@@ -15,8 +15,12 @@ import {Field, reduxForm} from "redux-form";
 import {setUser} from "../../actions/user";
 import styles from "./styles";
 
-const background = require("../../../images/shadow.png");
-
+const background = require("../../../images/wltLogo.png");
+/**
+ *
+ * @param values
+ * @returns {{}}
+ */
 const validate = values =>
 {
 	const error = {};
@@ -45,12 +49,23 @@ const validate = values =>
 	return error;
 };
 
+/**
+ *
+ */
 class Login extends Component
 {
+	/**
+	 *
+	 * @type {{setUser}}
+	 */
 	static propTypes = {
 		setUser: React.PropTypes.func
 	};
 
+	/**
+	 *
+	 * @param props
+	 */
 	constructor(props)
 	{
 		super(props);
@@ -60,11 +75,26 @@ class Login extends Component
 		this.renderInput = this.renderInput.bind(this);
 	}
 
+	/**
+	 *
+	 * @param name
+	 */
 	setUser(name)
 	{
 		this.props.setUser(name);
 	}
 
+	/**
+	 *
+	 * @param input
+	 * @param label
+	 * @param type
+	 * @param touched
+	 * @param error
+	 * @param warning
+	 * @param inputProps
+	 * @returns {XML}
+	 */
 	renderInput({
 					input,
 					label,
@@ -78,22 +108,25 @@ class Login extends Component
 			hasError = true;
 		}
 		return (
-			<Item error={hasError}>
-				<Icon active name={input.name === "email" ? "person" : "unlock"}/>
+			<Item error={hasError} rounded style={{ padding: 0, margin: 5 }}>
+				<Icon style={{ marginLeft: 10, color: '#327bb6' }} active name={input.name === "email" ? "person" : "unlock"}/>
 				<Input
 					placeholder={input.name === "email" ? "EMAIL" : "PASSWORD"}
 					{...input}
 				/>
 				{hasError
 					? <Item style={{borderColor: "transparent"}}>
-						<Icon active style={{color: "red", marginTop: 5}} name="bug"/>
-						<Text style={{fontSize: 15, color: "red"}}>{error}</Text>
+						<Text style={{fontSize: 11, color: "#d93131"}}>{error}</Text>
 					</Item>
 					: <Text/>}
 			</Item>
 		);
 	}
 
+	/**
+	 *
+	 * @returns {XML}
+	 */
 	render()
 	{
 		return (
@@ -104,11 +137,9 @@ class Login extends Component
 							<View style={styles.bg}>
 								<Field name="email" component={this.renderInput}/>
 								<Field name="password" component={this.renderInput}/>
-								<Button
-									style={styles.btn}
-									onPress={() => this.props.navigation.navigate("Home")}
-								>
-									<Text>Login</Text>
+								<Button style={styles.btn}
+									onPress={() => this.props.navigation.navigate("Home")}>
+									<Text>SIGN IN</Text>
 								</Button>
 							</View>
 						</Image>
@@ -119,6 +150,10 @@ class Login extends Component
 	}
 }
 
+
+/**
+ *
+ */
 const LoginSwag = reduxForm(
 	{
 		form: "test",

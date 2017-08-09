@@ -10,13 +10,36 @@ import {
 	Icon
 } from "native-base";
 
-const routes = ["Home", "BlankPage2"];
+/**
+ *
+ * @type {[string,string]}
+ */
+const routes = [
+	{name: "Home", label: "Search"},
+	{name: "BlankPage2", label: "Clubs"},
+];
+
+const background = require("../../../images/drawer-cover.png");
+const logo = require("../../../images/logo.png");
+
+
+/**
+ *
+ */
 export default class DrawBar extends React.Component
 {
+	/**
+	 *
+	 * @type {{header: null}}
+	 */
 	static navigationOptions = {
 		header: null
 	};
 
+	/**
+	 *
+	 * @returns {XML}
+	 */
 	render()
 	{
 		return (
@@ -24,15 +47,13 @@ export default class DrawBar extends React.Component
 				<Content>
 
 					<Image
-						source={{
-							uri: "https://raw.githubusercontent.com/GeekyAnts/NativeBase-KitchenSink/master/img/drawer-cover.png"
-						}}
+						source={background}
 						style={{
 							height: 120,
 							alignSelf: "stretch",
 							justifyContent: "center",
 							alignItems: "center"
-						}} >
+						}}>
 						<TouchableOpacity
 							style={{
 								height: 120,
@@ -40,13 +61,11 @@ export default class DrawBar extends React.Component
 								justifyContent: "center",
 								alignItems: "center"
 							}}
-							onPress={() => this.props.navigation.navigate("DrawerClose")} >
+							onPress={() => this.props.navigation.navigate("DrawerClose")}>
 							<Image
 								square
 								style={{height: 80, width: 70}}
-								source={{
-									uri: "https://raw.githubusercontent.com/GeekyAnts/NativeBase-KitchenSink/master/img/logo.png"
-								}}
+								source={logo}
 							/>
 						</TouchableOpacity>
 					</Image>
@@ -57,8 +76,8 @@ export default class DrawBar extends React.Component
 							return (
 								<ListItem
 									button
-									onPress={() => this.props.navigation.navigate(data)} >
-									<Text>{data}</Text>
+									onPress={() => this.props.navigation.navigate(data.name)}>
+									<Text>{data.label}</Text>
 								</ListItem>
 							);
 						}}

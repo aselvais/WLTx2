@@ -22,6 +22,9 @@ import {setIndex} from "../../actions/list";
 import {openDrawer} from "../../actions/drawer";
 import styles from "./styles";
 
+/**
+ *
+ */
 class Home extends Component
 {
 	/**
@@ -112,6 +115,11 @@ class Home extends Component
 	}
 }
 
+/**
+ *
+ * @param dispatch
+ * @returns {{setIndex: (function(*=): *), openDrawer: (function(): *)}}
+ */
 function bindAction(dispatch)
 {
 	return {
@@ -120,12 +128,22 @@ function bindAction(dispatch)
 	};
 }
 
+/**
+ *
+ * @param state
+ */
 const mapStateToProps = state => ({
 	name: state.user.name,
 	list: state.list.list
 });
 
+/**
+ *
+ */
 const HomeSwagger = connect(mapStateToProps, bindAction)(Home);
+/**
+ *
+ */
 const DrawNav = DrawerNavigator(
 	{
 		Home: {screen: HomeSwagger},
@@ -135,7 +153,16 @@ const DrawNav = DrawerNavigator(
 		contentComponent: props => <DrawBar {...props} />
 	}
 );
+/**
+ *
+ * @type {null}
+ */
 let DrawerNav = null;
+/**
+ *
+ * @param navigation
+ * @returns {{header: null}}
+ */
 DrawNav.navigationOptions = ({navigation}) =>
 {
 	DrawerNav = navigation;

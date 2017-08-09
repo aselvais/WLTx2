@@ -24,9 +24,18 @@ import styles from "./styles";
 
 class Home extends Component
 {
+	/**
+	 *
+	 * @type {{header: null}}
+	 */
 	static navigationOptions = {
 		header: null
 	};
+
+	/**
+	 *
+	 * @type {{name, setIndex, list: *, openDrawer}}
+	 */
 	static propTypes = {
 		name: React.PropTypes.string,
 		setIndex: React.PropTypes.func,
@@ -34,12 +43,20 @@ class Home extends Component
 		openDrawer: React.PropTypes.func
 	};
 
+	/**
+	 *
+	 * @param index
+	 */
 	newPage(index)
 	{
 		this.props.setIndex(index);
 		Actions.blankPage();
 	}
 
+	/**
+	 *
+	 * @returns {XML}
+	 */
 	render()
 	{
 		console.log(DrawNav, "786785786");
@@ -47,7 +64,16 @@ class Home extends Component
 			<Container style={styles.container}>
 				<Header>
 					<Left>
-
+						<Button
+							transparent
+							onPress={() => DrawerNav.navigate("DrawerOpen")} >
+							<Icon active name="menu"/>
+						</Button>
+					</Left>
+					<Body>
+					<Title>Home</Title>
+					</Body>
+					<Right>
 						<Button
 							transparent
 							onPress={() =>
@@ -59,22 +85,8 @@ class Home extends Component
 									})
 								);
 								DrawerNav.goBack();
-							}}
-						>
+							}} >
 							<Icon active name="power"/>
-						</Button>
-					</Left>
-
-					<Body>
-					<Title>Home</Title>
-					</Body>
-
-					<Right>
-						<Button
-							transparent
-							onPress={() => DrawerNav.navigate("DrawerOpen")}
-						>
-							<Icon active name="menu"/>
 						</Button>
 					</Right>
 				</Header>
@@ -123,7 +135,7 @@ const DrawNav = DrawerNavigator(
 		contentComponent: props => <DrawBar {...props} />
 	}
 );
-const DrawerNav = null;
+let DrawerNav = null;
 DrawNav.navigationOptions = ({navigation}) =>
 {
 	DrawerNav = navigation;

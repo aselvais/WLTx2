@@ -11,7 +11,7 @@ export default function configureStore(onCompletion: () => void): any
 	const enhancer = compose(
 		applyMiddleware(thunk, promise),
 		devTools({
-			name: 'nativestarterkit', realtime: true,
+			name: 'WLTx2', realtime: true,
 		}),
 	);
 

@@ -9,9 +9,15 @@ import platform from '../native-base-theme/variables/platform';
 
 function setup(): React.Component
 {
+	/**
+	 *
+	 */
 	class Root extends Component
 	{
 
+		/**
+		 *
+		 */
 		constructor()
 		{
 			super();
@@ -21,6 +27,10 @@ function setup(): React.Component
 			};
 		}
 
+		/**
+		 *
+		 * @returns {XML}
+		 */
 		render()
 		{
 			return (

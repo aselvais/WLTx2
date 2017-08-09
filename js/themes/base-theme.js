@@ -123,7 +123,7 @@ export default {
 
 	// Footer
 	footerHeight: 55,
-	footerDefaultBg: (Platform.OS === 'ios') ? '#F8F8F8' : '#4179F7',
+	footerDefaultBg: (Platform.OS === 'ios') ? '#fafafa' : '#fafafa',
 
 
 	// FooterTab
@@ -133,8 +133,8 @@ export default {
 
 
 	// Header
-	iosToolbarBtnColor: '#007aff',
-	toolbarDefaultBg: (Platform.OS === 'ios') ? '#F8F8F8' : '#4179F7',
+	iosToolbarBtnColor: '#FFFFFF',
+	toolbarDefaultBg: (Platform.OS === 'ios') ? '#1b6bb0' : '#1b6bb0',
 	toolbarHeight: (Platform.OS === 'ios') ? 64 : 56,
 	toolbarIconSize: (Platform.OS === 'ios') ? 20 : 22,
 	toolbarInputColor: '#CECDD2',

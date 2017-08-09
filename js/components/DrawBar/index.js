@@ -22,17 +22,17 @@ export default class DrawBar extends React.Component
 		return (
 			<Container>
 				<Content>
+
 					<Image
 						source={{
-							uri: "https://github.com/GeekyAnts/NativeBase-KitchenSink/raw/react-navigation/img/drawer-cover.png"
+							uri: "https://raw.githubusercontent.com/GeekyAnts/NativeBase-KitchenSink/master/img/drawer-cover.png"
 						}}
 						style={{
 							height: 120,
 							alignSelf: "stretch",
 							justifyContent: "center",
 							alignItems: "center"
-						}}
-					>
+						}} >
 						<TouchableOpacity
 							style={{
 								height: 120,
@@ -40,13 +40,12 @@ export default class DrawBar extends React.Component
 								justifyContent: "center",
 								alignItems: "center"
 							}}
-							onPress={() => this.props.navigation.navigate("DrawerClose")}
-						>
+							onPress={() => this.props.navigation.navigate("DrawerClose")} >
 							<Image
 								square
 								style={{height: 80, width: 70}}
 								source={{
-									uri: "https://github.com/GeekyAnts/NativeBase-KitchenSink/raw/react-navigation/img/logo.png"
+									uri: "https://raw.githubusercontent.com/GeekyAnts/NativeBase-KitchenSink/master/img/logo.png"
 								}}
 							/>
 						</TouchableOpacity>
@@ -58,8 +57,7 @@ export default class DrawBar extends React.Component
 							return (
 								<ListItem
 									button
-									onPress={() => this.props.navigation.navigate(data)}
-								>
+									onPress={() => this.props.navigation.navigate(data)} >
 									<Text>{data}</Text>
 								</ListItem>
 							);

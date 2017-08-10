@@ -102,8 +102,7 @@ class Home extends Component
 									onPress={() =>
 										this.props.navigation.navigate("BlankPage", {
 											name: {item}
-										})}
-								>
+										})} >
 									<Text style={styles.text}>{item}</Text>
 								</TouchableOpacity>
 							</Row>

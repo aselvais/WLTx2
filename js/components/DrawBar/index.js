@@ -1,5 +1,5 @@
 import React from "react";
-import {AppRegistry, Image, TouchableOpacity} from "react-native";
+import {Dimensions, ppRegistry, Image, TouchableOpacity} from "react-native";
 import {
 	Button,
 	Text,
@@ -7,8 +7,11 @@ import {
 	List,
 	ListItem,
 	Content,
-	Icon
+	Icon,
+	View
 } from "native-base";
+
+const deviceHeight = Dimensions.get('window').height;
 
 /**
  *
@@ -46,44 +49,68 @@ export default class DrawBar extends React.Component
 			<Container>
 				<Content>
 
-					<Image
-						source={background}
-						style={{
-							height: 120,
-							alignSelf: "stretch",
-							justifyContent: "center",
-							alignItems: "center"
+					<View style={{
+						flex: 1,
+						height: deviceHeight,
+						flexDirection: 'column'
+					}}>
+						<View style={{
+							flex: 0.3,
+							width: '100%',
+							backgroundColor: '#1b6bb0',
+							alignSelf: 'center',
+							justifyContent: 'center'
 						}}>
-						<TouchableOpacity
-							style={{
-								height: 120,
-								alignSelf: "stretch",
-								justifyContent: "center",
-								alignItems: "center"
-							}}
-							onPress={() => this.props.navigation.navigate("DrawerClose")}>
-							<Image
-								square
-								style={{height: 80, width: 70}}
-								source={logo}
-							/>
-						</TouchableOpacity>
-					</Image>
-					<List
-						dataArray={routes}
-						renderRow={data =>
-						{
-							return (
-								<ListItem
-									button
-									onPress={() => this.props.navigation.navigate(data.name)}>
-									<Text>{data.label}</Text>
-								</ListItem>
-							);
-						}}
-					/>
+							<Text style={{
+								color: '#FFF',
+								alignSelf: 'center'
+							}}>IMAGE HERE</Text>
+						</View>
+						<View style={{
+							flex: 0.7
+						}}>
+							<List dataArray={routes}
+								  renderRow={data =>
+								  {
+									  return (
+										  <ListItem
+											  button
+											  onPress={() => this.props.navigation.navigate(data.name)}>
+											  <Text>{data.label}</Text>
+										  </ListItem>
+									  );
+								  }}/>
+						</View>
+					</View>
 				</Content>
 			</Container>
 		);
 	}
 }
+
+
+/**
+ *                    <Image
+ source={background}
+ style={{
+							height: 120,
+							alignSelf: "stretch",
+							justifyContent: "center",
+							alignItems: "center"
+						}}>
+ <TouchableOpacity
+ style={{
+								height: 120,
+								alignSelf: "stretch",
+								justifyContent: "center",
+								alignItems: "center"
+							}}
+ onPress={() => this.props.navigation.navigate("DrawerClose")}>
+ <Image
+ square
+ style={{height: 80, width: 70}}
+ source={logo}
+ />
+ </TouchableOpacity>
+ </Image>
+ */

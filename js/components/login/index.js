@@ -108,7 +108,7 @@ class Login extends Component
 			hasError = true;
 		}
 		return (
-			<Item error={hasError} rounded style={{ padding: 0, margin: 5 }}>
+			<Item error={hasError} rounded style={{ padding: 0, margin: 3, alignSelf: 'center', width: '80%' }}>
 				<Icon style={{ marginLeft: 10, color: '#327bb6' }} active name={input.name === "email" ? "person" : "unlock"}/>
 				<Input
 					placeholder={input.name === "email" ? "EMAIL" : "PASSWORD"}

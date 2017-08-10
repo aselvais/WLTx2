@@ -32,9 +32,9 @@ export default {
 	},
 	btn: {
 		marginTop: 20,
-		alignSelf: 'center',
 		width: '80%',
 		borderRadius: 30,
+		alignSelf: 'center',
 		justifyContent: 'center'
 	},
 };

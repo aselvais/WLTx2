@@ -15,11 +15,33 @@ import {
 
 import styles from "./styles";
 
+/**
+ *
+ */
 class BlankPage extends Component
 {
+	/**
+	 *
+	 * @type {{header: XML}}
+	 */
 	static navigationOptions = {
-		header: null
+		header: <Header>
+			<Left>
+				<Button transparent onPress={() => this.props.navigation.goBack()}>
+					<Icon name="ios-arrow-back"/>
+				</Button>
+			</Left>
+			<Body>
+				<Title>{this.name ? this.props.name : "Blank Page"}</Title>
+			</Body>
+			<Right/>
+		</Header>
 	};
+
+	/**
+	 *
+	 * @type {{name, index, list: *, openDrawer}}
+	 */
 	static propTypes = {
 		name: React.PropTypes.string,
 		index: React.PropTypes.number,
@@ -27,26 +49,16 @@ class BlankPage extends Component
 		openDrawer: React.PropTypes.func
 	};
 
+	/**
+	 *
+	 * @returns {XML}
+	 */
 	render()
 	{
 		const {props: {name, index, list}} = this;
 		console.log(this.props.navigation, "000000000");
 		return (
 			<Container style={styles.container}>
-				<Header>
-					<Left>
-						<Button transparent onPress={() => this.props.navigation.goBack()}>
-							<Icon name="ios-arrow-back"/>
-						</Button>
-					</Left>
-
-					<Body>
-					<Title>{name ? this.props.name : "Blank Page"}</Title>
-					</Body>
-
-					<Right/>
-				</Header>
-
 				<Content padder>
 					<Text>
 						{this.props.navigation.state.params.name.item !== undefined
@@ -59,6 +71,11 @@ class BlankPage extends Component
 	}
 }
 
+/**
+ *
+ * @param dispatch
+ * @returns {{openDrawer: (function(): *)}}
+ */
 function bindAction(dispatch)
 {
 	return {
@@ -66,6 +83,10 @@ function bindAction(dispatch)
 	};
 }
 
+/**
+ *
+ * @param state
+ */
 const mapStateToProps = state => ({
 	name: state.user.name,
 	index: state.list.selectedIndex,

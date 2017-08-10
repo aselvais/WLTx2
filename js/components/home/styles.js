@@ -3,7 +3,7 @@ const React = require('react-native');
 const {StyleSheet} = React;
 export default {
 	container: {
-		backgroundColor: '#FBFAFA',
+		backgroundColor: '#FFFFFF',
 	},
 	row: {
 		flex: 1,

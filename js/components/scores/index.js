@@ -2,17 +2,11 @@ import React, {Component} from "react";
 import {connect} from "react-redux";
 import {
 	Container,
-	Header,
-	Title,
 	Content,
 	Text,
-	Button,
-	Icon,
-	Left,
-	Right,
-	Body
+	Icon
 } from "native-base";
-
+import Headerbar from '../headerbar';
 import styles from "./styles";
 
 /**
@@ -25,7 +19,7 @@ class Scores extends Component
 	 * @type {{header: null, tabBarLabel: string, tabBarIcon: (function({tintColor?: *}): XML)}}
 	 */
 	static navigationOptions = {
-		header: null,
+		header: <Headerbar title="Scores"/>,
 		tabBarLabel: 'Scores',
 		tabBarIcon: <Icon name="ios-medal"/>
 	};
@@ -39,36 +33,7 @@ class Scores extends Component
 	{
 		const {props: {name, index, list}} = this;
 		return (
-			<Container>
-				<Header>
-					<Left>
-						<Button
-							transparent
-							onPress={() => DrawerNav.navigate("DrawerOpen")}>
-							<Icon active name="menu"/>
-						</Button>
-					</Left>
-					<Body>
-					<Title>Scores</Title>
-					</Body>
-					<Right>
-						<Button
-							transparent
-							onPress={() =>
-							{
-								DrawerNav.dispatch(
-									NavigationActions.reset({
-										index: 0,
-										actions: [NavigationActions.navigate({routeName: "Home"})]
-									})
-								);
-								DrawerNav.goBack();
-							}}>
-							<Icon active name="power"/>
-						</Button>
-					</Right>
-				</Header>
-
+			<Container style={styles.container}>
 				<Content padder>
 					<Text>
 						Scores HERE ..... !!!!

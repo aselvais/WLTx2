@@ -17,4 +17,7 @@ export default {
 	mt: {
 		marginTop: 18,
 	},
+	tabbarText: {
+		fontSize: 9
+	}
 };

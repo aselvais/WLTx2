@@ -21,7 +21,7 @@ class Scores extends Component
 	static navigationOptions = {
 		header: <Headerbar title="Scores"/>,
 		tabBarLabel: 'Scores',
-		tabBarIcon: <Icon name="ios-medal"/>
+		tabBarIcon: ({ tintColor }) => <Icon name="ios-medal" style={{color: tintColor}}/>
 	};
 
 	/**

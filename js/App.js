@@ -9,6 +9,9 @@ import ProgressBar from "./components/loaders/ProgressBar";
 
 import theme from "./themes/base-theme";
 
+/**
+ *
+ */
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
@@ -24,8 +27,15 @@ const styles = StyleSheet.create({
 	}
 });
 
+/**
+ *
+ */
 class App extends Component
 {
+	/**
+	 *
+	 * @param props
+	 */
 	constructor(props)
 	{
 		super(props);
@@ -36,6 +46,9 @@ class App extends Component
 		};
 	}
 
+	/**
+	 *
+	 */
 	componentDidMount()
 	{
 		CodePush.sync(
@@ -65,6 +78,10 @@ class App extends Component
 		);
 	}
 
+	/**
+	 *
+	 * @returns {XML}
+	 */
 	render()
 	{
 		if (this.state.showDownloadingModal) {

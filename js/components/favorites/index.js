@@ -21,7 +21,7 @@ class Favorites extends Component
 	static navigationOptions = {
 		header: <Headerbar title="Favorites"/>,
 		tabBarLabel: 'Favorites',
-		tabBarIcon: <Icon name="ios-heart"/>
+		tabBarIcon: ({ tintColor }) => <Icon name="ios-heart" style={{color: tintColor}}/>
 	};
 
 	/**

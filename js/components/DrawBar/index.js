@@ -87,30 +87,3 @@ export default class DrawBar extends React.Component
 		);
 	}
 }
-
-
-/**
- *                    <Image
- source={background}
- style={{
-							height: 120,
-							alignSelf: "stretch",
-							justifyContent: "center",
-							alignItems: "center"
-						}}>
- <TouchableOpacity
- style={{
-								height: 120,
-								alignSelf: "stretch",
-								justifyContent: "center",
-								alignItems: "center"
-							}}
- onPress={() => this.props.navigation.navigate("DrawerClose")}>
- <Image
- square
- style={{height: 80, width: 70}}
- source={logo}
- />
- </TouchableOpacity>
- </Image>
- */

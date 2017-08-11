@@ -108,8 +108,9 @@ class Login extends Component
 			hasError = true;
 		}
 		return (
-			<Item error={hasError} rounded style={{ padding: 0, margin: 3, alignSelf: 'center', width: '80%' }}>
-				<Icon style={{ marginLeft: 10, color: '#327bb6' }} active name={input.name === "email" ? "person" : "unlock"}/>
+			<Item error={hasError} rounded style={{padding: 0, margin: 3, alignSelf: 'center', width: '80%'}}>
+				<Icon style={{marginLeft: 10, color: '#327bb6'}} active
+					  name={input.name === "email" ? "person" : "unlock"}/>
 				<Input
 					placeholder={input.name === "email" ? "EMAIL" : "PASSWORD"}
 					{...input}
@@ -137,8 +138,7 @@ class Login extends Component
 							<View style={styles.bg}>
 								<Field name="email" component={this.renderInput}/>
 								<Field name="password" component={this.renderInput}/>
-								<Button style={styles.btn}
-									onPress={() => this.props.navigation.navigate("Home")}>
+								<Button style={styles.btn} onPress={() => this.props.navigation.navigate("Home")}>
 									<Text>SIGN IN</Text>
 								</Button>
 							</View>

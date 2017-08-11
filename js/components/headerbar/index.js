@@ -24,9 +24,12 @@ class Headerbar extends Component
 	constructor(props)
 	{
 		super(props);
-		this.props.title = 'Home';
 	}
 
+	/**
+	 *
+	 * @returns {XML}
+	 */
 	render()
 	{
 		return <Header>
@@ -39,7 +42,7 @@ class Headerbar extends Component
 			<Title>{ this.props.title }</Title>
 			</Body>
 			<Right>
-				<Button transparent>
+				<Button transparent onPress={() => this.props.navigation.navigate("Login")}>
 					<Icon active name="power"/>
 				</Button>
 			</Right>

@@ -21,14 +21,13 @@ class Games extends Component
 	static navigationOptions = {
 		header: <Headerbar title="Games"/>,
 		tabBarLabel: 'Games',
-		tabBarIcon: <Icon name="ios-calendar"/>
+		tabBarIcon: ({ tintColor }) => <Icon name="ios-calendar" style={{color: tintColor}}/>
 	};
 
 	/**
 	 *
 	 * @returns {XML}
 	 */
-
 	render()
 	{
 		const {props: {name, index, list}} = this;

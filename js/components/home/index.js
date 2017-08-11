@@ -39,7 +39,7 @@ class Home extends Component
 	static navigationOptions = {
 		header: <Headerbar title="Home"/>,
 		tabBarLabel: 'Home',
-		tabBarIcon: <Icon name="ios-home"/>
+		tabBarIcon: ({ tintColor }) => <Icon style={{color: tintColor}} name="ios-home"/>
 	};
 
 	/**
@@ -69,7 +69,6 @@ class Home extends Component
 	 */
 	render()
 	{
-		console.log(DrawNav, "786785786");
 		return (
 			<Container style={styles.container}>
 				<Content>
@@ -162,7 +161,10 @@ const MainScreenNavigator = TabNavigator({
 	{
 		tabBarComponent: TabBarBottom,
 		tabBarPosition: 'bottom',
-		animationEnabled: true
+		animationEnabled: true,
+		tabBarOptions: {
+			activeTintColor: '#1b6bb0',
+		}
 	});
 
 // export default DrawNav;

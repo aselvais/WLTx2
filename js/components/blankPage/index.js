@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+import PropTypes from 'prop-types';
 import {connect} from "react-redux";
 import {
 	Container,
@@ -43,10 +44,10 @@ class BlankPage extends Component
 	 * @type {{name, index, list: *, openDrawer}}
 	 */
 	static propTypes = {
-		name: React.PropTypes.string,
-		index: React.PropTypes.number,
-		list: React.PropTypes.arrayOf(React.PropTypes.string),
-		openDrawer: React.PropTypes.func
+		name: PropTypes.string,
+		index: PropTypes.number,
+		list: PropTypes.arrayOf(React.PropTypes.string),
+		openDrawer: PropTypes.func
 	};
 
 	/**

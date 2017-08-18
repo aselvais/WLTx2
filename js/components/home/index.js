@@ -1,8 +1,6 @@
 import React, {Component} from "react";
-import {
-	TouchableOpacity,
-	Image
-} from "react-native";
+import PropTypes from 'prop-types';
+import { Image } from "react-native";
 import {connect} from "react-redux";
 import DrawBar from "../DrawBar";
 import {
@@ -55,11 +53,11 @@ class Home extends Component
 	 * @type {{name, setIndex, leagues: *, openDrawer}}
 	 */
 	static propTypes = {
-		name: React.PropTypes.string,
-		setIndex: React.PropTypes.func,
-		getLeagues: React.PropTypes.func,
-		//leagues: React.PropTypes.arrayOf(React.PropTypes.string),
-		openDrawer: React.PropTypes.func
+		name: PropTypes.string,
+		setIndex: PropTypes.func,
+		getLeagues: PropTypes.func,
+		//leagues: PropTypes.arrayOf(React.PropTypes.string),
+		openDrawer: PropTypes.func
 	};
 
 	/**

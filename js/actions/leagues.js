@@ -2,6 +2,7 @@ import type {Action} from './types';
 import Apiaccess from '../libs/Apiaccess';
 
 let api = new Apiaccess();
+
 export const SET_INDEX = 'SET_INDEX';
 export const LOAD_LEAGUES = 'LOAD_LEAGUES';
 

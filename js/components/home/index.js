@@ -23,7 +23,7 @@ import {
 	Col
 } from "react-native-easy-grid";
 
-import {setIndex, getLeagues} from "../../actions/list";
+import {setIndex, getLeagues} from "../../actions/leagues";
 import {openDrawer} from "../../actions/drawer";
 import styles from "./styles";
 // screens
@@ -52,13 +52,13 @@ class Home extends Component
 
 	/**
 	 *
-	 * @type {{name, setIndex, list: *, openDrawer}}
+	 * @type {{name, setIndex, leagues: *, openDrawer}}
 	 */
 	static propTypes = {
 		name: React.PropTypes.string,
 		setIndex: React.PropTypes.func,
 		getLeagues: React.PropTypes.func,
-		//list: React.PropTypes.arrayOf(React.PropTypes.string),
+		//leagues: React.PropTypes.arrayOf(React.PropTypes.string),
 		openDrawer: React.PropTypes.func
 	};
 
@@ -68,16 +68,6 @@ class Home extends Component
 	componentDidMount()
 	{
 		this.props.getLeagues();
-	}
-
-	/**
-	 *
-	 * @param index
-	 */
-	newPage(index)
-	{
-		this.props.setIndex(index);
-		Actions.blankPage();
 	}
 
 	/**
@@ -96,16 +86,16 @@ class Home extends Component
 					alignSelf: 'center',
 					justifyContent: 'center',
 					borderBottomColor: '#000'
-				}} onPress={() => this.props.getLeagues()}><Text>Re-load list</Text></Button>
+				}} onPress={() => this.props.getLeagues()}><Text>Re-load leagues</Text></Button>
 				<Content>
 					<Grid style={styles.mt}>
-						{this.props.list.map((item, i) => (
+						{this.props.leagues.map((item, i) => (
 							<Row key={item.id}>
-								<Col style={{ width: 60, height: 55 }}><Image style={{width: 50, height: 50}} source={{uri: item.imageUrl}}/></Col>
+								<Col style={{width: 60, height: 55}}>
+									<Image style={{width: 50, height: 50}} source={{uri: item.imageUrl}}/>
+								</Col>
 								<Col>
-									<TouchableOpacity style={styles.row} onPress={() => this.props.navigation.navigate("BlankPage", {name: item.name})}>
 									<Text style={styles.text}>{item.name}</Text>
-									</TouchableOpacity>
 								</Col>
 							</Row>
 						))}
@@ -125,7 +115,7 @@ function bindAction(dispatch)
 {
 	return {
 		setIndex: index => dispatch(setIndex(index)),
-		getLeagues: index => dispatch(getLeagues()),
+		getLeagues: () => dispatch(getLeagues()),
 		openDrawer: () => dispatch(openDrawer())
 	};
 }
@@ -136,7 +126,7 @@ function bindAction(dispatch)
  */
 const mapStateToProps = state => ({
 	name: state.user.name,
-	list: state.list.list
+	leagues: state.leagues.leagues
 });
 
 /**

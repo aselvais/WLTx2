@@ -1,11 +1,11 @@
 import type {Action} from "../actions/types";
-import {SET_INDEX, LOAD_LIST} from "../actions/list";
+import {SET_INDEX, LOAD_LEAGUES} from "../actions/leagues";
 
 /**
  *
  */
 export type State = {
-	list: object
+	leagues: object
 };
 
 /**
@@ -13,7 +13,7 @@ export type State = {
  * @type {{list: [null], selectedIndex: undefined}}
  */
 const initialState = {
-	list: [],
+	leagues: [],
 	selectedIndex: undefined
 };
 /**
@@ -26,18 +26,18 @@ export default function(state: State = initialState, action: Action): State
 {
 	switch(action.type)
 	{
-		// set index of the list
+		// set index of the leagues
 		case SET_INDEX:
 			return {
 				...state,
 				selectedIndex: action.payload
 			};
 			break;
-		// load the list from API
-		case LOAD_LIST:
+		// load the leagues from API
+		case LOAD_LEAGUES:
 			return {
 				...state,
-				list: action.list
+				leagues: action.leagues
 			};
 			break;
 		// default do nothing

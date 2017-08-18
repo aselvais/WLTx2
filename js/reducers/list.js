@@ -9,17 +9,6 @@ export type State = {
 };
 
 /**
- [
- "Signup",
- "Home",
- "Standings",
- "Playoffs",
- "Power Rankings",
- "Favourites",
- "Leagues News",
- "Team News",
- "GPS Nav",
- ]
  *
  * @type {{list: [null], selectedIndex: undefined}}
  */
@@ -35,21 +24,25 @@ const initialState = {
  */
 export default function(state: State = initialState, action: Action): State
 {
-
-	if (action.type === SET_INDEX) {
-		return {
-			...state,
-			selectedIndex: action.payload
-		};
+	switch(action.type)
+	{
+		// set index of the list
+		case SET_INDEX:
+			return {
+				...state,
+				selectedIndex: action.payload
+			};
+			break;
+		// load the list from API
+		case LOAD_LIST:
+			return {
+				...state,
+				list: action.list
+			};
+			break;
+		// default do nothing
+		default:
+			return state;
 	}
-
-	if (action.type === LOAD_LIST) {
-		return {
-			...state,
-			list: action.list
-		};
-	}
-
-
 	return state;
 }

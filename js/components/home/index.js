@@ -23,7 +23,7 @@ import {
 	Col
 } from "react-native-easy-grid";
 
-import {setIndex, loadList} from "../../actions/list";
+import {setIndex, getLeagues} from "../../actions/list";
 import {openDrawer} from "../../actions/drawer";
 import styles from "./styles";
 // screens
@@ -57,10 +57,18 @@ class Home extends Component
 	static propTypes = {
 		name: React.PropTypes.string,
 		setIndex: React.PropTypes.func,
-		loadList: React.PropTypes.func,
+		getLeagues: React.PropTypes.func,
 		//list: React.PropTypes.arrayOf(React.PropTypes.string),
 		openDrawer: React.PropTypes.func
 	};
+
+	/**
+	 *
+	 */
+	componentDidMount()
+	{
+		this.props.getLeagues();
+	}
 
 	/**
 	 *
@@ -80,8 +88,16 @@ class Home extends Component
 	{
 		return (
 			<Container style={styles.container}>
+				<Button style={{
+					backgroundColor: '#DDD',
+					width: '100%',
+					borderRadius: 0,
+					alignItems: 'center',
+					alignSelf: 'center',
+					justifyContent: 'center',
+					borderBottomColor: '#000'
+				}} onPress={() => this.props.getLeagues()}><Text>Re-load list</Text></Button>
 				<Content>
-					<Button onPress={() => this.props.loadList()}><Text>Load list</Text></Button>
 					<Grid style={styles.mt}>
 						{this.props.list.map((item, i) => (
 							<Row key={item.id}>
@@ -109,7 +125,7 @@ function bindAction(dispatch)
 {
 	return {
 		setIndex: index => dispatch(setIndex(index)),
-		loadList: index => dispatch(loadList()),
+		getLeagues: index => dispatch(getLeagues()),
 		openDrawer: () => dispatch(openDrawer())
 	};
 }

@@ -126,7 +126,7 @@ function bindAction(dispatch)
  */
 const mapStateToProps = state => ({
 	name: state.user.name,
-	leagues: state.leagues.leagues
+	leagues: state.leagues.list
 });
 
 /**

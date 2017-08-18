@@ -13,7 +13,7 @@ export type State = {
  * @type {{list: [null], selectedIndex: undefined}}
  */
 const initialState = {
-	leagues: [],
+	list: [],
 	selectedIndex: undefined
 };
 /**
@@ -26,21 +26,27 @@ export default function(state: State = initialState, action: Action): State
 {
 	switch(action.type)
 	{
-		// set index of the leagues
+		/**
+		 * set index of the leagues
+		 */
 		case SET_INDEX:
 			return {
 				...state,
 				selectedIndex: action.payload
 			};
 			break;
-		// load the leagues from API
+		/**
+		 * load the leagues from API
+		 */
 		case LOAD_LEAGUES:
 			return {
 				...state,
-				leagues: action.leagues
+				list: action.list
 			};
 			break;
-		// default do nothing
+		/**
+		 * default do nothing
+		 */
 		default:
 			return state;
 	}

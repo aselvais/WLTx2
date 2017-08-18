@@ -1,5 +1,8 @@
 import React, {Component} from "react";
-import {TouchableOpacity} from "react-native";
+import {
+	TouchableOpacity,
+	Image
+} from "react-native";
 import {connect} from "react-redux";
 import DrawBar from "../DrawBar";
 import {
@@ -12,13 +15,18 @@ import {
 	Content,
 	Text,
 	Icon,
+	Button
 } from "native-base";
-import {Grid, Row} from "react-native-easy-grid";
+import {
+	Grid,
+	Row,
+	Col
+} from "react-native-easy-grid";
 
-import {setIndex} from "../../actions/list";
+import {setIndex, loadList} from "../../actions/list";
 import {openDrawer} from "../../actions/drawer";
 import styles from "./styles";
-
+// screens
 import BlankPage2 from "../blankPage2";
 import Games from "../games";
 import Scores from "../scores";
@@ -39,7 +47,7 @@ class Home extends Component
 	static navigationOptions = {
 		header: <Headerbar title="Home"/>,
 		tabBarLabel: 'Home',
-		tabBarIcon: ({ tintColor }) => <Icon style={{color: tintColor}} name="ios-home"/>
+		tabBarIcon: ({tintColor}) => <Icon style={{color: tintColor}} name="ios-home"/>
 	};
 
 	/**
@@ -49,7 +57,8 @@ class Home extends Component
 	static propTypes = {
 		name: React.PropTypes.string,
 		setIndex: React.PropTypes.func,
-		list: React.PropTypes.arrayOf(React.PropTypes.string),
+		loadList: React.PropTypes.func,
+		//list: React.PropTypes.arrayOf(React.PropTypes.string),
 		openDrawer: React.PropTypes.func
 	};
 
@@ -72,17 +81,16 @@ class Home extends Component
 		return (
 			<Container style={styles.container}>
 				<Content>
+					<Button onPress={() => this.props.loadList()}><Text>Load list</Text></Button>
 					<Grid style={styles.mt}>
 						{this.props.list.map((item, i) => (
-							<Row key={i}>
-								<TouchableOpacity
-									style={styles.row}
-									onPress={() =>
-										this.props.navigation.navigate("BlankPage", {
-											name: {item}
-										})}>
-									<Text style={styles.text}>{item}</Text>
-								</TouchableOpacity>
+							<Row key={item.id}>
+								<Col style={{ width: 60, height: 55 }}><Image style={{width: 50, height: 50}} source={{uri: item.imageUrl}}/></Col>
+								<Col>
+									<TouchableOpacity style={styles.row} onPress={() => this.props.navigation.navigate("BlankPage", {name: item.name})}>
+									<Text style={styles.text}>{item.name}</Text>
+									</TouchableOpacity>
+								</Col>
 							</Row>
 						))}
 					</Grid>
@@ -101,6 +109,7 @@ function bindAction(dispatch)
 {
 	return {
 		setIndex: index => dispatch(setIndex(index)),
+		loadList: index => dispatch(loadList()),
 		openDrawer: () => dispatch(openDrawer())
 	};
 }

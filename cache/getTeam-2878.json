@@ -1,0 +1,58 @@
+[
+  {
+	"id": 27874,
+	"name": "BT/City TV",
+	"imageUrl": "http://admin.winloseortie.com/files/image?directory=team_images&filename=uTR_BT Logo.jpg",
+	"divisionId": 0,
+	"divisionName": null,
+	"tierId": 0,
+	"tierName": null,
+	"groupId": 0,
+	"groupName": null,
+	"hasNews": false,
+	"hasTweets": false,
+	"playOff": false
+  },
+  {
+	"id": 27872,
+	"name": "City of Toronto",
+	"imageUrl": "http://admin.winloseortie.com/files/image?directory=team_images&filename=DVw_toronto-logo.png",
+	"divisionId": 0,
+	"divisionName": null,
+	"tierId": 0,
+	"tierName": null,
+	"groupId": 0,
+	"groupName": null,
+	"hasNews": false,
+	"hasTweets": false,
+	"playOff": false
+  },
+  {
+	"id": 27873,
+	"name": "Jumpstart",
+	"imageUrl": "http://admin.winloseortie.com/files/image?directory=team_images&filename=IDl_JS Logo.png",
+	"divisionId": 0,
+	"divisionName": null,
+	"tierId": 0,
+	"tierName": null,
+	"groupId": 0,
+	"groupName": null,
+	"hasNews": false,
+	"hasTweets": false,
+	"playOff": false
+  },
+  {
+	"id": 27875,
+	"name": "Pro-Action",
+	"imageUrl": "http://admin.winloseortie.com/files/image?directory=team_images&filename=Dop_Cops and Kids.jpg",
+	"divisionId": 0,
+	"divisionName": null,
+	"tierId": 0,
+	"tierName": null,
+	"groupId": 0,
+	"groupName": null,
+	"hasNews": false,
+	"hasTweets": false,
+	"playOff": false
+  }
+]

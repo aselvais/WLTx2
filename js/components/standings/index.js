@@ -61,6 +61,49 @@ class Standings extends Component
 	}
 
 	/**
+	 * Returns drop down selection component
+	 *
+	 * @param data
+	 * @returns {XML}
+	 */
+	getDropDown(data = {})
+	{
+		data = {0: 'MINOR PEEWEE - TIER 0', 1: 'MINOR PEEWEE - TIER 1', 2: 'MINOR PEEWEE - TIER 2'};
+		var jsx = [];
+		for (d in data) {
+			jsx.push(<Item label={data[d]} key={'key' + d} value={'key' + d}/>);
+		}
+		return (<Form>
+			<Picker
+				style={{
+					backgroundColor: '#DDD',
+					width: '100%',
+					borderRadius: 0,
+					alignItems: 'center',
+					alignSelf: 'center',
+					justifyContent: 'center',
+					borderBottomColor: '#000'
+				}}
+				iosHeader="Select one"
+				mode="dropdown"
+				selectedValue={this.state.selected1}
+				onValueChange={this.onValueChange.bind(this)}>{jsx}</Picker>
+		</Form>);
+	}
+
+	/**
+	 * Returns a score table component
+	 *
+	 * @param title The title to display on top
+	 * @param data The data
+	 */
+	getScoreTable(title='Group A', data=[])
+	{
+		data = [];
+		var jsx = [];
+	}
+
+	/**
 	 *
 	 * @returns {XML}
 	 */
@@ -69,33 +112,10 @@ class Standings extends Component
 		const {props: {name, index, list}} = this;
 		return (
 			<Container style={styles.container}>
-				<Form>
-					<Picker
-						style={{
-							backgroundColor: '#DDD',
-							width: '100%',
-							borderRadius: 0,
-							alignItems: 'center',
-							alignSelf: 'center',
-							justifyContent: 'center',
-							borderBottomColor: '#000'
-						}}
-						iosHeader="Select one"
-						mode="dropdown"
-						selectedValue={this.state.selected1}
-						onValueChange={this.onValueChange.bind(this)}>
-						<Item label="MINOR PEEWEE - TIER 0" value="key0"/>
-						<Item label="MINOR PEEWEE - TIER 1" value="key1"/>
-						<Item label="MINOR PEEWEE - TIER 2" value="key2"/>
-						<Item label="MINOR PEEWEE - TIER 3" value="key3"/>
-						<Item label="MINOR PEEWEE - TIER 4" value="key4"/>
-					</Picker>
-				</Form>
-
-
+				{this.getDropDown()}
 				<Content padder>
 					<Text>
-						Standings HERE ..... !!!!
+						{this.getScoreTable()}
 					</Text>
 				</Content>
 			</Container>

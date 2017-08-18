@@ -10,9 +10,8 @@ export default {
 		alignItems: 'center',
 	},
 	text: {
-		fontSize: 20,
+		fontSize: 15,
 		marginBottom: 15,
-		alignItems: 'center',
 	},
 	mt: {
 		marginTop: 18,

@@ -38,7 +38,7 @@ class Seasons extends Component
 	 * @type {{getSeasons}}
 	 */
 	static propTypes = {
-		getSeasons: PropTypes.func
+		getSeasons: PropTypes.func,
 	};
 
 	/**
@@ -46,8 +46,8 @@ class Seasons extends Component
 	 */
 	componentDidMount()
 	{
-		console.log('Seasons::componentDidMount ' + this.props.navigation.state.params.league.id);
-		this.props.getSeasons(this.props.navigation.state.params.league.id);
+		console.log('Seasons::componentDidMount ' + parseInt(this.props.selectedLeague.id) );
+		this.props.getSeasons(parseInt(this.props.selectedLeague.id));
 	}
 
 	/**
@@ -64,9 +64,9 @@ class Seasons extends Component
 						<Grid>
 							{this.props.seasons.map((item, i) => (
 								<Row key={item.id}>
-									<Col>
-										<Text>{item}</Text>
-									</Col>
+									<Col><Text>{item.name}</Text></Col>
+									<Col><Text>{item.playOff ? 'PlayOffs' : null }</Text></Col>
+									<Col><Text>{item.bracketsVisibleInSeason ? 'brackets' : null }</Text></Col>
 								</Row>
 							))}
 						</Grid>
@@ -77,7 +77,7 @@ class Seasons extends Component
 						(this.props.seasons && this.props.seasons.message) ?
 							<Text>{this.props.seasons.message}</Text>
 							:
-							<Text>Something went wrong ...</Text>
+							null
 					}
 				</Content>
 			</Container>
@@ -90,11 +90,12 @@ class Seasons extends Component
 function bindAction(dispatch)
 {
 	return {
-		getSeasons: () => dispatch(getSeasons())
+		getSeasons: leagueid => dispatch(getSeasons(leagueid))
 	};
 }
 const mapStateToProps = state => ({
-	seasons: state.seasons.list
+	seasons: state.seasons.list,
+	selectedLeague: state.leagues.selectedIndex
 });
 const SeasonsSwagger = connect(mapStateToProps, bindAction)(Seasons);
 export default SeasonsSwagger;

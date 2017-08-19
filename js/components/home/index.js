@@ -18,7 +18,11 @@ import {
 	Col
 } from "react-native-easy-grid";
 
-import {getLeagues} from "../../actions/leagues";
+import {
+	getLeagues,
+	setIndex
+} from "../../actions/leagues";
+
 import styles from "./styles";
 
 // screens
@@ -46,7 +50,8 @@ class Home extends Component
 	 */
 	static propTypes = {
 		name: PropTypes.string,
-		getLeagues: PropTypes.func
+		getLeagues: PropTypes.func,
+		setIndex: PropTypes.func
 	};
 
 	/**
@@ -55,6 +60,16 @@ class Home extends Component
 	componentDidMount()
 	{
 		this.props.getLeagues();
+	}
+
+	/**
+	 *
+	 * @param item
+	 */
+	clickLeague(item)
+	{
+		this.props.setIndex(item);
+		this.props.navigation.navigate("Seasons", {league: item});
 	}
 
 	/**
@@ -79,17 +94,17 @@ class Home extends Component
 						{this.props.leagues.map((item, i) => (
 							<Row key={item.id}>
 								<Col style={{width: 60, height: 55}}>
-									<TouchableOpacity style={styles.row} onPress={() => this.props.navigation.navigate("Seasons", {league: item})}>
+									<TouchableOpacity style={styles.row} onPress={() => this.clickLeague(item) }>
 										<Image style={{width: 50, height: 50}} source={{uri: item.imageUrl}}/>
 									</TouchableOpacity>
 								</Col>
 								<Col>
-									<TouchableOpacity style={styles.row} onPress={() => this.props.navigation.navigate("Seasons", {league: item})}>
+									<TouchableOpacity style={styles.row} onPress={() => this.clickLeague(item) }>
 										<Text style={styles.text}>{item.name}</Text>
 									</TouchableOpacity>
 								</Col>
 								<Col style={{width: 40, alignItems: 'center'}}>
-									<TouchableOpacity style={styles.row} onPress={() => this.props.navigation.navigate("Seasons", {league: item})}>
+									<TouchableOpacity style={styles.row} onPress={() => this.clickLeague(item) }>
 										<Icon name="ios-arrow-forward-outline"/>
 									</TouchableOpacity>
 								</Col>
@@ -105,12 +120,14 @@ class Home extends Component
 function bindAction(dispatch)
 {
 	return {
-		getLeagues: () => dispatch(getLeagues())
+		getLeagues: () => dispatch(getLeagues()),
+		setIndex: index => dispatch(setIndex(index)),
 	};
 }
 const mapStateToProps = state => ({
 	name: state.user.name,
-	leagues: state.leagues.list
+	leagues: state.leagues.list,
+	selectedLeague: state.selectedLeague,
 });
 const HomeSwagger = connect(mapStateToProps, bindAction)(Home);
 export default HomeSwagger;

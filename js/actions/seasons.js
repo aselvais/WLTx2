@@ -28,9 +28,9 @@ function _returnLoadSeasons(d)
  * @param leagueId
  * @returns {function(*): (Promise.<TResult>|Promise<T>)}
  */
-export function getSeasons(leagueId=0): Action
+export function getSeasons(leagueid: number): Action
 {
-	return dispatch => api.getSeason(leagueId).then(
+	return dispatch => api.getSeason(leagueid).then(
 		(d) => dispatch(_returnLoadSeasons(d)),
 		(e) => dispatch(_returnLoadSeasons([]))
 	);

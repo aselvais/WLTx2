@@ -1,12 +1,16 @@
 import React, {Component} from "react";
 import PropTypes from 'prop-types';
-import { Image } from "react-native";
+import {
+	Image,
+	TouchableOpacity
+} from "react-native";
 import {connect} from "react-redux";
 import DrawBar from "../DrawBar";
 import {
 	DrawerNavigator,
 	TabNavigator,
-	TabBarBottom
+	TabBarBottom,
+	NavigationActions
 } from "react-navigation";
 import {
 	Container,
@@ -43,7 +47,7 @@ class Home extends Component
 	 * @type {{header: null, tabBarLabel: string, tabBarIcon: (function({tintColor?: *}): XML)}}
 	 */
 	static navigationOptions = {
-		header: <Headerbar title="Home"/>,
+		header: <Headerbar title="Leagues"/>,
 		tabBarLabel: 'Home',
 		tabBarIcon: ({tintColor}) => <Icon style={{color: tintColor}} name="ios-home"/>
 	};
@@ -56,7 +60,7 @@ class Home extends Component
 		name: PropTypes.string,
 		setIndex: PropTypes.func,
 		getLeagues: PropTypes.func,
-		//leagues: PropTypes.arrayOf(React.PropTypes.string),
+		//leagues: PropTypes.arrayOf(PropTypes.string),
 		openDrawer: PropTypes.func
 	};
 
@@ -89,11 +93,16 @@ class Home extends Component
 					<Grid style={styles.mt}>
 						{this.props.leagues.map((item, i) => (
 							<Row key={item.id}>
-								<Col style={{width: 60, height: 55}}>
-									<Image style={{width: 50, height: 50}} source={{uri: item.imageUrl}}/>
+								<Col style={{ width: 60, height: 55 }}>
+									<Image style={{ width: 50, height: 50 }} source={{uri: item.imageUrl}}/>
 								</Col>
 								<Col>
 									<Text style={styles.text}>{item.name}</Text>
+								</Col>
+								<Col style={{ width: 40, alignItems: 'center' }}>
+									<TouchableOpacity style={styles.row} onPress={() => this.props.navigation.navigate("BlankPage", { name2: 'Hello' } )}>
+									<Icon name="ios-arrow-forward-outline"/>
+									</TouchableOpacity>
 								</Col>
 							</Row>
 						))}

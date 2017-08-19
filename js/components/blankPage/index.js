@@ -26,7 +26,8 @@ class BlankPage extends Component
 	 * @type {{header: XML}}
 	 */
 	static navigationOptions = {
-		header: <Header>
+		header: null
+/*		header: <Header>
 			<Left>
 				<Button transparent onPress={() => this.props.navigation.goBack()}>
 					<Icon name="ios-arrow-back"/>
@@ -36,7 +37,7 @@ class BlankPage extends Component
 				<Title>{this.name ? this.props.name : "Blank Page"}</Title>
 			</Body>
 			<Right/>
-		</Header>
+		</Header> */
 	};
 
 	/**
@@ -46,7 +47,7 @@ class BlankPage extends Component
 	static propTypes = {
 		name: PropTypes.string,
 		index: PropTypes.number,
-		list: PropTypes.arrayOf(React.PropTypes.string),
+//		list: PropTypes.arrayOf(PropTypes.string),
 		openDrawer: PropTypes.func
 	};
 
@@ -57,14 +58,11 @@ class BlankPage extends Component
 	render()
 	{
 		const {props: {name, index, list}} = this;
-		console.log(this.props.navigation, "000000000");
 		return (
 			<Container style={styles.container}>
 				<Content padder>
 					<Text>
-						{this.props.navigation.state.params.name.item !== undefined
-							? this.props.navigation.state.params.name.item
-							: "Create Something Awesome . . ."}
+						WHATS?
 					</Text>
 				</Content>
 			</Container>
@@ -90,8 +88,8 @@ function bindAction(dispatch)
  */
 const mapStateToProps = state => ({
 	name: state.user.name,
-	index: state.list.selectedIndex,
-	list: state.list.list
+//	index: state.list.selectedIndex,
+//	list: state.list.list
 });
 
 export default connect(mapStateToProps, bindAction)(BlankPage);

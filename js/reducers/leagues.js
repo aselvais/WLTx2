@@ -1,5 +1,8 @@
 import type {Action} from "../actions/types";
-import {SET_INDEX, LOAD_LEAGUES} from "../actions/leagues";
+import {
+	SET_INDEX,
+	LOAD_LEAGUES
+} from "../actions/leagues";
 
 /**
  *

@@ -4,11 +4,13 @@ import drawer from "./drawer";
 import user from "./user";
 
 import leagues from "./leagues";
+import seasons from "./seasons";
 
 
 export default combineReducers({
 	form: formReducer,
 	drawer,
 	user,
-	leagues
+	leagues,
+	seasons
 });

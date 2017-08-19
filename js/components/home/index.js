@@ -5,12 +5,9 @@ import {
 	TouchableOpacity
 } from "react-native";
 import {connect} from "react-redux";
-import DrawBar from "../DrawBar";
 import {
-	DrawerNavigator,
 	TabNavigator,
-	TabBarBottom,
-	NavigationActions
+	TabBarBottom
 } from "react-navigation";
 import {
 	Container,
@@ -25,15 +22,10 @@ import {
 	Col
 } from "react-native-easy-grid";
 
-import {setIndex, getLeagues} from "../../actions/leagues";
-import {openDrawer} from "../../actions/drawer";
+import {getLeagues} from "../../actions/leagues";
 import styles from "./styles";
+
 // screens
-import BlankPage2 from "../blankPage2";
-import Games from "../games";
-import Scores from "../scores";
-import Standings from "../standings";
-import Favorites from "../favorites";
 import Headerbar from "../headerbar";
 
 /**
@@ -54,14 +46,11 @@ class Home extends Component
 
 	/**
 	 *
-	 * @type {{name, setIndex, leagues: *, openDrawer}}
+	 * @type {{name, getLeagues}}
 	 */
 	static propTypes = {
 		name: PropTypes.string,
-		setIndex: PropTypes.func,
-		getLeagues: PropTypes.func,
-		//leagues: PropTypes.arrayOf(PropTypes.string),
-		openDrawer: PropTypes.func
+		getLeagues: PropTypes.func
 	};
 
 	/**
@@ -93,15 +82,19 @@ class Home extends Component
 					<Grid style={styles.mt}>
 						{this.props.leagues.map((item, i) => (
 							<Row key={item.id}>
-								<Col style={{ width: 60, height: 55 }}>
-									<Image style={{ width: 50, height: 50 }} source={{uri: item.imageUrl}}/>
+								<Col style={{width: 60, height: 55}}>
+									<TouchableOpacity style={styles.row} onPress={() => this.props.navigation.navigate("Seasons", {name2: 'Hello01'})}>
+										<Image style={{width: 50, height: 50}} source={{uri: item.imageUrl}}/>
+									</TouchableOpacity>
 								</Col>
 								<Col>
-									<Text style={styles.text}>{item.name}</Text>
+									<TouchableOpacity style={styles.row} onPress={() => this.props.navigation.navigate("Seasons", {name2: 'Hello02'})}>
+										<Text style={styles.text}>{item.name}</Text>
+									</TouchableOpacity>
 								</Col>
-								<Col style={{ width: 40, alignItems: 'center' }}>
-									<TouchableOpacity style={styles.row} onPress={() => this.props.navigation.navigate("BlankPage", { name2: 'Hello' } )}>
-									<Icon name="ios-arrow-forward-outline"/>
+								<Col style={{width: 40, alignItems: 'center'}}>
+									<TouchableOpacity style={styles.row} onPress={() => this.props.navigation.navigate("Seasons", {name2: 'Hello03'})}>
+										<Icon name="ios-arrow-forward-outline"/>
 									</TouchableOpacity>
 								</Col>
 							</Row>
@@ -113,81 +106,15 @@ class Home extends Component
 	}
 }
 
-/**
- *
- * @param dispatch
- * @returns {{setIndex: (function(*=): *), openDrawer: (function(): *)}}
- */
 function bindAction(dispatch)
 {
 	return {
-		setIndex: index => dispatch(setIndex(index)),
-		getLeagues: () => dispatch(getLeagues()),
-		openDrawer: () => dispatch(openDrawer())
+		getLeagues: () => dispatch(getLeagues())
 	};
 }
-
-/**
- *
- * @param state
- */
 const mapStateToProps = state => ({
 	name: state.user.name,
 	leagues: state.leagues.list
 });
-
-/**
- *
- */
 const HomeSwagger = connect(mapStateToProps, bindAction)(Home);
-/**
- *
- */
-const DrawNav = DrawerNavigator(
-	{
-		Home: {screen: HomeSwagger},
-		BlankPage2: {screen: BlankPage2}
-	},
-	{
-		contentComponent: props => <DrawBar {...props} />
-	}
-);
-/**
- *
- * @type {null}
- */
-let DrawerNav = null;
-/**
- *
- * @param navigation
- * @returns {{header: null}}
- */
-DrawNav.navigationOptions = ({navigation}) =>
-{
-	DrawerNav = navigation;
-	return {
-		header: null
-	};
-};
-
-/**
- *
- */
-const MainScreenNavigator = TabNavigator({
-		Home: {screen: HomeSwagger},
-		Games: {screen: Games},
-		Scores: {screen: Scores},
-		Stand: {screen: Standings},
-		Fav: {screen: Favorites},
-	},
-	{
-		tabBarComponent: TabBarBottom,
-		tabBarPosition: 'bottom',
-		animationEnabled: true,
-		tabBarOptions: {
-			activeTintColor: '#1b6bb0',
-		}
-	});
-
-// export default DrawNav;
-export default MainScreenNavigator;
+export default HomeSwagger;

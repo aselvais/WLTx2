@@ -139,7 +139,7 @@ class Login extends Component
 							<View style={styles.bg}>
 								<Field name="email" component={this.renderInput}/>
 								<Field name="password" component={this.renderInput}/>
-								<Button style={styles.btn} onPress={() => this.props.navigation.navigate("Home")}>
+								<Button style={styles.btn} onPress={() => this.props.navigation.navigate("HomeWtabs")}>
 									<Text>SIGN IN</Text>
 								</Button>
 							</View>

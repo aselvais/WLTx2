@@ -30,7 +30,7 @@ function _returnLoadSeasons(d)
  */
 export function getSeasons(leagueId=0): Action
 {
-	return dispatch => api.getLeague(leagueId).then(
+	return dispatch => api.getSeason(leagueId).then(
 		(d) => dispatch(_returnLoadSeasons(d)),
 		(e) => dispatch(_returnLoadSeasons([]))
 	);

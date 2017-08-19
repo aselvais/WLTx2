@@ -6,10 +6,6 @@ import {
 } from "react-native";
 import {connect} from "react-redux";
 import {
-	TabNavigator,
-	TabBarBottom
-} from "react-navigation";
-import {
 	Container,
 	Content,
 	Text,
@@ -38,11 +34,11 @@ class Home extends Component
 	 * Option for the TabNavigation system
 	 * @type {{header: null, tabBarLabel: string, tabBarIcon: (function({tintColor?: *}): XML)}}
 	 */
-	static navigationOptions = {
-		header: <Headerbar title="Leagues"/>,
+	static navigationOptions =  ({ navigation }) => ({
+		header: <Headerbar title="Leagues" navigation={navigation}/>,
 		tabBarLabel: 'Home',
 		tabBarIcon: ({tintColor}) => <Icon style={{color: tintColor}} name="ios-home"/>
-	};
+	});
 
 	/**
 	 *
@@ -83,17 +79,17 @@ class Home extends Component
 						{this.props.leagues.map((item, i) => (
 							<Row key={item.id}>
 								<Col style={{width: 60, height: 55}}>
-									<TouchableOpacity style={styles.row} onPress={() => this.props.navigation.navigate("Seasons", {name2: 'Hello01'})}>
+									<TouchableOpacity style={styles.row} onPress={() => this.props.navigation.navigate("Seasons", {league: item})}>
 										<Image style={{width: 50, height: 50}} source={{uri: item.imageUrl}}/>
 									</TouchableOpacity>
 								</Col>
 								<Col>
-									<TouchableOpacity style={styles.row} onPress={() => this.props.navigation.navigate("Seasons", {name2: 'Hello02'})}>
+									<TouchableOpacity style={styles.row} onPress={() => this.props.navigation.navigate("Seasons", {league: item})}>
 										<Text style={styles.text}>{item.name}</Text>
 									</TouchableOpacity>
 								</Col>
 								<Col style={{width: 40, alignItems: 'center'}}>
-									<TouchableOpacity style={styles.row} onPress={() => this.props.navigation.navigate("Seasons", {name2: 'Hello03'})}>
+									<TouchableOpacity style={styles.row} onPress={() => this.props.navigation.navigate("Seasons", {league: item})}>
 										<Icon name="ios-arrow-forward-outline"/>
 									</TouchableOpacity>
 								</Col>

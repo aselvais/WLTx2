@@ -269,6 +269,7 @@ class Apiaccess
 	 */
 	async getSeason(leagueId)
 	{
+		console.log('getSeason ' + leagueId);
 		return this.postRegister().then(() => this._genericApiCall('GetSeason', {leagueId: leagueId}));
 	}
 

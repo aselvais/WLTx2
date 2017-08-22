@@ -1,6 +1,7 @@
 import type {Action} from "../actions/types";
 import {
-	LOAD_SEASONS
+	LOAD_SEASONS,
+	SET_SEASONS_INDEX
 } from "../actions/seasons";
 
 /**
@@ -27,6 +28,12 @@ export default function(state: State = initialState, action: Action): State
 {
 	switch(action.type)
 	{
+		case SET_SEASONS_INDEX:
+			return {
+				...state,
+				selectedIndex: action.payload
+			};
+			break;
 		/**
 		 * load the seasons from API
 		 */

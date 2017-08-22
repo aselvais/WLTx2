@@ -20,7 +20,7 @@ import {
 
 import {
 	getLeagues,
-	setIndex
+	setLeagueIndex
 } from "../../actions/leagues";
 
 import styles from "./styles";
@@ -51,7 +51,7 @@ class Home extends Component
 	static propTypes = {
 		name: PropTypes.string,
 		getLeagues: PropTypes.func,
-		setIndex: PropTypes.func
+		setLeagueIndex: PropTypes.func
 	};
 
 	/**
@@ -68,7 +68,7 @@ class Home extends Component
 	 */
 	clickLeague(item)
 	{
-		this.props.setIndex(item);
+		this.props.setLeagueIndex(item);
 		this.props.navigation.navigate("Seasons", {league: item});
 	}
 
@@ -121,7 +121,7 @@ function bindAction(dispatch)
 {
 	return {
 		getLeagues: () => dispatch(getLeagues()),
-		setIndex: index => dispatch(setIndex(index)),
+		setLeagueIndex: index => dispatch(setLeagueIndex(index)),
 	};
 }
 const mapStateToProps = state => ({

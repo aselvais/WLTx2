@@ -3,6 +3,7 @@ import Apiaccess from '../libs/Apiaccess';
 
 let api = new Apiaccess();
 
+export const SET_SEASONS_INDEX = 'SET_SEASONS_INDEX';
 export const LOAD_SEASONS = 'LOAD_SEASONS';
 
 /* ------------------------------------------------------------------------------------------------------------------ */
@@ -22,6 +23,18 @@ function _returnLoadSeasons(d)
 }
 
 /* ------------------------------------------------------------------------------------------------------------------ */
+
+/**
+ *
+ * @param index
+ */
+export function setSeasonIndex(index: number): Action
+{
+	return {
+		type: SET_SEASONS_INDEX,
+		payload: index
+	};
+};
 
 /**
  *

@@ -1,0 +1,50 @@
+import type {Action} from './types';
+import Apiaccess from '../libs/Apiaccess';
+
+let api = new Apiaccess();
+
+export const SET_DIVISIONS_INDEX = 'SET_DIVISIONS_INDEX';
+export const LOAD_DIVISIONS = 'LOAD_DIVISIONS';
+
+/* ------------------------------------------------------------------------------------------------------------------ */
+
+/**
+ *
+ * @param d
+ * @returns {{type: string, leagues: *}}
+ * @private
+ */
+function _returnLoadDivisions(d)
+{
+	return {
+		type: LOAD_DIVISIONS,
+		list: d
+	};
+}
+
+/* ------------------------------------------------------------------------------------------------------------------ */
+/**
+ *
+ * @param index
+ */
+export function setDivisionIndex(index: number): Action
+{
+	return {
+		type: SET_DIVISIONS_INDEX,
+		payload: index
+	};
+};
+
+/**
+ *
+ * @param leagueId
+ * @returns {function(*): (Promise.<TResult>|Promise<T>)}
+ */
+export function getDivisions(seasonid: number): Action
+{
+	return dispatch => api.getDivision(seasonid).then(
+		(d) => dispatch(_returnLoadDivisions(d)),
+		(e) => dispatch(_returnLoadDivisions([]))
+	);
+};
+

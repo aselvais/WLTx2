@@ -18,7 +18,10 @@ import {
 	Col
 } from "react-native-easy-grid";
 
-import {getSeasons} from "../../actions/seasons";
+import {
+	getSeasons,
+	setSeasonIndex
+} from "../../actions/seasons";
 
 /**
  *
@@ -30,7 +33,7 @@ class Seasons extends Component
 	 * @param navigation
 	 */
 	static navigationOptions = ({ navigation }) => ({
-		title: navigation.state.params.league.name
+		title: 'Season: ' + navigation.state.params.league.name
 	});
 
 	/**
@@ -39,6 +42,7 @@ class Seasons extends Component
 	 */
 	static propTypes = {
 		getSeasons: PropTypes.func,
+		setSeasonIndex: PropTypes.func
 	};
 
 	/**
@@ -52,11 +56,21 @@ class Seasons extends Component
 
 	/**
 	 *
+	 * @param item
+	 */
+	clickSeason(item)
+	{
+		this.props.setSeasonIndex(item);
+		this.props.navigation.navigate("Divisions", {season: item});
+	}
+
+	/**
+	 *
 	 * @returns {XML}
 	 */
 	render()
 	{
-		const params = this.props.navigation.state.params;
+		// const params = this.props.navigation.state.params;
 		return (
 			<Container>
 				<Content padder>
@@ -64,9 +78,14 @@ class Seasons extends Component
 						<Grid>
 							{this.props.seasons.map((item, i) => (
 								<Row key={item.id}>
-									<Col><Text>{item.name}</Text></Col>
-									<Col><Text>{item.playOff ? 'PlayOffs' : null }</Text></Col>
-									<Col><Text>{item.bracketsVisibleInSeason ? 'brackets' : null }</Text></Col>
+									<Col style={{ padding: 10 }}>
+										<TouchableOpacity onPress={() => this.clickSeason(item) }>
+											<Text>{item.name}
+											{item.bracketsVisibleInSeason ? (<Icon name="code" fontSize="5" color="#FF0000"/>) : null }
+											{item.playOff ? (<Icon name="ios-american-football" fontSize="5" color="#FF0000"/>) : null }
+											</Text>
+										</TouchableOpacity>
+									</Col>
 								</Row>
 							))}
 						</Grid>
@@ -90,7 +109,8 @@ class Seasons extends Component
 function bindAction(dispatch)
 {
 	return {
-		getSeasons: leagueid => dispatch(getSeasons(leagueid))
+		getSeasons: leagueid => dispatch(getSeasons(leagueid)),
+		setSeasonIndex: index => dispatch(setSeasonIndex(index)),
 	};
 }
 const mapStateToProps = state => ({

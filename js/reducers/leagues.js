@@ -1,6 +1,6 @@
 import type {Action} from "../actions/types";
 import {
-	SET_INDEX,
+	SET_LEAGUE_INDEX,
 	LOAD_LEAGUES
 } from "../actions/leagues";
 
@@ -32,7 +32,7 @@ export default function(state: State = initialState, action: Action): State
 		/**
 		 * set index of the leagues
 		 */
-		case SET_INDEX:
+		case SET_LEAGUE_INDEX:
 			return {
 				...state,
 				selectedIndex: action.payload

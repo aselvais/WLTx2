@@ -3,7 +3,7 @@ import Apiaccess from '../libs/Apiaccess';
 
 let api = new Apiaccess();
 
-export const SET_INDEX = 'SET_INDEX';
+export const SET_LEAGUE_INDEX = 'SET_LEAGUE_INDEX';
 export const LOAD_LEAGUES = 'LOAD_LEAGUES';
 
 /* ------------------------------------------------------------------------------------------------------------------ */
@@ -28,10 +28,10 @@ function _returnLoadLeagues(d)
  *
  * @param index
  */
-export function setIndex(index: number): Action
+export function setLeagueIndex(index: number): Action
 {
 	return {
-		type: SET_INDEX,
+		type: SET_LEAGUE_INDEX,
 		payload: index
 	};
 };

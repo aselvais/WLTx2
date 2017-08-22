@@ -8,6 +8,7 @@ import HomeWtabs from "./BottomTabBar";
 import BlankPage from "../components/blankPage";
 import Seasons from "../components/seasons";
 import Divisions from "../components/divisions";
+import Teams from "../components/teams";
 
 HomeDrawerRouter.navigationOptions = ({navigation}) => ({header: null});
 
@@ -17,7 +18,8 @@ export default (StackNav = StackNavigator({
 		Home: {screen: Home},
 		BlankPage: {screen: BlankPage},
 		Seasons: {screen: Seasons},
-		Divisions: {screen: Divisions}
+		Divisions: {screen: Divisions},
+		Teams: {screen: Teams},
 	},
 	{
 		mode: 'modal'

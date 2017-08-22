@@ -18,7 +18,10 @@ import {
 	Col
 } from "react-native-easy-grid";
 
-import {getDivisions} from "../../actions/divisions";
+import {
+	getDivisions,
+	setDivisionIndex
+} from "../../actions/divisions";
 
 /**
  *
@@ -39,6 +42,7 @@ class Divisions extends Component
 	 */
 	static propTypes = {
 		getDivisions: PropTypes.func,
+		setDivisionIndex: PropTypes.func,
 	};
 
 	/**
@@ -48,6 +52,17 @@ class Divisions extends Component
 	{
 		console.log('Divisions::componentDidMount ' + parseInt(this.props.selectedSeason.id) );
 		this.props.getDivisions(parseInt(this.props.selectedSeason.id));
+	}
+
+
+	/**
+	 *
+	 * @param item
+	 */
+	clickDivision(item)
+	{
+		this.props.setDivisionIndex(item);
+		this.props.navigation.navigate("Teams", {division: item});
 	}
 
 	/**
@@ -65,7 +80,9 @@ class Divisions extends Component
 							{this.props.divisions.map((item, i) => (
 								<Row key={item.id}>
 									<Col style={{ padding: 10 }}>
-										<Text>{item.name}</Text>
+										<TouchableOpacity onPress={() => this.clickDivision(item) }>
+											<Text>{item.name}</Text>
+										</TouchableOpacity>
 									</Col>
 								</Row>
 							))}
@@ -79,12 +96,11 @@ class Divisions extends Component
 	}
 }
 
-// export default Divisions;
-
 function bindAction(dispatch)
 {
 	return {
-		getDivisions: seasonid => dispatch(getDivisions(seasonid))
+		getDivisions: seasonid => dispatch(getDivisions(seasonid)),
+		setDivisionIndex: index => dispatch(setDivisionIndex(index)),
 	};
 }
 const mapStateToProps = state => ({

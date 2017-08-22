@@ -6,6 +6,7 @@ import user from "./user";
 import leagues from "./leagues";
 import seasons from "./seasons";
 import divisions from "./divisions";
+import teams from "./teams";
 
 
 export default combineReducers({
@@ -14,5 +15,6 @@ export default combineReducers({
 	user,
 	leagues,
 	seasons,
-	divisions
+	divisions,
+	teams
 });

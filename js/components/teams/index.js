@@ -20,7 +20,7 @@ import {
 
 import {
 	getTeams,
-	setDivisionIndex
+	setTeamIndex
 } from "../../actions/teams";
 
 /**
@@ -42,7 +42,7 @@ class Teams extends Component
 	 */
 	static propTypes = {
 		getTeams: PropTypes.func,
-		setDivisionIndex: PropTypes.func,
+		setTeamIndex: PropTypes.func,
 	};
 
 	/**
@@ -59,10 +59,10 @@ class Teams extends Component
 	 *
 	 * @param item
 	 */
-	clickDivision(item)
+	clickTeam(item)
 	{
-		this.props.setDivisionIndex(item);
-		this.props.navigation.navigate("Teams", {division: item});
+		this.props.setTeamIndex(item);
+		// this.props.navigation.navigate("Games", {team: item});
 	}
 
 	/**
@@ -79,9 +79,17 @@ class Teams extends Component
 						<Grid>
 							{this.props.teams.map((item, i) => (
 								<Row key={item.id}>
+									<Col style={{width: 60, height: 55}}>
+										<TouchableOpacity onPress={() => this.clickLeague(item) }>
+											<Image style={{width: 50, height: 50}} source={{uri: item.imageUrl}}/>
+										</TouchableOpacity>
+									</Col>
 									<Col style={{ padding: 10 }}>
-										<TouchableOpacity onPress={() => this.clickDivision(item) }>
-											<Text>{item.name}</Text>
+										<TouchableOpacity onPress={() => this.clickTeam(item) }>
+											<Text>{item.name}
+												{ (item.id && this.props.selectedTeam && this.props.selectedTeam.id && this.props.selectedTeam.id == item.id)
+													? (<Icon name="checkmark" fontSize="10" color="#FF0000" iconRight="true"/>) : null }
+											</Text>
 										</TouchableOpacity>
 									</Col>
 								</Row>
@@ -100,11 +108,12 @@ function bindAction(dispatch)
 {
 	return {
 		getTeams: seasonid => dispatch(getTeams(seasonid)),
-		setDivisionIndex: index => dispatch(setDivisionIndex(index)),
+		setTeamIndex: index => dispatch(setTeamIndex(index)),
 	};
 }
 const mapStateToProps = state => ({
 	teams: state.teams.list,
+	selectedTeam: state.teams.selectedIndex,
 	selectedDivision: state.divisions.selectedIndex
 });
 const TeamsSwagger = connect(mapStateToProps, bindAction)(Teams);

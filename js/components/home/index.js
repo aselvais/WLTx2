@@ -80,15 +80,6 @@ class Home extends Component
 	{
 		return (
 			<Container style={styles.container}>
-				<Button style={{
-					backgroundColor: '#DDD',
-					width: '100%',
-					borderRadius: 0,
-					alignItems: 'center',
-					alignSelf: 'center',
-					justifyContent: 'center',
-					borderBottomColor: '#000'
-				}} onPress={() => this.props.getLeagues()}><Text>Re-load leagues</Text></Button>
 				<Content>
 					<Grid style={styles.mt}>
 						{this.props.leagues.map((item, i) => (

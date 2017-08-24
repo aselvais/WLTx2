@@ -4,10 +4,10 @@ import CodePush from "react-native-code-push";
 
 import {Container, Content, Text, View} from "native-base";
 import Modal from "react-native-modalbox";
-import MainStackRouter from "./Routers/MainStackRouter";
-import ProgressBar from "./components/loaders/ProgressBar";
+import MainStackRouter from "./routers/MainStackRouter";
+import ProgressBar from "./components/widgets/loaders/ProgressBar";
 
-import theme from "./themes/base-theme";
+import theme from "./components/themes/base-theme";
 
 /**
  *

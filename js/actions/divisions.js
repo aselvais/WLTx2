@@ -4,6 +4,7 @@ import Apiaccess from '../libs/Apiaccess';
 let api = new Apiaccess();
 
 export const SET_DIVISIONS_INDEX = 'SET_DIVISIONS_INDEX';
+export const RESET_DIVISIONS = 'RESET_DIVISIONS';
 export const LOAD_DIVISIONS = 'LOAD_DIVISIONS';
 
 /* ------------------------------------------------------------------------------------------------------------------ */
@@ -32,6 +33,16 @@ export function setDivisionIndex(index: number): Action
 	return {
 		type: SET_DIVISIONS_INDEX,
 		payload: index
+	};
+};
+/**
+ *
+ * @param index
+ */
+export function resetDivisions(): Action
+{
+	return {
+		type: RESET_DIVISIONS
 	};
 };
 

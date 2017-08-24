@@ -1,6 +1,7 @@
 import type {Action} from "../actions/types";
 import {
 	SET_LEAGUE_INDEX,
+	RESET_LEAGUES,
 	LOAD_LEAGUES
 } from "../actions/leagues";
 
@@ -17,7 +18,7 @@ export type State = {
  */
 const initialState = {
 	list: [],
-	selectedIndex: undefined
+	selectedIndex: null
 };
 /**
  *
@@ -36,6 +37,16 @@ export default function(state: State = initialState, action: Action): State
 			return {
 				...state,
 				selectedIndex: action.payload
+			};
+			break;
+		/**
+		 * set index of the leagues
+		 */
+		case RESET_LEAGUES:
+			return {
+				...state,
+				list: [],
+				selectedIndex: null
 			};
 			break;
 		/**

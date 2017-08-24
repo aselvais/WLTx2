@@ -4,6 +4,7 @@ import Apiaccess from '../libs/Apiaccess';
 let api = new Apiaccess();
 
 export const SET_LEAGUE_INDEX = 'SET_LEAGUE_INDEX';
+export const RESET_LEAGUES = 'RESET_LEAGUES';
 export const LOAD_LEAGUES = 'LOAD_LEAGUES';
 
 /* ------------------------------------------------------------------------------------------------------------------ */
@@ -33,6 +34,17 @@ export function setLeagueIndex(index: number): Action
 	return {
 		type: SET_LEAGUE_INDEX,
 		payload: index
+	};
+};
+
+/**
+ *
+ * @param index
+ */
+export function resetLeagues(): Action
+{
+	return {
+		type: RESET_LEAGUES
 	};
 };
 

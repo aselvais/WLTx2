@@ -4,6 +4,7 @@ import Apiaccess from '../libs/Apiaccess';
 let api = new Apiaccess();
 
 export const SET_TEAMS_INDEX = 'SET_TEAMS_INDEX';
+export const RESET_TEAMS = 'RESET_TEAMS';
 export const LOAD_TEAMS = 'LOAD_TEAMS';
 
 /* ------------------------------------------------------------------------------------------------------------------ */
@@ -32,6 +33,16 @@ export function setTeamIndex(index: number): Action
 	return {
 		type: SET_TEAMS_INDEX,
 		payload: index
+	};
+};
+/**
+ *
+ * @param index
+ */
+export function resetTeams(): Action
+{
+	return {
+		type: RESET_TEAMS
 	};
 };
 

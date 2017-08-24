@@ -1,6 +1,7 @@
 import type {Action} from "../actions/types";
 import {
 	LOAD_SEASONS,
+	RESET_SEASONS,
 	SET_SEASONS_INDEX
 } from "../actions/seasons";
 
@@ -16,7 +17,8 @@ export type State = {
  * @type {{list: [null], selectedIndex: undefined}}
  */
 const initialState = {
-	list: []
+	list: [],
+	selectedIndex: null
 };
 /**
  *
@@ -32,6 +34,13 @@ export default function(state: State = initialState, action: Action): State
 			return {
 				...state,
 				selectedIndex: action.payload
+			};
+			break;
+		case RESET_SEASONS:
+			return {
+				...state,
+				list: [],
+				selectedIndex: null
 			};
 			break;
 		/**

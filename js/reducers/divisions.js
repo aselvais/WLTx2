@@ -1,6 +1,7 @@
 import type {Action} from "../actions/types";
 import {
 	LOAD_DIVISIONS,
+	RESET_DIVISIONS,
 	SET_DIVISIONS_INDEX
 } from "../actions/divisions";
 
@@ -16,7 +17,8 @@ export type State = {
  * @type {{list: [null], selectedIndex: undefined}}
  */
 const initialState = {
-	list: []
+	list: [],
+	selectedIndex: null
 };
 /**
  *
@@ -32,6 +34,13 @@ export default function(state: State = initialState, action: Action): State
 			return {
 				...state,
 				selectedIndex: action.payload
+			};
+			break;
+		case RESET_DIVISIONS:
+			return {
+				...state,
+				list: [],
+				selectedIndex: null
 			};
 			break;
 		/**

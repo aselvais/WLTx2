@@ -4,6 +4,7 @@ import Apiaccess from '../libs/Apiaccess';
 let api = new Apiaccess();
 
 export const SET_SEASONS_INDEX = 'SET_SEASONS_INDEX';
+export const RESET_SEASONS = 'RESET_SEASONS';
 export const LOAD_SEASONS = 'LOAD_SEASONS';
 
 /* ------------------------------------------------------------------------------------------------------------------ */
@@ -33,6 +34,17 @@ export function setSeasonIndex(index: number): Action
 	return {
 		type: SET_SEASONS_INDEX,
 		payload: index
+	};
+};
+
+/**
+ *
+ * @param index
+ */
+export function resetSeasons(): Action
+{
+	return {
+		type: RESET_SEASONS
 	};
 };
 

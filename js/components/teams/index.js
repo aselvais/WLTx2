@@ -33,7 +33,7 @@ class Teams extends Component
 	 * @param navigation
 	 */
 	static navigationOptions = ({ navigation }) => ({
-		title: 'Teams'
+		title: 'Select a team'
 	});
 
 	/**
@@ -86,11 +86,12 @@ class Teams extends Component
 									</Col>
 									<Col style={{ padding: 10 }}>
 										<TouchableOpacity onPress={() => this.clickTeam(item) }>
-											<Text>{item.name}
-												{ (item.id && this.props.selectedTeam && this.props.selectedTeam.id && this.props.selectedTeam.id == item.id)
-													? (<Icon name="checkmark" fontSize="10" color="#FF0000" iconRight="true"/>) : null }
-											</Text>
+											<Text>{item.name}</Text>
 										</TouchableOpacity>
+									</Col>
+									<Col style={{width: 40, alignItems: 'center'}}>
+										{ (item.id && this.props.selectedTeam && this.props.selectedTeam.id && this.props.selectedTeam.id == item.id)
+											? (<Icon name="checkmark" fontSize="10" color="#FF0000" iconRight="true"/>) : null }
 									</Col>
 								</Row>
 							))}

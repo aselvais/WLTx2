@@ -25,6 +25,7 @@ import {
 
 import Headerbar from '../headerbar';
 import styles from "./styles";
+import Btnteamselect from '../btnteamselect';
 
 /**
  *
@@ -37,7 +38,7 @@ class Games extends Component
 	 */
 	static navigationOptions = {
 		header: <Headerbar title="Games"/>,
-		tabBarLabel: 'Games' /*+ navigation.state.params.team.name*/,
+		tabBarLabel: 'Games',
 		tabBarIcon: ({ tintColor }) => <Icon name="ios-calendar" style={{color: tintColor}}/>
 	};
 
@@ -80,7 +81,9 @@ class Games extends Component
 		let {league, season, division, team} = this.props;
 		const {props: {name, index, list}} = this;
 		return (
-			<Container>
+			<Container style={{
+				backgroundColor: '#FFFFFF',
+			}}>
 				<Button
 					style={{
 						backgroundColor: '#DDD',
@@ -93,14 +96,10 @@ class Games extends Component
 					}}
 					onPress={ () => this.props.navigation.navigate("Leagues") }
 				>
-					<Text>League > Season > Division > Team</Text>
+					<Text>{ (team && team.name) ? 'Change team' : 'Choose a team'}</Text>
 				</Button>
 				<Content padder>
-					<Text onPress={ () => this.props.navigation.navigate("Leagues") }>League : { (league && league.name) ? league.name : ''} </Text>
-					<Text onPress={ () => this.props.navigation.navigate("Seasons") }>Season : { (season && season.name) ? season.name : ''} </Text>
-					<Text onPress={ () => this.props.navigation.navigate("Divisions") }>Division : { (division && division.name) ? division.name : ''} </Text>
-					<Text onPress={ () => this.props.navigation.navigate("Teams") }>Team : { (team && team.name) ? team.name : ''} </Text>
-
+					<Btnteamselect navigation={this.props.navigation} />
 					{(this.props.games && this.props.games.length && this.props.games.length > 0) ?
 						<Grid>
 							{this.props.games.map((item, i) => (

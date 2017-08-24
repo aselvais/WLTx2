@@ -18,8 +18,7 @@ const deviceHeight = Dimensions.get('window').height;
  * @type {[string,string]}
  */
 const routes = [
-	{name: "Home", label: "Search"},
-	{name: "BlankPage2", label: "Clubs"},
+	{name: "Home", label: "Search"}
 ];
 
 const background = require("../../../images/drawer-cover.png");

@@ -1,6 +1,6 @@
 import type {Action} from "../actions/types";
 import {
-	LOAD_TEAMS,
+	LOAD_TEAMS, RESET_TEAMS,
 	SET_TEAMS_INDEX
 } from "../actions/teams";
 
@@ -16,7 +16,8 @@ export type State = {
  * @type {{list: [null], selectedIndex: undefined}}
  */
 const initialState = {
-	list: []
+	list: [],
+	selectedIndex: null
 };
 /**
  *
@@ -32,6 +33,16 @@ export default function(state: State = initialState, action: Action): State
 			return {
 				...state,
 				selectedIndex: action.payload
+			};
+			break;
+		/**
+		 * load the teams from API
+		 */
+		case RESET_TEAMS:
+			return {
+				...state,
+				list: [],
+				selectedIndex: null
 			};
 			break;
 		/**

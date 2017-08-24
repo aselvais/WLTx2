@@ -23,6 +23,8 @@ import {
 	setLeagueIndex
 } from "../../actions/leagues";
 
+import Btnteamselect from '../btnteamselect';
+
 import styles from "./styles";
 
 // screens
@@ -78,16 +80,13 @@ class Home extends Component
 						justifyContent: 'center',
 						borderBottomColor: '#000'
 					}}
-					onPress={ () => this.props.navigation.navigate("Leagues") }
-				>
-					<Text>League > Season > Division > Team</Text>
+					onPress={ () => this.props.navigation.navigate("Leagues") }>
+					<Text>{ (team && team.name) ? 'Change team' : 'Choose a team'}</Text>
 				</Button>
 				<Content>
-					<Text onPress={ () => this.props.navigation.navigate("Leagues") }>League : { (league && league.name) ? league.name : ''} </Text>
-					<Text onPress={ () => this.props.navigation.navigate("Seasons") }>Season : { (season && season.name) ? season.name : ''} </Text>
-					<Text onPress={ () => this.props.navigation.navigate("Divisions") }>Division : { (division && division.name) ? division.name : ''} </Text>
-					<Text onPress={ () => this.props.navigation.navigate("Teams") }>Team : { (team && team.name) ? team.name : ''} </Text>
+					<Btnteamselect navigation={this.props.navigation} />
 				</Content>
+
 			</Container>
 		);
 	}

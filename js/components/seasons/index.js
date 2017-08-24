@@ -23,6 +23,8 @@ import {
 	setSeasonIndex
 } from "../../actions/seasons";
 
+import { resetDivisions } from "../../actions/divisions";
+
 /**
  *
  */
@@ -33,7 +35,7 @@ class Seasons extends Component
 	 * @param navigation
 	 */
 	static navigationOptions = ({ navigation }) => ({
-		title: 'Seasons'
+		title: 'Select a seasons'
 	});
 
 	/**
@@ -42,7 +44,8 @@ class Seasons extends Component
 	 */
 	static propTypes = {
 		getSeasons: PropTypes.func,
-		setSeasonIndex: PropTypes.func
+		setSeasonIndex: PropTypes.func,
+		resetDivisions: PropTypes.func
 	};
 
 	/**
@@ -60,6 +63,10 @@ class Seasons extends Component
 	 */
 	clickSeason(item)
 	{
+		if (this.props.selectedSeason && this.props.selectedSeason.id != item.id)
+		{
+			this.props.resetDivisions();
+		}
 		this.props.setSeasonIndex(item);
 		this.props.navigation.navigate("Divisions", {season: item});
 	}
@@ -86,6 +93,11 @@ class Seasons extends Component
 											</Text>
 										</TouchableOpacity>
 									</Col>
+									<Col style={{width: 40, alignItems: 'center'}}>
+										{ (item.id && this.props.selectedSeason && this.props.selectedSeason.id && this.props.selectedSeason.id == item.id)
+											? (<Icon name="checkmark" fontSize="10" color="#FF0000" iconRight="true"/>) : null }
+									</Col>
+
 								</Row>
 							))}
 						</Grid>
@@ -111,10 +123,12 @@ function bindAction(dispatch)
 	return {
 		getSeasons: leagueid => dispatch(getSeasons(leagueid)),
 		setSeasonIndex: index => dispatch(setSeasonIndex(index)),
+		resetDivisions: () => dispatch(resetDivisions()),
 	};
 }
 const mapStateToProps = state => ({
 	seasons: state.seasons.list,
+	selectedSeason: state.seasons.selectedIndex,
 	selectedLeague: state.leagues.selectedIndex
 });
 const SeasonsSwagger = connect(mapStateToProps, bindAction)(Seasons);

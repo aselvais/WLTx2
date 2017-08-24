@@ -1,6 +1,7 @@
 import type {Action} from "../actions/types";
 import {
 	LOAD_GAMES,
+	RESET_GAMES,
 	SET_GAMES_INDEX
 } from "../actions/games";
 
@@ -16,6 +17,7 @@ export type State = {
  * @type {{list: [null], selectedIndex: undefined}}
  */
 const initialState = {
+	selectedIndex: null,
 	list: []
 };
 /**
@@ -32,6 +34,13 @@ export default function(state: State = initialState, action: Action): State
 			return {
 				...state,
 				selectedIndex: action.payload
+			};
+			break;
+		case RESET_GAMES:
+			return {
+				...state,
+				selectedIndex: null,
+				list: []
 			};
 			break;
 		/**

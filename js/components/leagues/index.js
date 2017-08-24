@@ -22,6 +22,7 @@ import {
 	getLeagues,
 	setLeagueIndex
 } from "../../actions/leagues";
+import {resetSeasons} from "../../actions/seasons";
 
 import styles from "./styles";
 
@@ -35,7 +36,7 @@ class Leagues extends Component
 	 * @param navigation
 	 */
 	static navigationOptions = ({ navigation }) => ({
-		title: 'Leagues'
+		title: 'Select a league'
 	});
 
 	/**
@@ -45,7 +46,8 @@ class Leagues extends Component
 	static propTypes = {
 		name: PropTypes.string,
 		getLeagues: PropTypes.func,
-		setLeagueIndex: PropTypes.func
+		setLeagueIndex: PropTypes.func,
+		resetSeasons: PropTypes.func,
 	};
 
 	/**
@@ -62,6 +64,10 @@ class Leagues extends Component
 	 */
 	clickLeague(item)
 	{
+		if (this.props.selectedLeague && this.props.selectedLeague.id != item.id)
+		{
+			this.props.resetSeasons();
+		}
 		this.props.setLeagueIndex(item);
 		this.props.navigation.navigate("Seasons", {league: item});
 	}
@@ -89,9 +95,8 @@ class Leagues extends Component
 									</TouchableOpacity>
 								</Col>
 								<Col style={{width: 40, alignItems: 'center'}}>
-									<TouchableOpacity style={styles.row} onPress={() => this.clickLeague(item) }>
-										<Icon name="ios-arrow-forward-outline"/>
-									</TouchableOpacity>
+									{ (item.id && this.props.selectedLeague && this.props.selectedLeague.id && this.props.selectedLeague.id == item.id)
+										? (<Icon name="checkmark" fontSize="10" color="#FF0000" iconRight="true"/>) : null }
 								</Col>
 							</Row>
 						))}
@@ -107,12 +112,13 @@ function bindAction(dispatch)
 	return {
 		getLeagues: () => dispatch(getLeagues()),
 		setLeagueIndex: index => dispatch(setLeagueIndex(index)),
+		resetSeasons: () => dispatch(resetSeasons()),
 	};
 }
 const mapStateToProps = state => ({
 	name: state.user.name,
 	leagues: state.leagues.list,
-	selectedLeague: state.selectedLeague,
+	selectedLeague: state.leagues.selectedIndex,
 });
 const LeaguesSwagger = connect(mapStateToProps, bindAction)(Leagues);
 export default LeaguesSwagger;

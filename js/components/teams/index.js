@@ -33,7 +33,7 @@ class Teams extends Component
 	 * @param navigation
 	 */
 	static navigationOptions = ({ navigation }) => ({
-		title: 'Team: ' + navigation.state.params.division.name
+		title: 'Teams'
 	});
 
 	/**
@@ -62,7 +62,7 @@ class Teams extends Component
 	clickTeam(item)
 	{
 		this.props.setTeamIndex(item);
-		// this.props.navigation.navigate("Games", {team: item});
+		this.props.navigation.navigate("HomeWtabs");
 	}
 
 	/**
@@ -80,7 +80,7 @@ class Teams extends Component
 							{this.props.teams.map((item, i) => (
 								<Row key={item.id}>
 									<Col style={{width: 60, height: 55}}>
-										<TouchableOpacity onPress={() => this.clickLeague(item) }>
+										<TouchableOpacity onPress={() => this.clickTeam(item) }>
 											<Image style={{width: 50, height: 50}} source={{uri: item.imageUrl}}/>
 										</TouchableOpacity>
 									</Col>

@@ -33,7 +33,7 @@ class Divisions extends Component
 	 * @param navigation
 	 */
 	static navigationOptions = ({ navigation }) => ({
-		title: 'Division: ' + navigation.state.params.season.name
+		title: 'Divisions'
 	});
 
 	/**

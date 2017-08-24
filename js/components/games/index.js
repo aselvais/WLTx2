@@ -37,7 +37,7 @@ class Games extends Component
 	 */
 	static navigationOptions = {
 		header: <Headerbar title="Games"/>,
-		tabBarLabel: 'Games' + navigation.state.params.team.name,
+		tabBarLabel: 'Games' /*+ navigation.state.params.team.name*/,
 		tabBarIcon: ({ tintColor }) => <Icon name="ios-calendar" style={{color: tintColor}}/>
 	};
 
@@ -55,8 +55,10 @@ class Games extends Component
 	 */
 	componentDidMount()
 	{
-		console.log('Games::componentDidMount ' + parseInt(this.props.selectedTeam.id) );
-		this.props.getGames(parseInt(this.props.selectedTeam.id));
+		// console.log('Games::componentDidMount ' + parseInt(this.props.selectedTeam.id) );
+		if (this.props && this.props.selectedTeam && this.props.selectedTeam.id) {
+			this.props.getGames(parseInt(this.props.selectedTeam.id));
+		}
 	}
 
 	/**
@@ -75,10 +77,30 @@ class Games extends Component
 	 */
 	render()
 	{
+		let {league, season, division, team} = this.props;
 		const {props: {name, index, list}} = this;
 		return (
 			<Container>
+				<Button
+					style={{
+						backgroundColor: '#DDD',
+						width: '100%',
+						borderRadius: 0,
+						alignItems: 'center',
+						alignSelf: 'center',
+						justifyContent: 'center',
+						borderBottomColor: '#000'
+					}}
+					onPress={ () => this.props.navigation.navigate("Leagues") }
+				>
+					<Text>League > Season > Division > Team</Text>
+				</Button>
 				<Content padder>
+					<Text onPress={ () => this.props.navigation.navigate("Leagues") }>League : { (league && league.name) ? league.name : ''} </Text>
+					<Text onPress={ () => this.props.navigation.navigate("Seasons") }>Season : { (season && season.name) ? season.name : ''} </Text>
+					<Text onPress={ () => this.props.navigation.navigate("Divisions") }>Division : { (division && division.name) ? division.name : ''} </Text>
+					<Text onPress={ () => this.props.navigation.navigate("Teams") }>Team : { (team && team.name) ? team.name : ''} </Text>
+
 					{(this.props.games && this.props.games.length && this.props.games.length > 0) ?
 						<Grid>
 							{this.props.games.map((item, i) => (
@@ -117,7 +139,11 @@ function bindAction(dispatch)
 }
 const mapStateToProps = state => ({
 	games: state.games.list,
-	selectedTeam: state.teams.selectedIndex
+	selectedTeam: state.teams.selectedIndex,
+	league: state.leagues.selectedIndex,
+	season: state.seasons.selectedIndex,
+	division: state.divisions.selectedIndex,
+	team: state.teams.selectedIndex,
 });
 const GamesSwagger = connect(mapStateToProps, bindAction)(Games);
 export default GamesSwagger;

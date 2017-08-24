@@ -33,7 +33,7 @@ class Seasons extends Component
 	 * @param navigation
 	 */
 	static navigationOptions = ({ navigation }) => ({
-		title: 'Season: ' + navigation.state.params.league.name
+		title: 'Seasons'
 	});
 
 	/**

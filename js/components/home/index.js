@@ -39,7 +39,7 @@ class Home extends Component
 	 * @type {{header: null, tabBarLabel: string, tabBarIcon: (function({tintColor?: *}): XML)}}
 	 */
 	static navigationOptions =  ({ navigation }) => ({
-		header: <Headerbar title="Leagues" navigation={navigation}/>,
+		header: <Headerbar title="Home" navigation={navigation}/>,
 		tabBarLabel: 'Home',
 		tabBarIcon: ({tintColor}) => <Icon style={{color: tintColor}} name="ios-home"/>
 	});
@@ -50,8 +50,6 @@ class Home extends Component
 	 */
 	static propTypes = {
 		name: PropTypes.string,
-		getLeagues: PropTypes.func,
-		setLeagueIndex: PropTypes.func
 	};
 
 	/**
@@ -59,17 +57,6 @@ class Home extends Component
 	 */
 	componentDidMount()
 	{
-		this.props.getLeagues();
-	}
-
-	/**
-	 *
-	 * @param item
-	 */
-	clickLeague(item)
-	{
-		this.props.setLeagueIndex(item);
-		this.props.navigation.navigate("Seasons", {league: item});
 	}
 
 	/**
@@ -78,30 +65,28 @@ class Home extends Component
 	 */
 	render()
 	{
+		let {league, season, division, team} = this.props;
 		return (
 			<Container style={styles.container}>
+				<Button
+					style={{
+						backgroundColor: '#DDD',
+						width: '100%',
+						borderRadius: 0,
+						alignItems: 'center',
+						alignSelf: 'center',
+						justifyContent: 'center',
+						borderBottomColor: '#000'
+					}}
+					onPress={ () => this.props.navigation.navigate("Leagues") }
+				>
+					<Text>League > Season > Division > Team</Text>
+				</Button>
 				<Content>
-					<Grid style={styles.mt}>
-						{this.props.leagues.map((item, i) => (
-							<Row key={item.id}>
-								<Col style={{width: 60, height: 55}}>
-									<TouchableOpacity style={styles.row} onPress={() => this.clickLeague(item) }>
-										<Image style={{width: 50, height: 50}} source={{uri: item.imageUrl}}/>
-									</TouchableOpacity>
-								</Col>
-								<Col>
-									<TouchableOpacity style={styles.row} onPress={() => this.clickLeague(item) }>
-										<Text style={styles.text}>{item.name}</Text>
-									</TouchableOpacity>
-								</Col>
-								<Col style={{width: 40, alignItems: 'center'}}>
-									<TouchableOpacity style={styles.row} onPress={() => this.clickLeague(item) }>
-										<Icon name="ios-arrow-forward-outline"/>
-									</TouchableOpacity>
-								</Col>
-							</Row>
-						))}
-					</Grid>
+					<Text onPress={ () => this.props.navigation.navigate("Leagues") }>League : { (league && league.name) ? league.name : ''} </Text>
+					<Text onPress={ () => this.props.navigation.navigate("Seasons") }>Season : { (season && season.name) ? season.name : ''} </Text>
+					<Text onPress={ () => this.props.navigation.navigate("Divisions") }>Division : { (division && division.name) ? division.name : ''} </Text>
+					<Text onPress={ () => this.props.navigation.navigate("Teams") }>Team : { (team && team.name) ? team.name : ''} </Text>
 				</Content>
 			</Container>
 		);
@@ -111,14 +96,14 @@ class Home extends Component
 function bindAction(dispatch)
 {
 	return {
-		getLeagues: () => dispatch(getLeagues()),
-		setLeagueIndex: index => dispatch(setLeagueIndex(index)),
 	};
 }
 const mapStateToProps = state => ({
 	name: state.user.name,
-	leagues: state.leagues.list,
-	selectedLeague: state.selectedLeague,
+	league: state.leagues.selectedIndex,
+	season: state.seasons.selectedIndex,
+	division: state.divisions.selectedIndex,
+	team: state.teams.selectedIndex,
 });
 const HomeSwagger = connect(mapStateToProps, bindAction)(Home);
 export default HomeSwagger;

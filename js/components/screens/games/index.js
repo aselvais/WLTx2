@@ -2,7 +2,8 @@ import React, {Component} from "react";
 import PropTypes from 'prop-types';
 import {
 	Image,
-	TouchableOpacity
+	TouchableOpacity,
+	View
 } from "react-native";
 import {connect} from "react-redux";
 import {
@@ -10,7 +11,8 @@ import {
 	Content,
 	Text,
 	Icon,
-	Button
+	Button,
+	H1
 } from "native-base";
 import {
 	Grid,
@@ -22,7 +24,7 @@ import moment from 'moment';
 import {
 	getGames,
 	setGameIndex,
-	getGamesDay
+// 	getGamesDay
 } from "../../../redux/actions/games";
 
 import Headerbar from '../../widgets/headerbar/index';
@@ -41,7 +43,7 @@ class Games extends Component
 	static navigationOptions = {
 		header: <Headerbar title="Games"/>,
 		tabBarLabel: 'Games',
-		tabBarIcon: ({ tintColor }) => <Icon name="ios-calendar" style={{color: tintColor}}/>
+		tabBarIcon: ({tintColor}) => <Icon name="ios-calendar" style={{color: tintColor}}/>
 	};
 
 	/**
@@ -51,7 +53,7 @@ class Games extends Component
 	static propTypes = {
 		getGames: PropTypes.func,
 		setGameIndex: PropTypes.func,
-		getGamesDay: PropTypes.func,
+//		getGamesDay: PropTypes.func,
 	};
 
 	/**
@@ -59,11 +61,11 @@ class Games extends Component
 	 */
 	componentDidMount()
 	{
-		// let date = moment().format('YYYY-MM-DD');
-		let date = "2017-09-08";
-		if (this.props && this.props.selectedTeam && this.props.selectedTeam.id) {
-			this.props.getGames( date, parseInt(this.props.selectedTeam.id) );
-			this.props.getGamesDay(date, this.props.season.id, this.props.division.id);
+		let date = moment().format('YYYY-MM-DD');
+		if (this.props && this.props.selectedTeam && this.props.selectedTeam.id)
+		{
+			this.props.getGames(date, parseInt(this.props.selectedTeam.id));
+			// this.props.getGamesDay(date, this.props.season.id, this.props.division.id);
 		}
 	}
 
@@ -98,24 +100,57 @@ class Games extends Component
 						alignSelf: 'center',
 						justifyContent: 'center',
 						borderBottomColor: '#000'
-					}}
-					onPress={ () => this.props.navigation.navigate("Leagues") }
-				>
-					<Text>{ (team && team.name) ? 'Change team' : 'Choose a team'}</Text>
+					}} onPress={() => this.props.navigation.navigate("Teams")}>
+					<Text>{(team && team.name) ? 'Change team' : 'Choose a team'}</Text>
 				</Button>
+				{
+					(team && team.name) ?
+						(<Grid style={{backgroundColor: '#DDD'}}>
+							<Row key={team.id}>
+								<Col style={{width: 60, height: 55}}>
+									<Image style={{width: 50, height: 50}} source={{uri: team.imageUrl}}/>
+								</Col>
+								<Col style={{padding: 10}}>
+									<Text>{team.name}</Text>
+								</Col>
+							</Row>
+						</Grid>) : null
+				}
 				<Content padder>
-					<Btnteamselect navigation={this.props.navigation} />
 					{(this.props.games && this.props.games.upcoming && this.props.games.upcoming.length && this.props.games.upcoming.length > 0) ?
 						<Grid>
 							{this.props.games.upcoming.map((item, i) => (
 								<Row key={item.id}>
-									<Col style={{ padding: 10 }}>
-										<TouchableOpacity onPress={() => this.clickGame(item) }>
-											<Text>{item.team}</Text>
+									<Col style={{padding: 10}}>
+										<TouchableOpacity onPress={() => this.clickGame(item)}>
+											<H1>{item.team}</H1>
 										</TouchableOpacity>
+
+										<text>id : {item.id}</text>
+										<text>date : {item.date}</text>
+										<text>time : {item.time}</text>
+										<text>home : {item.home}</text>
+										<text>team : {item.team}</text>
+										<text>imageUrl : {item.imageUrl}</text>
+
+										<text>arena : {item.arena.name}</text>
+
+										<text>teamId : {item.teamId}</text>
+										<text>leagueTimezone : {item.leagueTimezone}</text>
+										<text>divisionId : {item.divisionId}</text>
+										<text>divisionName : {item.divisionName}</text>
+										<text>dateTime : {item.dateTime}</text>
+										<text>news : {item.news}</text>
+										<text>tweets : {item.tweets}</text>
+										<text>shareUrl : {item.shareUrl}</text>
+										<text>seasonPlayOff : {item.seasonPlayOff}</text>
+										<text>status : {item.status}</text>
+										<text>linkStreamVideo : {item.linkStreamVideo}</text>
+
+
 									</Col>
 								</Row>
-							))}
+								))}
 						</Grid>
 						:
 						null
@@ -138,10 +173,11 @@ function bindAction(dispatch)
 {
 	return {
 		getGames: (date, teamid) => dispatch(getGames(date, teamid)),
-		getGamesDay: (date, seasonid, divisionid) => dispatch(getGamesDay(date, seasonid, divisionid)),
+		// getGamesDay: (date, seasonid, divisionid) => dispatch(getGamesDay(date, seasonid, divisionid)),
 		setGameIndex: index => dispatch(setGameIndex(index)),
 	};
 }
+
 const mapStateToProps = state => ({
 	games: state.games.list,
 	selectedTeam: state.teams.selectedIndex,

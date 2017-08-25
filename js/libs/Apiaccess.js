@@ -320,7 +320,7 @@ class Apiaccess
 	 *
 	 * @param divisionId
 	 * @returns {Promise}
-	 * @todo create redux tiers
+	 * @todo create list view for tiers
 	 */
 	async getTier(divisionId)
 	{
@@ -332,7 +332,7 @@ class Apiaccess
 	 *
 	 * @param teamId
 	 * @returns {Promise}
-	 * @todo create redux newsfeed
+	 * @todo create list view for newsfeed
 	 */
 	async getFeedNews(teamId)
 	{
@@ -344,7 +344,7 @@ class Apiaccess
 	 *
 	 * @param teamId
 	 * @returns {Promise}
-	 * @todo create redux twitterfeed
+	 * @todo create list view for twitterfeed
 	 */
 	async getFeedTwitter(teamId)
 	{
@@ -355,7 +355,7 @@ class Apiaccess
 	 * Get team info
 	 * @param teamId
 	 * @returns {Promise}
-	 * @todo create redux teaminfo
+	 * @todo create list view for teaminfo
 	 */
 	async getTeamInfo(teamId)
 	{
@@ -366,7 +366,7 @@ class Apiaccess
 	 *
 	 * @param divisionIds
 	 * @returns {Promise}
-	 * @todo create redux standings
+	 * @todo create list view for standings
 	 */
 	async getTeamStandingLocalTierGroup(divisionIds)
 	{

@@ -23,8 +23,6 @@ import {
 	setStandingIndex
 } from "../../../redux/actions/standings";
 
-import {resetTeams} from "../../../redux/actions/teams";
-
 /**
  *
  */
@@ -45,7 +43,6 @@ class Standings extends Component
 	static propTypes = {
 		getStandings: PropTypes.func,
 		setStandingIndex: PropTypes.func,
-		resetTeams: PropTypes.func,
 	};
 
 	/**
@@ -53,8 +50,7 @@ class Standings extends Component
 	 */
 	componentDidMount()
 	{
-		console.log('Standings::componentDidMount ' + parseInt(this.props.selectedSeason.id) );
-		this.props.getStandings(parseInt(this.props.selectedSeason.id));
+		this.props.getStandings(parseInt(this.props.selectedDivisions.id));
 	}
 
 
@@ -64,10 +60,6 @@ class Standings extends Component
 	 */
 	clickStanding(item)
 	{
-		if (this.props.selectedStanding && this.props.selectedStanding.id != item.id)
-		{
-			this.props.resetTeams();
-		}
 		this.props.setStandingIndex(item);
 		this.props.navigation.navigate("Teams", {standing: item});
 	}
@@ -110,15 +102,14 @@ class Standings extends Component
 function bindAction(dispatch)
 {
 	return {
-		getStandings: seasonid => dispatch(getStandings(seasonid)),
+		getStandings: divisionids => dispatch(getStandings(divisionids)),
 		setStandingIndex: index => dispatch(setStandingIndex(index)),
-		resetTeams: () => dispatch(resetTeams()),
 	};
 }
 const mapStateToProps = state => ({
 	standings: state.standings.list,
 	selectedStanding: state.standings.selectedIndex,
-	selectedSeason: state.seasons.selectedIndex
+	selectedDivisions: state.divisions.selectedIndex
 });
 const StandingsSwagger = connect(mapStateToProps, bindAction)(Standings);
 export default StandingsSwagger;

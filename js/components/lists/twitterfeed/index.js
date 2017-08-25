@@ -21,9 +21,7 @@ import {
 import {
 	getTwitterfeeds,
 	setTwitterfeedIndex
-} from "../../../redux/actions/twitterfeeds";
-
-import {resetTeams} from "../../../redux/actions/teams";
+} from "../../../redux/actions/twitterfeed";
 
 /**
  *
@@ -45,7 +43,6 @@ class Twitterfeeds extends Component
 	static propTypes = {
 		getTwitterfeeds: PropTypes.func,
 		setTwitterfeedIndex: PropTypes.func,
-		resetTeams: PropTypes.func,
 	};
 
 	/**
@@ -53,8 +50,7 @@ class Twitterfeeds extends Component
 	 */
 	componentDidMount()
 	{
-		console.log('Twitterfeeds::componentDidMount ' + parseInt(this.props.selectedSeason.id) );
-		this.props.getTwitterfeeds(parseInt(this.props.selectedSeason.id));
+		this.props.getTwitterfeeds(parseInt(this.props.selectedTeam.id));
 	}
 
 
@@ -64,10 +60,6 @@ class Twitterfeeds extends Component
 	 */
 	clickTwitterfeed(item)
 	{
-		if (this.props.selectedTwitterfeed && this.props.selectedTwitterfeed.id != item.id)
-		{
-			this.props.resetTeams();
-		}
 		this.props.setTwitterfeedIndex(item);
 		this.props.navigation.navigate("Teams", {twitterfeed: item});
 	}
@@ -110,15 +102,14 @@ class Twitterfeeds extends Component
 function bindAction(dispatch)
 {
 	return {
-		getTwitterfeeds: seasonid => dispatch(getTwitterfeeds(seasonid)),
+		getTwitterfeeds: teamid => dispatch(getTwitterfeeds(teamid)),
 		setTwitterfeedIndex: index => dispatch(setTwitterfeedIndex(index)),
-		resetTeams: () => dispatch(resetTeams()),
 	};
 }
 const mapStateToProps = state => ({
 	twitterfeeds: state.twitterfeeds.list,
 	selectedTwitterfeed: state.twitterfeeds.selectedIndex,
-	selectedSeason: state.seasons.selectedIndex
+	selectedTeam: state.teams.selectedIndex
 });
 const TwitterfeedsSwagger = connect(mapStateToProps, bindAction)(Twitterfeeds);
 export default TwitterfeedsSwagger;

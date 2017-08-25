@@ -21,9 +21,7 @@ import {
 import {
 	getNewsfeeds,
 	setNewsfeedIndex
-} from "../../../redux/actions/newsfeeds";
-
-import {resetTeams} from "../../../redux/actions/teams";
+} from "../../../redux/actions/newsfeed";
 
 /**
  *
@@ -45,7 +43,6 @@ class Newsfeeds extends Component
 	static propTypes = {
 		getNewsfeeds: PropTypes.func,
 		setNewsfeedIndex: PropTypes.func,
-		resetTeams: PropTypes.func,
 	};
 
 	/**
@@ -53,8 +50,7 @@ class Newsfeeds extends Component
 	 */
 	componentDidMount()
 	{
-		console.log('Newsfeeds::componentDidMount ' + parseInt(this.props.selectedSeason.id) );
-		this.props.getNewsfeeds(parseInt(this.props.selectedSeason.id));
+		this.props.getNewsfeeds(parseInt(this.props.selectedTeam.id));
 	}
 
 
@@ -64,10 +60,6 @@ class Newsfeeds extends Component
 	 */
 	clickNewsfeed(item)
 	{
-		if (this.props.selectedNewsfeed && this.props.selectedNewsfeed.id != item.id)
-		{
-			this.props.resetTeams();
-		}
 		this.props.setNewsfeedIndex(item);
 		this.props.navigation.navigate("Teams", {newsfeed: item});
 	}
@@ -110,15 +102,14 @@ class Newsfeeds extends Component
 function bindAction(dispatch)
 {
 	return {
-		getNewsfeeds: seasonid => dispatch(getNewsfeeds(seasonid)),
+		getNewsfeeds: teamid => dispatch(getNewsfeeds(teamid)),
 		setNewsfeedIndex: index => dispatch(setNewsfeedIndex(index)),
-		resetTeams: () => dispatch(resetTeams()),
 	};
 }
 const mapStateToProps = state => ({
 	newsfeeds: state.newsfeeds.list,
 	selectedNewsfeed: state.newsfeeds.selectedIndex,
-	selectedSeason: state.seasons.selectedIndex
+	selectedTeam: state.teams.selectedIndex
 });
 const NewsfeedsSwagger = connect(mapStateToProps, bindAction)(Newsfeeds);
 export default NewsfeedsSwagger;

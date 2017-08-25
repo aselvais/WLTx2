@@ -21,9 +21,7 @@ import {
 import {
 	getTeaminfos,
 	setTeaminfoIndex
-} from "../../../redux/actions/teaminfos";
-
-import {resetTeams} from "../../../redux/actions/teams";
+} from "../../../redux/actions/teaminfo";
 
 /**
  *
@@ -45,7 +43,6 @@ class Teaminfos extends Component
 	static propTypes = {
 		getTeaminfos: PropTypes.func,
 		setTeaminfoIndex: PropTypes.func,
-		resetTeams: PropTypes.func,
 	};
 
 	/**
@@ -53,8 +50,7 @@ class Teaminfos extends Component
 	 */
 	componentDidMount()
 	{
-		console.log('Teaminfos::componentDidMount ' + parseInt(this.props.selectedSeason.id) );
-		this.props.getTeaminfos(parseInt(this.props.selectedSeason.id));
+		this.props.getTeaminfos(parseInt(this.props.selectedTeam.id));
 	}
 
 
@@ -64,10 +60,6 @@ class Teaminfos extends Component
 	 */
 	clickTeaminfo(item)
 	{
-		if (this.props.selectedTeaminfo && this.props.selectedTeaminfo.id != item.id)
-		{
-			this.props.resetTeams();
-		}
 		this.props.setTeaminfoIndex(item);
 		this.props.navigation.navigate("Teams", {teaminfo: item});
 	}
@@ -110,15 +102,14 @@ class Teaminfos extends Component
 function bindAction(dispatch)
 {
 	return {
-		getTeaminfos: seasonid => dispatch(getTeaminfos(seasonid)),
+		getTeaminfos: teamid => dispatch(getTeaminfos(teamid)),
 		setTeaminfoIndex: index => dispatch(setTeaminfoIndex(index)),
-		resetTeams: () => dispatch(resetTeams()),
 	};
 }
 const mapStateToProps = state => ({
 	teaminfos: state.teaminfos.list,
 	selectedTeaminfo: state.teaminfos.selectedIndex,
-	selectedSeason: state.seasons.selectedIndex
+	selectedTeam: state.teams.selectedIndex
 });
 const TeaminfosSwagger = connect(mapStateToProps, bindAction)(Teaminfos);
 export default TeaminfosSwagger;

@@ -23,8 +23,6 @@ import {
 	setTierIndex
 } from "../../../redux/actions/tiers";
 
-import {resetTeams} from "../../../redux/actions/teams";
-
 /**
  *
  */
@@ -45,7 +43,6 @@ class Tiers extends Component
 	static propTypes = {
 		getTiers: PropTypes.func,
 		setTierIndex: PropTypes.func,
-		resetTeams: PropTypes.func,
 	};
 
 	/**
@@ -53,8 +50,7 @@ class Tiers extends Component
 	 */
 	componentDidMount()
 	{
-		console.log('Tiers::componentDidMount ' + parseInt(this.props.selectedSeason.id) );
-		this.props.getTiers(parseInt(this.props.selectedSeason.id));
+		this.props.getTiers(parseInt(this.props.selectedDivision.id));
 	}
 
 
@@ -64,10 +60,6 @@ class Tiers extends Component
 	 */
 	clickTier(item)
 	{
-		if (this.props.selectedTier && this.props.selectedTier.id != item.id)
-		{
-			this.props.resetTeams();
-		}
 		this.props.setTierIndex(item);
 		this.props.navigation.navigate("Teams", {tier: item});
 	}
@@ -110,15 +102,14 @@ class Tiers extends Component
 function bindAction(dispatch)
 {
 	return {
-		getTiers: seasonid => dispatch(getTiers(seasonid)),
+		getTiers: divisionid => dispatch(getTiers(divisionid)),
 		setTierIndex: index => dispatch(setTierIndex(index)),
-		resetTeams: () => dispatch(resetTeams()),
 	};
 }
 const mapStateToProps = state => ({
 	tiers: state.tiers.list,
 	selectedTier: state.tiers.selectedIndex,
-	selectedSeason: state.seasons.selectedIndex
+	selectedDivision: state.division.selectedIndex
 });
 const TiersSwagger = connect(mapStateToProps, bindAction)(Tiers);
 export default TiersSwagger;

@@ -1,9 +1,5 @@
 import React, {Component} from "react";
 import PropTypes from 'prop-types';
-import {
-	Image,
-	TouchableOpacity
-} from "react-native";
 import {connect} from "react-redux";
 import {
 	Container,
@@ -12,21 +8,9 @@ import {
 	Icon,
 	Button
 } from "native-base";
-import {
-	Grid,
-	Row,
-	Col
-} from "react-native-easy-grid";
-
-import {
-	getLeagues,
-	setLeagueIndex
-} from "../../../redux/actions/leagues";
-
-import Btnteamselect from '../../widgets/btnteamselect/index';
 
 import styles from "./styles";
-
+import Btnteamselect from '../../widgets/btnteamselect/index';
 // screens
 import Headerbar from "../../widgets/headerbar/index";
 
@@ -94,8 +78,7 @@ class Home extends Component
 
 function bindAction(dispatch)
 {
-	return {
-	};
+	return {};
 }
 const mapStateToProps = state => ({
 	name: state.user.name,

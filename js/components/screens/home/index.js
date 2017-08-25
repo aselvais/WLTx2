@@ -54,19 +54,6 @@ class Home extends Component
 		let {league, season, division, team} = this.props;
 		return (
 			<Container style={styles.container}>
-				<Button
-					style={{
-						backgroundColor: '#DDD',
-						width: '100%',
-						borderRadius: 0,
-						alignItems: 'center',
-						alignSelf: 'center',
-						justifyContent: 'center',
-						borderBottomColor: '#000'
-					}}
-					onPress={ () => this.props.navigation.navigate("Leagues") }>
-					<Text>{ (team && team.name) ? 'Change team' : 'Choose a team'}</Text>
-				</Button>
 				<Content>
 					<Btnteamselect navigation={this.props.navigation} />
 				</Content>

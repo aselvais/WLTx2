@@ -17,10 +17,12 @@ import {
 	Row,
 	Col
 } from "react-native-easy-grid";
+import moment from 'moment';
 
 import {
 	getGames,
-	setGameIndex
+	setGameIndex,
+	getGamesDay
 } from "../../../redux/actions/games";
 
 import Headerbar from '../../widgets/headerbar/index';
@@ -48,7 +50,8 @@ class Games extends Component
 	 */
 	static propTypes = {
 		getGames: PropTypes.func,
-		setGameIndex: PropTypes.func
+		setGameIndex: PropTypes.func,
+		getGamesDay: PropTypes.func,
 	};
 
 	/**
@@ -56,9 +59,11 @@ class Games extends Component
 	 */
 	componentDidMount()
 	{
-		// console.log('Games::componentDidMount ' + parseInt(this.props.selectedTeam.id) );
+		// let date = moment().format('YYYY-MM-DD');
+		let date = "2017-09-08";
 		if (this.props && this.props.selectedTeam && this.props.selectedTeam.id) {
-			this.props.getGames(parseInt(this.props.selectedTeam.id));
+			this.props.getGames( date, parseInt(this.props.selectedTeam.id) );
+			this.props.getGamesDay(date, this.props.season.id, this.props.division.id);
 		}
 	}
 
@@ -100,13 +105,13 @@ class Games extends Component
 				</Button>
 				<Content padder>
 					<Btnteamselect navigation={this.props.navigation} />
-					{(this.props.games && this.props.games.length && this.props.games.length > 0) ?
+					{(this.props.games && this.props.games.upcoming && this.props.games.upcoming.length && this.props.games.upcoming.length > 0) ?
 						<Grid>
-							{this.props.games.map((item, i) => (
+							{this.props.games.upcoming.map((item, i) => (
 								<Row key={item.id}>
 									<Col style={{ padding: 10 }}>
 										<TouchableOpacity onPress={() => this.clickGame(item) }>
-											<Text>{item.name}</Text>
+											<Text>{item.team}</Text>
 										</TouchableOpacity>
 									</Col>
 								</Row>
@@ -132,7 +137,8 @@ class Games extends Component
 function bindAction(dispatch)
 {
 	return {
-		getGames: (date, teamId) => dispatch(getGames(date, teamId)),
+		getGames: (date, teamid) => dispatch(getGames(date, teamid)),
+		getGamesDay: (date, seasonid, divisionid) => dispatch(getGamesDay(date, seasonid, divisionid)),
 		setGameIndex: index => dispatch(setGameIndex(index)),
 	};
 }

@@ -8,6 +8,11 @@ import seasons from "./seasons";
 import divisions from "./divisions";
 import teams from "./teams";
 import games from "./games";
+import tiers from "./tiers";
+import newsfeed from "./newsfeed";
+import twitterfeed from "./twitterfeed";
+import teaminfo from "./teaminfo";
+import standings from "./standings";
 
 
 export default combineReducers({
@@ -18,5 +23,10 @@ export default combineReducers({
 	seasons,
 	divisions,
 	teams,
-	games
+	games,
+	tiers,
+	newsfeed,
+	twitterfeed,
+	teaminfo,
+	standings
 });

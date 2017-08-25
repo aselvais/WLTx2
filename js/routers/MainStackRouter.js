@@ -22,6 +22,5 @@ export default (StackNav = StackNavigator({
 		Teams: {screen: Teams},
 	},
 	{
-		mode: 'modal'
 	}
 ));

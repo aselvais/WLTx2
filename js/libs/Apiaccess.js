@@ -14,7 +14,7 @@ class Apiaccess
 	 * @type {boolean}
 	 * @private
 	 */
-	_debugMode = true;
+	_debugMode = false;
 	/**
 	 *
 	 * @type {{prod: string, stage: string}}
@@ -269,7 +269,6 @@ class Apiaccess
 	 */
 	async getSeason(leagueId)
 	{
-		console.log('getSeason ' + leagueId);
 		return this.postRegister().then(() => this._genericApiCall('GetSeason', {leagueId: leagueId}));
 	}
 
@@ -317,6 +316,65 @@ class Apiaccess
 	}
 
 	/**
+	 * Get ties for division
+	 *
+	 * @param divisionId
+	 * @returns {Promise}
+	 * @todo create redux tiers
+	 */
+	async getTier(divisionId)
+	{
+		return this.postRegister().then(() => this._genericApiCall('GetTier', {divisionId: divisionId}));
+	}
+
+	/**
+	 * Get news for team
+	 *
+	 * @param teamId
+	 * @returns {Promise}
+	 * @todo create redux newsfeed
+	 */
+	async getFeedNews(teamId)
+	{
+		return this.postRegister().then(() => this._genericApiCall('GetFeedNews', {teamId: teamId}));
+	}
+
+	/**
+	 * Get tweets for team
+	 *
+	 * @param teamId
+	 * @returns {Promise}
+	 * @todo create redux twitterfeed
+	 */
+	async getFeedTwitter(teamId)
+	{
+		return this.postRegister().then(() => this._genericApiCall('GetFeedTwitter', {teamId: teamId}));
+	}
+
+	/**
+	 * Get team info
+	 * @param teamId
+	 * @returns {Promise}
+	 * @todo create redux teaminfo
+	 */
+	async getTeamInfo(teamId)
+	{
+		return this.postRegister().then(() => this._genericApiCall('GetTeamInfo', {teamId: teamId}));
+	}
+
+	/**
+	 *
+	 * @param divisionIds
+	 * @returns {Promise}
+	 * @todo create redux standings
+	 */
+	async getTeamStandingLocalTierGroup(divisionIds)
+	{
+		return this.postRegister().then(() => this._genericApiCall('GetTeamStandingLocalTierGroup', {divisionIds: divisionIds}));
+	}
+
+
+	/**
 	 * Get games in dates range for users favourite teams
 	 *
 	 * @param date
@@ -326,17 +384,6 @@ class Apiaccess
 	async getUserGames(date, endDate)
 	{
 		return this.postRegister().then(() => this._genericApiCall('GetUserGames', {date: date, endDate: endDate}));
-	}
-
-	/**
-	 * Get ties for division
-	 *
-	 * @param divisionId
-	 * @returns {Promise}
-	 */
-	async getTier(divisionId)
-	{
-		return this.postRegister().then(() => this._genericApiCall('GetTier', {divisionId: divisionId}));
 	}
 
 	/**
@@ -381,47 +428,6 @@ class Apiaccess
 		return this.postRegister().then(() => this._genericApiCall('DeleteUserTeams', {teamId: teamId}));
 	}
 
-	/**
-	 * Get news for team
-	 *
-	 * @param teamId
-	 * @returns {Promise}
-	 */
-	async getFeedNews(teamId)
-	{
-		return this.postRegister().then(() => this._genericApiCall('GetFeedNews', {teamId: teamId}));
-	}
-
-	/**
-	 * Get tweets for team
-	 *
-	 * @param teamId
-	 * @returns {Promise}
-	 */
-	async getFeedTwitter(teamId)
-	{
-		return this.postRegister().then(() => this._genericApiCall('GetFeedTwitter', {teamId: teamId}));
-	}
-
-	/**
-	 * Get team info
-	 * @param teamId
-	 * @returns {Promise}
-	 */
-	async getTeamInfo(teamId)
-	{
-		return this.postRegister().then(() => this._genericApiCall('GetTeamInfo', {teamId: teamId}));
-	}
-
-	/**
-	 *
-	 * @param divisionIds
-	 * @returns {Promise}
-	 */
-	async getTeamStandingLocalTierGroup(divisionIds)
-	{
-		return this.postRegister().then(() => this._genericApiCall('GetTeamStandingLocalTierGroup', {divisionIds: divisionIds}));
-	}
 
 	/**
 	 * Generic call to the API

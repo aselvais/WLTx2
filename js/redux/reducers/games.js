@@ -1,6 +1,7 @@
 import type {Action} from "../actions/types";
 import {
 	LOAD_GAMES,
+	LOAD_GAMES_DAY,
 	RESET_GAMES,
 	SET_GAMES_INDEX
 } from "../actions/games";
@@ -18,7 +19,8 @@ export type State = {
  */
 const initialState = {
 	selectedIndex: null,
-	list: []
+	list: [],
+	listday: []
 };
 /**
  *
@@ -40,7 +42,8 @@ export default function(state: State = initialState, action: Action): State
 			return {
 				...state,
 				selectedIndex: null,
-				list: []
+				list: [],
+				listday: []
 			};
 			break;
 		/**
@@ -50,6 +53,15 @@ export default function(state: State = initialState, action: Action): State
 			return {
 				...state,
 				list: action.list
+			};
+			break;
+		/**
+		 * load the teams from API
+		 */
+		case LOAD_GAMES_DAY:
+			return {
+				...state,
+				listday: action.listday
 			};
 			break;
 		/**

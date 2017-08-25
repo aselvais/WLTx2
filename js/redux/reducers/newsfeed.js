@@ -3,7 +3,7 @@ import {
 	SET_NEWSFEED_INDEX,
 	RESET_NEWSFEEDS,
 	LOAD_NEWSFEEDS
-} from "../actions/newsfeeds";
+} from "../actions/newsfeed";
 
 /**
  *

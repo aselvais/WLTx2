@@ -2,15 +2,16 @@ import React, {Component} from "react";
 import PropTypes from 'prop-types';
 import {
 	Image,
+	Text,
 	TouchableOpacity
 } from "react-native";
 import {connect} from "react-redux";
 import {
 	Container,
 	Content,
-	Text,
 	Icon,
-	Button
+	Button,
+	H2
 } from "native-base";
 import {
 	Grid,
@@ -50,7 +51,8 @@ class Newsfeeds extends Component
 	 */
 	componentDidMount()
 	{
-		this.props.getNewsfeeds(parseInt(this.props.selectedTeam.id));
+		if (this.props.selectedTeam && this.props.selectedTeam.id)
+			this.props.getNewsfeeds(parseInt(this.props.selectedTeam.id));
 	}
 
 
@@ -61,7 +63,6 @@ class Newsfeeds extends Component
 	clickNewsfeed(item)
 	{
 		this.props.setNewsfeedIndex(item);
-		this.props.navigation.navigate("Teams", {newsfeed: item});
 	}
 
 	/**
@@ -70,6 +71,7 @@ class Newsfeeds extends Component
 	 */
 	render()
 	{
+		let i=0;
 		// const params = this.props.navigation.state.params;
 		return (
 			<Container>
@@ -77,21 +79,20 @@ class Newsfeeds extends Component
 					{(this.props.newsfeeds && this.props.newsfeeds.length && this.props.newsfeeds.length > 0) ?
 						<Grid>
 							{this.props.newsfeeds.map((item, i) => (
-								<Row key={item.id}>
+								<Row key={i++}>
 									<Col style={{ padding: 10 }}>
+										<Text>{item.date}</Text>
+										<H2>{item.title}</H2>
+										<Text>{item.description}</Text>
 										<TouchableOpacity onPress={() => this.clickNewsfeed(item) }>
-											<Text>{item.name}</Text>
+											<Text>Go to URL</Text>
 										</TouchableOpacity>
-									</Col>
-									<Col style={{width: 40, alignItems: 'center'}}>
-										{ (item.id && this.props.selectedNewsfeed && this.props.selectedNewsfeed.id && this.props.selectedNewsfeed.id == item.id)
-											? (<Icon name="checkmark" fontSize="10" color="#FF0000" iconRight="true"/>) : null }
 									</Col>
 								</Row>
 							))}
 						</Grid>
 						:
-						null
+						<Text>No news here ...</Text>
 					}
 				</Content>
 			</Container>

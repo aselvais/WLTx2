@@ -50,7 +50,8 @@ class Standings extends Component
 	 */
 	componentDidMount()
 	{
-		this.props.getStandings(parseInt(this.props.selectedDivisions.id));
+		if (this.props.selectedDivisions && this.props.selectedDivisions.id)
+			this.props.getStandings(parseInt(this.props.selectedDivisions.id));
 	}
 
 

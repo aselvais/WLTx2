@@ -1,10 +1,12 @@
 import React, {Component} from "react";
 import {connect} from "react-redux";
+import { Text, View } from "react-native";
 import {
 	Container,
 	Content,
-	Text,
-	Icon
+	Icon,
+	Tabs,
+	Tab
 } from "native-base";
 import Headerbar from '../../widgets/headerbar/index';
 import styles from "./styles";
@@ -18,11 +20,11 @@ class Favorites extends Component
 	 * Option for the TabNavigation system
 	 * @type {{header: null, tabBarLabel: string, tabBarIcon: (function({tintColor?: *}): XML)}}
 	 */
-	static navigationOptions = {
-		header: <Headerbar title="Favorites"/>,
+	static navigationOptions = ({ navigation }) => ({
+		header: <Headerbar title="Favorites" navigation={navigation}/>,
 		tabBarLabel: 'Favorites',
 		tabBarIcon: ({ tintColor }) => <Icon name="ios-heart" style={{color: tintColor}}/>
-	};
+	});
 
 	/**
 	 *
@@ -34,11 +36,29 @@ class Favorites extends Component
 		const {props: {name, index, list}} = this;
 		return (
 			<Container style={styles.container}>
-				<Content padder>
-					<Text>
-						Favorites HERE ..... !!!!
-					</Text>
-				</Content>
+				<Tabs initialPage={0}>
+					<Tab heading="Divisions">
+						<Content padder>
+							<View>
+								<Text>Divisions HERE ..... !!!!</Text>
+							</View>
+						</Content>
+					</Tab>
+					<Tab heading="Teams">
+						<Content padder>
+							<View>
+								<Text>Teams HERE ..... !!!!</Text>
+							</View>
+						</Content>
+					</Tab>
+					<Tab heading="Games">
+						<Content padder>
+							<View>
+								<Text>Games HERE ..... !!!!</Text>
+							</View>
+						</Content>
+					</Tab>
+				</Tabs>
 			</Container>
 		);
 	}

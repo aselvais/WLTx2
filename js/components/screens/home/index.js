@@ -11,8 +11,9 @@ import {
 
 import styles from "./styles";
 import Btnteamselect from '../../widgets/btnteamselect/index';
-// screens
 import Headerbar from "../../widgets/headerbar/index";
+import Teaminfo from "../../lists/teaminfo";
+
 
 /**
  *
@@ -24,7 +25,7 @@ class Home extends Component
 	 * Option for the TabNavigation system
 	 * @type {{header: null, tabBarLabel: string, tabBarIcon: (function({tintColor?: *}): XML)}}
 	 */
-	static navigationOptions =  ({ navigation }) => ({
+	static navigationOptions = ({ navigation }) => ({
 		header: <Headerbar title="Home" navigation={navigation}/>,
 		tabBarLabel: 'Home',
 		tabBarIcon: ({tintColor}) => <Icon style={{color: tintColor}} name="ios-home"/>
@@ -56,8 +57,13 @@ class Home extends Component
 			<Container style={styles.container}>
 				<Content padder>
 					<Btnteamselect navigation={this.props.navigation} />
+					{
+						(team && team.id) ?
+							<Teaminfo/>
+							:
+							null
+					}
 				</Content>
-
 			</Container>
 		);
 	}

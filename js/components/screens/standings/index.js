@@ -14,6 +14,8 @@ import {
 	Item as FormItem
 } from "native-base";
 
+import StandingsList from '../../lists/standings';
+
 import {
 	StackNavigator,
 } from "react-navigation";
@@ -31,11 +33,11 @@ class Standings extends Component
 	 * Option for the TabNavigation system
 	 * @type {{header: null, tabBarLabel: string, tabBarIcon: (function({tintColor?: *}): XML)}}
 	 */
-	static navigationOptions = {
-		header: <Headerbar title="Standings"/>,
+	static navigationOptions = ({ navigation }) => ({
+		header: <Headerbar title="Standings" navigation={navigation}/>,
 		tabBarLabel: 'Standings',
 		tabBarIcon: ({tintColor}) => <Icon name="ios-speedometer" style={{color: tintColor}}/>
-	};
+	});
 
 	/**
 	 *
@@ -92,18 +94,6 @@ class Standings extends Component
 	}
 
 	/**
-	 * Returns a score table component
-	 *
-	 * @param title The title to display on top
-	 * @param data The data
-	 */
-	getScoreTable(title='Group A', data=[])
-	{
-		data = [];
-		var jsx = [];
-	}
-
-	/**
 	 *
 	 * @returns {XML}
 	 */
@@ -114,9 +104,7 @@ class Standings extends Component
 			<Container style={styles.container}>
 				{this.getDropDown()}
 				<Content padder>
-					<Text>
-						{this.getScoreTable()}
-					</Text>
+					<StandingsList/>
 				</Content>
 			</Container>
 		);

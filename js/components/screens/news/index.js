@@ -11,6 +11,9 @@ import {
 import Headerbar from '../../widgets/headerbar/index';
 import styles from "./styles";
 
+import Newsfeed from '../../lists/newsfeed';
+import Twitterfeed from '../../lists/twitterfeed';
+
 /**
  *
  */
@@ -20,11 +23,11 @@ class News extends Component
 	 * Option for the TabNavigation system
 	 * @type {{header: null, tabBarLabel: string, tabBarIcon: (function({tintColor?: *}): XML)}}
 	 */
-	static navigationOptions = {
-		header: <Headerbar title="News"/>,
+	static navigationOptions = ({ navigation }) => ({
+		header: <Headerbar title="News" navigation={navigation}/>,
 		tabBarLabel: 'News',
 		tabBarIcon: ({ tintColor }) => <Icon name="ios-medal" style={{color: tintColor}}/>
-	};
+	});
 
 	/**
 	 *
@@ -40,14 +43,14 @@ class News extends Component
 					<Tab heading="News">
 						<Content padder>
 							<View>
-								<Text>News HERE ..... !!!!</Text>
+								<Newsfeed/>
 							</View>
 						</Content>
 					</Tab>
 					<Tab heading="Twitter">
 						<Content padder>
 							<View>
-								<Text>Twitter News HERE ..... !!!!</Text>
+								<Twitterfeed/>
 							</View>
 						</Content>
 					</Tab>

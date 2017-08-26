@@ -43,11 +43,11 @@ class Games extends Component
 	 * Option for the TabNavigation system
 	 * @type {{header: null, tabBarLabel: string, tabBarIcon: (function({tintColor?: *}): XML)}}
 	 */
-	static navigationOptions = {
-		header: <Headerbar title="Games"/>,
+	static navigationOptions = ({ navigation }) => ({
+		header: <Headerbar title="Games" navigation={navigation}/>,
 		tabBarLabel: 'Games',
 		tabBarIcon: ({tintColor}) => <Icon name="ios-calendar" style={{color: tintColor}}/>
-	};
+	});
 
 	/**
 	 *

@@ -50,7 +50,8 @@ class Teaminfos extends Component
 	 */
 	componentDidMount()
 	{
-		this.props.getTeaminfos(parseInt(this.props.selectedTeam.id));
+		if (this.props.selectedTeam && this.props.selectedTeam.id)
+			this.props.getTeaminfos(parseInt(this.props.selectedTeam.id));
 	}
 
 
@@ -61,7 +62,6 @@ class Teaminfos extends Component
 	clickTeaminfo(item)
 	{
 		this.props.setTeaminfoIndex(item);
-		this.props.navigation.navigate("Teams", {teaminfo: item});
 	}
 
 	/**
@@ -71,24 +71,28 @@ class Teaminfos extends Component
 	render()
 	{
 		// const params = this.props.navigation.state.params;
+		let {teaminfos} = this.props;
 		return (
 			<Container>
 				<Content padder>
-					{(this.props.teaminfos && this.props.teaminfos.length && this.props.teaminfos.length > 0) ?
+					{(teaminfos && teaminfos.id) ?
 						<Grid>
-							{this.props.teaminfos.map((item, i) => (
-								<Row key={item.id}>
-									<Col style={{ padding: 10 }}>
-										<TouchableOpacity onPress={() => this.clickTeaminfo(item) }>
-											<Text>{item.name}</Text>
-										</TouchableOpacity>
-									</Col>
-									<Col style={{width: 40, alignItems: 'center'}}>
-										{ (item.id && this.props.selectedTeaminfo && this.props.selectedTeaminfo.id && this.props.selectedTeaminfo.id == item.id)
-											? (<Icon name="checkmark" fontSize="10" color="#FF0000" iconRight="true"/>) : null }
-									</Col>
-								</Row>
-							))}
+							<Row key={teaminfos.id}>
+								<Col style={{ padding: 10 }}>
+									<Text>{teaminfos.id}</Text>
+									<Text>{teaminfos.name}</Text>
+									<Text>{teaminfos.imageUrl}</Text>
+									<Text>{teaminfos.divisionId}</Text>
+									<Text>{teaminfos.divisionName}</Text>
+									<Text>{teaminfos.tierId}</Text>
+									<Text>{teaminfos.tierName}</Text>
+									<Text>{teaminfos.groupId}</Text>
+									<Text>{teaminfos.groupName}</Text>
+									<Text>{teaminfos.hasNews}</Text>
+									<Text>{teaminfos.hasTweets}</Text>
+									<Text>{teaminfos.playOff}</Text>
+								</Col>
+							</Row>
 						</Grid>
 						:
 						null
@@ -107,8 +111,8 @@ function bindAction(dispatch)
 	};
 }
 const mapStateToProps = state => ({
-	teaminfos: state.teaminfos.list,
-	selectedTeaminfo: state.teaminfos.selectedIndex,
+	teaminfos: state.teaminfo.list,
+	selectedTeaminfo: state.teaminfo.selectedIndex,
 	selectedTeam: state.teams.selectedIndex
 });
 const TeaminfosSwagger = connect(mapStateToProps, bindAction)(Teaminfos);

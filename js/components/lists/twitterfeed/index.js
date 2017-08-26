@@ -2,13 +2,14 @@ import React, {Component} from "react";
 import PropTypes from 'prop-types';
 import {
 	Image,
-	TouchableOpacity
+	TouchableOpacity,
+	Text
 } from "react-native";
 import {connect} from "react-redux";
 import {
 	Container,
 	Content,
-	Text,
+	H2,
 	Icon,
 	Button
 } from "native-base";
@@ -50,7 +51,8 @@ class Twitterfeeds extends Component
 	 */
 	componentDidMount()
 	{
-		this.props.getTwitterfeeds(parseInt(this.props.selectedTeam.id));
+		if (this.props.selectedTeam && this.props.selectedTeam.id)
+			this.props.getTwitterfeeds(parseInt(this.props.selectedTeam.id));
 	}
 
 
@@ -61,7 +63,6 @@ class Twitterfeeds extends Component
 	clickTwitterfeed(item)
 	{
 		this.props.setTwitterfeedIndex(item);
-		this.props.navigation.navigate("Teams", {twitterfeed: item});
 	}
 
 	/**
@@ -70,6 +71,7 @@ class Twitterfeeds extends Component
 	 */
 	render()
 	{
+		let i=0;
 		// const params = this.props.navigation.state.params;
 		return (
 			<Container>
@@ -77,21 +79,22 @@ class Twitterfeeds extends Component
 					{(this.props.twitterfeeds && this.props.twitterfeeds.length && this.props.twitterfeeds.length > 0) ?
 						<Grid>
 							{this.props.twitterfeeds.map((item, i) => (
-								<Row key={item.id}>
+								<Row key={i++}>
 									<Col style={{ padding: 10 }}>
+
+										<Text>{item.date}</Text>
+										<H2>{item.screenName}</H2>
+										<Text>{item.text}</Text>
+
 										<TouchableOpacity onPress={() => this.clickTwitterfeed(item) }>
-											<Text>{item.name}</Text>
+											<Text>{item.url}</Text>
 										</TouchableOpacity>
-									</Col>
-									<Col style={{width: 40, alignItems: 'center'}}>
-										{ (item.id && this.props.selectedTwitterfeed && this.props.selectedTwitterfeed.id && this.props.selectedTwitterfeed.id == item.id)
-											? (<Icon name="checkmark" fontSize="10" color="#FF0000" iconRight="true"/>) : null }
 									</Col>
 								</Row>
 							))}
 						</Grid>
 						:
-						null
+						<Text>No news here ...</Text>
 					}
 				</Content>
 			</Container>

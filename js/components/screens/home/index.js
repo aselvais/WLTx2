@@ -54,7 +54,7 @@ class Home extends Component
 		let {league, season, division, team} = this.props;
 		return (
 			<Container style={styles.container}>
-				<Content>
+				<Content padder>
 					<Btnteamselect navigation={this.props.navigation} />
 				</Content>
 

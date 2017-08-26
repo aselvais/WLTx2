@@ -1,9 +1,9 @@
 import React, {Component} from "react";
 import {connect} from "react-redux";
+import {Text} from "react-native";
 import {
-	View,
-	Text,
-	Button
+	Button,
+	Icon
 } from "native-base";
 import {
 	Grid,
@@ -17,6 +17,20 @@ import styles from "./styles";
  */
 class Btnteamselect extends Component
 {
+	/**
+	 *
+	 * @returns {}
+	 */
+	getData()
+	{
+		let {league, season, division, team} = this.props;
+		return {
+			league: 	{ label: "league", route: "Leagues", item: league },
+			season: 	{ label: "season", route: "Seasons", item: season },
+			division: 	{ label: "division", route: "Divisions", item: division, 	func: 'getTier | getTeamStandingLocalTierGroup' },
+			team: 		{ label: "team", route: "Teams", item: team, 				func: 'getFeedNews | getFeedTwitter | getTeamInfo' },
+		};
+	}
 
 	/**
 	 *
@@ -24,119 +38,47 @@ class Btnteamselect extends Component
 	 */
 	render()
 	{
-		let {league, season, division, team, navigation} = this.props;
-		return (
-			<Grid>
-				{
-					(!league || !league.name) ?
-						(<Row>
-								<Col size={5}>
-									<Button style={styles.btn} onPress={ () => navigation.navigate("Leagues") }>
-										<Text>Choose a league</Text>
-									</Button>
-								</Col>
-							</Row>
-						)
-						:
-						(<Row>
-								<Col size={1}>
-									<Text onPress={ () => navigation.navigate("Leagues") }>League</Text>
-								</Col>
-								<Col size={3}>
-									<Text>{ (league && league.name) ? league.name : ''} </Text>
-								</Col>
-								<Col size={1}>
-									<Text>X</Text>
-								</Col>
-							</Row>
-						)
-				}
-				{
-					((league && league.name) && (!season || !season.name)) ?
-						(<Row>
-								<Col size={5}>
-									<Button style={styles.btn} onPress={() => navigation.navigate("Leagues")}>
-										<Text>Choose a season</Text>
-									</Button>
-								</Col>
-							</Row>
-						)
-						:
-						(
-							<Row>
-								<Col size={1}>
-									<Text onPress={() => navigation.navigate("Seasons")}>Season</Text>
-								</Col>
-								<Col size={3}>
-									<Text>{(season && season.name) ? season.name : ''} </Text>
-								</Col>
-								<Col size={1}>
-									<Text>X</Text>
-								</Col>
-							</Row>
-						)
-				}
-				{
-					((league && league.name && season && season.name) && (!division || !division.name)) ?
-						(<Row>
-								<Col size={5}>
-									<Button style={styles.btn} onPress={() => navigation.navigate("Leagues")}>
-										<Text>Choose a division</Text>
-									</Button>
-								</Col>
-							</Row>
-						)
-						:
-						(
-						<Row>
-							<Col size={1}>
-							<Text onPress={ () => navigation.navigate("Divisions") }>Division</Text>
-							</Col>
-							<Col size={3}>
-								<Text>{ (division && division.name) ? division.name : ''} </Text>
-							</Col>
-							<Col size={1}>
-								<Text>X</Text>
-							</Col>
-						</Row>
-						)
-				}
-				{
-					((league && league.name && season && season.name && division && division.name) && (!team || !team.name)) ?
-						(<Row>
-								<Col size={5}>
-									<Button style={styles.btn} onPress={() => navigation.navigate("Leagues")}>
-										<Text>Choose a team</Text>
-									</Button>
-								</Col>
-							</Row>
-						)
-						:
-						(<Row>
-							<Col size={1}>
-								<Text onPress={() => navigation.navigate("Teams")}>Team</Text>
-							</Col>
-							<Col size={3}>
-								<Text>{(team && team.name) ? team.name : ''} </Text>
-							</Col>
-							<Col size={1}>
-								<Text>X</Text>
-							</Col>
-						</Row>)
-				}
-
-
-
-			</Grid>
-		);
+		let {navigation} = this.props;
+		let data = this.getData();
+		let toret = [];
+		let k = 0;
+		for (let i in data)
+		{
+			if (!data[i].item || !data[i].item.name)
+			{
+				toret.push(
+					<Row key={data[i].label + ++k}>
+						<Col size={5}>
+							<Button style={styles.btn} onPress={() => navigation.navigate(data[i].route)}>
+								<Icon name="ios-create"/><Text>Choose a {data[i].label}</Text>
+							</Button>
+						</Col>
+					</Row>
+				);
+				break;
+			}
+			else if (data[i].item && data[i].item.name)
+			{
+				toret.push(
+					<Row key={data[i].label + ++k} style={styles.rowLabel} onPress={() => navigation.navigate(data[i].route)}>
+						<Col size={4}><Text style={styles.label}>{data[i].label.toUpperCase()}</Text></Col>
+						<Col size={1} style={styles.colRight}><Icon name="ios-arrow-forward" iconRight="true"/></Col>
+					</Row>
+				);
+				toret.push(
+					<Row key={data[i].label + ++k}>
+						<Col size={4}><Text style={styles.name}>{data[i].item.name} </Text></Col>
+						<Col size={1}></Col>
+					</Row>
+				);
+			}
+		}
+		return (<Grid>{toret}</Grid>)
 	}
 
 }
 
-function bindAction(dispatch)
-{
-	return {};
-}
+function bindAction(dispatch) { return {}; }
 const mapStateToProps = state => ({
 	name: state.user.name,
 	league: state.leagues.selectedIndex,

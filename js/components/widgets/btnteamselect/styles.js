@@ -10,5 +10,20 @@ export default {
 		alignSelf: 'center',
 		justifyContent: 'center',
 		borderBottomColor: '#000'
+	},
+	rowLabel: {
+		backgroundColor: '#ddd',
+		padding: 5
+	},
+	label: {
+		padding: 10,
+		fontWeight: 'bold',
+	},
+	name: {
+		padding: 10
+	},
+	colRight:{
+		justifyContent: 'center',
+		alignItems: 'flex-end'
 	}
 };

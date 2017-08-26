@@ -7,7 +7,7 @@ import {
 // screens
 import Home from "../components/screens/home";
 import Games from "../components/screens/games";
-import Scores from "../components/screens/scores";
+import News from "../components/screens/news";
 import Standings from "../components/screens/standings";
 import Favorites from "../components/screens/favorites";
 
@@ -15,8 +15,8 @@ import Favorites from "../components/screens/favorites";
 const MainScreenNavigator = TabNavigator({
 		Home: {screen: Home},
 		Games: {screen: Games},
-		Scores: {screen: Scores},
 		Stand: {screen: Standings},
+		News: {screen: News},
 		Fav: {screen: Favorites},
 	},
 	{

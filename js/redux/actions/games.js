@@ -71,7 +71,7 @@ export function getGames(date: string, teamid: number): Action
 {
 	return dispatch => api.getGameDetailAllArrays(date, teamid).then(
 		(d) => dispatch(_returnLoadGames(d)),
-		(e) => dispatch(_returnLoadGames(e))
+		(e) => dispatch(_returnLoadGames([]))
 	);
 };
 

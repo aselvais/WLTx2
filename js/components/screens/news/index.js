@@ -1,10 +1,12 @@
 import React, {Component} from "react";
 import {connect} from "react-redux";
+import { Text, View } from "react-native";
 import {
 	Container,
 	Content,
-	Text,
-	Icon
+	Icon,
+	Tabs,
+	Tab
 } from "native-base";
 import Headerbar from '../../widgets/headerbar/index';
 import styles from "./styles";
@@ -12,15 +14,15 @@ import styles from "./styles";
 /**
  *
  */
-class Scores extends Component
+class News extends Component
 {
 	/**
 	 * Option for the TabNavigation system
 	 * @type {{header: null, tabBarLabel: string, tabBarIcon: (function({tintColor?: *}): XML)}}
 	 */
 	static navigationOptions = {
-		header: <Headerbar title="Scores"/>,
-		tabBarLabel: 'Scores',
+		header: <Headerbar title="News"/>,
+		tabBarLabel: 'News',
 		tabBarIcon: ({ tintColor }) => <Icon name="ios-medal" style={{color: tintColor}}/>
 	};
 
@@ -34,17 +36,28 @@ class Scores extends Component
 		const {props: {name, index, list}} = this;
 		return (
 			<Container style={styles.container}>
-				<Content padder>
-					<Text>
-						Scores HERE ..... !!!!
-					</Text>
-				</Content>
+				<Tabs initialPage={0}>
+					<Tab heading="News">
+						<Content padder>
+							<View>
+								<Text>News HERE ..... !!!!</Text>
+							</View>
+						</Content>
+					</Tab>
+					<Tab heading="Twitter">
+						<Content padder>
+							<View>
+								<Text>Twitter News HERE ..... !!!!</Text>
+							</View>
+						</Content>
+					</Tab>
+				</Tabs>
 			</Container>
 		);
 	}
 }
 
-export default Scores;
+export default News;
 
 
 

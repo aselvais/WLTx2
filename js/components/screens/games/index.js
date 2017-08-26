@@ -3,16 +3,19 @@ import PropTypes from 'prop-types';
 import {
 	Image,
 	TouchableOpacity,
+	Text,
 	View
 } from "react-native";
 import {connect} from "react-redux";
 import {
 	Container,
 	Content,
-	Text,
 	Icon,
 	Button,
-	H1
+	H1,
+	H2,
+	Tabs,
+	Tab
 } from "native-base";
 import {
 	Grid,
@@ -81,87 +84,96 @@ class Games extends Component
 
 	/**
 	 *
+	 * @param item
+	 * @returns {XML}
+	 */
+	getJsxGame(item)
+	{
+
+		let itms = [];
+		let c = 0;
+
+		for (let i in item)
+		{
+			if (typeof item[i] == 'string')
+			{
+				itms.push(<Text key={c++}>{i} : {item[i]}</Text>);
+			}
+		}
+
+		return (
+			<Row key={item.id}>
+				<Col style={{padding: 10}}>
+					<TouchableOpacity onPress={() => this.clickGame(item)}>
+						<H2>{(item.team) ? item.team : ''}</H2>
+					</TouchableOpacity>
+					{itms}
+				</Col>
+			</Row>
+		);
+	}
+
+	/**
+	 *
 	 * @returns {XML}
 	 */
 	render()
 	{
-		let {league, season, division, team} = this.props;
+		let {league, season, division, team, games} = this.props;
 		const {props: {name, index, list}} = this;
+/*				<Button
+					style={styles.topbtn} onPress={() => this.props.navigation.navigate("Teams")}>
+					<Text>{(team && team.name) ? 'Change team' : 'Choose a team'}</Text>
+				</Button>
+*/
 		return (
 			<Container style={{
 				backgroundColor: '#FFFFFF',
 			}}>
-				<Button
-					style={{
-						backgroundColor: '#DDD',
-						width: '100%',
-						borderRadius: 0,
-						alignItems: 'center',
-						alignSelf: 'center',
-						justifyContent: 'center',
-						borderBottomColor: '#000'
-					}} onPress={() => this.props.navigation.navigate("Teams")}>
-					<Text>{(team && team.name) ? 'Change team' : 'Choose a team'}</Text>
-				</Button>
-				{
-					(team && team.name) ?
-						(<Grid style={{backgroundColor: '#DDD'}}>
-							<Row key={team.id}>
-								<Col style={{width: 60, height: 55}}>
-									<Image style={{width: 50, height: 50}} source={{uri: team.imageUrl}}/>
-								</Col>
-								<Col style={{padding: 10}}>
-									<Text>{team.name}</Text>
-								</Col>
-							</Row>
-						</Grid>) : null
-				}
-				<Content padder>
-					{(this.props.games && this.props.games.upcoming && this.props.games.upcoming.length && this.props.games.upcoming.length > 0) ?
-						<Grid>
-							{this.props.games.upcoming.map((item, i) => (
-								<Row key={item.id}>
-									<Col style={{padding: 10}}>
-										<TouchableOpacity onPress={() => this.clickGame(item)}>
-											<H1>{item.team}</H1>
-										</TouchableOpacity>
-
-										<text>id : {item.id}</text>
-										<text>date : {item.date}</text>
-										<text>time : {item.time}</text>
-										<text>home : {item.home}</text>
-										<text>team : {item.team}</text>
-										<text>imageUrl : {item.imageUrl}</text>
-
-										<text>arena : {item.arena.name}</text>
-
-										<text>teamId : {item.teamId}</text>
-										<text>leagueTimezone : {item.leagueTimezone}</text>
-										<text>divisionId : {item.divisionId}</text>
-										<text>divisionName : {item.divisionName}</text>
-										<text>dateTime : {item.dateTime}</text>
-										<text>news : {item.news}</text>
-										<text>tweets : {item.tweets}</text>
-										<text>shareUrl : {item.shareUrl}</text>
-										<text>seasonPlayOff : {item.seasonPlayOff}</text>
-										<text>status : {item.status}</text>
-										<text>linkStreamVideo : {item.linkStreamVideo}</text>
-
-
-									</Col>
-								</Row>
-								))}
-						</Grid>
-						:
-						null
-					}
-					{
-						(this.props.games && this.props.games.message) ?
-							<Text>{this.props.games.message}</Text>
-							:
-							null
-					}
-				</Content>
+				<Tabs initialPage={1}>
+					<Tab heading="Past">
+						<Content padder>
+							{
+								(games && games.past && games.past.length && games.past.length > 0) ?
+									<Grid>
+										{games.past.map((item, i) => this.getJsxGame(item) )}
+									</Grid>
+									:
+									<View>
+										<Text>No data ...</Text>
+									</View>
+							}
+						</Content>
+					</Tab>
+					<Tab heading="Today">
+						<Content padder>
+							{
+								(games && games.today && games.today.length && games.today.length > 0) ?
+									<Grid>
+										{games.today.map((item, i) => this.getJsxGame(item) )}
+									</Grid>
+									:
+									<View>
+										<Text>No game today or no data ...</Text>
+									</View>
+							}
+						</Content>
+					</Tab>
+					<Tab heading="Upcoming">
+						<Content padder>
+							{
+								(games && games.upcoming && games.upcoming.length && games.upcoming.length > 0) ?
+									<Grid>
+										{games.upcoming.map((item, i) => this.getJsxGame(item) )}
+									</Grid>
+									:
+									<View>
+										<Text>No data ...</Text>
+									</View>
+							}
+						</Content>
+					</Tab>
+				</Tabs>
 			</Container>
 		);
 	}

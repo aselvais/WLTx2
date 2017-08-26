@@ -21,7 +21,8 @@ import {
 
 import {
 	getTwitterfeeds,
-	setTwitterfeedIndex
+	setTwitterfeedIndex,
+	resetTwitterfeeds
 } from "../../../redux/actions/twitterfeed";
 
 /**
@@ -44,6 +45,7 @@ class Twitterfeeds extends Component
 	static propTypes = {
 		getTwitterfeeds: PropTypes.func,
 		setTwitterfeedIndex: PropTypes.func,
+		resetTwitterfeeds: PropTypes.func,
 	};
 
 	/**
@@ -52,7 +54,10 @@ class Twitterfeeds extends Component
 	componentDidMount()
 	{
 		if (this.props.selectedTeam && this.props.selectedTeam.id)
+		{
+			this.props.resetTwitterfeeds();
 			this.props.getTwitterfeeds(parseInt(this.props.selectedTeam.id));
+		}
 	}
 
 
@@ -107,6 +112,7 @@ function bindAction(dispatch)
 	return {
 		getTwitterfeeds: teamid => dispatch(getTwitterfeeds(teamid)),
 		setTwitterfeedIndex: index => dispatch(setTwitterfeedIndex(index)),
+		resetTwitterfeeds: () => dispatch(resetTwitterfeeds()),
 	};
 }
 const mapStateToProps = state => ({

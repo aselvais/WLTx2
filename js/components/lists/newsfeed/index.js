@@ -21,7 +21,8 @@ import {
 
 import {
 	getNewsfeeds,
-	setNewsfeedIndex
+	setNewsfeedIndex,
+	resetNewsfeeds
 } from "../../../redux/actions/newsfeed";
 
 /**
@@ -44,6 +45,7 @@ class Newsfeeds extends Component
 	static propTypes = {
 		getNewsfeeds: PropTypes.func,
 		setNewsfeedIndex: PropTypes.func,
+		resetNewsfeeds: PropTypes.func,
 	};
 
 	/**
@@ -52,7 +54,10 @@ class Newsfeeds extends Component
 	componentDidMount()
 	{
 		if (this.props.selectedTeam && this.props.selectedTeam.id)
+		{
+			this.props.resetNewsfeeds();
 			this.props.getNewsfeeds(parseInt(this.props.selectedTeam.id));
+		}
 	}
 
 
@@ -105,6 +110,7 @@ function bindAction(dispatch)
 	return {
 		getNewsfeeds: teamid => dispatch(getNewsfeeds(teamid)),
 		setNewsfeedIndex: index => dispatch(setNewsfeedIndex(index)),
+		resetNewsfeeds: () => dispatch(resetNewsfeeds()),
 	};
 }
 const mapStateToProps = state => ({

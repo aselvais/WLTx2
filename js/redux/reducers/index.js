@@ -13,6 +13,7 @@ import newsfeeds from "./newsfeed";
 import twitterfeeds from "./twitterfeed";
 import teaminfo from "./teaminfo";
 import standings from "./standings";
+import favorites from "./favorites";
 
 
 export default combineReducers({
@@ -28,5 +29,6 @@ export default combineReducers({
 	newsfeeds,
 	twitterfeeds,
 	teaminfo,
-	standings
+	standings,
+	favorites
 });

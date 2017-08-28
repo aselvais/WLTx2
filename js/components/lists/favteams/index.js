@@ -1,0 +1,111 @@
+import React, {Component} from "react";
+import PropTypes from 'prop-types';
+import {
+	Image,
+	TouchableOpacity
+} from "react-native";
+import {connect} from "react-redux";
+import {
+	Container,
+	Content,
+	Text,
+	Icon,
+	Button
+} from "native-base";
+import {
+	Grid,
+	Row,
+	Col
+} from "react-native-easy-grid";
+
+import {
+	getUserTeams
+} from "../../../redux/actions/favorites";
+
+/**
+ *
+ */
+class Favfavteams extends Component
+{
+	/**
+	 *
+	 * @param navigation
+	 */
+	static navigationOptions = ({ navigation }) => ({
+		title: 'Select a favteam'
+	});
+
+	/**
+	 *
+	 * @type {{getFavfavteams}}
+	 */
+	static propTypes = {
+		getUserTeams: PropTypes.func,
+	};
+
+	/**
+	 *
+	 */
+	componentDidMount()
+	{
+		this.props.getUserTeams();
+	}
+
+
+	/**
+	 *
+	 * @param item
+	 */
+	clickFavfavteam(item)
+	{
+		this.props.setFavfavteamIndex(item);
+		this.props.navigation.navigate("HomeWtabs");
+	}
+
+	/**
+	 *
+	 * @returns {XML}
+	 */
+	render()
+	{
+		// const params = this.props.navigation.state.params;
+		return (
+			<Container>
+				<Content padder>
+					{(this.props.favteams && this.props.favteams.length && this.props.favteams.length > 0) ?
+						<Grid>
+							{this.props.favteams.map((item, i) => (
+								<Row key={item.id}>
+									<Col style={{width: 60, height: 55}}>
+										<TouchableOpacity onPress={() => this.clickFavfavteam(item) }>
+											<Image style={{width: 50, height: 50}} source={{uri: item.imageUrl}}/>
+										</TouchableOpacity>
+									</Col>
+									<Col style={{ padding: 10 }}>
+										<TouchableOpacity onPress={() => this.clickFavfavteam(item) }>
+											<Text>{item.name}</Text>
+										</TouchableOpacity>
+									</Col>
+								</Row>
+							))}
+						</Grid>
+						:
+						null
+					}
+				</Content>
+			</Container>
+		);
+	}
+}
+
+function bindAction(dispatch)
+{
+	return {
+		getUserTeams: () => dispatch(getUserTeams()),
+	};
+}
+const mapStateToProps = state => ({
+	favteams: state.favorites.teams,
+});
+const FavfavteamsSwagger = connect(mapStateToProps, bindAction)(Favfavteams);
+export default FavfavteamsSwagger;

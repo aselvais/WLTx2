@@ -45,6 +45,14 @@ class Teams extends Component
 		setTeamIndex: PropTypes.func,
 	};
 
+	constructor(props)
+	{
+		super(props);
+		this.state = {
+			stars: {}
+		};
+	}
+
 	/**
 	 *
 	 */
@@ -63,6 +71,13 @@ class Teams extends Component
 	{
 		this.props.setTeamIndex(item);
 		this.props.navigation.navigate("HomeWtabs");
+	}
+
+	toggleStar(itemId)
+	{
+		var _stars = this.state.stars;
+		_stars[itemId] ? _stars[itemId]=false : _stars[itemId]=true;
+		this.setState(_stars);
 	}
 
 	/**
@@ -92,6 +107,13 @@ class Teams extends Component
 									<Col style={{width: 40, alignItems: 'center'}}>
 										{ (item.id && this.props.selectedTeam && this.props.selectedTeam.id && this.props.selectedTeam.id == item.id)
 											? (<Icon name="checkmark" fontSize="10" color="#FF0000" iconRight="true"/>) : null }
+									</Col>
+									<Col style={{width: 40, alignItems: 'center'}}>
+										{ (this.state.stars[item.id] && this.state.stars[item.id] === true) ?
+											(<Icon onPress={ () => this.toggleStar(item.id) } name="ios-star" fontSize="10" style={{ color: "#ffbb00"}} iconRight="true"/>)
+											:
+											(<Icon onPress={ () => this.toggleStar(item.id) } name="ios-star-outline" fontSize="10" style={{ color: "#888888"}} iconRight="true"/>)
+										}
 									</Col>
 								</Row>
 							))}

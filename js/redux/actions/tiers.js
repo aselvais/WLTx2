@@ -7,24 +7,6 @@ export const SET_TIER_INDEX = 'SET_TIER_INDEX';
 export const RESET_TIERS = 'RESET_TIERS';
 export const LOAD_TIERS = 'LOAD_TIERS';
 
-/* ------------------------------------------------------------------------------------------------------------------ */
-
-/**
- *
- * @param d
- * @returns {{type: string, tiers: *}}
- * @private
- */
-function _returnLoadTiers(d)
-{
-	return {
-		type: LOAD_TIERS,
-		list: d
-	};
-}
-
-/* ------------------------------------------------------------------------------------------------------------------ */
-
 /**
  *
  * @param index
@@ -54,6 +36,7 @@ export function resetTiers(): Action
  */
 export function getTiers(divisionid: number): Action
 {
+	function _returnLoadTiers(d) { return { type: LOAD_TIERS, list: d }; }
 	return dispatch => api.getTier(divisionid).then(
 		(d) => dispatch(_returnLoadTiers(d)),
 		(e) => dispatch(_returnLoadTiers([]))

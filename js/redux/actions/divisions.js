@@ -7,23 +7,6 @@ export const SET_DIVISIONS_INDEX = 'SET_DIVISIONS_INDEX';
 export const RESET_DIVISIONS = 'RESET_DIVISIONS';
 export const LOAD_DIVISIONS = 'LOAD_DIVISIONS';
 
-/* ------------------------------------------------------------------------------------------------------------------ */
-
-/**
- *
- * @param d
- * @returns {{type: string, leagues: *}}
- * @private
- */
-function _returnLoadDivisions(d)
-{
-	return {
-		type: LOAD_DIVISIONS,
-		list: d
-	};
-}
-
-/* ------------------------------------------------------------------------------------------------------------------ */
 /**
  *
  * @param index
@@ -53,6 +36,7 @@ export function resetDivisions(): Action
  */
 export function getDivisions(seasonid: number): Action
 {
+	function _returnLoadDivisions(d) { return { type: LOAD_DIVISIONS, list: d }; }
 	return dispatch => api.getDivision(seasonid).then(
 		(d) => dispatch(_returnLoadDivisions(d)),
 		(e) => dispatch(_returnLoadDivisions([]))

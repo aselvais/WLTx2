@@ -50,7 +50,8 @@ class Tiers extends Component
 	 */
 	componentDidMount()
 	{
-		this.props.getTiers(parseInt(this.props.selectedDivision.id));
+		if (this.props.selectedDivision && this.props.selectedDivision.id)
+			this.props.getTiers(parseInt(this.props.selectedDivision.id));
 	}
 
 
@@ -61,7 +62,7 @@ class Tiers extends Component
 	clickTier(item)
 	{
 		this.props.setTierIndex(item);
-		this.props.navigation.navigate("Teams", {tier: item});
+		// this.props.navigation.navigate("Teams", {tier: item});
 	}
 
 	/**
@@ -109,7 +110,7 @@ function bindAction(dispatch)
 const mapStateToProps = state => ({
 	tiers: state.tiers.list,
 	selectedTier: state.tiers.selectedIndex,
-	selectedDivision: state.division.selectedIndex
+	selectedDivision: state.divisions.selectedIndex
 });
 const TiersSwagger = connect(mapStateToProps, bindAction)(Tiers);
 export default TiersSwagger;

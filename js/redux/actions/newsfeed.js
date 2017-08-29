@@ -7,24 +7,6 @@ export const SET_NEWSFEED_INDEX = 'SET_NEWSFEED_INDEX';
 export const RESET_NEWSFEEDS = 'RESET_NEWSFEEDS';
 export const LOAD_NEWSFEEDS = 'LOAD_NEWSFEEDS';
 
-/* ------------------------------------------------------------------------------------------------------------------ */
-
-/**
- *
- * @param d
- * @returns {{type: string, newsfeeds: *}}
- * @private
- */
-function _returnLoadNewsfeeds(d)
-{
-	return {
-		type: LOAD_NEWSFEEDS,
-		list: d
-	};
-}
-
-/* ------------------------------------------------------------------------------------------------------------------ */
-
 /**
  *
  * @param index
@@ -54,6 +36,7 @@ export function resetNewsfeeds(): Action
  */
 export function getNewsfeeds(teamid: number): Action
 {
+	function _returnLoadNewsfeeds(d) { return { type: LOAD_NEWSFEEDS, list: d }; }
 	return dispatch => api.getFeedNews(teamid).then(
 		(d) => dispatch(_returnLoadNewsfeeds(d)),
 		(e) => dispatch(_returnLoadNewsfeeds([]))

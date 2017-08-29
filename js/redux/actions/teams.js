@@ -7,23 +7,6 @@ export const SET_TEAMS_INDEX = 'SET_TEAMS_INDEX';
 export const RESET_TEAMS = 'RESET_TEAMS';
 export const LOAD_TEAMS = 'LOAD_TEAMS';
 
-/* ------------------------------------------------------------------------------------------------------------------ */
-
-/**
- *
- * @param d
- * @returns {{type: string, leagues: *}}
- * @private
- */
-function _returnLoadTeams(d)
-{
-	return {
-		type: LOAD_TEAMS,
-		list: d
-	};
-}
-
-/* ------------------------------------------------------------------------------------------------------------------ */
 /**
  *
  * @param index
@@ -53,6 +36,7 @@ export function resetTeams(): Action
  */
 export function getTeams(divisionid: number): Action
 {
+	function _returnLoadTeams(d) { return { type: LOAD_TEAMS, list: d }; }
 	return dispatch => api.getTeam(divisionid).then(
 		(d) => dispatch(_returnLoadTeams(d)),
 		(e) => dispatch(_returnLoadTeams([]))

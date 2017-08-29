@@ -8,37 +8,6 @@ export const RESET_GAMES = 'RESET_GAMES';
 export const LOAD_GAMES = 'LOAD_GAMES';
 export const LOAD_GAMES_DAY = 'LOAD_GAMES_DAY';
 
-/* ------------------------------------------------------------------------------------------------------------------ */
-
-/**
- *
- * @param d
- * @returns {{type: string, leagues: *}}
- * @private
- */
-function _returnLoadGames(d)
-{
-	return {
-		type: LOAD_GAMES,
-		list: d
-	};
-}
-
-/**
- *
- * @param d
- * @returns {{type: string, leagues: *}}
- * @private
- */
-function _returnLoadGamesDay(d)
-{
-	return {
-		type: LOAD_GAMES_DAY,
-		listday: d
-	};
-}
-
-/* ------------------------------------------------------------------------------------------------------------------ */
 /**
  *
  * @param index
@@ -69,6 +38,7 @@ export function resetGames(): Action
  */
 export function getGames(date: string, teamid: number): Action
 {
+	function _returnLoadGames(d){ return { type: LOAD_GAMES, list: d }; }
 	return dispatch => api.getGameDetailAllArrays(date, teamid).then(
 		(d) => dispatch(_returnLoadGames(d)),
 		(e) => dispatch(_returnLoadGames([]))
@@ -84,9 +54,10 @@ export function getGames(date: string, teamid: number): Action
  */
 export function getGamesDay(date: string, seasonid: number, divisionid: number): Action
 {
+	function _returnLoadGamesDay(d) { return { type: LOAD_GAMES_DAY, listday: d }; }
 	return dispatch => api.getGameToday(date, seasonid, divisionid).then(
-		(d) => dispatch(_returnLoadGames(d)),
-		(e) => dispatch(_returnLoadGames(e))
+		(d) => dispatch(_returnLoadGamesDay(d)),
+		(e) => dispatch(_returnLoadGamesDay([]))
 	);
 };
 

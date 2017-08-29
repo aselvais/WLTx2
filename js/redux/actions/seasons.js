@@ -7,23 +7,6 @@ export const SET_SEASONS_INDEX = 'SET_SEASONS_INDEX';
 export const RESET_SEASONS = 'RESET_SEASONS';
 export const LOAD_SEASONS = 'LOAD_SEASONS';
 
-/* ------------------------------------------------------------------------------------------------------------------ */
-
-/**
- *
- * @param d
- * @returns {{type: string, leagues: *}}
- * @private
- */
-function _returnLoadSeasons(d)
-{
-	return {
-		type: LOAD_SEASONS,
-		list: d
-	};
-}
-
-/* ------------------------------------------------------------------------------------------------------------------ */
 
 /**
  *
@@ -55,6 +38,7 @@ export function resetSeasons(): Action
  */
 export function getSeasons(leagueid: number): Action
 {
+	function _returnLoadSeasons(d) { return { type: LOAD_SEASONS, list: d }; }
 	return dispatch => api.getSeason(leagueid).then(
 		(d) => dispatch(_returnLoadSeasons(d)),
 		(e) => dispatch(_returnLoadSeasons([]))

@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+import PropTypes from 'prop-types';
 import {connect} from "react-redux";
 import {
 	Container,
@@ -15,6 +16,10 @@ import {
 } from "native-base";
 
 import StandingsList from '../../lists/standings';
+import {
+	getTiers,
+	setTierIndex
+} from "../../../redux/actions/tiers";
 
 import {
 	StackNavigator,
@@ -41,6 +46,15 @@ class Standings extends Component
 
 	/**
 	 *
+	 * @type {{getTiers}}
+	 */
+	static propTypes = {
+		getTiers: PropTypes.func,
+		setTierIndex: PropTypes.func,
+	};
+
+	/**
+	 *
 	 * @param props
 	 */
 	constructor(props)
@@ -49,6 +63,15 @@ class Standings extends Component
 		this.state = {
 			selected1: "key1"
 		};
+	}
+
+	/**
+	 *
+	 */
+	componentDidMount()
+	{
+		if (this.props.selectedDivision && this.props.selectedDivision.id)
+			this.props.getTiers(parseInt(this.props.selectedDivision.id));
 	}
 
 	/**
@@ -111,9 +134,23 @@ class Standings extends Component
 	}
 }
 
+// export default Standings;
 
-export default Standings;
 
+function bindAction(dispatch)
+{
+	return {
+		getTiers: divisionid => dispatch(getTiers(divisionid)),
+		setTierIndex: index => dispatch(setTierIndex(index)),
+	};
+}
+const mapStateToProps = state => ({
+	tiers: state.tiers.list,
+	selectedTier: state.tiers.selectedIndex,
+	selectedDivision: state.divisions.selectedIndex
+});
+const StandingsSwagger = connect(mapStateToProps, bindAction)(Standings);
+export default StandingsSwagger;
 
 
 

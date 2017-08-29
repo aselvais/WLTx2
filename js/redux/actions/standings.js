@@ -7,24 +7,6 @@ export const SET_STANDING_INDEX = 'SET_STANDING_INDEX';
 export const RESET_STANDINGS = 'RESET_STANDINGS';
 export const LOAD_STANDINGS = 'LOAD_STANDINGS';
 
-/* ------------------------------------------------------------------------------------------------------------------ */
-
-/**
- *
- * @param d
- * @returns {{type: string, standings: *}}
- * @private
- */
-function _returnLoadStandings(d)
-{
-	return {
-		type: LOAD_STANDINGS,
-		list: d
-	};
-}
-
-/* ------------------------------------------------------------------------------------------------------------------ */
-
 /**
  *
  * @param index
@@ -54,6 +36,7 @@ export function resetStandings(): Action
  */
 export function getStandings(divisionids: number): Action
 {
+	function _returnLoadStandings(d) { return { type: LOAD_STANDINGS, list: d }; }
 	return dispatch => api.getTeamStandingLocalTierGroup(divisionids).then(
 		(d) => dispatch(_returnLoadStandings(d)),
 		(e) => dispatch(_returnLoadStandings([]))

@@ -34,10 +34,16 @@ export function resetStandings(): Action
  *
  * @returns {{type: string, payload: string}}
  */
-export function getStandings(divisionids: number): Action
+export function getStandings(divisionids: number, tierid: number): Action
 {
-	function _returnLoadStandings(d) { return { type: LOAD_STANDINGS, list: d }; }
-	return dispatch => api.getTeamStandingLocalTierGroup(divisionids).then(
+	function _returnLoadStandings(d) {
+		for (var i=0; i < d.length; i++)
+		{
+			d[i].id = i;
+		}
+		return { type: LOAD_STANDINGS, list: d };
+	}
+	return dispatch => api.standingLocalTierGroup(divisionids, tierid).then(
 		(d) => dispatch(_returnLoadStandings(d)),
 		(e) => dispatch(_returnLoadStandings([]))
 	);

@@ -123,9 +123,9 @@ class Standings extends Component
 	render()
 	{
 		const {props: {name, index, list}} = this;
+		// 				{this.getDropDown()}
 		return (
 			<Container style={styles.container}>
-				{this.getDropDown()}
 				<Content padder>
 					<StandingsList/>
 				</Content>

@@ -50,6 +50,15 @@ class Twitterfeeds extends Component
 
 	/**
 	 *
+	 * @param props
+	 */
+	constructor(props)
+	{
+		super(props);
+	}
+
+	/**
+	 *
 	 */
 	componentDidMount()
 	{

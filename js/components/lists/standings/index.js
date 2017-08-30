@@ -2,26 +2,29 @@ import React, {Component} from "react";
 import PropTypes from 'prop-types';
 import {
 	Image,
-	TouchableOpacity
+	TouchableOpacity,
+	Text,
+	View
 } from "react-native";
 import {connect} from "react-redux";
 import {
 	Container,
 	Content,
-	Text,
 	Icon,
-	Button
+	Button,
+	H2
 } from "native-base";
 import {
 	Grid,
 	Row,
 	Col
 } from "react-native-easy-grid";
-
 import {
 	getStandings,
+	resetStandings,
 	setStandingIndex
 } from "../../../redux/actions/standings";
+import md5 from 'md5';
 
 /**
  *
@@ -42,6 +45,7 @@ class Standings extends Component
 	 */
 	static propTypes = {
 		getStandings: PropTypes.func,
+		resetStandings: PropTypes.func,
 		setStandingIndex: PropTypes.func,
 	};
 
@@ -51,7 +55,13 @@ class Standings extends Component
 	componentDidMount()
 	{
 		if (this.props.selectedDivisions && this.props.selectedDivisions.id)
-			this.props.getStandings(parseInt(this.props.selectedDivisions.id));
+		{
+			this.props.resetStandings();
+			this.props.getStandings(
+				parseInt(this.props.selectedDivisions.id,
+					(this.props.selectedTiers && this.props.selectedTiers.id) ? this.props.selectedTiers.id : 0
+				));
+		}
 	}
 
 
@@ -67,26 +77,40 @@ class Standings extends Component
 
 	/**
 	 *
+	 * @param d
+	 * @returns {Array}
+	 */
+	getStandingsJsx(el)
+	{
+		let jsx = [];
+		let u=0;
+		el.map((d) => {
+			for (var i in d)
+			{
+				let pd = JSON.stringify(d[i]);
+				jsx.push(<Text key={i + ++u}>{i}: {pd}</Text>);
+			}
+		});
+
+		return jsx;
+	}
+
+	/**
+	 *
 	 * @returns {XML}
 	 */
 	render()
 	{
-		// const params = this.props.navigation.state.params;
+		let u = 0;
 		return (
-			<Container>
-				<Content padder>
+				<View>
 					{(this.props.standings && this.props.standings.length && this.props.standings.length > 0) ?
 						<Grid>
 							{this.props.standings.map((item, i) => (
 								<Row key={item.id}>
 									<Col style={{ padding: 10 }}>
-										<TouchableOpacity onPress={() => this.clickStanding(item) }>
-											<Text>{item.name}</Text>
-										</TouchableOpacity>
-									</Col>
-									<Col style={{width: 40, alignItems: 'center'}}>
-										{ (item.id && this.props.selectedStanding && this.props.selectedStanding.id && this.props.selectedStanding.id == item.id)
-											? (<Icon name="checkmark" fontSize="10" color="#FF0000" iconRight="true"/>) : null }
+										<H2>{item.name}</H2>
+										{ (item.name != '') ? this.getStandingsJsx( item.teamStandingLocalAPIModels ) : null }
 									</Col>
 								</Row>
 							))}
@@ -94,8 +118,7 @@ class Standings extends Component
 						:
 						null
 					}
-				</Content>
-			</Container>
+				</View>
 		);
 	}
 }
@@ -103,14 +126,16 @@ class Standings extends Component
 function bindAction(dispatch)
 {
 	return {
-		getStandings: divisionids => dispatch(getStandings(divisionids)),
+		getStandings: (divisionids, tierid) => dispatch(getStandings(divisionids, tierid)),
+		resetStandings: () => dispatch(resetStandings()),
 		setStandingIndex: index => dispatch(setStandingIndex(index)),
 	};
 }
 const mapStateToProps = state => ({
 	standings: state.standings.list,
 	selectedStanding: state.standings.selectedIndex,
-	selectedDivisions: state.divisions.selectedIndex
+	selectedDivisions: state.divisions.selectedIndex,
+	selectedTiers: state.tiers.selectedIndex
 });
 const StandingsSwagger = connect(mapStateToProps, bindAction)(Standings);
 export default StandingsSwagger;

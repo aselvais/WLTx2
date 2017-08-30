@@ -131,16 +131,19 @@ class Login extends Component
 	 */
 	render()
 	{
+		/**
+		 * <Field name="email" component={this.renderInput}/>
+		 * <Field name="password" component={this.renderInput}/>
+		 */
+
 		return (
 			<Container>
 				<View style={styles.container}>
 					<Content>
 						<Image source={background} style={styles.shadow}>
 							<View style={styles.bg}>
-								<Field name="email" component={this.renderInput}/>
-								<Field name="password" component={this.renderInput}/>
 								<Button style={styles.btn} onPress={() => this.props.navigation.navigate("HomeWtabs")}>
-									<Text>SIGN IN</Text>
+									<Text>Start</Text>
 								</Button>
 							</View>
 						</Image>

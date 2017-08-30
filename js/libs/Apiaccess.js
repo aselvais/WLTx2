@@ -153,10 +153,10 @@ class Apiaccess
 			desc: "Get team info"
 		},
 		// No view for that... Don't know what that is
-		GetTeamStandingLocalTierGroup: {
+		standingLocalTierGroup: {
 			url: "/api/team/standingLocalTierGroup",
 			method: "GET",
-			params: ["divisionIds"],
+			params: ["divisionIds","tierId"],
 			desc: ""
 		}
 	};
@@ -368,9 +368,9 @@ class Apiaccess
 	 * @returns {Promise}
 	 * @todo create list view for standings
 	 */
-	async getTeamStandingLocalTierGroup(divisionIds)
+	async standingLocalTierGroup(divisionIds, tierId=0)
 	{
-		return this.postRegister().then(() => this._genericApiCall('GetTeamStandingLocalTierGroup', {divisionIds: divisionIds}));
+		return this.postRegister().then(() => this._genericApiCall('standingLocalTierGroup', {divisionIds: divisionIds, tierId: tierId}));
 	}
 
 
@@ -485,6 +485,7 @@ class Apiaccess
 			if (getDataFromAPI) {
 				response = await fetch(url + sd.url + prms, fetchOpts);
 				responseJson = await response.json();
+console.log('JSON : ' + url + sd.url + prms, responseJson);
 				this._caching[requestHash] = {creationDate: new Date(), data: responseJson};
 				this.log = 'Created cached data ' + requestHash;
 				this.log = this._caching[requestHash]

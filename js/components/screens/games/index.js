@@ -119,17 +119,24 @@ class Games extends Component
 	 */
 	render()
 	{
-		let {league, season, division, team, games} = this.props;
+		let {league, season, division, team, games, navigation} = this.props;
 		const {props: {name, index, list}} = this;
-/*				<Button
-					style={styles.topbtn} onPress={() => this.props.navigation.navigate("Teams")}>
-					<Text>{(team && team.name) ? 'Change team' : 'Choose a team'}</Text>
-				</Button>
-*/
 		return (
 			<Container style={{
 				backgroundColor: '#FFFFFF',
 			}}>
+				<Button style={{
+					backgroundColor: '#DDD',
+					width: '100%',
+					borderRadius: 0,
+					alignItems: 'center',
+					alignSelf: 'center',
+					justifyContent: 'center',
+					borderBottomColor: '#000'
+				}} onPress={() => navigation.navigate("Teams")}>
+					<Icon name="ios-create"/><Text>Filter on a team</Text>
+				</Button>
+
 				<Tabs initialPage={1}>
 					<Tab heading="Past">
 						<Content padder>

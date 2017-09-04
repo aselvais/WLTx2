@@ -11,7 +11,7 @@ import {
 import Headerbar from '../../widgets/headerbar/index';
 import styles from "./styles";
 
-import Favteams from '../../lists/favteams';
+import Teams from '../../lists/favorites/teams';
 
 /**
  *
@@ -49,7 +49,7 @@ class Favorites extends Component
 					<Tab heading="Teams">
 						<Content padder>
 							<View>
-								<Favteams/>
+								<Teams></Teams>
 							</View>
 						</Content>
 					</Tab>

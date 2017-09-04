@@ -23,6 +23,11 @@ import {
 	setTeamIndex
 } from "../../../redux/actions/teams";
 
+import {
+	postUserTeams
+} from "../../../redux/actions/favorites";
+
+
 /**
  *
  */
@@ -43,6 +48,7 @@ class Teams extends Component
 	static propTypes = {
 		getTeams: PropTypes.func,
 		setTeamIndex: PropTypes.func,
+		postUserTeams: PropTypes.func,
 	};
 
 	constructor(props)
@@ -73,10 +79,17 @@ class Teams extends Component
 		this.props.navigation.navigate("HomeWtabs");
 	}
 
+	/**
+	 *
+	 * @param itemId
+	 */
 	toggleStar(itemId)
 	{
 		var _stars = this.state.stars;
 		_stars[itemId] ? _stars[itemId]=false : _stars[itemId]=true;
+
+		this.props.postUserTeams(parseInt(itemId));
+
 		this.setState(_stars);
 	}
 
@@ -131,6 +144,7 @@ function bindAction(dispatch)
 {
 	return {
 		getTeams: seasonid => dispatch(getTeams(seasonid)),
+		postUserTeams: teamid => dispatch(postUserTeams(teamid)),
 		setTeamIndex: index => dispatch(setTeamIndex(index)),
 	};
 }

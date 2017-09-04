@@ -25,7 +25,7 @@ import {
 /**
  *
  */
-class Favfavteams extends Component
+class Teams extends Component
 {
 	/**
 	 *
@@ -81,11 +81,6 @@ class Favfavteams extends Component
 											<Image style={{width: 50, height: 50}} source={{uri: item.imageUrl}}/>
 										</TouchableOpacity>
 									</Col>
-									<Col style={{ padding: 10 }}>
-										<TouchableOpacity onPress={() => this.clickFavfavteam(item) }>
-											<Text>{item.name}</Text>
-										</TouchableOpacity>
-									</Col>
 								</Row>
 							))}
 						</Grid>
@@ -107,5 +102,5 @@ function bindAction(dispatch)
 const mapStateToProps = state => ({
 	favteams: state.favorites.teams,
 });
-const FavfavteamsSwagger = connect(mapStateToProps, bindAction)(Favfavteams);
-export default FavfavteamsSwagger;
+const TeamsSwagger = connect(mapStateToProps, bindAction)(Teams);
+export default TeamsSwagger;

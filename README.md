@@ -79,4 +79,15 @@ Successfully added the "TorontoMarlboros-ios" app, along with the following defa
 ├────────────┼──────────────────────────────────────────────────────────────────┤
 │ Staging    │ UuPygacAW9GC_D5Rc22e0l6Qnlckd6a1b3b3-a940-4ce5-ace9-1b792d004c3a │
 └────────────┴──────────────────────────────────────────────────────────────────┘
+
+
+code-push release-react TorontoMarlboros android --description "Button cleaned up" -d Production
+code-push release-react TorontoMarlboros-ios ios --description "Button cleaned up" -d Production 
+
+
+code-push deployment ls TorontoMarlboros 
+
 ```
+
+
+

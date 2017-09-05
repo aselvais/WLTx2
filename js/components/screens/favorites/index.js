@@ -12,6 +12,8 @@ import Headerbar from '../../widgets/headerbar/index';
 import styles from "./styles";
 
 import Teams from '../../lists/favorites/teams';
+import Apptracking from '../../../libs/Apptracking';
+const tracking = new Apptracking();
 
 /**
  *
@@ -35,6 +37,7 @@ class Favorites extends Component
 
 	render()
 	{
+		tracking.tracker.trackScreenView('favorites');
 		const {props: {name, index, list}} = this;
 		return (
 			<Container style={styles.container}>

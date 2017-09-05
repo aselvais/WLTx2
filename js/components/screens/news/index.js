@@ -13,6 +13,8 @@ import styles from "./styles";
 
 import Newsfeed from '../../lists/newsfeed';
 import Twitterfeed from '../../lists/twitterfeed';
+import Apptracking from '../../../libs/Apptracking';
+const tracking = new Apptracking();
 
 /**
  *
@@ -36,6 +38,7 @@ class News extends Component
 
 	render()
 	{
+		tracking.tracker.trackScreenView('news');
 		const {props: {name, index, list}} = this;
 		return (
 			<Container style={styles.container}>

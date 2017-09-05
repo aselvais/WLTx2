@@ -55,4 +55,28 @@ $ ./gradlew assembleRelease.sh
 For iOS, you will need to open X-code and build an Archive then upload it to the App Store thing...
 
 
+# Code push
 
+Here is what I got:
+
+```bash
+Arnauds-MacBook-Pro:WLTx2 arnaud$ code-push app add TorontoMarlboros android react-native
+Successfully added the "TorontoMarlboros" app, along with the following default deployments:
+┌────────────┬──────────────────────────────────────────────────────────────────┐
+│ Name       │ Deployment Key                                                   │
+├────────────┼──────────────────────────────────────────────────────────────────┤
+│ Production │ SNC_O3BFznfiFxHPlDr0tGtj6cxDd6a1b3b3-a940-4ce5-ace9-1b792d004c3a │
+├────────────┼──────────────────────────────────────────────────────────────────┤
+│ Staging    │ qHKfaScw48X8F1Vkap3hIsiMvpsLd6a1b3b3-a940-4ce5-ace9-1b792d004c3a │
+└────────────┴──────────────────────────────────────────────────────────────────┘
+
+Arnauds-MacBook-Pro:WLTx2 arnaud$ code-push app add TorontoMarlboros-ios ios react-native
+Successfully added the "TorontoMarlboros-ios" app, along with the following default deployments:
+┌────────────┬──────────────────────────────────────────────────────────────────┐
+│ Name       │ Deployment Key                                                   │
+├────────────┼──────────────────────────────────────────────────────────────────┤
+│ Production │ P1bwDe_ZkZsJv2strZV6-hB2u0uAd6a1b3b3-a940-4ce5-ace9-1b792d004c3a │
+├────────────┼──────────────────────────────────────────────────────────────────┤
+│ Staging    │ UuPygacAW9GC_D5Rc22e0l6Qnlckd6a1b3b3-a940-4ce5-ace9-1b792d004c3a │
+└────────────┴──────────────────────────────────────────────────────────────────┘
+```

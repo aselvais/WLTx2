@@ -180,7 +180,7 @@ class Login extends Component
 				<Row size={1}>
 					<Col>
 						<Button style={styles.btn} onPress={() => this.props.navigation.navigate("Divisions")}>
-							<Text>Start beta</Text>
+							<Text>Start (code push)</Text>
 						</Button>
 					</Col>
 				</Row>

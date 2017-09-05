@@ -17,7 +17,7 @@ const MainScreenNavigator = TabNavigator({
 		Games: {screen: Games},
 		Stand: {screen: Standings},
 		News: {screen: News},
-		Fav: {screen: Favorites},
+//		Fav: {screen: Favorites},
 	},
 	{
 		tabBarComponent: TabBarBottom,

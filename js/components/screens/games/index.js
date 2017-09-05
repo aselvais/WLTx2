@@ -27,7 +27,7 @@ import moment from 'moment';
 import {
 	getGames,
 	setGameIndex,
-// 	getGamesDay
+	getGamesDay
 } from "../../../redux/actions/games";
 
 import Headerbar from '../../widgets/headerbar/index';
@@ -56,7 +56,7 @@ class Games extends Component
 	static propTypes = {
 		getGames: PropTypes.func,
 		setGameIndex: PropTypes.func,
-//		getGamesDay: PropTypes.func,
+		getGamesDay: PropTypes.func,
 	};
 
 	/**
@@ -64,11 +64,15 @@ class Games extends Component
 	 */
 	componentDidMount()
 	{
-		let date = moment().format('YYYY-MM-DD');
+		// let date = moment().format('YYYY-MM-DD');
+		let date = '2017-09-08';
 		if (this.props && this.props.selectedTeam && this.props.selectedTeam.id)
 		{
 			this.props.getGames(date, parseInt(this.props.selectedTeam.id));
-			// this.props.getGamesDay(date, this.props.season.id, this.props.division.id);
+		}
+		if (this.props && this.props.season && this.props.season.id && this.props.division && this.props.division.id)
+		{
+			this.props.getGamesDay(date, this.props.season.id, this.props.division.id);
 		}
 	}
 
@@ -192,7 +196,7 @@ function bindAction(dispatch)
 {
 	return {
 		getGames: (date, teamid) => dispatch(getGames(date, teamid)),
-		// getGamesDay: (date, seasonid, divisionid) => dispatch(getGamesDay(date, seasonid, divisionid)),
+		getGamesDay: (date, seasonid, divisionid) => dispatch(getGamesDay(date, seasonid, divisionid)),
 		setGameIndex: index => dispatch(setGameIndex(index)),
 	};
 }

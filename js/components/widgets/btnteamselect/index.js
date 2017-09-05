@@ -25,8 +25,8 @@ class Btnteamselect extends Component
 	{
 		let {league, season, division, team} = this.props;
 		return {
-			league: 	{ label: "league", route: "Leagues", item: league },
-			season: 	{ label: "season", route: "Seasons", item: season },
+			// league: 	{ label: "league", route: "Leagues", item: league },
+			// season: 	{ label: "season", route: "Seasons", item: season },
 			division: 	{ label: "division", route: "Divisions", item: division, 	func: 'getTier | getTeamStandingLocalTierGroup' },
 			team: 		{ label: "team", route: "Teams", item: team, 				func: 'getFeedNews | getFeedTwitter | getTeamInfo' },
 		};

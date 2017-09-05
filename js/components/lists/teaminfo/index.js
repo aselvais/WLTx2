@@ -33,7 +33,7 @@ class Teaminfos extends Component
 	 * @param navigation
 	 */
 	static navigationOptions = ({ navigation }) => ({
-		title: 'Select a teaminfo'
+		title: 'Team info'
 	});
 
 	/**

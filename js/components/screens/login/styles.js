@@ -3,6 +3,7 @@ const React = require('react-native');
 const {StyleSheet, Dimensions} = React;
 
 const deviceHeight = Dimensions.get('window').height;
+const deviceWidth = Dimensions.get('window').width;
 
 export default {
 	container: {
@@ -12,6 +13,8 @@ export default {
 		left: 0,
 		right: 0,
 		backgroundColor: '#FFFFFF',
+		width: deviceWidth,
+		height: deviceHeight
 	},
 	shadow: {
 		flex: 1,
@@ -19,7 +22,7 @@ export default {
 		height: null,
 	},
 	bg: {
-		flex: 1,
+//		flex: 1,
 		marginTop: deviceHeight / 1.75,
 		paddingTop: 20,
 		paddingLeft: 10,

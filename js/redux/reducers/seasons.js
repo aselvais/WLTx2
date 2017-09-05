@@ -17,8 +17,20 @@ export type State = {
  * @type {{list: [null], selectedIndex: undefined}}
  */
 const initialState = {
-	list: [],
-	selectedIndex: null
+	list: [{
+		id: 196,
+		name: "Friendship Tournament",
+		playOff: false,
+		visible: true,
+		bracketsVisibleInSeason: true
+	}],
+	selectedIndex: {
+		id: 196,
+		name: "Friendship Tournament",
+		playOff: false,
+		visible: true,
+		bracketsVisibleInSeason: true
+	}
 };
 /**
  *
@@ -39,8 +51,8 @@ export default function(state: State = initialState, action: Action): State
 		case RESET_SEASONS:
 			return {
 				...state,
-				list: [],
-				selectedIndex: null
+				list: initialState.list,
+				selectedIndex: initialState.selectedIndex
 			};
 			break;
 		/**
@@ -49,7 +61,8 @@ export default function(state: State = initialState, action: Action): State
 		case LOAD_SEASONS:
 			return {
 				...state,
-				list: action.list
+				list: initialState.list
+				// list: action.list
 			};
 			break;
 		/**

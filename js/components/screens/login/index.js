@@ -1,6 +1,9 @@
 import React, {Component} from "react";
 import PropTypes from 'prop-types';
-import {Image} from "react-native";
+import {
+	Image,
+	Dimensions
+} from "react-native";
 import {connect} from "react-redux";
 import {
 	Container,
@@ -12,11 +15,23 @@ import {
 	View,
 	Text
 } from "native-base";
-import {Field, reduxForm} from "redux-form";
+import {
+	Grid,
+	Row,
+	Col
+} from "react-native-easy-grid";
+import {
+	Field,
+	reduxForm
+} from "redux-form";
 import {setUser} from "../../../redux/actions/user";
 import styles from "./styles";
 
+const deviceWidth = Dimensions.get('window').width;
+const deviceHeight = Dimensions.get('window').height;
+
 const background = require("../../../../images/wltLogo.png");
+const logo = require("../../../../images/MarlLogo.png");
 /**
  *
  * @param values
@@ -136,20 +151,41 @@ class Login extends Component
 		 * <Field name="password" component={this.renderInput}/>
 		 */
 
+		/**
+		 * 							<Image source={logo} style={{
+								width: (deviceWidth/1.5),
+								height: (deviceWidth/1.5)
+							}} />
+		 <View style={styles.bg}>
+		 <Button style={styles.btn} onPress={() => this.props.navigation.navigate("HomeWtabs")}>
+		 <Text>Start</Text>
+		 </Button>
+		 </View>
+		 */
+
 		return (
-			<Container>
-				<View style={styles.container}>
-					<Content>
-						<Image source={background} style={styles.shadow}>
-							<View style={styles.bg}>
-								<Button style={styles.btn} onPress={() => this.props.navigation.navigate("HomeWtabs")}>
-									<Text>Start</Text>
-								</Button>
-							</View>
-						</Image>
-					</Content>
-				</View>
-			</Container>
+			<Grid style={styles.container}>
+				<Image source={background} style={styles.shadow}>
+				<Row size={2}>
+					<Col style={{
+						alignItems:'center',
+						justifyContent:'center'
+					}}>
+						<Image source={logo} style={{
+							resizeMode: 'contain',
+							height: (deviceHeight/2)
+						}} />
+					</Col>
+				</Row>
+				<Row size={1}>
+					<Col>
+						<Button style={styles.btn} onPress={() => this.props.navigation.navigate("Divisions")}>
+							<Text>Start</Text>
+						</Button>
+					</Col>
+				</Row>
+				</Image>
+			</Grid>
 		);
 	}
 }

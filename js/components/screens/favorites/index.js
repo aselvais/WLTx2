@@ -39,17 +39,10 @@ class Favorites extends Component
 		return (
 			<Container style={styles.container}>
 				<Tabs initialPage={0}>
-					<Tab heading="Divisions">
-						<Content padder>
-							<View>
-								<Text>Divisions HERE ..... !!!!</Text>
-							</View>
-						</Content>
-					</Tab>
 					<Tab heading="Teams">
 						<Content padder>
 							<View>
-								<Teams></Teams>
+								<Teams navigation={this.props.navigation}/>
 							</View>
 						</Content>
 					</Tab>

@@ -17,8 +17,18 @@ export type State = {
  * @type {{list: [null], selectedIndex: undefined}}
  */
 const initialState = {
-	list: [],
-	selectedIndex: null
+	list: [{
+		id: 174,
+		name: "Toronto Marlboros",
+		shortName: "Toronto Marlboros - Tournaments",
+		imageUrl: "http://admin.winloseortie.com/files/image?directory=team_images&filename=kKS_Toronto-Marlboros-logo.png"
+	}],
+	selectedIndex: {
+		id: 174,
+		name: "Toronto Marlboros",
+		shortName: "Toronto Marlboros - Tournaments",
+		imageUrl: "http://admin.winloseortie.com/files/image?directory=team_images&filename=kKS_Toronto-Marlboros-logo.png"
+	}
 };
 /**
  *
@@ -45,8 +55,8 @@ export default function(state: State = initialState, action: Action): State
 		case RESET_LEAGUES:
 			return {
 				...state,
-				list: [],
-				selectedIndex: null
+				list: initialState.list,
+				selectedIndex: initialState.list
 			};
 			break;
 		/**
@@ -55,7 +65,8 @@ export default function(state: State = initialState, action: Action): State
 		case LOAD_LEAGUES:
 			return {
 				...state,
-				list: action.list
+				// list: action.list
+				list: initialState.list
 			};
 			break;
 		/**

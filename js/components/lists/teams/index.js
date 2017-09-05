@@ -76,7 +76,8 @@ class Teams extends Component
 	clickTeam(item)
 	{
 		this.props.setTeamIndex(item);
-		this.props.navigation.navigate("HomeWtabs");
+		// this.props.navigation.navigate("HomeWtabs");
+		this.props.navigation.navigate("Games");
 	}
 
 	/**

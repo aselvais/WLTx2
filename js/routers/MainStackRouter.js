@@ -9,6 +9,7 @@ import Leagues from "../components/lists/leagues";
 import Seasons from "../components/lists/seasons";
 import Divisions from "../components/lists/divisions";
 import Teams from "../components/lists/teams";
+import Teaminfos from "../components/lists/teaminfo/index";
 
 HomeDrawerRouter.navigationOptions = ({navigation}) => ({header: null});
 
@@ -20,6 +21,7 @@ export default (StackNav = StackNavigator({
 		Seasons: {screen: Seasons},
 		Divisions: {screen: Divisions},
 		Teams: {screen: Teams},
+		Teaminfo: {screen: Teaminfos},
 	},
 	{
 	}

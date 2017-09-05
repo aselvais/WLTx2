@@ -69,7 +69,8 @@ class Divisions extends Component
 			this.props.resetTeams();
 		}
 		this.props.setDivisionIndex(item);
-		this.props.navigation.navigate("Teams", {division: item});
+		// this.props.navigation.navigate("Teams", {division: item});
+		this.props.navigation.navigate("HomeWtabs");
 	}
 
 	/**

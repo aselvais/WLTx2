@@ -58,8 +58,8 @@ class Teams extends Component
 	 */
 	clickFavfavteam(item)
 	{
-		this.props.setFavfavteamIndex(item);
-		this.props.navigation.navigate("HomeWtabs");
+		// this.props.setFavfavteamIndex(item);
+		this.props.navigation.navigate("Teaminfo");
 	}
 
 	/**
@@ -79,6 +79,11 @@ class Teams extends Component
 									<Col style={{width: 60, height: 55}}>
 										<TouchableOpacity onPress={() => this.clickFavfavteam(item) }>
 											<Image style={{width: 50, height: 50}} source={{uri: item.imageUrl}}/>
+										</TouchableOpacity>
+									</Col>
+									<Col style={{ padding: 10 }}>
+										<TouchableOpacity onPress={() => this.clickFavfavteam(item) }>
+											<Text>{item.name}</Text>
 										</TouchableOpacity>
 									</Col>
 								</Row>

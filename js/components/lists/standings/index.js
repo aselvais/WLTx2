@@ -58,9 +58,9 @@ class Standings extends Component
 		{
 			this.props.resetStandings();
 			this.props.getStandings(
-				parseInt(this.props.selectedDivisions.id,
-					(this.props.selectedTiers && this.props.selectedTiers.id) ? this.props.selectedTiers.id : 0
-				));
+				parseInt(this.props.selectedDivisions.id),
+				((this.props.selectedTiers && this.props.selectedTiers.id) ? this.props.selectedTiers.id : 0)
+			);
 		}
 	}
 

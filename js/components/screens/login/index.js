@@ -24,10 +24,6 @@ import {
 	Field,
 	reduxForm
 } from "redux-form";
-
-import Apptracking from '../../../libs/Apptracking';
-const tracking = new Apptracking();
-
 import {setUser} from "../../../redux/actions/user";
 import styles from "./styles";
 
@@ -150,7 +146,6 @@ class Login extends Component
 	 */
 	render()
 	{
-		tracking.tracker.trackScreenView('login');
 		/**
 		 * <Field name="email" component={this.renderInput}/>
 		 * <Field name="password" component={this.renderInput}/>

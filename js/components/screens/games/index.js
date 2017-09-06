@@ -23,8 +23,6 @@ import {
 	Col
 } from "react-native-easy-grid";
 import moment from 'moment';
-import Apptracking from '../../../libs/Apptracking';
-const tracking = new Apptracking();
 
 import {
 	getGames,
@@ -125,7 +123,6 @@ class Games extends Component
 	 */
 	render()
 	{
-		tracking.tracker.trackScreenView('games');
 		let {league, season, division, team, games, navigation} = this.props;
 		const {props: {name, index, list}} = this;
 		return (

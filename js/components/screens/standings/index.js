@@ -21,8 +21,6 @@ import {
 	setTierIndex
 } from "../../../redux/actions/tiers";
 
-import Apptracking from '../../../libs/Apptracking';
-const tracking = new Apptracking();
 
 import {
 	StackNavigator,
@@ -125,8 +123,6 @@ class Standings extends Component
 	 */
 	render()
 	{
-		tracking.tracker.trackScreenView('standings');
-
 		const {props: {name, index, list}} = this;
 		// 				{this.getDropDown()}
 		return (

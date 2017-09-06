@@ -13,8 +13,6 @@ import styles from "./styles";
 import Btnteamselect from '../../widgets/btnteamselect/index';
 import Headerbar from "../../widgets/headerbar/index";
 import Teaminfo from "../../lists/teaminfo";
-import Apptracking from '../../../libs/Apptracking';
-const tracking = new Apptracking();
 
 
 /**
@@ -54,8 +52,6 @@ class Home extends Component
 	 */
 	render()
 	{
-		tracking.tracker.trackScreenView('home');
-
 		let {league, season, division, team} = this.props;
 		return (
 			<Container style={styles.container}>

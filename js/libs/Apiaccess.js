@@ -219,7 +219,11 @@ class Apiaccess
 		var that = this;
 		if (that._token === null) {
 			var p;
-			var uID = DeviceInfo.getUniqueID() || md5('sdf645ds6f45d4fs64sdf6468s7f8wervxc546');
+			var uID = md5('sdf645ds6f45d4fs64sdf6468s7f8wervxc546');
+			if (DeviceInfo && DeviceInfo.getUniqueID)
+			{
+				uID = DeviceInfo.getUniqueID();
+			}
 			p = that._genericApiCall('PostRegister', { device: uID });
 			p.then(
 				function(d)
@@ -467,7 +471,6 @@ class Apiaccess
 				fetchOpts.body = paramsT;
 			}
 		}
-
 		try {
 			let requestHash = md5(JSON.stringify([url + sd.url + prms, fetchOpts]));
 			let response;
@@ -485,7 +488,6 @@ class Apiaccess
 			if (getDataFromAPI) {
 				response = await fetch(url + sd.url + prms, fetchOpts);
 				responseJson = await response.json();
-console.log('JSON : ' + url + sd.url + prms, responseJson);
 				this._caching[requestHash] = {creationDate: new Date(), data: responseJson};
 				this.log = 'Created cached data ' + requestHash;
 				this.log = this._caching[requestHash]

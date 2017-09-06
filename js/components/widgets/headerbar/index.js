@@ -32,10 +32,13 @@ class Headerbar extends Component
 	 */
 	render()
 	{
+		// 					<Icon active name="menu"/>
+		// 					<Icon active name="power"/>
+
+
 		return <Header>
 			<Left>
 				<Button transparent>
-					<Icon active name="menu"/>
 				</Button>
 			</Left>
 			<Body>
@@ -43,7 +46,6 @@ class Headerbar extends Component
 			</Body>
 			<Right>
 				<Button transparent onPress={() => this.props.navigation.navigate("Login")}>
-					<Icon active name="power"/>
 				</Button>
 			</Right>
 		</Header>;

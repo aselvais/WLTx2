@@ -14,6 +14,7 @@ import twitterfeeds from "./twitterfeed";
 import teaminfo from "./teaminfo";
 import standings from "./standings";
 import favorites from "./favorites";
+import selecteddate from "./selecteddate";
 
 
 export default combineReducers({
@@ -30,5 +31,6 @@ export default combineReducers({
 	twitterfeeds,
 	teaminfo,
 	standings,
-	favorites
+	favorites,
+	selecteddate
 });

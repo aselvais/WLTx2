@@ -28,7 +28,7 @@ class Btnteamselect extends Component
 			// league: 	{ label: "league", route: "Leagues", item: league },
 			// season: 	{ label: "season", route: "Seasons", item: season },
 			division: 	{ label: "division", route: "Divisions", item: division, 	func: 'getTier | getTeamStandingLocalTierGroup' },
-			team: 		{ label: "team", route: "Teams", item: team, 				func: 'getFeedNews | getFeedTwitter | getTeamInfo' },
+			// team: 		{ label: "team", route: "Teams", item: team, 				func: 'getFeedNews | getFeedTwitter | getTeamInfo' },
 		};
 	}
 
@@ -61,16 +61,17 @@ class Btnteamselect extends Component
 			{
 				toret.push(
 					<Row key={data[i].label + ++k} style={styles.rowLabel} onPress={() => navigation.navigate(data[i].route)}>
-						<Col size={4}><Text style={styles.label}>{data[i].label.toUpperCase()}</Text></Col>
-						<Col size={1} style={styles.colRight}><Icon name="ios-arrow-forward" iconRight="true"/></Col>
+						<Col size={4}><Text style={styles.label}>{data[i].label.toUpperCase()} : {data[i].item.name}</Text></Col>
 					</Row>
 				);
+				/*
 				toret.push(
 					<Row key={data[i].label + ++k}>
 						<Col size={4}><Text style={styles.name}>{data[i].item.name} </Text></Col>
 						<Col size={1}></Col>
 					</Row>
 				);
+				*/
 			}
 		}
 		return (<Grid>{toret}</Grid>)

@@ -23,7 +23,6 @@ import {
 	Col
 } from "react-native-easy-grid";
 import moment from 'moment';
-
 import {
 	getGames,
 	setGameIndex,
@@ -64,8 +63,7 @@ class Games extends Component
 	 */
 	componentDidMount()
 	{
-		// let date = moment().format('YYYY-MM-DD');
-		let date = '2017-09-08';
+		let date = moment(this.props.sdate).format('YYYY-MM-DD');
 		if (this.props && this.props.selectedTeam && this.props.selectedTeam.id)
 		{
 			this.props.getGames(date, parseInt(this.props.selectedTeam.id));
@@ -93,26 +91,62 @@ class Games extends Component
 	 */
 	getJsxGame(item)
 	{
-
-		let itms = [];
-		let c = 0;
-
-		for (let i in item)
-		{
-			if (typeof item[i] == 'string')
-			{
-				itms.push(<Text key={c++}>{i} : {item[i]}</Text>);
-			}
-		}
-
 		return (
 			<Row key={item.id}>
-				<Col style={{padding: 10}}>
-					<TouchableOpacity onPress={() => this.clickGame(item)}>
-						<H2>{(item.team) ? item.team : ''}</H2>
-					</TouchableOpacity>
-					{itms}
+
+				<Col style={{margin: 10}}>
+					<Grid style={{
+						backgroundColor: '#FFFFFF',
+						margin: 5,
+						borderRadius: 5,
+						borderBottomColor: '#AAAAAA',
+						borderBottomWidth: 1,
+						borderRightColor: '#AAAAAA',
+						borderRightWidth: 1,
+					}}>
+						<Col size={2}>
+							<Row>
+								<Grid>
+									<Row>
+										<Col style={{width: 40, height: 40}}><Image style={{width: 30, height: 30}} source={{uri: item.info.team1.imageUrl}}/></Col>
+										<Col><Text>{item.info.team1.teamName.toUpperCase()}</Text></Col>
+									</Row>
+								</Grid>
+							</Row>
+							<Row>
+								<Grid>
+									<Row>
+										<Col style={{width: 40, height: 40}}><Image style={{width: 30, height: 30}} source={{uri: item.info.team2.imageUrl}}/></Col>
+										<Col><Text>{item.info.team2.teamName.toUpperCase()}</Text></Col>
+									</Row>
+								</Grid>
+							</Row>
+						</Col>
+						<Col size={1} style={{
+							borderLeftColor: '#EEEEEE',
+							borderLeftWidth: 1,
+							paddingLeft: 5
+						}}>
+							<Row style={{
+								borderBottomColor: '#EEEEEE',
+								borderBottomWidth: 1,
+								paddingTop: 5
+							}}>
+								<Text style={{ fontWeight: 'bold' }}>
+									<Icon name="ios-time" style={{ fontSize: 15 }}/>
+									{ '  ' + item.time}
+								</Text>
+							</Row>
+							<Row style={{paddingTop: 5}}>
+								<Text>
+									<Icon name="ios-navigate" style={{ fontSize: 15 }}/>
+									{'  ' + item.arena.name}
+								</Text>
+							</Row>
+						</Col>
+					</Grid>
 				</Col>
+
 			</Row>
 		);
 	}
@@ -123,68 +157,56 @@ class Games extends Component
 	 */
 	render()
 	{
-		let {league, season, division, team, games, navigation} = this.props;
-		const {props: {name, index, list}} = this;
+		let {sdate, league, season, division, team, games, gamesday, navigation} = this.props;
+		//const {props: {name, index, list}} = this;
 		return (
 			<Container style={{
-				backgroundColor: '#FFFFFF',
+				backgroundColor: '#EEEEEE',
 			}}>
+				<Button style={{
+				backgroundColor: '#DDD',
+				width: '100%',
+				borderRadius: 0,
+				borderBottomColor: '#AAAAAA',
+				borderBottomWidth: 1
+			}} onPress={() => this.props.navigation.navigate("Divisions") }>
+				<Grid>
+					<Col style={{
+						alignItems: 'center',
+						alignSelf: 'center',
+						justifyContent: 'center',
+					}}><Text style={{ fontWeight: 'bold' }}>DIVISION: { division.name.toUpperCase() }</Text></Col>
+					<Col style={{ width: 18 }}><Icon name="ios-arrow-forward" style={{ color: '#000000'}}/></Col>
+				</Grid>
+			</Button>
 				<Button style={{
 					backgroundColor: '#DDD',
 					width: '100%',
 					borderRadius: 0,
-					alignItems: 'center',
-					alignSelf: 'center',
-					justifyContent: 'center',
-					borderBottomColor: '#000'
-				}} onPress={() => navigation.navigate("Teams")}>
-					<Icon name="ios-create"/><Text>Filter on a team</Text>
+					borderBottomColor: '#AAAAAA',
+					borderBottomWidth: 1
+				}} onPress={() => this.props.navigation.navigate("Selectdate") }>
+					<Grid>
+						<Col style={{
+							alignItems: 'center',
+							alignSelf: 'center',
+							justifyContent: 'center',
+						}}><Text style={{ fontWeight: 'bold' }}>DATE: { moment(sdate).format('L') }</Text></Col>
+						<Col style={{ width: 18 }}><Icon name="ios-arrow-forward" style={{ color: '#000000'}}/></Col>
+					</Grid>
 				</Button>
-
-				<Tabs initialPage={1}>
-					<Tab heading="Past">
-						<Content padder>
-							{
-								(games && games.past && games.past.length && games.past.length > 0) ?
-									<Grid>
-										{games.past.map((item, i) => this.getJsxGame(item) )}
-									</Grid>
-									:
-									<View>
-										<Text>No data ...</Text>
-									</View>
-							}
-						</Content>
-					</Tab>
-					<Tab heading="Today">
-						<Content padder>
-							{
-								(games && games.today && games.today.length && games.today.length > 0) ?
-									<Grid>
-										{games.today.map((item, i) => this.getJsxGame(item) )}
-									</Grid>
-									:
-									<View>
-										<Text>No game today or no data ...</Text>
-									</View>
-							}
-						</Content>
-					</Tab>
-					<Tab heading="Upcoming">
-						<Content padder>
-							{
-								(games && games.upcoming && games.upcoming.length && games.upcoming.length > 0) ?
-									<Grid>
-										{games.upcoming.map((item, i) => this.getJsxGame(item) )}
-									</Grid>
-									:
-									<View>
-										<Text>No data ...</Text>
-									</View>
-							}
-						</Content>
-					</Tab>
-				</Tabs>
+				<Content padder>
+					{
+						(gamesday && gamesday.length && gamesday.length > 0) ?
+							<Grid>
+								{gamesday.map((item, i) => this.getJsxGame(item) )}
+							</Grid>
+							:
+							<View>
+								<Text>No game on the {moment(sdate).format('L')}</Text>
+							</View>
+					}
+				</Content>
 			</Container>
 		);
 	}
@@ -203,11 +225,13 @@ function bindAction(dispatch)
 
 const mapStateToProps = state => ({
 	games: state.games.list,
+	gamesday: state.games.listday,
 	selectedTeam: state.teams.selectedIndex,
 	league: state.leagues.selectedIndex,
 	season: state.seasons.selectedIndex,
 	division: state.divisions.selectedIndex,
 	team: state.teams.selectedIndex,
+	sdate: state.selecteddate.sdate,
 });
 const GamesSwagger = connect(mapStateToProps, bindAction)(Games);
 export default GamesSwagger;

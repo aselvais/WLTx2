@@ -86,6 +86,7 @@ code-push release-react TorontoMarlboros-ios ios --description "Button cleaned u
 
 
 code-push deployment ls TorontoMarlboros 
+code-push deployment ls TorontoMarlboros-ios
 
 ```
 

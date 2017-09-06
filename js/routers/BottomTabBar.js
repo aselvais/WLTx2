@@ -13,9 +13,9 @@ import Favorites from "../components/screens/favorites";
 
 
 const MainScreenNavigator = TabNavigator({
-		Home: {screen: Home},
+//		Home: {screen: Home},
 		Games: {screen: Games},
-		Stand: {screen: Standings},
+//		Stand: {screen: Standings},
 		News: {screen: News},
 //		Fav: {screen: Favorites},
 	},

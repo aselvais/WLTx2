@@ -2,7 +2,8 @@ import React, {Component} from "react";
 import PropTypes from 'prop-types';
 import {
 	Image,
-	TouchableOpacity
+	TouchableOpacity,
+	Dimensions
 } from "react-native";
 import {connect} from "react-redux";
 import {
@@ -22,6 +23,8 @@ import {
 	getTeaminfos,
 	setTeaminfoIndex
 } from "../../../redux/actions/teaminfo";
+const deviceWidth = Dimensions.get('window').width;
+const deviceHeight = Dimensions.get('window').height;
 
 /**
  *
@@ -78,19 +81,24 @@ class Teaminfos extends Component
 					{(teaminfos && teaminfos.id) ?
 						<Grid>
 							<Row key={teaminfos.id}>
-								<Col style={{ padding: 10 }}>
-									<Text>{teaminfos.id}</Text>
+								<Col style={{
+									padding: 10,
+									alignSelf: 'center',
+									justifyContent: 'center'
+								}}>
+									<Image style={{
+										resizeMode: 'contain',
+										width: (deviceWidth/2),
+										height: (deviceWidth/2)
+									}} source={{uri: teaminfos.imageUrl}}/>
+									<Text style={{fontWeight: 'bold'}}>NAME</Text>
 									<Text>{teaminfos.name}</Text>
-									<Text>{teaminfos.imageUrl}</Text>
-									<Text>{teaminfos.divisionId}</Text>
+									<Text style={{fontWeight: 'bold'}}>DIVITION</Text>
 									<Text>{teaminfos.divisionName}</Text>
-									<Text>{teaminfos.tierId}</Text>
+									<Text style={{fontWeight: 'bold'}}>TIER</Text>
 									<Text>{teaminfos.tierName}</Text>
-									<Text>{teaminfos.groupId}</Text>
+									<Text style={{fontWeight: 'bold'}}>GROUP</Text>
 									<Text>{teaminfos.groupName}</Text>
-									<Text>{teaminfos.hasNews}</Text>
-									<Text>{teaminfos.hasTweets}</Text>
-									<Text>{teaminfos.playOff}</Text>
 								</Col>
 							</Row>
 						</Grid>

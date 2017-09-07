@@ -9,7 +9,8 @@ import {
 	Container,
 	Content,
 	Text,
-	H1,
+	H2,
+	H3,
 	Icon,
 	Button
 } from "native-base";
@@ -43,7 +44,22 @@ class Arena extends Component
 	openMaps()
 	{
 		const {game} = this.props;
-		openMap({ latitude: game.arena.latitude, longitude: game.arena.longitude });
+		openMap({latitude: game.arena.latitude, longitude: game.arena.longitude});
+	}
+
+	/**
+	 *
+	 * @param d
+	 * @returns {XML}
+	 */
+	getJsxRow(k, v)
+	{
+		return (
+			<Row>
+				<Col size={1}><Text style={{fontWeight: 'bold'}}>{k}</Text></Col>
+				<Col size={2}><Text>{v}</Text></Col>
+			</Row>
+		);
 	}
 
 	/**
@@ -56,13 +72,30 @@ class Arena extends Component
 		return (
 			<Container>
 				<Content padder>
-					<H1>Game</H1>
-					<H1>Arena</H1>
-					<Text>{game.arena.name}</Text>
-					<Text>{game.arena.address}</Text>
-					<Button onPress={() => this.openMaps() }>
-						<Text>Open Map</Text>
-					</Button>
+					<Grid>
+						<Row>
+							<Col style={{paddingTop: 20, paddingBottom: 20}}><H2>Game</H2></Col>
+						</Row>
+
+						{this.getJsxRow('Type', game.type)}
+						{this.getJsxRow('Date/Time', game.dateTime)}
+						{this.getJsxRow('Division', game.divisionName)}
+
+						<Row>
+							<Col style={{paddingTop: 20, paddingBottom: 20}}><H2>Arena</H2></Col>
+						</Row>
+
+						{this.getJsxRow('Name', game.arena.name)}
+						{this.getJsxRow('Address', game.arena.address)}
+						<Row>
+							<Col size={1}><Text style={{fontWeight: 'bold'}}>Map</Text></Col>
+							<Col size={2}>
+								<Button onPress={() => this.openMaps()}><Text>Open Map</Text></Button>
+							</Col>
+						</Row>
+
+					</Grid>
+
 				</Content>
 			</Container>
 		);

@@ -128,7 +128,7 @@ class Standings extends Component
 		return (
 			<Container style={styles.container}>
 				<Content padder>
-					<StandingsList/>
+					<StandingsList navigation={this.props.navigation}/>
 				</Content>
 			</Container>
 		);

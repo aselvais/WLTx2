@@ -35,7 +35,6 @@ import {
 
 import Headerbar from '../../widgets/headerbar/index';
 import styles from "./styles";
-import Btnteamselect from '../../widgets/btnteamselect/index';
 
 /**
  *
@@ -147,9 +146,11 @@ class Games extends Component
 						</Col>
 						<Col size={1} style={styles.colin}>
 							<Row style={{borderBottomColor: '#EEEEEE', borderBottomWidth: 1}}>
-								<Text style={{fontWeight: 'bold'}}>
-									<Icon name="ios-time" style={{fontSize: 15}}/>{'  ' + item.time}
-								</Text>
+								<TouchableOpacity onPress={() => this.clickGame(item, "Arena")}>
+									<Text style={{fontWeight: 'bold'}}>
+										<Icon name="ios-time" style={{fontSize: 15}}/>{'  ' + item.time}
+									</Text>
+								</TouchableOpacity>
 							</Row>
 							<Row style={{paddingTop: 5}}>
 								<TouchableOpacity onPress={() => this.clickGame(item, "Arena")}>

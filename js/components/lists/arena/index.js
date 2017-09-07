@@ -9,6 +9,7 @@ import {
 	Container,
 	Content,
 	Text,
+	H1,
 	Icon,
 	Button
 } from "native-base";
@@ -17,6 +18,7 @@ import {
 	Row,
 	Col
 } from "react-native-easy-grid";
+import openMap from 'react-native-open-maps';
 
 
 /**
@@ -29,7 +31,7 @@ class Arena extends Component
 	 * @param navigation
 	 */
 	static navigationOptions = ({navigation}) => ({
-		title: 'Arena'
+		title: 'Game info'
 	});
 
 	/**
@@ -37,6 +39,12 @@ class Arena extends Component
 	 * @type {{getDivisions}}
 	 */
 	static propTypes = {};
+
+	openMaps()
+	{
+		const {game} = this.props;
+		openMap({ latitude: game.arena.latitude, longitude: game.arena.longitude });
+	}
 
 	/**
 	 *
@@ -48,9 +56,13 @@ class Arena extends Component
 		return (
 			<Container>
 				<Content padder>
-					<Text>
-						ARENA
-					</Text>
+					<H1>Game</H1>
+					<H1>Arena</H1>
+					<Text>{game.arena.name}</Text>
+					<Text>{game.arena.address}</Text>
+					<Button onPress={() => this.openMaps() }>
+						<Text>Open Map</Text>
+					</Button>
 				</Content>
 			</Container>
 		);

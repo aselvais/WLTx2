@@ -81,8 +81,8 @@ Successfully added the "TorontoMarlboros-ios" app, along with the following defa
 └────────────┴──────────────────────────────────────────────────────────────────┘
 
 
-code-push release-react TorontoMarlboros android --description "Button cleaned up" -d Production
-code-push release-react TorontoMarlboros-ios ios --description "Button cleaned up" -d Production 
+code-push release-react TorontoMarlboros android -d Production
+code-push release-react TorontoMarlboros-ios ios -d Production 
 
 
 code-push deployment ls TorontoMarlboros 

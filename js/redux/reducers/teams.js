@@ -1,7 +1,8 @@
 import type {Action} from "../actions/types";
 import {
 	LOAD_TEAMS, RESET_TEAMS,
-	SET_TEAMS_INDEX
+	SET_TEAMS_INDEX,
+	SET_TEAMS_INDEX_BY_ID
 } from "../actions/teams";
 
 /**
@@ -33,6 +34,21 @@ export default function(state: State = initialState, action: Action): State
 			return {
 				...state,
 				selectedIndex: action.payload
+			};
+			break;
+		case SET_TEAMS_INDEX_BY_ID:
+			var relem = {};
+			state.list.map((e) => {
+				if (e.id === action.payload)
+				{
+					console.log(e.id, action.payload);
+					relem = e;
+					return;
+				}
+			});
+			return {
+				...state,
+				selectedIndex: relem
 			};
 			break;
 		/**

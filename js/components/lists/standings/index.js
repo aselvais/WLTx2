@@ -135,7 +135,7 @@ const mapStateToProps = state => ({
 	standings: state.standings.list,
 	selectedStanding: state.standings.selectedIndex,
 	selectedDivisions: state.divisions.selectedIndex,
-	selectedTiers: state.tiers.selectedIndex
+	selectedTiers: (state.tiers.list && state.tiers.list[0]) ? state.tiers.list[0] : null
 });
 const StandingsSwagger = connect(mapStateToProps, bindAction)(Standings);
 export default StandingsSwagger;

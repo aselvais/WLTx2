@@ -60,32 +60,32 @@ For iOS, you will need to open X-code and build an Archive then upload it to the
 Here is what I got:
 
 ```bash
-Arnauds-MacBook-Pro:WLTx2 arnaud$ code-push app add WinLoseOrTie android react-native
+Arnauds-MacBook-Pro:WLTx2 arnaud$ code-push app add WinLoseOrTie-android android react-native
 Successfully added the "WinLoseOrTie" app, along with the following default deployments:
 ┌────────────┬──────────────────────────────────────────────────────────────────┐
 │ Name       │ Deployment Key                                                   │
 ├────────────┼──────────────────────────────────────────────────────────────────┤
-│ Production │ SNC_O3BFznfiFxHPlDr0tGtj6cxDd6a1b3b3-a940-4ce5-ace9-1b792d004c3a │
+│ Production │ TkzhMiuvHCt63fGBfBIL167I0MiDd6a1b3b3-a940-4ce5-ace9-1b792d004c3a │
 ├────────────┼──────────────────────────────────────────────────────────────────┤
-│ Staging    │ qHKfaScw48X8F1Vkap3hIsiMvpsLd6a1b3b3-a940-4ce5-ace9-1b792d004c3a │
+│ Staging    │ J9cJVEsl-4FUwMQtCpV0nlaEj30pd6a1b3b3-a940-4ce5-ace9-1b792d004c3a │
 └────────────┴──────────────────────────────────────────────────────────────────┘
 
 Arnauds-MacBook-Pro:WLTx2 arnaud$ code-push app add WinLoseOrTie-ios ios react-native
 Successfully added the "WinLoseOrTie-ios" app, along with the following default deployments:
+
 ┌────────────┬──────────────────────────────────────────────────────────────────┐
 │ Name       │ Deployment Key                                                   │
 ├────────────┼──────────────────────────────────────────────────────────────────┤
-│ Production │ P1bwDe_ZkZsJv2strZV6-hB2u0uAd6a1b3b3-a940-4ce5-ace9-1b792d004c3a │
+│ Production │ RtlN7DJ4fSmB2HLU8QeS_t89VSaAd6a1b3b3-a940-4ce5-ace9-1b792d004c3a │
 ├────────────┼──────────────────────────────────────────────────────────────────┤
-│ Staging    │ UuPygacAW9GC_D5Rc22e0l6Qnlckd6a1b3b3-a940-4ce5-ace9-1b792d004c3a │
+│ Staging    │ so5ufonprUcPMHZT23KYGBqcyv1Wd6a1b3b3-a940-4ce5-ace9-1b792d004c3a │
 └────────────┴──────────────────────────────────────────────────────────────────┘
 
+code-push release-react WinLoseOrTie-android android -d Production
+code-push release-react WinLoseOrTie-ios ios -d Production
 
-code-push release-react WinLoseOrTie android -d Production
-code-push release-react WinLoseOrTie-ios ios -d Production 
 
-
-code-push deployment ls WinLoseOrTie 
+code-push deployment ls WinLoseOrTie-android
 code-push deployment ls WinLoseOrTie-ios
 
 ```

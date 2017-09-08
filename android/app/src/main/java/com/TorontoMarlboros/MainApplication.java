@@ -32,7 +32,7 @@ public class MainApplication extends Application implements ReactApplication {
     @Override
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
-            new CodePush("SNC_O3BFznfiFxHPlDr0tGtj6cxDd6a1b3b3-a940-4ce5-ace9-1b792d004c3a", MainApplication.this, BuildConfig.DEBUG),
+            new CodePush("TkzhMiuvHCt63fGBfBIL167I0MiDd6a1b3b3-a940-4ce5-ace9-1b792d004c3a", MainApplication.this, BuildConfig.DEBUG),
             new RNDeviceInfo(),
             new GoogleAnalyticsBridgePackage(),
             new MainReactPackage(),

@@ -25,10 +25,10 @@ class Btnteamselect extends Component
 	{
 		let {league, season, division, team} = this.props;
 		return {
-			// league: 	{ label: "league", route: "Leagues", item: league },
-			// season: 	{ label: "season", route: "Seasons", item: season },
+			league: 	{ label: "league", route: "Leagues", item: league },
+			season: 	{ label: "season", route: "Seasons", item: season },
 			division: 	{ label: "division", route: "Divisions", item: division, 	func: 'getTier | getTeamStandingLocalTierGroup' },
-			// team: 		{ label: "team", route: "Teams", item: team, 				func: 'getFeedNews | getFeedTwitter | getTeamInfo' },
+			team: 		{ label: "team", route: "Teams", item: team, 				func: 'getFeedNews | getFeedTwitter | getTeamInfo' },
 		};
 	}
 
@@ -64,14 +64,12 @@ class Btnteamselect extends Component
 						<Col size={4}><Text style={styles.label}>{data[i].label.toUpperCase()} : {data[i].item.name}</Text></Col>
 					</Row>
 				);
-				/*
 				toret.push(
 					<Row key={data[i].label + ++k}>
 						<Col size={4}><Text style={styles.name}>{data[i].item.name} </Text></Col>
 						<Col size={1}></Col>
 					</Row>
 				);
-				*/
 			}
 		}
 		return (<Grid>{toret}</Grid>)

@@ -179,7 +179,7 @@ class Login extends Component
 				</Row>
 				<Row size={1}>
 					<Col>
-						<Button style={styles.btn} onPress={() => this.props.navigation.navigate("Divisions")}>
+						<Button style={styles.btn} onPress={() => this.props.navigation.navigate("HomeWtabs")}>
 							<Text>START</Text>
 						</Button>
 					</Col>

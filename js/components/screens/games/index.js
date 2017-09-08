@@ -184,7 +184,7 @@ class Games extends Component
 								<Grid>
 									<Col style={styles.topbntcol}>
 										<Text style={{fontWeight: 'bold'}}>DIVISION:</Text>
-										<Text style={{fontWeight: 'bold'}}>{division.name.toUpperCase()}</Text>
+										<Text style={{fontWeight: 'bold'}}>{(division && division.name) ? division.name.toUpperCase() : null}</Text>
 									</Col>
 									<Col style={{width: 18}}>
 										<Icon name="ios-arrow-forward" style={{color: '#000000'}}/>

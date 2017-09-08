@@ -15,11 +15,9 @@ const tracking = new Apptracking();
 /**
  *
  */
-const styles = StyleSheet.create({
+const styles = {
 	container: {
-		flex: 1,
-		width: null,
-		height: null
+		flex: 1
 	},
 	modal: {
 		justifyContent: "center",
@@ -28,7 +26,7 @@ const styles = StyleSheet.create({
 	modal1: {
 		height: 300
 	}
-});
+};
 
 /**
  *
@@ -91,26 +89,20 @@ class App extends Component
 			return (
 				<Container
 					theme={theme}
-					style={{backgroundColor: theme.defaultBackgroundColor}}
-				>
+					style={{backgroundColor: theme.defaultBackgroundColor}}>
 					<Content style={styles.container}>
 						<Modal
 							style={[styles.modal, styles.modal1]}
 							backdrop={false}
-							ref={c =>
-							{
-								this._modal = c;
-							}}
-							swipeToClose={false}
-						>
+							ref={c => { this._modal = c; }}
+							swipeToClose={false}>
 							<View
 								style={{
 									flex: 1,
 									alignSelf: "stretch",
 									justifyContent: "center",
 									padding: 20
-								}}
-							>
+								}}>
 								{this.state.showInstalling
 									? <Text
 										style={{
@@ -118,8 +110,7 @@ class App extends Component
 											textAlign: "center",
 											marginBottom: 15,
 											fontSize: 15
-										}}
-									>
+										}}>
 										Installing update...
 									</Text>
 									: <View
@@ -128,24 +119,20 @@ class App extends Component
 											alignSelf: "stretch",
 											justifyContent: "center",
 											padding: 20
-										}}
-									>
+										}}>
 										<Text
 											style={{
 												color: theme.brandPrimary,
 												textAlign: "center",
 												marginBottom: 15,
 												fontSize: 15
-											}}
-										>
+											}}>
 											Downloading update...
 											{" "}
 											{`${parseInt(this.state.downloadProgress, 10)} %`}
 										</Text>
 										<ProgressBar
-											color="theme.brandPrimary"
-											progress={parseInt(this.state.downloadProgress, 10)}
-										/>
+											progress={parseInt(this.state.downloadProgress, 10)}/>
 									</View>}
 							</View>
 						</Modal>
@@ -154,7 +141,8 @@ class App extends Component
 			);
 		}
 
-		return <MainStackRouter onNavigationStateChange={(prevState, currentState) => tracking.trackRouteChange(prevState, currentState) }/>;
+		return <MainStackRouter
+			onNavigationStateChange={(prevState, currentState) => tracking.trackRouteChange(prevState, currentState)}/>;
 	}
 }
 

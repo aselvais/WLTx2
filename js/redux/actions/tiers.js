@@ -36,7 +36,9 @@ export function resetTiers(): Action
  */
 export function getTiers(divisionid: number): Action
 {
-	function _returnLoadTiers(d) { return { type: LOAD_TIERS, list: d }; }
+	function _returnLoadTiers(d) {
+		return { type: LOAD_TIERS, list: d };
+	}
 	return dispatch => api.getTier(divisionid).then(
 		(d) => dispatch(_returnLoadTiers(d)),
 		(e) => dispatch(_returnLoadTiers([]))

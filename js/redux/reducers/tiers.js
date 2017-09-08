@@ -53,6 +53,10 @@ export default function(state: State = initialState, action: Action): State
 		 * load the tiers from API
 		 */
 		case LOAD_TIERS:
+			if (!state.selectedIndex && action.list && action.list[0])
+			{
+				state.selectedIndex = action.list[0];
+			}
 			return {
 				...state,
 				list: action.list

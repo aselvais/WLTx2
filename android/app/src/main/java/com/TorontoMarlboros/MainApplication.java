@@ -1,4 +1,4 @@
-package com.TorontoMarlboros;
+package com.WinLoseOrTie;
 
 import android.app.Application;
 

@@ -1,4 +1,4 @@
 import {AppRegistry} from 'react-native';
 import setup from './js/setup';
 
-AppRegistry.registerComponent('TorontoMarlboros', setup);
+AppRegistry.registerComponent('WinLoseOrTie', setup);

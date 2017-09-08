@@ -60,8 +60,8 @@ For iOS, you will need to open X-code and build an Archive then upload it to the
 Here is what I got:
 
 ```bash
-Arnauds-MacBook-Pro:WLTx2 arnaud$ code-push app add TorontoMarlboros android react-native
-Successfully added the "TorontoMarlboros" app, along with the following default deployments:
+Arnauds-MacBook-Pro:WLTx2 arnaud$ code-push app add WinLoseOrTie android react-native
+Successfully added the "WinLoseOrTie" app, along with the following default deployments:
 ┌────────────┬──────────────────────────────────────────────────────────────────┐
 │ Name       │ Deployment Key                                                   │
 ├────────────┼──────────────────────────────────────────────────────────────────┤
@@ -70,8 +70,8 @@ Successfully added the "TorontoMarlboros" app, along with the following default 
 │ Staging    │ qHKfaScw48X8F1Vkap3hIsiMvpsLd6a1b3b3-a940-4ce5-ace9-1b792d004c3a │
 └────────────┴──────────────────────────────────────────────────────────────────┘
 
-Arnauds-MacBook-Pro:WLTx2 arnaud$ code-push app add TorontoMarlboros-ios ios react-native
-Successfully added the "TorontoMarlboros-ios" app, along with the following default deployments:
+Arnauds-MacBook-Pro:WLTx2 arnaud$ code-push app add WinLoseOrTie-ios ios react-native
+Successfully added the "WinLoseOrTie-ios" app, along with the following default deployments:
 ┌────────────┬──────────────────────────────────────────────────────────────────┐
 │ Name       │ Deployment Key                                                   │
 ├────────────┼──────────────────────────────────────────────────────────────────┤
@@ -81,12 +81,12 @@ Successfully added the "TorontoMarlboros-ios" app, along with the following defa
 └────────────┴──────────────────────────────────────────────────────────────────┘
 
 
-code-push release-react TorontoMarlboros android -d Production
-code-push release-react TorontoMarlboros-ios ios -d Production 
+code-push release-react WinLoseOrTie android -d Production
+code-push release-react WinLoseOrTie-ios ios -d Production 
 
 
-code-push deployment ls TorontoMarlboros 
-code-push deployment ls TorontoMarlboros-ios
+code-push deployment ls WinLoseOrTie 
+code-push deployment ls WinLoseOrTie-ios
 
 ```
 

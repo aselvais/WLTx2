@@ -18,7 +18,7 @@ class Apptracking
 			instance = this;
 		}
 		this._singletonStartDate = new Date();
-		this.tracker = new GoogleAnalyticsTracker('UA-105982154-1');
+		this.tracker = new GoogleAnalyticsTracker('UA-105982154-2');
 		return instance;
 	}
 

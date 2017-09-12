@@ -91,4 +91,13 @@ code-push deployment ls WinLoseOrTie-ios
 ```
 
 
+# Branding
+
+ Things to consider for the branded app:
+ - Rename the elements in the ios and android folders
+ - Change the google analytics ID
+ - Change the logos and icons
+ - Add fixed data for the league/division/ ...
+ - Change the CodePush ID
+ 
 

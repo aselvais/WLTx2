@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import {StyleSheet} from "react-native";
+import PropTypes from 'prop-types';
 import CodePush from "react-native-code-push";
 
 import {Container, Content, Text, View} from "native-base";

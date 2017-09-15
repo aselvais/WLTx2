@@ -91,6 +91,12 @@ class Apiaccess
 			params: ["date", "seasonId", "divisionId"],
 			desc: "Get games for specific date, season and division"
 		},
+		GetGameAll: {
+			url: "/api/game/all",
+			method: "GET",
+			params: ["datefrom", "dateto", "seasonId", "divisionId"],
+			desc: "Get games for specific date, season and division"
+		},
 		GetGameDetailAllArrays: {
 			url: "/api/game/detailAllArrays",
 			method: "GET",
@@ -299,6 +305,25 @@ class Apiaccess
 	{
 		return this.postRegister().then(() => this._genericApiCall('GetGameToday', {
 			date: date,
+			seasonId: seasonId,
+			divisionId: divisionId
+		}));
+	}
+
+	/**
+	 * Same as getGameToday but with a date from and to
+	 *
+	 * @param datefrom
+	 * @param dateto
+	 * @param seasonId
+	 * @param divisionId
+	 * @returns {Promise}
+	 */
+	async getGameToday(datefrom, dateto, seasonId, divisionId)
+	{
+		return this.postRegister().then(() => this._genericApiCall('GetGameAll', {
+			datefrom: datefrom,
+			dateto: dateto,
 			seasonId: seasonId,
 			divisionId: divisionId
 		}));

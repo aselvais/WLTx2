@@ -72,7 +72,7 @@ export function getGamesDay(date: string, seasonid: number, divisionid: number):
 export function getGamesAll(datefrom: string, dateto: string, seasonid: number, divisionid: number): Action
 {
 	function _returnLoadGamesDay(d) { return { type: LOAD_GAMES_DAY, listday: d }; }
-	return dispatch => api.getGameToday(datefrom, dateto, seasonid, divisionid).then(
+	return dispatch => api.getGameAll(datefrom, dateto, seasonid, divisionid).then(
 		(d) => dispatch(_returnLoadGamesDay(d)),
 		(e) => dispatch(_returnLoadGamesDay([]))
 	);

@@ -26,7 +26,8 @@ import moment from 'moment';
 import {
 	getGames,
 	setGameIndex,
-	getGamesDay
+	getGamesDay,
+	getGamesAll
 } from "../../../redux/actions/games";
 import {
 	setTeamIndexById,
@@ -60,6 +61,7 @@ class Games extends Component
 		setGameIndex: PropTypes.func,
 		setTeamIndexById: PropTypes.func,
 		getGamesDay: PropTypes.func,
+		getGamesAll: PropTypes.func,
 		getTeams: PropTypes.func,
 	};
 
@@ -68,14 +70,19 @@ class Games extends Component
 	 */
 	componentDidMount()
 	{
-		let date = moment(this.props.sdate).format('YYYY-MM-DD');
+		// let date = moment(this.props.sdate).format('YYYY-MM-DD');
+		let datefrom = this.props.sdatefrom.getTime(); // moment(this.props.sdatefrom).format('YYYY-MM-DD');
+		let dateto = this.props.sdateto.getTime(); // moment(this.props.sdateto).format('YYYY-MM-DD');
+
+
 		if (this.props.division && this.props.division.id)
 			this.props.getTeams(parseInt(this.props.division.id));
 		if (this.props && this.props.selectedTeam && this.props.selectedTeam.id) {
 			this.props.getGames(date, parseInt(this.props.selectedTeam.id));
 		}
 		if (this.props && this.props.season && this.props.season.id && this.props.division && this.props.division.id) {
-			this.props.getGamesDay(date, this.props.season.id, this.props.division.id);
+			// this.props.getGamesDay(date, this.props.season.id, this.props.division.id);
+			this.props.getGamesAll(datefrom, dateto, this.props.season.id, this.props.division.id);
 		}
 	}
 
@@ -172,7 +179,7 @@ class Games extends Component
 	 */
 	render()
 	{
-		let {sdate, league, season, division, team, games, gamesday, navigation} = this.props;
+		let {sdate, sdatefrom, sdateto, league, season, division, team, games, gamesday, navigation} = this.props;
 		//const {props: {name, index, list}} = this;
 		return (
 			<Container style={{backgroundColor: '#EEEEEE'}}>
@@ -216,7 +223,7 @@ class Games extends Component
 									</Grid>
 									:
 									<View>
-										<Text>No game on the {moment(sdate).format('L')}</Text>
+										<Text>No game from {moment(sdatefrom).format('L')} to {moment(sdateto).format('L')}</Text>
 									</View>
 							}
 						</Content>
@@ -234,6 +241,7 @@ function bindAction(dispatch)
 	return {
 		getGames: (date, teamid) => dispatch(getGames(date, teamid)),
 		getGamesDay: (date, seasonid, divisionid) => dispatch(getGamesDay(date, seasonid, divisionid)),
+		getGamesAll: (datefrom, dateto, seasonid, divisionid) => dispatch(getGamesAll(datefrom, dateto, seasonid, divisionid)),
 		getTeams: index => dispatch(getTeams(index)),
 		setGameIndex: index => dispatch(setGameIndex(index)),
 		setTeamIndexById: id => dispatch(setTeamIndexById(id)),
@@ -249,6 +257,8 @@ const mapStateToProps = state => ({
 	division: state.divisions.selectedIndex,
 	team: state.teams.selectedIndex,
 	sdate: state.selecteddate.sdate,
+	sdatefrom: state.selecteddate.sdatefrom,
+	sdateto: state.selecteddate.sdateto
 });
 const GamesSwagger = connect(mapStateToProps, bindAction)(Games);
 export default GamesSwagger;

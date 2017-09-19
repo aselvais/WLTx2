@@ -35,6 +35,10 @@ class Selectdate extends Component
 		setDate: PropTypes.func,
 	};
 
+	/**
+	 *
+	 * @param d
+	 */
 	onDayPress( d )
 	{
 		let dd = new Date(d.year, d.month-1, d.day)
@@ -42,6 +46,23 @@ class Selectdate extends Component
 		this.props.navigation.navigate("Games");
 	}
 
+	/**
+	 *
+	 * @returns {{}}
+	 */
+	/* getMarkedDates()
+	{
+		let {sdate, sdatefrom, sdateto} = this.props;
+		let mdates = {};
+		let i = sdatefrom;
+		mdates[moment(sdate).format('YYYY-MM-DD')] = {selected: true};
+		while(i < sdateto)
+		{
+			mdates[moment(i).format('YYYY-MM-DD')] = [{marked: true, color: 'green', textColor: 'white'}];
+			i.setDate(i.getDate() + 1);
+		}
+		return mdates;
+	} */
 
 	/**
 	 *
@@ -49,13 +70,24 @@ class Selectdate extends Component
 	 */
 	render()
 	{
-		let {sdate} = this.props;
+		let {sdate, sdatefrom, sdateto} = this.props;
+		let mdates = {};
+		let i = sdatefrom;
+		mdates[moment(sdate).format('YYYY-MM-DD')] = [{selected: true}];
+		while(i < sdateto)
+		{
+			let txtd = moment(i).format('YYYY-MM-DD');
+			if (!mdates[txtd]) mdates[txtd] = [];
+			mdates[txtd].push({marked: true, color: 'green', textColor: 'white'});
+			i.setDate(i.getDate() + 1);
+		}
+
 		return (
 			<Container>
 				<Content padder>
 					<Calendar
-						selected={[moment(sdate).format('YYYY-MM-DD')]}
 						onDayPress={ (day) => this.onDayPress(day) }
+						markedDates={mdates}
 					/>
 				</Content>
 			</Container>
@@ -71,6 +103,8 @@ function bindAction(dispatch)
 }
 const mapStateToProps = state => ({
 	sdate: state.selecteddate.sdate,
+	sdatefrom: state.selecteddate.sdatefrom,
+	sdateto: state.selecteddate.sdateto,
 });
 const SelectdateSwagger = connect(mapStateToProps, bindAction)(Selectdate);
 export default SelectdateSwagger;

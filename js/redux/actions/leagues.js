@@ -36,16 +36,10 @@ export function resetLeagues(): Action
  */
 export function getLeagues(): Action
 {
-	return {
-		type: LOAD_LEAGUES
-	};
-	/*
 	function _returnLoadLeagues(d) { return { type: LOAD_LEAGUES, list: d }; }
 	return dispatch => api.getLeague().then(
 		(d) => dispatch(_returnLoadLeagues(d)),
 		(e) => dispatch(_returnLoadLeagues([]))
 	);
-	*/
-
 };
 

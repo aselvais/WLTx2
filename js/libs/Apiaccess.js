@@ -319,7 +319,7 @@ class Apiaccess
 	 * @param divisionId
 	 * @returns {Promise}
 	 */
-	async getGameToday(datefrom, dateto, seasonId, divisionId)
+	async getGameAll(datefrom, dateto, seasonId, divisionId)
 	{
 		return this.postRegister().then(() => this._genericApiCall('GetGameAll', {
 			datefrom: datefrom,
@@ -496,6 +496,7 @@ class Apiaccess
 				fetchOpts.body = paramsT;
 			}
 		}
+console.log(url + sd.url + prms, fetchOpts);
 		try {
 			let requestHash = md5(JSON.stringify([url + sd.url + prms, fetchOpts]));
 			let response;
@@ -517,6 +518,7 @@ class Apiaccess
 				this.log = 'Created cached data ' + requestHash;
 				this.log = this._caching[requestHash]
 			}
+console.log(responseJson);
 			return responseJson;
 		} catch (error) {
 			this.log = 'Error querying the API';

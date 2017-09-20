@@ -24,7 +24,7 @@ export default function(state: State = initialState, action: Action): State
 		let dd = action.payload;
 		state.sdate = dd;
 		state.sdatefrom = dd;
-		state.sdateto = new Date(dd.getFullYear(), dd.getMonth()+rangeMonths, dd.getDate());;
+		state.sdateto = new Date(dd.getFullYear(), dd.getMonth()+rangeMonths, dd.getDate());
 		return state;
 	}
 	return state;

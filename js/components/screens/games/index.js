@@ -74,13 +74,18 @@ class Games extends Component
 		let datefrom = this.props.sdatefrom.getTime(); // moment(this.props.sdatefrom).format('YYYY-MM-DD');
 		let dateto = this.props.sdateto.getTime(); // moment(this.props.sdateto).format('YYYY-MM-DD');
 
-
+		/*
 		if (this.props.division && this.props.division.id)
+		{
 			this.props.getTeams(parseInt(this.props.division.id));
-		if (this.props && this.props.selectedTeam && this.props.selectedTeam.id) {
-			this.props.getGames(date, parseInt(this.props.selectedTeam.id));
 		}
-		if (this.props && this.props.season && this.props.season.id && this.props.division && this.props.division.id) {
+		if (this.props && this.props.selectedTeam && this.props.selectedTeam.id)
+		{
+			this.props.getGames(datefrom, parseInt(this.props.selectedTeam.id));
+		}
+		*/
+		if (this.props && this.props.season && this.props.season.id && this.props.division && this.props.division.id)
+		{
 			// this.props.getGamesDay(date, this.props.season.id, this.props.division.id);
 			this.props.getGamesAll(datefrom, dateto, this.props.season.id, this.props.division.id);
 		}
@@ -191,7 +196,8 @@ class Games extends Component
 								<Grid>
 									<Col style={styles.topbntcol}>
 										<Text style={{fontWeight: 'bold'}}>DIVISION:</Text>
-										<Text style={{fontWeight: 'bold'}}>{(division && division.name) ? division.name.toUpperCase() : null}</Text>
+										<Text
+											style={{fontWeight: 'bold'}}>{(division && division.name) ? division.name.toUpperCase() : null}</Text>
 									</Col>
 									<Col style={{width: 18}}>
 										<Icon name="ios-arrow-forward" style={{color: '#000000'}}/>
@@ -223,7 +229,8 @@ class Games extends Component
 									</Grid>
 									:
 									<View>
-										<Text>No game from {moment(sdatefrom).format('L')} to {moment(sdateto).format('L')}</Text>
+										<Text>No game from {moment(sdatefrom).format('L')}
+											to {moment(sdateto).format('L')}</Text>
 									</View>
 							}
 						</Content>

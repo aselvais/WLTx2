@@ -1,7 +1,7 @@
 import type {Action} from '../actions/types';
 import {SET_DATE} from '../actions/selecteddate';
 
-let rangeMonths = 12;
+let rangeMonths = 1;
 let today = new Date();
 let dateFrom = new Date();
 let dateTo = new Date(today.getFullYear(), today.getMonth()+rangeMonths, today.getDate());

@@ -13,6 +13,7 @@ import styles from "./styles";
 import Btnteamselect from '../../widgets/btnteamselect/index';
 import Headerbar from "../../widgets/headerbar/index";
 import Teaminfo from "../../lists/teaminfo";
+import Loadingspinner from '../../widgets/loadingspinner';
 
 
 /**
@@ -54,6 +55,7 @@ class Home extends Component
 	{
 		let {league, season, division, team} = this.props;
 		return (
+			<Loadingspinner>
 			<Container style={styles.container}>
 				<Content padder>
 					<Btnteamselect navigation={this.props.navigation} />
@@ -65,6 +67,7 @@ class Home extends Component
 					}
 				</Content>
 			</Container>
+			</Loadingspinner>
 		);
 	}
 }

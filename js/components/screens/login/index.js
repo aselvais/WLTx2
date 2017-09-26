@@ -26,6 +26,7 @@ import {
 } from "redux-form";
 import {setUser} from "../../../redux/actions/user";
 import styles from "./styles";
+import Loadingspinner from '../../widgets/loadingspinner';
 
 const deviceWidth = Dimensions.get('window').width;
 const deviceHeight = Dimensions.get('window').height;
@@ -44,22 +45,28 @@ const validate = values =>
 	error.password = "";
 	var ema = values.email;
 	var pw = values.password;
-	if (values.email === undefined) {
+	if (values.email === undefined)
+	{
 		ema = "";
 	}
-	if (values.password === undefined) {
+	if (values.password === undefined)
+	{
 		pw = "";
 	}
-	if (ema.length < 8 && ema !== "") {
+	if (ema.length < 8 && ema !== "")
+	{
 		error.email = "too short";
 	}
-	if (!ema.includes("@") && ema !== "") {
+	if (!ema.includes("@") && ema !== "")
+	{
 		error.email = "@ not included";
 	}
-	if (pw.length > 12) {
+	if (pw.length > 12)
+	{
 		error.password = "max 11 characters";
 	}
-	if (pw.length < 5 && pw.length > 0) {
+	if (pw.length < 5 && pw.length > 0)
+	{
 		error.password = "Weak";
 	}
 	return error;
@@ -120,7 +127,8 @@ class Login extends Component
 				})
 	{
 		var hasError = false;
-		if (error !== undefined) {
+		if (error !== undefined)
+		{
 			hasError = true;
 		}
 		return (
@@ -152,7 +160,7 @@ class Login extends Component
 		 */
 
 		/**
-		 * 							<Image source={logo} style={{
+		 *                            <Image source={logo} style={{
 								width: (deviceWidth/1.5),
 								height: (deviceWidth/1.5)
 							}} />
@@ -164,28 +172,30 @@ class Login extends Component
 		 */
 
 		return (
-			<Grid style={styles.container}>
-				<Image source={background} style={styles.shadow}>
-				<Row size={2}>
-					<Col style={{
-						alignItems:'center',
-						justifyContent:'center'
-					}}>
-						<Image source={logo} style={{
-							resizeMode: 'contain',
-							height: (deviceHeight/2)
-						}} />
-					</Col>
-				</Row>
-				<Row size={1}>
-					<Col>
-						<Button style={styles.btn} onPress={() => this.props.navigation.navigate("HomeWtabs")}>
-							<Text>START</Text>
-						</Button>
-					</Col>
-				</Row>
-				</Image>
-			</Grid>
+			<Loadingspinner>
+				<Grid style={styles.container}>
+					<Image source={background} style={styles.shadow}>
+						<Row size={2}>
+							<Col style={{
+								alignItems: 'center',
+								justifyContent: 'center'
+							}}>
+								<Image source={logo} style={{
+									resizeMode: 'contain',
+									height: (deviceHeight / 2)
+								}}/>
+							</Col>
+						</Row>
+						<Row size={1}>
+							<Col>
+								<Button style={styles.btn} onPress={() => this.props.navigation.navigate("HomeWtabs")}>
+									<Text>START</Text>
+								</Button>
+							</Col>
+						</Row>
+					</Image>
+				</Grid>
+			</Loadingspinner>
 		);
 	}
 }

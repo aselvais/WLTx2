@@ -26,7 +26,6 @@ import {
 } from "redux-form";
 import {setUser} from "../../../redux/actions/user";
 import styles from "./styles";
-import Loadingspinner from '../../widgets/loadingspinner';
 
 const deviceWidth = Dimensions.get('window').width;
 const deviceHeight = Dimensions.get('window').height;
@@ -172,7 +171,6 @@ class Login extends Component
 		 */
 
 		return (
-			<Loadingspinner>
 				<Grid style={styles.container}>
 					<Image source={background} style={styles.shadow}>
 						<Row size={2}>
@@ -195,7 +193,6 @@ class Login extends Component
 						</Row>
 					</Image>
 				</Grid>
-			</Loadingspinner>
 		);
 	}
 }

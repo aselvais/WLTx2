@@ -24,6 +24,8 @@ import {
 } from "../../../redux/actions/seasons";
 
 import { resetDivisions } from "../../../redux/actions/divisions";
+import Spinner from '../../widgets/loaders/Spinner';
+import { setLoading } from "../../../redux/actions/loading";
 
 /**
  *
@@ -45,7 +47,8 @@ class Seasons extends Component
 	static propTypes = {
 		getSeasons: PropTypes.func,
 		setSeasonIndex: PropTypes.func,
-		resetDivisions: PropTypes.func
+		resetDivisions: PropTypes.func,
+		setLoading: PropTypes.func
 	};
 
 	/**
@@ -54,7 +57,12 @@ class Seasons extends Component
 	componentDidMount()
 	{
 		console.log('Seasons::componentDidMount ' + parseInt(this.props.selectedLeague.id) );
-		this.props.getSeasons(parseInt(this.props.selectedLeague.id));
+		this.props.setLoading('seasons', true);
+		this.props.getSeasons(parseInt(this.props.selectedLeague.id)).then(
+			() => this.props.setLoading('seasons', false),
+			() => this.props.setLoading('seasons', false)
+		);
+		;
 	}
 
 	/**
@@ -80,6 +88,7 @@ class Seasons extends Component
 		// const params = this.props.navigation.state.params;
 		return (
 			<Container>
+				<Spinner/>
 				<Content padder>
 					{(this.props.seasons && this.props.seasons.length && this.props.seasons.length > 0) ?
 						<Grid>
@@ -124,6 +133,7 @@ function bindAction(dispatch)
 		getSeasons: leagueid => dispatch(getSeasons(leagueid)),
 		setSeasonIndex: index => dispatch(setSeasonIndex(index)),
 		resetDivisions: () => dispatch(resetDivisions()),
+		setLoading: (name, status) => dispatch(setLoading(name, status)),
 	};
 }
 const mapStateToProps = state => ({

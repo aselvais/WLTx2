@@ -26,6 +26,8 @@ import {
 import {
 	postUserTeams
 } from "../../../redux/actions/favorites";
+import Spinner from '../../widgets/loaders/Spinner';
+import { setLoading } from "../../../redux/actions/loading";
 
 
 /**
@@ -49,6 +51,7 @@ class Teams extends Component
 		getTeams: PropTypes.func,
 		setTeamIndex: PropTypes.func,
 		postUserTeams: PropTypes.func,
+		setLoading: PropTypes.func,
 	};
 
 	constructor(props)
@@ -65,7 +68,11 @@ class Teams extends Component
 	componentDidMount()
 	{
 		console.log('Teams::componentDidMount ' + parseInt(this.props.selectedDivision.id) );
-		this.props.getTeams(parseInt(this.props.selectedDivision.id));
+		this.props.setLoading('games', true);
+		this.props.getTeams(parseInt(this.props.selectedDivision.id)).then(
+			() => this.props.setLoading('games', false),
+			() => this.props.setLoading('games', false)
+		);
 	}
 
 
@@ -113,6 +120,7 @@ class Teams extends Component
 		// const params = this.props.navigation.state.params;
 		return (
 			<Container>
+				<Spinner/>
 				<Content padder>
 					{(this.props.teams && this.props.teams.length && this.props.teams.length > 0) ?
 						<Grid>
@@ -151,6 +159,7 @@ function bindAction(dispatch)
 		getTeams: seasonid => dispatch(getTeams(seasonid)),
 		postUserTeams: teamid => dispatch(postUserTeams(teamid)),
 		setTeamIndex: index => dispatch(setTeamIndex(index)),
+		setLoading: (name, status) => dispatch(setLoading(name, status)),
 	};
 }
 const mapStateToProps = state => ({

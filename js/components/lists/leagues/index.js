@@ -18,10 +18,16 @@ import {
 	Col
 } from "react-native-easy-grid";
 
+
 import {
 	getLeagues,
 	setLeagueIndex
 } from "../../../redux/actions/leagues";
+
+import Spinner from '../../widgets/loaders/Spinner';
+import { setLoading } from "../../../redux/actions/loading";
+
+
 import {resetSeasons} from "../../../redux/actions/seasons";
 
 import styles from "./styles";
@@ -48,6 +54,7 @@ class Leagues extends Component
 		getLeagues: PropTypes.func,
 		setLeagueIndex: PropTypes.func,
 		resetSeasons: PropTypes.func,
+		setLoading: PropTypes.func,
 	};
 
 	/**
@@ -55,7 +62,11 @@ class Leagues extends Component
 	 */
 	componentDidMount()
 	{
-		this.props.getLeagues();
+		this.props.setLoading('leagues', true);
+		this.props.getLeagues().then(
+			() => this.props.setLoading('leagues', false),
+			() => this.props.setLoading('leagues', false)
+		);
 	}
 
 	/**
@@ -81,6 +92,7 @@ class Leagues extends Component
 		return (
 			<Container>
 				<Content>
+					<Spinner/>
 					<Grid style={styles.mt}>
 						{this.props.leagues.map((item, i) => (
 							<Row key={item.id}>
@@ -113,12 +125,13 @@ function bindAction(dispatch)
 		getLeagues: () => dispatch(getLeagues()),
 		setLeagueIndex: index => dispatch(setLeagueIndex(index)),
 		resetSeasons: () => dispatch(resetSeasons()),
+		setLoading: (name, status) => dispatch(setLoading(name, status)),
 	};
 }
 const mapStateToProps = state => ({
 	name: state.user.name,
 	leagues: state.leagues.list,
-	selectedLeague: state.leagues.selectedIndex,
+	selectedLeague: state.leagues.selectedIndex
 });
 const LeaguesSwagger = connect(mapStateToProps, bindAction)(Leagues);
 export default LeaguesSwagger;

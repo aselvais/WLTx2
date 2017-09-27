@@ -13,7 +13,7 @@ import styles from "./styles";
 import Btnteamselect from '../../widgets/btnteamselect/index';
 import Headerbar from "../../widgets/headerbar/index";
 import Teaminfo from "../../lists/teaminfo";
-import Loadingspinner from '../../widgets/loadingspinner';
+import Spinner from "../../widgets/loaders/Spinner";
 
 
 /**
@@ -55,9 +55,9 @@ class Home extends Component
 	{
 		let {league, season, division, team} = this.props;
 		return (
-			<Loadingspinner>
 			<Container style={styles.container}>
 				<Content padder>
+					<Spinner/>
 					<Btnteamselect navigation={this.props.navigation} />
 					{
 						(team && team.id) ?
@@ -67,7 +67,6 @@ class Home extends Component
 					}
 				</Content>
 			</Container>
-			</Loadingspinner>
 		);
 	}
 }

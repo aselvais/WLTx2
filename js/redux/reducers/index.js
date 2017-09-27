@@ -1,6 +1,5 @@
 import {combineReducers} from "redux";
 import {reducer as formReducer} from "redux-form";
-import drawer from "./drawer";
 import user from "./user";
 
 import leagues from "./leagues";
@@ -15,11 +14,11 @@ import teaminfo from "./teaminfo";
 import standings from "./standings";
 import favorites from "./favorites";
 import selecteddate from "./selecteddate";
+import loading from "./loading";
 
 
 export default combineReducers({
 	form: formReducer,
-	drawer,
 	user,
 	leagues,
 	seasons,
@@ -32,5 +31,6 @@ export default combineReducers({
 	teaminfo,
 	standings,
 	favorites,
-	selecteddate
+	selecteddate,
+	loading
 });

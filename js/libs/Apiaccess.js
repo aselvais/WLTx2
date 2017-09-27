@@ -496,7 +496,6 @@ class Apiaccess
 				fetchOpts.body = paramsT;
 			}
 		}
-console.log(url + sd.url + prms, fetchOpts);
 		try {
 			let requestHash = md5(JSON.stringify([url + sd.url + prms, fetchOpts]));
 			let response;
@@ -518,7 +517,6 @@ console.log(url + sd.url + prms, fetchOpts);
 				this.log = 'Created cached data ' + requestHash;
 				this.log = this._caching[requestHash]
 			}
-console.log(responseJson);
 			return responseJson;
 		} catch (error) {
 			this.log = 'Error querying the API';

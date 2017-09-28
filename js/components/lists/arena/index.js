@@ -20,6 +20,7 @@ import {
 	Col
 } from "react-native-easy-grid";
 import openMap from 'react-native-open-maps';
+import Spinner from '../../widgets/loaders/Spinner';
 
 
 /**
@@ -71,6 +72,7 @@ class Arena extends Component
 		const {game} = this.props;
 		return (
 			<Container>
+				<Spinner/>
 				<Content padder>
 					<Grid>
 						<Row>

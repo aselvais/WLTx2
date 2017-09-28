@@ -25,6 +25,7 @@ import {
 } from "../../../redux/actions/teaminfo";
 const deviceWidth = Dimensions.get('window').width;
 const deviceHeight = Dimensions.get('window').height;
+import Spinner from '../../widgets/loaders/Spinner';
 
 /**
  *
@@ -77,6 +78,7 @@ class Teaminfos extends Component
 		let {teaminfos} = this.props;
 		return (
 			<Container>
+				<Spinner/>
 				<Content padder>
 					{(teaminfos && teaminfos.id) ?
 						<Grid>

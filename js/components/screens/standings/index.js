@@ -20,7 +20,7 @@ import {
 	getTiers,
 	setTierIndex
 } from "../../../redux/actions/tiers";
-
+import Spinner from '../../widgets/loaders/Spinner';
 
 import {
 	StackNavigator,
@@ -127,6 +127,7 @@ class Standings extends Component
 		// 				{this.getDropDown()}
 		return (
 			<Container style={styles.container}>
+				<Spinner/>
 				<Content padder>
 					<StandingsList navigation={this.props.navigation}/>
 				</Content>

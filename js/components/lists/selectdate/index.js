@@ -14,6 +14,8 @@ import {
 	Calendar
 } from 'react-native-calendars';
 import moment from 'moment';
+import Spinner from '../../widgets/loaders/Spinner';
+
 /**
  *
  */
@@ -84,6 +86,7 @@ class Selectdate extends Component
 
 		return (
 			<Container>
+				<Spinner/>
 				<Content padder>
 					<Calendar
 						onDayPress={ (day) => this.onDayPress(day) }

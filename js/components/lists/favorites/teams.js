@@ -21,6 +21,7 @@ import {
 import {
 	getUserTeams
 } from "../../../redux/actions/favorites";
+import Spinner from '../../widgets/loaders/Spinner';
 
 /**
  *
@@ -71,6 +72,7 @@ class Teams extends Component
 		// const params = this.props.navigation.state.params;
 		return (
 			<Container>
+				<Spinner/>
 				<Content padder>
 					{(this.props.favteams && this.props.favteams.length && this.props.favteams.length > 0) ?
 						<Grid>

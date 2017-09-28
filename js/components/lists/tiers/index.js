@@ -22,7 +22,7 @@ import {
 	getTiers,
 	setTierIndex
 } from "../../../redux/actions/tiers";
-
+import Spinner from '../../widgets/loaders/Spinner';
 /**
  *
  */
@@ -74,6 +74,7 @@ class Tiers extends Component
 		// const params = this.props.navigation.state.params;
 		return (
 			<Container>
+				<Spinner/>
 				<Content padder>
 					{(this.props.tiers && this.props.tiers.length && this.props.tiers.length > 0) ?
 						<Grid>

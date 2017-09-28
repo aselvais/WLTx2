@@ -12,6 +12,7 @@ import Headerbar from '../../widgets/headerbar/index';
 import styles from "./styles";
 
 import Teams from '../../lists/favorites/teams';
+import Spinner from '../../widgets/loaders/Spinner';
 
 /**
  *

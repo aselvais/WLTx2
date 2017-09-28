@@ -24,7 +24,7 @@ import {
 	setTwitterfeedIndex,
 	resetTwitterfeeds
 } from "../../../redux/actions/twitterfeed";
-
+import Spinner from '../../widgets/loaders/Spinner';
 /**
  *
  */
@@ -89,6 +89,7 @@ class Twitterfeeds extends Component
 		// const params = this.props.navigation.state.params;
 		return (
 			<Container>
+				<Spinner/>
 				<Content padder>
 					{(this.props.twitterfeeds && this.props.twitterfeeds.length && this.props.twitterfeeds.length > 0) ?
 						<Grid>

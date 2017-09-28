@@ -28,6 +28,8 @@ import {
 	setTeamIndexById,
 	getTeams
 } from "../../../redux/actions/teams";
+import Spinner from '../../widgets/loaders/Spinner';
+import {setLoading} from "../../../redux/actions/loading";
 
 
 /**
@@ -52,6 +54,7 @@ class Standings extends Component
 		resetStandings: PropTypes.func,
 		setStandingIndex: PropTypes.func,
 		setTeamIndexById: PropTypes.func,
+		setLoading: PropTypes.func,
 	};
 
 	/**
@@ -59,11 +62,16 @@ class Standings extends Component
 	 */
 	componentDidMount()
 	{
-		if (this.props.selectedDivisions && this.props.selectedDivisions.id) {
+		if (this.props.selectedDivisions && this.props.selectedDivisions.id)
+		{
+			this.props.setLoading('standings', true);
 			this.props.resetStandings();
 			this.props.getStandings(
 				parseInt(this.props.selectedDivisions.id),
 				((this.props.selectedTiers && this.props.selectedTiers.id) ? this.props.selectedTiers.id : 0)
+			).then(
+				() => this.props.setLoading('standings', false),
+				() => this.props.setLoading('standings', false)
 			);
 		}
 	}
@@ -79,6 +87,10 @@ class Standings extends Component
 		this.props.navigation.navigate("Teams", {standing: item});
 	}
 
+	/**
+	 *
+	 * @param t
+	 */
 	clickTeam(t)
 	{
 		if (t > 0)
@@ -118,6 +130,7 @@ class Standings extends Component
 
 		return (
 			<Grid>
+				<Spinner/>
 				<Row>
 					<Col size={1}></Col>
 					<Col size={5}><Text style={{fontWeight: 'bold'}}>Team</Text></Col>
@@ -144,7 +157,7 @@ class Standings extends Component
 						{this.props.standings.map((item, i) => (
 							<Row key={item.id}>
 								<Col style={{padding: 10}}>
-									<Text style={{fontWeight: 'bold', textAlign: 'center' }}>{item.name}</Text>
+									<Text style={{fontWeight: 'bold', textAlign: 'center'}}>{item.name}</Text>
 									{(item.name != '') ? this.getStandingsJsx(item.teamStandingLocalAPIModels) : null}
 								</Col>
 							</Row>
@@ -165,6 +178,7 @@ function bindAction(dispatch)
 		resetStandings: () => dispatch(resetStandings()),
 		setStandingIndex: index => dispatch(setStandingIndex(index)),
 		setTeamIndexById: id => dispatch(setTeamIndexById(id)),
+		setLoading: (name, status) => dispatch(setLoading(name, status)),
 	};
 }
 

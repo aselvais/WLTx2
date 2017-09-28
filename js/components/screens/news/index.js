@@ -13,6 +13,7 @@ import styles from "./styles";
 
 import Newsfeed from '../../lists/newsfeed';
 import Twitterfeed from '../../lists/twitterfeed';
+import Spinner from '../../widgets/loaders/Spinner';
 
 /**
  *

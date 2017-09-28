@@ -12,10 +12,6 @@ import {
 	Content,
 	Icon,
 	Button,
-	H1,
-	H2,
-	Tabs,
-	Tab
 } from "native-base";
 import {
 	Grid,
@@ -24,18 +20,18 @@ import {
 } from "react-native-easy-grid";
 import moment from 'moment';
 import {
-	getGames,
 	setGameIndex,
-	getGamesDay,
 	getGamesAll
 } from "../../../redux/actions/games";
 import {
 	setTeamIndexById,
 	getTeams
 } from "../../../redux/actions/teams";
+import {setLoading} from "../../../redux/actions/loading";
 
 import Headerbar from '../../widgets/headerbar/index';
 import styles from "./styles";
+import Spinner from '../../widgets/loaders/Spinner';
 
 /**
  *
@@ -63,6 +59,7 @@ class Games extends Component
 		getGamesDay: PropTypes.func,
 		getGamesAll: PropTypes.func,
 		getTeams: PropTypes.func,
+		setLoading: PropTypes.func,
 	};
 
 	/**
@@ -70,24 +67,16 @@ class Games extends Component
 	 */
 	componentDidMount()
 	{
-		// let date = moment(this.props.sdate).format('YYYY-MM-DD');
-		let datefrom = this.props.sdatefrom.getTime(); // moment(this.props.sdatefrom).format('YYYY-MM-DD');
-		let dateto = this.props.sdateto.getTime(); // moment(this.props.sdateto).format('YYYY-MM-DD');
+		let datefrom = this.props.sdatefrom.getTime();
+		let dateto = this.props.sdateto.getTime();
 
-		/*
-		if (this.props.division && this.props.division.id)
-		{
-			this.props.getTeams(parseInt(this.props.division.id));
-		}
-		if (this.props && this.props.selectedTeam && this.props.selectedTeam.id)
-		{
-			this.props.getGames(datefrom, parseInt(this.props.selectedTeam.id));
-		}
-		*/
 		if (this.props && this.props.season && this.props.season.id && this.props.division && this.props.division.id)
 		{
-			// this.props.getGamesDay(date, this.props.season.id, this.props.division.id);
-			this.props.getGamesAll(datefrom, dateto, this.props.season.id, this.props.division.id);
+			this.props.setLoading('games', true);
+			this.props.getGamesAll(datefrom, dateto, this.props.season.id, this.props.division.id).then(
+				() => this.props.setLoading('games', false),
+				() => this.props.setLoading('games', false)
+			);
 		}
 	}
 
@@ -99,7 +88,9 @@ class Games extends Component
 	{
 		this.props.setGameIndex(item);
 		if (routeName)
+		{
 			this.props.navigation.navigate(routeName);
+		}
 	}
 
 	clickTeam(t)
@@ -184,8 +175,8 @@ class Games extends Component
 	 */
 	render()
 	{
-		let {sdate, sdatefrom, sdateto, league, season, division, team, games, gamesday, navigation} = this.props;
-		//const {props: {name, index, list}} = this;
+		let {sdate, sdatefrom, sdateto, division, gamesday, loading} = this.props;
+
 		return (
 			<Container style={{backgroundColor: '#EEEEEE'}}>
 				<Grid>
@@ -222,16 +213,21 @@ class Games extends Component
 					</Row>
 					<Row>
 						<Content padder>
+							<Spinner/>
 							{
 								(gamesday && gamesday.length && gamesday.length > 0) ?
 									<Grid>
 										{gamesday.map((item, i) => this.getJsxGame(item))}
 									</Grid>
-									:
+									: null
+							}
+							{
+								(!loading) ?
 									<View>
-										<Text>No game from {moment(sdatefrom).format('L')}
-											to {moment(sdateto).format('L')}</Text>
+										<Text>No game from {moment(sdatefrom).format('L')} to {moment(sdateto).format('L')}</Text>
 									</View>
+								:
+								null
 							}
 						</Content>
 					</Row>
@@ -246,12 +242,11 @@ class Games extends Component
 function bindAction(dispatch)
 {
 	return {
-		getGames: (date, teamid) => dispatch(getGames(date, teamid)),
-		getGamesDay: (date, seasonid, divisionid) => dispatch(getGamesDay(date, seasonid, divisionid)),
 		getGamesAll: (datefrom, dateto, seasonid, divisionid) => dispatch(getGamesAll(datefrom, dateto, seasonid, divisionid)),
 		getTeams: index => dispatch(getTeams(index)),
 		setGameIndex: index => dispatch(setGameIndex(index)),
 		setTeamIndexById: id => dispatch(setTeamIndexById(id)),
+		setLoading: (name, status) => dispatch(setLoading(name, status)),
 	};
 }
 
@@ -265,7 +260,8 @@ const mapStateToProps = state => ({
 	team: state.teams.selectedIndex,
 	sdate: state.selecteddate.sdate,
 	sdatefrom: state.selecteddate.sdatefrom,
-	sdateto: state.selecteddate.sdateto
+	sdateto: state.selecteddate.sdateto,
+	loading: state.loading.globalstatus
 });
 const GamesSwagger = connect(mapStateToProps, bindAction)(Games);
 export default GamesSwagger;

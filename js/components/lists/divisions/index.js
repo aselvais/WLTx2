@@ -1,7 +1,6 @@
 import React, {Component} from "react";
 import PropTypes from 'prop-types';
 import {
-	Image,
 	TouchableOpacity
 } from "react-native";
 import {connect} from "react-redux";
@@ -10,21 +9,18 @@ import {
 	Content,
 	Text,
 	Icon,
-	Button
 } from "native-base";
 import {
 	Grid,
 	Row,
 	Col
 } from "react-native-easy-grid";
-
 import {
 	getDivisions,
 	setDivisionIndex
 } from "../../../redux/actions/divisions";
 import Spinner from '../../widgets/loaders/Spinner';
-import { setLoading } from "../../../redux/actions/loading";
-
+import {setLoading} from "../../../redux/actions/loading";
 import {resetTeams} from "../../../redux/actions/teams";
 
 /**
@@ -36,7 +32,7 @@ class Divisions extends Component
 	 *
 	 * @param navigation
 	 */
-	static navigationOptions = ({ navigation }) => ({
+	static navigationOptions = ({navigation}) => ({
 		title: 'Select a division'
 	});
 
@@ -56,13 +52,12 @@ class Divisions extends Component
 	 */
 	componentDidMount()
 	{
-		console.log('Divisions::componentDidMount ' + parseInt(this.props.selectedSeason.id) );
+		console.log('Divisions::componentDidMount ' + parseInt(this.props.selectedSeason.id));
 		this.props.setLoading('divisions', true);
 		this.props.getDivisions(parseInt(this.props.selectedSeason.id)).then(
-		() => this.props.setLoading('divisions', false),
-		() => this.props.setLoading('divisions', false)
-	);
-
+			() => this.props.setLoading('divisions', false),
+			() => this.props.setLoading('divisions', false)
+		);
 	}
 
 
@@ -87,7 +82,6 @@ class Divisions extends Component
 	 */
 	render()
 	{
-		// const params = this.props.navigation.state.params;
 		return (
 			<Container>
 				<Spinner/>
@@ -96,14 +90,15 @@ class Divisions extends Component
 						<Grid>
 							{this.props.divisions.map((item, i) => (
 								<Row key={item.id}>
-									<Col style={{ padding: 10 }}>
-										<TouchableOpacity onPress={() => this.clickDivision(item) }>
+									<Col style={{padding: 10}}>
+										<TouchableOpacity onPress={() => this.clickDivision(item)}>
 											<Text>{item.name}</Text>
 										</TouchableOpacity>
 									</Col>
 									<Col style={{width: 40, alignItems: 'center'}}>
-										{ (item.id && this.props.selectedDivision && this.props.selectedDivision.id && this.props.selectedDivision.id == item.id)
-											? (<Icon name="checkmark" fontSize="10" color="#FF0000" iconRight="true"/>) : null }
+										{(item.id && this.props.selectedDivision && this.props.selectedDivision.id && this.props.selectedDivision.id == item.id)
+											? (<Icon name="checkmark" fontSize="10" color="#FF0000"
+													 iconRight="true"/>) : null}
 									</Col>
 								</Row>
 							))}
@@ -126,6 +121,7 @@ function bindAction(dispatch)
 		setLoading: (name, status) => dispatch(setLoading(name, status)),
 	};
 }
+
 const mapStateToProps = state => ({
 	divisions: state.divisions.list,
 	selectedDivision: state.divisions.selectedIndex,

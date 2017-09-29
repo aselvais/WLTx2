@@ -6,6 +6,7 @@ import MainStackRouter from "./routers/MainStackRouter";
 import ProgressBar from "./components/widgets/loaders/ProgressBar";
 import theme from "./components/themes/base-theme";
 import Apptracking from './libs/Apptracking';
+
 const tracking = new Apptracking();
 
 /**

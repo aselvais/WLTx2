@@ -20,6 +20,11 @@ export function setTeamIndex(index: number): Action
 	};
 };
 
+/**
+ *
+ * @param id
+ * @returns {{type: string, payload: number}}
+ */
 export function setTeamIndexById(id: number): Action
 {
 	return {
@@ -46,7 +51,11 @@ export function resetTeams(): Action
  */
 export function getTeams(divisionid: number): Action
 {
-	function _returnLoadTeams(d) { return { type: LOAD_TEAMS, list: d }; }
+	function _returnLoadTeams(d)
+	{
+		return {type: LOAD_TEAMS, list: d};
+	}
+
 	return dispatch => api.getTeam(divisionid).then(
 		(d) => dispatch(_returnLoadTeams(d)),
 		(e) => dispatch(_returnLoadTeams([]))

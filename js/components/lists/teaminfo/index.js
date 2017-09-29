@@ -2,7 +2,6 @@ import React, {Component} from "react";
 import PropTypes from 'prop-types';
 import {
 	Image,
-	TouchableOpacity,
 	Dimensions
 } from "react-native";
 import {connect} from "react-redux";
@@ -10,8 +9,6 @@ import {
 	Container,
 	Content,
 	Text,
-	Icon,
-	Button
 } from "native-base";
 import {
 	Grid,
@@ -20,11 +17,10 @@ import {
 } from "react-native-easy-grid";
 
 import {
-	getTeaminfos,
-	setTeaminfoIndex
+	getTeaminfos
 } from "../../../redux/actions/teaminfo";
+
 const deviceWidth = Dimensions.get('window').width;
-const deviceHeight = Dimensions.get('window').height;
 import Spinner from '../../widgets/loaders/Spinner';
 
 /**
@@ -36,7 +32,7 @@ class Teaminfos extends Component
 	 *
 	 * @param navigation
 	 */
-	static navigationOptions = ({ navigation }) => ({
+	static navigationOptions = ({navigation}) => ({
 		title: 'Team info'
 	});
 
@@ -46,7 +42,6 @@ class Teaminfos extends Component
 	 */
 	static propTypes = {
 		getTeaminfos: PropTypes.func,
-		setTeaminfoIndex: PropTypes.func,
 	};
 
 	/**
@@ -55,17 +50,9 @@ class Teaminfos extends Component
 	componentDidMount()
 	{
 		if (this.props.selectedTeam && this.props.selectedTeam.id)
+		{
 			this.props.getTeaminfos(parseInt(this.props.selectedTeam.id));
-	}
-
-
-	/**
-	 *
-	 * @param item
-	 */
-	clickTeaminfo(item)
-	{
-		this.props.setTeaminfoIndex(item);
+		}
 	}
 
 	/**
@@ -74,7 +61,6 @@ class Teaminfos extends Component
 	 */
 	render()
 	{
-		// const params = this.props.navigation.state.params;
 		let {teaminfos} = this.props;
 		return (
 			<Container>
@@ -90,8 +76,8 @@ class Teaminfos extends Component
 								}}>
 									<Image style={{
 										resizeMode: 'contain',
-										width: (deviceWidth/2),
-										height: (deviceWidth/2)
+										width: (deviceWidth / 2),
+										height: (deviceWidth / 2)
 									}} source={{uri: teaminfos.imageUrl}}/>
 									<Text style={{fontWeight: 'bold'}}>NAME</Text>
 									<Text>{teaminfos.name}</Text>
@@ -113,17 +99,13 @@ class Teaminfos extends Component
 	}
 }
 
-function bindAction(dispatch)
-{
-	return {
-		getTeaminfos: teamid => dispatch(getTeaminfos(teamid)),
-		setTeaminfoIndex: index => dispatch(setTeaminfoIndex(index)),
-	};
-}
-const mapStateToProps = state => ({
-	teaminfos: state.teaminfo.list,
-	selectedTeaminfo: state.teaminfo.selectedIndex,
-	selectedTeam: state.teams.selectedIndex
-});
-const TeaminfosSwagger = connect(mapStateToProps, bindAction)(Teaminfos);
-export default TeaminfosSwagger;
+export default connect(
+	state => ({
+		teaminfos: state.teaminfo.list,
+		selectedTeaminfo: state.teaminfo.selectedIndex,
+		selectedTeam: state.teams.selectedIndex
+	}),
+	dispatch => ({
+		getTeaminfos: teamid => dispatch(getTeaminfos(teamid))
+	})
+)(Teaminfos);

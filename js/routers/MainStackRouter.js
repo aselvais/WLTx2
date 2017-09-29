@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React from "react";
 import HomeDrawerRouter from "./HomeDrawerRouter";
 import {StackNavigator} from "react-navigation";
 

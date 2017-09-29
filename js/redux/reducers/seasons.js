@@ -28,7 +28,7 @@ const initialState = {
  */
 export default function(state: State = initialState, action: Action): State
 {
-	switch(action.type)
+	switch (action.type)
 	{
 		case SET_SEASONS_INDEX:
 			return {

@@ -112,20 +112,16 @@ class Divisions extends Component
 	}
 }
 
-function bindAction(dispatch)
-{
-	return {
+export default connect(
+	state => ({
+		divisions: state.divisions.list,
+		selectedDivision: state.divisions.selectedIndex,
+		selectedSeason: state.seasons.selectedIndex
+	}),
+	dispatch => ({
 		getDivisions: seasonid => dispatch(getDivisions(seasonid)),
 		setDivisionIndex: index => dispatch(setDivisionIndex(index)),
 		resetTeams: () => dispatch(resetTeams()),
 		setLoading: (name, status) => dispatch(setLoading(name, status)),
-	};
-}
-
-const mapStateToProps = state => ({
-	divisions: state.divisions.list,
-	selectedDivision: state.divisions.selectedIndex,
-	selectedSeason: state.seasons.selectedIndex
-});
-const DivisionsSwagger = connect(mapStateToProps, bindAction)(Divisions);
-export default DivisionsSwagger;
+	})
+)(Divisions);

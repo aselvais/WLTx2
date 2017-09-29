@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import {connect} from "react-redux";
-import { Text, View } from "react-native";
+import {Text, View} from "react-native";
 import {
 	Container,
 	Content,
@@ -10,7 +10,6 @@ import {
 } from "native-base";
 import Headerbar from '../../widgets/headerbar/index';
 import styles from "./styles";
-
 import Teams from '../../lists/favorites/teams';
 import Spinner from '../../widgets/loaders/Spinner';
 
@@ -23,10 +22,10 @@ class Favorites extends Component
 	 * Option for the TabNavigation system
 	 * @type {{header: null, tabBarLabel: string, tabBarIcon: (function({tintColor?: *}): XML)}}
 	 */
-	static navigationOptions = ({ navigation }) => ({
+	static navigationOptions = ({navigation}) => ({
 		header: <Headerbar title="Favorites" navigation={navigation}/>,
 		tabBarLabel: 'Favorites',
-		tabBarIcon: ({ tintColor }) => <Icon name="ios-heart" style={{color: tintColor}}/>
+		tabBarIcon: ({tintColor}) => <Icon name="ios-heart" style={{color: tintColor}}/>
 	});
 
 	/**
@@ -61,7 +60,3 @@ class Favorites extends Component
 }
 
 export default Favorites;
-
-
-
-

@@ -248,5 +248,5 @@ export default {
 	inputLineHeight: 24,
 	jumbotronBg: '#C9C9CE',
 	jumbotronPadding: 30,
-	defaultBackgroundColor:'#FFFFFF'
+	defaultBackgroundColor: '#FFFFFF'
 };

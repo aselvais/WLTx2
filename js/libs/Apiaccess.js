@@ -162,7 +162,7 @@ class Apiaccess
 		standingLocalTierGroup: {
 			url: "/api/team/standingLocalTierGroup",
 			method: "GET",
-			params: ["divisionIds","tierId"],
+			params: ["divisionIds", "tierId"],
 			desc: ""
 		}
 	};
@@ -182,7 +182,8 @@ class Apiaccess
 	 */
 	constructor()
 	{
-		if (!instance) {
+		if (!instance)
+		{
 			instance = this;
 		}
 		this._singletonStartDate = new Date();
@@ -223,14 +224,15 @@ class Apiaccess
 	async postRegister()
 	{
 		var that = this;
-		if (that._token === null) {
+		if (that._token === null)
+		{
 			var p;
 			var uID = md5('sdf645ds6f45d4fs64sdf6468s7f8wervxc546');
 			if (DeviceInfo && DeviceInfo.getUniqueID)
 			{
 				uID = DeviceInfo.getUniqueID();
 			}
-			p = that._genericApiCall('PostRegister', { device: uID });
+			p = that._genericApiCall('PostRegister', {device: uID});
 			p.then(
 				function(d)
 				{
@@ -242,7 +244,9 @@ class Apiaccess
 				}
 			);
 			return p;
-		} else {
+		}
+		else
+		{
 			return new Promise(function(resolve, reject)
 			{
 				resolve({token: that._token});
@@ -397,9 +401,12 @@ class Apiaccess
 	 * @returns {Promise}
 	 * @todo create list view for standings
 	 */
-	async standingLocalTierGroup(divisionIds, tierId=0)
+	async standingLocalTierGroup(divisionIds, tierId = 0)
 	{
-		return this.postRegister().then(() => this._genericApiCall('standingLocalTierGroup', {divisionIds: divisionIds, tierId: tierId}));
+		return this.postRegister().then(() => this._genericApiCall('standingLocalTierGroup', {
+			divisionIds: divisionIds,
+			tierId: tierId
+		}));
 	}
 
 
@@ -479,38 +486,47 @@ class Apiaccess
 				'Content-Type': 'application/json'
 			}
 		};
-		if (this._token !== null && serviceName !== 'PostRegister') {
+		if (this._token !== null && serviceName !== 'PostRegister')
+		{
 			fetchOpts.headers.authToken = this._token;
 		}
 
-		if (params && params !== {}) {
+		if (params && params !== {})
+		{
 			let paramsT = JSON.stringify(params);
-			if (sd.method === 'GET') {
+			if (sd.method === 'GET')
+			{
 				// paramsT = JSON.stringify(params).replace(/{|}/gi, "");
 				prms = '?';
-				for (var p in params) {
+				for (var p in params)
+				{
 					prms += p + '=' + params[p] + '&';
 				}
 			}
-			else {
+			else
+			{
 				fetchOpts.body = paramsT;
 			}
 		}
-		try {
+		try
+		{
 			let requestHash = md5(JSON.stringify([url + sd.url + prms, fetchOpts]));
 			let response;
 			let responseJson;
 			let getDataFromAPI = true;
 
-			if (this._caching[requestHash] && this._caching[requestHash].data) {
+			if (this._caching[requestHash] && this._caching[requestHash].data)
+			{
 				let cacheAge = ( (new Date()).getTime() - this._caching[requestHash].creationDate.getTime()) / 1000;
-				if (cacheAge < this._cachingDuration) {
+				if (cacheAge < this._cachingDuration)
+				{
 					this.log = 'Found cached data ' + requestHash + '. Created: ' + this._caching[requestHash].creationDate + ' Age: ' + cacheAge;
 					responseJson = this._caching[requestHash].data;
 					getDataFromAPI = false;
 				}
 			}
-			if (getDataFromAPI) {
+			if (getDataFromAPI)
+			{
 				response = await fetch(url + sd.url + prms, fetchOpts);
 				responseJson = await response.json();
 				this._caching[requestHash] = {creationDate: new Date(), data: responseJson};
@@ -518,7 +534,8 @@ class Apiaccess
 				this.log = this._caching[requestHash]
 			}
 			return responseJson;
-		} catch (error) {
+		} catch (error)
+		{
 			this.log = 'Error querying the API';
 			this.log = error;
 			return error;
@@ -532,11 +549,11 @@ class Apiaccess
 	 */
 	set log(msg)
 	{
-		if (this._debugMode) {
+		if (this._debugMode)
+		{
 			console.log(msg);
 		}
 	}
-
 
 }
 

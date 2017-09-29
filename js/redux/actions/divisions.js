@@ -18,6 +18,7 @@ export function setDivisionIndex(index: number): Action
 		payload: index
 	};
 };
+
 /**
  *
  * @param index
@@ -36,7 +37,11 @@ export function resetDivisions(): Action
  */
 export function getDivisions(seasonid: number): Action
 {
-	function _returnLoadDivisions(d) { return { type: LOAD_DIVISIONS, list: d }; }
+	function _returnLoadDivisions(d)
+	{
+		return {type: LOAD_DIVISIONS, list: d};
+	}
+
 	return dispatch => api.getDivision(seasonid).then(
 		(d) => dispatch(_returnLoadDivisions(d)),
 		(e) => dispatch(_returnLoadDivisions([]))

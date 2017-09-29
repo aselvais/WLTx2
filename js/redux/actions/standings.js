@@ -36,13 +36,15 @@ export function resetStandings(): Action
  */
 export function getStandings(divisionids: number, tierid: number): Action
 {
-	function _returnLoadStandings(d) {
-		for (var i=0; i < d.length; i++)
+	function _returnLoadStandings(d)
+	{
+		for (var i = 0; i < d.length; i++)
 		{
 			d[i].id = i;
 		}
-		return { type: LOAD_STANDINGS, list: d };
+		return {type: LOAD_STANDINGS, list: d};
 	}
+
 	return dispatch => api.standingLocalTierGroup(divisionids, tierid).then(
 		(d) => dispatch(_returnLoadStandings(d)),
 		(e) => dispatch(_returnLoadStandings([]))

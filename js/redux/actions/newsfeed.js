@@ -36,7 +36,11 @@ export function resetNewsfeeds(): Action
  */
 export function getNewsfeeds(teamid: number): Action
 {
-	function _returnLoadNewsfeeds(d) { return { type: LOAD_NEWSFEEDS, list: d }; }
+	function _returnLoadNewsfeeds(d)
+	{
+		return {type: LOAD_NEWSFEEDS, list: d};
+	}
+
 	return dispatch => api.getFeedNews(teamid).then(
 		(d) => dispatch(_returnLoadNewsfeeds(d)),
 		(e) => dispatch(_returnLoadNewsfeeds([]))

@@ -4,11 +4,8 @@ import {connect} from "react-redux";
 import {
 	Container,
 	Content,
-	Text,
 	Icon,
-	Button
 } from "native-base";
-
 import styles from "./styles";
 import Btnteamselect from '../../widgets/btnteamselect/index';
 import Headerbar from "../../widgets/headerbar/index";
@@ -26,7 +23,7 @@ class Home extends Component
 	 * Option for the TabNavigation system
 	 * @type {{header: null, tabBarLabel: string, tabBarIcon: (function({tintColor?: *}): XML)}}
 	 */
-	static navigationOptions = ({ navigation }) => ({
+	static navigationOptions = ({navigation}) => ({
 		header: <Headerbar title="Home" navigation={navigation}/>,
 		tabBarLabel: 'Home',
 		tabBarIcon: ({tintColor}) => <Icon style={{color: tintColor}} name="ios-home"/>
@@ -53,12 +50,12 @@ class Home extends Component
 	 */
 	render()
 	{
-		let {league, season, division, team} = this.props;
+		let {team} = this.props;
 		return (
 			<Container style={styles.container}>
 				<Content padder>
 					<Spinner/>
-					<Btnteamselect navigation={this.props.navigation} />
+					<Btnteamselect navigation={this.props.navigation}/>
 					{
 						(team && team.id) ?
 							<Teaminfo/>
@@ -71,16 +68,13 @@ class Home extends Component
 	}
 }
 
-function bindAction(dispatch)
-{
-	return {};
-}
-const mapStateToProps = state => ({
-	name: state.user.name,
-	league: state.leagues.selectedIndex,
-	season: state.seasons.selectedIndex,
-	division: state.divisions.selectedIndex,
-	team: state.teams.selectedIndex,
-});
-const HomeSwagger = connect(mapStateToProps, bindAction)(Home);
-export default HomeSwagger;
+export default connect(
+	state => ({
+		name: state.user.name,
+		league: state.leagues.selectedIndex,
+		season: state.seasons.selectedIndex,
+		division: state.divisions.selectedIndex,
+		team: state.teams.selectedIndex,
+	}),
+	dispatch => ({})
+)(Home);

@@ -1,7 +1,6 @@
 import React, {Component} from "react";
 import PropTypes from 'prop-types';
 import {
-	Image,
 	TouchableOpacity
 } from "react-native";
 import {connect} from "react-redux";
@@ -10,19 +9,18 @@ import {
 	Content,
 	Text,
 	Icon,
-	Button
 } from "native-base";
 import {
 	Grid,
 	Row,
 	Col
 } from "react-native-easy-grid";
-
 import {
 	getTiers,
 	setTierIndex
 } from "../../../redux/actions/tiers";
 import Spinner from '../../widgets/loaders/Spinner';
+
 /**
  *
  */
@@ -32,7 +30,7 @@ class Tiers extends Component
 	 *
 	 * @param navigation
 	 */
-	static navigationOptions = ({ navigation }) => ({
+	static navigationOptions = ({navigation}) => ({
 		title: 'Select a tier'
 	});
 
@@ -51,7 +49,9 @@ class Tiers extends Component
 	componentDidMount()
 	{
 		if (this.props.selectedDivision && this.props.selectedDivision.id)
+		{
 			this.props.getTiers(parseInt(this.props.selectedDivision.id));
+		}
 	}
 
 
@@ -62,7 +62,6 @@ class Tiers extends Component
 	clickTier(item)
 	{
 		this.props.setTierIndex(item);
-		// this.props.navigation.navigate("Teams", {tier: item});
 	}
 
 	/**
@@ -71,7 +70,6 @@ class Tiers extends Component
 	 */
 	render()
 	{
-		// const params = this.props.navigation.state.params;
 		return (
 			<Container>
 				<Spinner/>
@@ -80,14 +78,15 @@ class Tiers extends Component
 						<Grid>
 							{this.props.tiers.map((item, i) => (
 								<Row key={item.id}>
-									<Col style={{ padding: 10 }}>
-										<TouchableOpacity onPress={() => this.clickTier(item) }>
+									<Col style={{padding: 10}}>
+										<TouchableOpacity onPress={() => this.clickTier(item)}>
 											<Text>{item.name}</Text>
 										</TouchableOpacity>
 									</Col>
 									<Col style={{width: 40, alignItems: 'center'}}>
-										{ (item.id && this.props.selectedTier && this.props.selectedTier.id && this.props.selectedTier.id == item.id)
-											? (<Icon name="checkmark" fontSize="10" color="#FF0000" iconRight="true"/>) : null }
+										{(item.id && this.props.selectedTier && this.props.selectedTier.id && this.props.selectedTier.id == item.id)
+											? (<Icon name="checkmark" fontSize="10" color="#FF0000"
+													 iconRight="true"/>) : null}
 									</Col>
 								</Row>
 							))}
@@ -101,17 +100,14 @@ class Tiers extends Component
 	}
 }
 
-function bindAction(dispatch)
-{
-	return {
+export default connect(
+	state => ({
+		tiers: state.tiers.list,
+		selectedTier: state.tiers.selectedIndex,
+		selectedDivision: state.divisions.selectedIndex
+	}),
+	dispatch => ({
 		getTiers: divisionid => dispatch(getTiers(divisionid)),
 		setTierIndex: index => dispatch(setTierIndex(index)),
-	};
-}
-const mapStateToProps = state => ({
-	tiers: state.tiers.list,
-	selectedTier: state.tiers.selectedIndex,
-	selectedDivision: state.divisions.selectedIndex
-});
-const TiersSwagger = connect(mapStateToProps, bindAction)(Tiers);
-export default TiersSwagger;
+	})
+)(Tiers);

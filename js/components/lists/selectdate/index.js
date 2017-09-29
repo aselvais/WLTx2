@@ -25,7 +25,7 @@ class Selectdate extends Component
 	 *
 	 * @param navigation
 	 */
-	static navigationOptions = ({ navigation }) => ({
+	static navigationOptions = ({navigation}) => ({
 		title: 'Select a date'
 	});
 
@@ -41,30 +41,12 @@ class Selectdate extends Component
 	 *
 	 * @param d
 	 */
-	onDayPress( d )
+	onDayPress(d)
 	{
-		let dd = new Date(d.year, d.month-1, d.day)
- 		this.props.setDate(dd);
+		let dd = new Date(d.year, d.month - 1, d.day)
+		this.props.setDate(dd);
 		this.props.navigation.navigate("Games");
 	}
-
-	/**
-	 *
-	 * @returns {{}}
-	 */
-	/* getMarkedDates()
-	{
-		let {sdate, sdatefrom, sdateto} = this.props;
-		let mdates = {};
-		let i = sdatefrom;
-		mdates[moment(sdate).format('YYYY-MM-DD')] = {selected: true};
-		while(i < sdateto)
-		{
-			mdates[moment(i).format('YYYY-MM-DD')] = [{marked: true, color: 'green', textColor: 'white'}];
-			i.setDate(i.getDate() + 1);
-		}
-		return mdates;
-	} */
 
 	/**
 	 *
@@ -76,10 +58,13 @@ class Selectdate extends Component
 		let mdates = {};
 		let i = sdatefrom;
 		mdates[moment(sdate).format('YYYY-MM-DD')] = [{selected: true}];
-		while(i < sdateto)
+		while (i < sdateto)
 		{
 			let txtd = moment(i).format('YYYY-MM-DD');
-			if (!mdates[txtd]) mdates[txtd] = [];
+			if (!mdates[txtd])
+			{
+				mdates[txtd] = [];
+			}
 			mdates[txtd].push({marked: true, color: 'green', textColor: 'white'});
 			i.setDate(i.getDate() + 1);
 		}
@@ -89,7 +74,7 @@ class Selectdate extends Component
 				<Spinner/>
 				<Content padder>
 					<Calendar
-						onDayPress={ (day) => this.onDayPress(day) }
+						onDayPress={(day) => this.onDayPress(day)}
 						markedDates={mdates}
 					/>
 				</Content>
@@ -98,16 +83,14 @@ class Selectdate extends Component
 	}
 }
 
-function bindAction(dispatch)
-{
-	return {
+
+export default connect(
+	state => ({
+		sdate: state.selecteddate.sdate,
+		sdatefrom: state.selecteddate.sdatefrom,
+		sdateto: state.selecteddate.sdateto,
+	}),
+	dispatch => ({
 		setDate: date => dispatch(setDate(date)),
-	};
-}
-const mapStateToProps = state => ({
-	sdate: state.selecteddate.sdate,
-	sdatefrom: state.selecteddate.sdatefrom,
-	sdateto: state.selecteddate.sdateto,
-});
-const SelectdateSwagger = connect(mapStateToProps, bindAction)(Selectdate);
-export default SelectdateSwagger;
+	})
+)(Selectdate);

@@ -1,19 +1,11 @@
 import React, {Component} from "react";
 import PropTypes from 'prop-types';
 import {
-	Image,
 	TouchableOpacity,
 	Text,
 	View
 } from "react-native";
 import {connect} from "react-redux";
-import {
-	Container,
-	Content,
-	Icon,
-	Button,
-	H3
-} from "native-base";
 import {
 	Grid,
 	Row,
@@ -26,7 +18,6 @@ import {
 } from "../../../redux/actions/standings";
 import {
 	setTeamIndexById,
-	getTeams
 } from "../../../redux/actions/teams";
 import Spinner from '../../widgets/loaders/Spinner';
 import {setLoading} from "../../../redux/actions/loading";
@@ -171,22 +162,18 @@ class Standings extends Component
 	}
 }
 
-function bindAction(dispatch)
-{
-	return {
+export default connect(
+	state => ({
+		standings: state.standings.list,
+		selectedStanding: state.standings.selectedIndex,
+		selectedDivisions: state.divisions.selectedIndex,
+		selectedTiers: (state.tiers.list && state.tiers.list[0]) ? state.tiers.list[0] : null
+	}),
+	dispatch => ({
 		getStandings: (divisionids, tierid) => dispatch(getStandings(divisionids, tierid)),
 		resetStandings: () => dispatch(resetStandings()),
 		setStandingIndex: index => dispatch(setStandingIndex(index)),
 		setTeamIndexById: id => dispatch(setTeamIndexById(id)),
 		setLoading: (name, status) => dispatch(setLoading(name, status)),
-	};
-}
-
-const mapStateToProps = state => ({
-	standings: state.standings.list,
-	selectedStanding: state.standings.selectedIndex,
-	selectedDivisions: state.divisions.selectedIndex,
-	selectedTiers: (state.tiers.list && state.tiers.list[0]) ? state.tiers.list[0] : null
-});
-const StandingsSwagger = connect(mapStateToProps, bindAction)(Standings);
-export default StandingsSwagger;
+	})
+)(Standings);

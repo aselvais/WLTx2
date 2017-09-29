@@ -1,12 +1,12 @@
 import React, {Component} from "react";
 import PropTypes from 'prop-types';
+import {connect} from "react-redux";
 import {
 	Image,
 	TouchableOpacity,
 	Text,
 	View
 } from "react-native";
-import {connect} from "react-redux";
 import {
 	Container,
 	Content,
@@ -28,7 +28,6 @@ import {
 	getTeams
 } from "../../../redux/actions/teams";
 import {setLoading} from "../../../redux/actions/loading";
-
 import Headerbar from '../../widgets/headerbar/index';
 import styles from "./styles";
 import Spinner from '../../widgets/loaders/Spinner';
@@ -222,12 +221,13 @@ class Games extends Component
 									: null
 							}
 							{
-								(!loading) ?
+								(!loading && !(gamesday && gamesday.length && gamesday.length > 0)) ?
 									<View>
-										<Text>No game from {moment(sdatefrom).format('L')} to {moment(sdateto).format('L')}</Text>
+										<Text>No game from {moment(sdatefrom).format('L')}
+											to {moment(sdateto).format('L')}</Text>
 									</View>
-								:
-								null
+									:
+									null
 							}
 						</Content>
 					</Row>
@@ -237,32 +237,26 @@ class Games extends Component
 	}
 }
 
-// export default Games;
-
-function bindAction(dispatch)
-{
-	return {
+export default connect(
+	state => ({
+		games: state.games.list,
+		gamesday: state.games.listday,
+		selectedTeam: state.teams.selectedIndex,
+		league: state.leagues.selectedIndex,
+		season: state.seasons.selectedIndex,
+		division: state.divisions.selectedIndex,
+		team: state.teams.selectedIndex,
+		sdate: state.selecteddate.sdate,
+		sdatefrom: state.selecteddate.sdatefrom,
+		sdateto: state.selecteddate.sdateto,
+		loading: state.loading.globalstatus
+	}),
+	dispatch => ({
 		getGamesAll: (datefrom, dateto, seasonid, divisionid) => dispatch(getGamesAll(datefrom, dateto, seasonid, divisionid)),
 		getTeams: index => dispatch(getTeams(index)),
 		setGameIndex: index => dispatch(setGameIndex(index)),
 		setTeamIndexById: id => dispatch(setTeamIndexById(id)),
 		setLoading: (name, status) => dispatch(setLoading(name, status)),
-	};
-}
-
-const mapStateToProps = state => ({
-	games: state.games.list,
-	gamesday: state.games.listday,
-	selectedTeam: state.teams.selectedIndex,
-	league: state.leagues.selectedIndex,
-	season: state.seasons.selectedIndex,
-	division: state.divisions.selectedIndex,
-	team: state.teams.selectedIndex,
-	sdate: state.selecteddate.sdate,
-	sdatefrom: state.selecteddate.sdatefrom,
-	sdateto: state.selecteddate.sdateto,
-	loading: state.loading.globalstatus
-});
-const GamesSwagger = connect(mapStateToProps, bindAction)(Games);
-export default GamesSwagger;
+	})
+)(Games);
 

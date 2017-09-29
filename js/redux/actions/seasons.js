@@ -38,7 +38,11 @@ export function resetSeasons(): Action
  */
 export function getSeasons(leagueid: number): Action
 {
-	function _returnLoadSeasons(d) { return { type: LOAD_SEASONS, list: d }; }
+	function _returnLoadSeasons(d)
+	{
+		return {type: LOAD_SEASONS, list: d};
+	}
+
 	return dispatch => api.getSeason(leagueid).then(
 		(d) => dispatch(_returnLoadSeasons(d)),
 		(e) => dispatch(_returnLoadSeasons([]))

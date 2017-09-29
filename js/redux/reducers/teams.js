@@ -20,6 +20,7 @@ const initialState = {
 	list: [],
 	selectedIndex: null
 };
+
 /**
  *
  * @param state
@@ -28,17 +29,24 @@ const initialState = {
  */
 export default function(state: State = initialState, action: Action): State
 {
-	switch(action.type)
+	switch (action.type)
 	{
+		/**
+		 * Sets the selected team
+		 */
 		case SET_TEAMS_INDEX:
 			return {
 				...state,
 				selectedIndex: action.payload
 			};
 			break;
+		/**
+		 * Sets the selected team by ID
+		 */
 		case SET_TEAMS_INDEX_BY_ID:
 			var relem = {};
-			state.list.map((e) => {
+			state.list.map((e) =>
+			{
 				if (e.id === action.payload)
 				{
 					console.log(e.id, action.payload);

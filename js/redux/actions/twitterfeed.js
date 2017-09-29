@@ -36,7 +36,11 @@ export function resetTwitterfeeds(): Action
  */
 export function getTwitterfeeds(teamid: number): Action
 {
-	function _returnLoadTwitterfeeds(d) { return { type: LOAD_TWITTERFEEDS, list: d }; }
+	function _returnLoadTwitterfeeds(d)
+	{
+		return {type: LOAD_TWITTERFEEDS, list: d};
+	}
+
 	return dispatch => api.getFeedTwitter(teamid).then(
 		(d) => dispatch(_returnLoadTwitterfeeds(d)),
 		(e) => dispatch(_returnLoadTwitterfeeds([]))

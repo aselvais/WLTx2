@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {ProgressBarAndroid} from 'react-native';
 
 
-export default class SpinnerNB extends Component
+class SpinnerNB extends Component
 {
 
 	render()
@@ -20,3 +20,5 @@ export default class SpinnerNB extends Component
 	}
 
 }
+
+export default SpinnerNB;

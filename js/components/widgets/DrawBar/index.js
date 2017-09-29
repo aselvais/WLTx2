@@ -1,16 +1,15 @@
 import React from "react";
-import {Dimensions, ppRegistry, Image, TouchableOpacity} from "react-native";
 import {
-	Button,
+	Dimensions,
+} from "react-native";
+import {
 	Text,
 	Container,
 	List,
 	ListItem,
 	Content,
-	Icon,
 	View
 } from "native-base";
-
 const deviceHeight = Dimensions.get('window').height;
 
 /**
@@ -20,10 +19,8 @@ const deviceHeight = Dimensions.get('window').height;
 const routes = [
 	{name: "Home", label: "Search"}
 ];
-
 const background = require("../../../../images/drawer-cover.png");
 const logo = require("../../../../images/logo.png");
-
 
 /**
  *

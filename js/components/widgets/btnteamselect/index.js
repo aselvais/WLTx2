@@ -25,10 +25,15 @@ class Btnteamselect extends Component
 	{
 		let {league, season, division, team} = this.props;
 		return {
-			league: 	{ label: "league", route: "Leagues", item: league },
-			season: 	{ label: "season", route: "Seasons", item: season },
-			division: 	{ label: "division", route: "Divisions", item: division, 	func: 'getTier | getTeamStandingLocalTierGroup' },
-			team: 		{ label: "team", route: "Teams", item: team, 				func: 'getFeedNews | getFeedTwitter | getTeamInfo' },
+			league: {label: "league", route: "Leagues", item: league},
+			season: {label: "season", route: "Seasons", item: season},
+			division: {
+				label: "division",
+				route: "Divisions",
+				item: division,
+				func: 'getTier | getTeamStandingLocalTierGroup'
+			},
+			team: {label: "team", route: "Teams", item: team, func: 'getFeedNews | getFeedTwitter | getTeamInfo'},
 		};
 	}
 
@@ -60,8 +65,10 @@ class Btnteamselect extends Component
 			else if (data[i].item && data[i].item.name)
 			{
 				toret.push(
-					<Row key={data[i].label + ++k} style={styles.rowLabel} onPress={() => navigation.navigate(data[i].route)}>
-						<Col size={4}><Text style={styles.label}>{data[i].label.toUpperCase()} : {data[i].item.name}</Text></Col>
+					<Row key={data[i].label + ++k} style={styles.rowLabel}
+						 onPress={() => navigation.navigate(data[i].route)}>
+						<Col size={4}><Text style={styles.label}>{data[i].label.toUpperCase()}
+							: {data[i].item.name}</Text></Col>
 					</Row>
 				);
 				toret.push(
@@ -77,13 +84,13 @@ class Btnteamselect extends Component
 
 }
 
-function bindAction(dispatch) { return {}; }
-const mapStateToProps = state => ({
-	name: state.user.name,
-	league: state.leagues.selectedIndex,
-	season: state.seasons.selectedIndex,
-	division: state.divisions.selectedIndex,
-	team: state.teams.selectedIndex,
-});
-const BtnteamselectSwagger = connect(mapStateToProps, bindAction)(Btnteamselect);
-export default BtnteamselectSwagger;
+export default connect(
+	state => ({
+		name: state.user.name,
+		league: state.leagues.selectedIndex,
+		season: state.seasons.selectedIndex,
+		division: state.divisions.selectedIndex,
+		team: state.teams.selectedIndex,
+	}),
+	dispatch => ({})
+)(Btnteamselect);

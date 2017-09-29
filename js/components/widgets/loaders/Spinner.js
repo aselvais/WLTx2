@@ -28,7 +28,7 @@ class SpinnerCustom extends Component
 	}
 }
 
-function bindAction(dispatch) { return {}; }
-const mapStateToProps = state => ({ loading: state.loading.globalstatus });
-const SpinnerCustomSwagger = connect(mapStateToProps, bindAction)(SpinnerCustom);
-export default SpinnerCustomSwagger;
+export default connect(
+	state => ({loading: state.loading.globalstatus}),
+	dispatch => ({})
+)(SpinnerCustom);

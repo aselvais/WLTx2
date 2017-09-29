@@ -9,8 +9,6 @@ import {
 	Container,
 	Content,
 	Text,
-	Icon,
-	Button
 } from "native-base";
 import {
 	Grid,
@@ -32,7 +30,7 @@ class Teams extends Component
 	 *
 	 * @param navigation
 	 */
-	static navigationOptions = ({ navigation }) => ({
+	static navigationOptions = ({navigation}) => ({
 		title: 'Select a favteam'
 	});
 
@@ -79,12 +77,12 @@ class Teams extends Component
 							{this.props.favteams.map((item, i) => (
 								<Row key={item.id}>
 									<Col style={{width: 60, height: 55}}>
-										<TouchableOpacity onPress={() => this.clickFavfavteam(item) }>
+										<TouchableOpacity onPress={() => this.clickFavfavteam(item)}>
 											<Image style={{width: 50, height: 50}} source={{uri: item.imageUrl}}/>
 										</TouchableOpacity>
 									</Col>
-									<Col style={{ padding: 10 }}>
-										<TouchableOpacity onPress={() => this.clickFavfavteam(item) }>
+									<Col style={{padding: 10}}>
+										<TouchableOpacity onPress={() => this.clickFavfavteam(item)}>
 											<Text>{item.name}</Text>
 										</TouchableOpacity>
 									</Col>
@@ -100,14 +98,11 @@ class Teams extends Component
 	}
 }
 
-function bindAction(dispatch)
-{
-	return {
+export default connect(
+	state => ({
+		favteams: state.favorites.teams,
+	}),
+	dispatch => ({
 		getUserTeams: () => dispatch(getUserTeams()),
-	};
-}
-const mapStateToProps = state => ({
-	favteams: state.favorites.teams,
-});
-const TeamsSwagger = connect(mapStateToProps, bindAction)(Teams);
-export default TeamsSwagger;
+	})
+)(Teams);

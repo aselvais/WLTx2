@@ -1,7 +1,6 @@
 import React, {Component} from "react";
 import PropTypes from 'prop-types';
 import {
-	Image,
 	Text,
 	TouchableOpacity
 } from "react-native";
@@ -9,8 +8,6 @@ import {connect} from "react-redux";
 import {
 	Container,
 	Content,
-	Icon,
-	Button,
 	H2
 } from "native-base";
 import {
@@ -18,7 +15,6 @@ import {
 	Row,
 	Col
 } from "react-native-easy-grid";
-
 import {
 	getNewsfeeds,
 	setNewsfeedIndex,
@@ -35,7 +31,7 @@ class Newsfeeds extends Component
 	 *
 	 * @param navigation
 	 */
-	static navigationOptions = ({ navigation }) => ({
+	static navigationOptions = ({navigation}) => ({
 		title: 'Select a newsfeed'
 	});
 
@@ -77,7 +73,7 @@ class Newsfeeds extends Component
 	 */
 	render()
 	{
-		let i=0;
+		let i = 0;
 		// const params = this.props.navigation.state.params;
 		return (
 			<Container>
@@ -87,11 +83,11 @@ class Newsfeeds extends Component
 						<Grid>
 							{this.props.newsfeeds.map((item, i) => (
 								<Row key={i++}>
-									<Col style={{ padding: 10 }}>
+									<Col style={{padding: 10}}>
 										<Text>{item.date}</Text>
 										<H2>{item.title}</H2>
 										<Text>{item.description}</Text>
-										<TouchableOpacity onPress={() => this.clickNewsfeed(item) }>
+										<TouchableOpacity onPress={() => this.clickNewsfeed(item)}>
 											<Text>Go to URL</Text>
 										</TouchableOpacity>
 									</Col>
@@ -107,18 +103,15 @@ class Newsfeeds extends Component
 	}
 }
 
-function bindAction(dispatch)
-{
-	return {
+export default connect(
+	state => ({
+		newsfeeds: state.newsfeeds.list,
+		selectedNewsfeed: state.newsfeeds.selectedIndex,
+		selectedTeam: state.teams.selectedIndex
+	}),
+	dispatch => ({
 		getNewsfeeds: teamid => dispatch(getNewsfeeds(teamid)),
 		setNewsfeedIndex: index => dispatch(setNewsfeedIndex(index)),
 		resetNewsfeeds: () => dispatch(resetNewsfeeds()),
-	};
-}
-const mapStateToProps = state => ({
-	newsfeeds: state.newsfeeds.list,
-	selectedNewsfeed: state.newsfeeds.selectedIndex,
-	selectedTeam: state.teams.selectedIndex
-});
-const NewsfeedsSwagger = connect(mapStateToProps, bindAction)(Newsfeeds);
-export default NewsfeedsSwagger;
+	})
+)(Newsfeeds);

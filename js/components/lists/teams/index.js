@@ -10,7 +10,6 @@ import {
 	Content,
 	Text,
 	Icon,
-	Button
 } from "native-base";
 import {
 	Grid,
@@ -27,7 +26,7 @@ import {
 	postUserTeams
 } from "../../../redux/actions/favorites";
 import Spinner from '../../widgets/loaders/Spinner';
-import { setLoading } from "../../../redux/actions/loading";
+import {setLoading} from "../../../redux/actions/loading";
 
 
 /**
@@ -39,7 +38,7 @@ class Teams extends Component
 	 *
 	 * @param navigation
 	 */
-	static navigationOptions = ({ navigation }) => ({
+	static navigationOptions = ({navigation}) => ({
 		title: 'Select a team'
 	});
 
@@ -54,6 +53,10 @@ class Teams extends Component
 		setLoading: PropTypes.func,
 	};
 
+	/**
+	 *
+	 * @param props
+	 */
 	constructor(props)
 	{
 		super(props);
@@ -67,14 +70,13 @@ class Teams extends Component
 	 */
 	componentDidMount()
 	{
-		console.log('Teams::componentDidMount ' + parseInt(this.props.selectedDivision.id) );
+		console.log('Teams::componentDidMount ' + parseInt(this.props.selectedDivision.id));
 		this.props.setLoading('games', true);
 		this.props.getTeams(parseInt(this.props.selectedDivision.id)).then(
 			() => this.props.setLoading('games', false),
 			() => this.props.setLoading('games', false)
 		);
 	}
-
 
 	/**
 	 *
@@ -94,7 +96,7 @@ class Teams extends Component
 	toggleStar(itemId)
 	{
 		var _stars = this.state.stars;
-		_stars[itemId] ? _stars[itemId]=false : _stars[itemId]=true;
+		_stars[itemId] ? _stars[itemId] = false : _stars[itemId] = true;
 
 		this.props.postUserTeams(parseInt(itemId));
 
@@ -107,17 +109,6 @@ class Teams extends Component
 	 */
 	render()
 	{
-		/**
-		 * <Col style={{width: 40, alignItems: 'center'}}>
-		 { (this.state.stars[item.id] && this.state.stars[item.id] === true) ?
-			 (<Icon onPress={ () => this.toggleStar(item.id) } name="ios-star" fontSize="10" style={{ color: "#ffbb00"}} iconRight="true"/>)
-			 :
-			 (<Icon onPress={ () => this.toggleStar(item.id) } name="ios-star-outline" fontSize="10" style={{ color: "#888888"}} iconRight="true"/>)
-		 }
-		 </Col>
-		 */
-
-		// const params = this.props.navigation.state.params;
 		return (
 			<Container>
 				<Spinner/>
@@ -127,20 +118,29 @@ class Teams extends Component
 							{this.props.teams.map((item, i) => (
 								<Row key={item.id}>
 									<Col style={{width: 60, height: 55}}>
-										<TouchableOpacity onPress={() => this.clickTeam(item) }>
+										<TouchableOpacity onPress={() => this.clickTeam(item)}>
 											<Image style={{width: 50, height: 50}} source={{uri: item.imageUrl}}/>
 										</TouchableOpacity>
 									</Col>
-									<Col style={{ padding: 10 }}>
-										<TouchableOpacity onPress={() => this.clickTeam(item) }>
+									<Col style={{padding: 10}}>
+										<TouchableOpacity onPress={() => this.clickTeam(item)}>
 											<Text>{item.name}</Text>
 										</TouchableOpacity>
 									</Col>
 									<Col style={{width: 40, alignItems: 'center'}}>
-										{ (item.id && this.props.selectedTeam && this.props.selectedTeam.id && this.props.selectedTeam.id == item.id)
-											? (<Icon name="checkmark" fontSize="10" color="#FF0000" iconRight="true"/>) : null }
+										{(item.id && this.props.selectedTeam && this.props.selectedTeam.id && this.props.selectedTeam.id == item.id)
+											? (<Icon name="checkmark" fontSize="10" color="#FF0000"
+													 iconRight="true"/>) : null}
 									</Col>
-
+									<Col style={{width: 40, alignItems: 'center'}}>
+										{(this.state.stars[item.id] && this.state.stars[item.id] === true) ?
+											(<Icon onPress={() => this.toggleStar(item.id)} name="ios-star"
+												   fontSize="10" style={{color: "#ffbb00"}} iconRight="true"/>)
+											:
+											(<Icon onPress={() => this.toggleStar(item.id)} name="ios-star-outline"
+												   fontSize="10" style={{color: "#888888"}} iconRight="true"/>)
+										}
+									</Col>
 								</Row>
 							))}
 						</Grid>
@@ -153,19 +153,16 @@ class Teams extends Component
 	}
 }
 
-function bindAction(dispatch)
-{
-	return {
+export default connect(
+	state => ({
+		teams: state.teams.list,
+		selectedTeam: state.teams.selectedIndex,
+		selectedDivision: state.divisions.selectedIndex
+	}),
+	dispatch => ({
 		getTeams: seasonid => dispatch(getTeams(seasonid)),
 		postUserTeams: teamid => dispatch(postUserTeams(teamid)),
 		setTeamIndex: index => dispatch(setTeamIndex(index)),
 		setLoading: (name, status) => dispatch(setLoading(name, status)),
-	};
-}
-const mapStateToProps = state => ({
-	teams: state.teams.list,
-	selectedTeam: state.teams.selectedIndex,
-	selectedDivision: state.divisions.selectedIndex
-});
-const TeamsSwagger = connect(mapStateToProps, bindAction)(Teams);
-export default TeamsSwagger;
+	})
+)(Teams);

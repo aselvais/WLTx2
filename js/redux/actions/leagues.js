@@ -1,5 +1,6 @@
 import type {Action} from './types';
 import Apiaccess from '../../libs/Apiaccess';
+
 let api = new Apiaccess();
 
 export const SET_LEAGUE_INDEX = 'SET_LEAGUE_INDEX';
@@ -35,9 +36,11 @@ export function resetLeagues(): Action
  */
 export function getLeagues(): Action
 {
-	function _returnLoadLeagues(d) {
-		return { type: LOAD_LEAGUES, list: d };
+	function _returnLoadLeagues(d)
+	{
+		return {type: LOAD_LEAGUES, list: d};
 	}
+
 	return dispatch => api.getLeague().then(
 		(d) => dispatch(_returnLoadLeagues(d)),
 		(e) => dispatch(_returnLoadLeagues([]))

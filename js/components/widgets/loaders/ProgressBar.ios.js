@@ -3,7 +3,7 @@
 import React, {Component} from 'react';
 import {ProgressViewIOS} from 'react-native';
 
-export default class ProgressBarNB extends Component
+class ProgressBarNB extends Component
 {
 
 
@@ -21,3 +21,5 @@ export default class ProgressBarNB extends Component
 	}
 
 }
+
+export default ProgressBarNB;

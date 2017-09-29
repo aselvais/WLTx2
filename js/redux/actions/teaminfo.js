@@ -36,7 +36,11 @@ export function resetTeaminfos(): Action
  */
 export function getTeaminfos(teamid: number): Action
 {
-	function _returnLoadTeaminfos(d) { return { type: LOAD_TEAMINFOS, list: d }; }
+	function _returnLoadTeaminfos(d)
+	{
+		return {type: LOAD_TEAMINFOS, list: d};
+	}
+
 	return dispatch => api.getTeamInfo(teamid).then(
 		(d) => dispatch(_returnLoadTeaminfos(d)),
 		(e) => dispatch(_returnLoadTeaminfos([]))

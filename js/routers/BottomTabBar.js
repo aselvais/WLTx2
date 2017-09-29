@@ -1,9 +1,5 @@
-import React, {Component} from "react";
-import {
-	TabNavigator,
-	TabBarBottom
-} from "react-navigation";
-
+import React from "react";
+import {TabBarBottom, TabNavigator} from "react-navigation";
 // screens
 import Home from "../components/screens/home";
 import Games from "../components/screens/games";

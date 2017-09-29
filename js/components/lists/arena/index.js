@@ -10,8 +10,6 @@ import {
 	Content,
 	Text,
 	H2,
-	H3,
-	Icon,
 	Button
 } from "native-base";
 import {
@@ -21,7 +19,6 @@ import {
 } from "react-native-easy-grid";
 import openMap from 'react-native-open-maps';
 import Spinner from '../../widgets/loaders/Spinner';
-
 
 /**
  *
@@ -42,6 +39,9 @@ class Arena extends Component
 	 */
 	static propTypes = {};
 
+	/**
+	 *
+	 */
 	openMaps()
 	{
 		const {game} = this.props;
@@ -104,13 +104,7 @@ class Arena extends Component
 	}
 }
 
-function bindAction(dispatch)
-{
-	return {};
-}
-
-const mapStateToProps = state => ({
-	game: state.games.selectedIndex,
-});
-const ArenaSwagger = connect(mapStateToProps, bindAction)(Arena);
-export default ArenaSwagger;
+export default connect(
+	state => ({game: state.games.selectedIndex}),
+	dispatch => ({})
+)(Arena);

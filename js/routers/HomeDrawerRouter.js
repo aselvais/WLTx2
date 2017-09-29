@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React from "react";
 import Home from "../components/screens/home/";
 import {DrawerNavigator} from "react-navigation";
 import DrawBar from "../components/widgets/DrawBar";

@@ -1,7 +1,6 @@
 import React, {Component} from "react";
 import PropTypes from 'prop-types';
 import {
-	Image,
 	TouchableOpacity,
 	Text
 } from "react-native";
@@ -10,8 +9,6 @@ import {
 	Container,
 	Content,
 	H2,
-	Icon,
-	Button
 } from "native-base";
 import {
 	Grid,
@@ -25,6 +22,7 @@ import {
 	resetTwitterfeeds
 } from "../../../redux/actions/twitterfeed";
 import Spinner from '../../widgets/loaders/Spinner';
+
 /**
  *
  */
@@ -34,7 +32,7 @@ class Twitterfeeds extends Component
 	 *
 	 * @param navigation
 	 */
-	static navigationOptions = ({ navigation }) => ({
+	static navigationOptions = ({navigation}) => ({
 		title: 'Select a twitterfeed'
 	});
 
@@ -85,7 +83,7 @@ class Twitterfeeds extends Component
 	 */
 	render()
 	{
-		let i=0;
+		let i = 0;
 		// const params = this.props.navigation.state.params;
 		return (
 			<Container>
@@ -95,13 +93,13 @@ class Twitterfeeds extends Component
 						<Grid>
 							{this.props.twitterfeeds.map((item, i) => (
 								<Row key={i++}>
-									<Col style={{ padding: 10 }}>
+									<Col style={{padding: 10}}>
 
 										<Text>{item.date}</Text>
 										<H2>{item.screenName}</H2>
 										<Text>{item.text}</Text>
 
-										<TouchableOpacity onPress={() => this.clickTwitterfeed(item) }>
+										<TouchableOpacity onPress={() => this.clickTwitterfeed(item)}>
 											<Text>{item.url}</Text>
 										</TouchableOpacity>
 									</Col>
@@ -117,18 +115,15 @@ class Twitterfeeds extends Component
 	}
 }
 
-function bindAction(dispatch)
-{
-	return {
+export default connect(
+	state => ({
+		twitterfeeds: state.twitterfeeds.list,
+		selectedTwitterfeed: state.twitterfeeds.selectedIndex,
+		selectedTeam: state.teams.selectedIndex
+	}),
+	dispatch => ({
 		getTwitterfeeds: teamid => dispatch(getTwitterfeeds(teamid)),
 		setTwitterfeedIndex: index => dispatch(setTwitterfeedIndex(index)),
 		resetTwitterfeeds: () => dispatch(resetTwitterfeeds()),
-	};
-}
-const mapStateToProps = state => ({
-	twitterfeeds: state.twitterfeeds.list,
-	selectedTwitterfeed: state.twitterfeeds.selectedIndex,
-	selectedTeam: state.teams.selectedIndex
-});
-const TwitterfeedsSwagger = connect(mapStateToProps, bindAction)(Twitterfeeds);
-export default TwitterfeedsSwagger;
+	})
+)(Twitterfeeds);

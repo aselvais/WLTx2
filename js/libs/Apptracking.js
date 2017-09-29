@@ -1,4 +1,5 @@
-import { GoogleAnalyticsTracker } from 'react-native-google-analytics-bridge';
+import {GoogleAnalyticsTracker} from 'react-native-google-analytics-bridge';
+
 let instance = null;
 
 
@@ -14,7 +15,8 @@ class Apptracking
 	 */
 	constructor()
 	{
-		if (!instance) {
+		if (!instance)
+		{
 			instance = this;
 		}
 		this._singletonStartDate = new Date();
@@ -26,7 +28,7 @@ class Apptracking
 	 *
 	 * @param msg
 	 */
-	trackScreenView( msg )
+	trackScreenView(msg)
 	{
 		this.tracker.trackScreenView(msg);
 	}
@@ -40,12 +42,14 @@ class Apptracking
 	{
 		function getCurrentRouteName(navigationState)
 		{
-			if (!navigationState) {
+			if (!navigationState)
+			{
 				return null;
 			}
 			const route = navigationState.routes[navigationState.index];
 			// dive into nested navigators
-			if (route.routes) {
+			if (route.routes)
+			{
 				return getCurrentRouteName(route);
 			}
 			return route.routeName;
@@ -60,8 +64,6 @@ class Apptracking
 		}
 	}
 
-
 }
-
 
 export default Apptracking;

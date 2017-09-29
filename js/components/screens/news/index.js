@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import {connect} from "react-redux";
-import { Text, View } from "react-native";
+import {View} from "react-native";
 import {
 	Container,
 	Content,
@@ -24,10 +24,10 @@ class News extends Component
 	 * Option for the TabNavigation system
 	 * @type {{header: null, tabBarLabel: string, tabBarIcon: (function({tintColor?: *}): XML)}}
 	 */
-	static navigationOptions = ({ navigation }) => ({
+	static navigationOptions = ({navigation}) => ({
 		header: <Headerbar title="News" navigation={navigation}/>,
 		tabBarLabel: 'News',
-		tabBarIcon: ({ tintColor }) => <Icon name="ios-medal" style={{color: tintColor}}/>
+		tabBarIcon: ({tintColor}) => <Icon name="ios-medal" style={{color: tintColor}}/>
 	});
 
 	/**

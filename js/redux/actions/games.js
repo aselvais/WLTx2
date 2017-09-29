@@ -19,6 +19,7 @@ export function setGameIndex(index: number): Action
 		payload: index
 	};
 };
+
 /**
  *
  * @param index
@@ -38,7 +39,11 @@ export function resetGames(): Action
  */
 export function getGames(date: string, teamid: number): Action
 {
-	function _returnLoadGames(d){ return { type: LOAD_GAMES, list: d }; }
+	function _returnLoadGames(d)
+	{
+		return {type: LOAD_GAMES, list: d};
+	}
+
 	return dispatch => api.getGameDetailAllArrays(date, teamid).then(
 		(d) => dispatch(_returnLoadGames(d)),
 		(e) => dispatch(_returnLoadGames([]))
@@ -54,7 +59,11 @@ export function getGames(date: string, teamid: number): Action
  */
 export function getGamesDay(date: string, seasonid: number, divisionid: number): Action
 {
-	function _returnLoadGamesDay(d) { return { type: LOAD_GAMES_DAY, listday: d }; }
+	function _returnLoadGamesDay(d)
+	{
+		return {type: LOAD_GAMES_DAY, listday: d};
+	}
+
 	return dispatch => api.getGameToday(date, seasonid, divisionid).then(
 		(d) => dispatch(_returnLoadGamesDay(d)),
 		(e) => dispatch(_returnLoadGamesDay([]))
@@ -71,7 +80,11 @@ export function getGamesDay(date: string, seasonid: number, divisionid: number):
  */
 export function getGamesAll(datefrom: string, dateto: string, seasonid: number, divisionid: number): Action
 {
-	function _returnLoadGamesDay(d) { return { type: LOAD_GAMES_DAY, listday: d }; }
+	function _returnLoadGamesDay(d)
+	{
+		return {type: LOAD_GAMES_DAY, listday: d};
+	}
+
 	return dispatch => api.getGameAll(datefrom, dateto, seasonid, divisionid).then(
 		(d) => dispatch(_returnLoadGamesDay(d)),
 		(e) => dispatch(_returnLoadGamesDay([]))

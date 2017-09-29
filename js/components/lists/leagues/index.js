@@ -10,26 +10,19 @@ import {
 	Content,
 	Text,
 	Icon,
-	Button
 } from "native-base";
 import {
 	Grid,
 	Row,
 	Col
 } from "react-native-easy-grid";
-
-
 import {
 	getLeagues,
 	setLeagueIndex
 } from "../../../redux/actions/leagues";
-
 import Spinner from '../../widgets/loaders/Spinner';
-import { setLoading } from "../../../redux/actions/loading";
-
-
+import {setLoading} from "../../../redux/actions/loading";
 import {resetSeasons} from "../../../redux/actions/seasons";
-
 import styles from "./styles";
 
 /**
@@ -41,7 +34,7 @@ class Leagues extends Component
 	 *
 	 * @param navigation
 	 */
-	static navigationOptions = ({ navigation }) => ({
+	static navigationOptions = ({navigation}) => ({
 		title: 'Select a league'
 	});
 
@@ -97,18 +90,19 @@ class Leagues extends Component
 						{this.props.leagues.map((item, i) => (
 							<Row key={item.id}>
 								<Col style={{width: 60, height: 55}}>
-									<TouchableOpacity style={styles.row} onPress={() => this.clickLeague(item) }>
+									<TouchableOpacity style={styles.row} onPress={() => this.clickLeague(item)}>
 										<Image style={{width: 50, height: 50}} source={{uri: item.imageUrl}}/>
 									</TouchableOpacity>
 								</Col>
 								<Col>
-									<TouchableOpacity style={styles.row} onPress={() => this.clickLeague(item) }>
+									<TouchableOpacity style={styles.row} onPress={() => this.clickLeague(item)}>
 										<Text style={styles.text}>{item.name}</Text>
 									</TouchableOpacity>
 								</Col>
 								<Col style={{width: 40, alignItems: 'center'}}>
-									{ (item.id && this.props.selectedLeague && this.props.selectedLeague.id && this.props.selectedLeague.id == item.id)
-										? (<Icon name="checkmark" fontSize="10" color="#FF0000" iconRight="true"/>) : null }
+									{(item.id && this.props.selectedLeague && this.props.selectedLeague.id && this.props.selectedLeague.id == item.id)
+										? (<Icon name="checkmark" fontSize="10" color="#FF0000"
+												 iconRight="true"/>) : null}
 								</Col>
 							</Row>
 						))}
@@ -119,19 +113,16 @@ class Leagues extends Component
 	}
 }
 
-function bindAction(dispatch)
-{
-	return {
+export default connect(
+	state => ({
+		name: state.user.name,
+		leagues: state.leagues.list,
+		selectedLeague: state.leagues.selectedIndex
+	}),
+	dispatch => ({
 		getLeagues: () => dispatch(getLeagues()),
 		setLeagueIndex: index => dispatch(setLeagueIndex(index)),
 		resetSeasons: () => dispatch(resetSeasons()),
 		setLoading: (name, status) => dispatch(setLoading(name, status)),
-	};
-}
-const mapStateToProps = state => ({
-	name: state.user.name,
-	leagues: state.leagues.list,
-	selectedLeague: state.leagues.selectedIndex
-});
-const LeaguesSwagger = connect(mapStateToProps, bindAction)(Leagues);
-export default LeaguesSwagger;
+	})
+)(Leagues);

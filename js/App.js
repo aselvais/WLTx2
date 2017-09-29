@@ -1,16 +1,11 @@
 import React, {Component} from "react";
-import {StyleSheet} from "react-native";
-import PropTypes from 'prop-types';
 import CodePush from "react-native-code-push";
-
 import {Container, Content, Text, View} from "native-base";
 import Modal from "react-native-modalbox";
 import MainStackRouter from "./routers/MainStackRouter";
 import ProgressBar from "./components/widgets/loaders/ProgressBar";
-
 import theme from "./components/themes/base-theme";
 import Apptracking from './libs/Apptracking';
-
 const tracking = new Apptracking();
 
 /**
@@ -57,7 +52,8 @@ class App extends Component
 			{updateDialog: true, installMode: CodePush.InstallMode.IMMEDIATE},
 			status =>
 			{
-				switch (status) {
+				switch (status)
+				{
 					case CodePush.SyncStatus.DOWNLOADING_PACKAGE:
 						this.setState({showDownloadingModal: true});
 						this._modal.open();
@@ -86,7 +82,8 @@ class App extends Component
 	 */
 	render()
 	{
-		if (this.state.showDownloadingModal) {
+		if (this.state.showDownloadingModal)
+		{
 			return (
 				<Container
 					theme={theme}
@@ -95,7 +92,10 @@ class App extends Component
 						<Modal
 							style={[styles.modal, styles.modal1]}
 							backdrop={false}
-							ref={c => { this._modal = c; }}
+							ref={c =>
+							{
+								this._modal = c;
+							}}
 							swipeToClose={false}>
 							<View
 								style={{

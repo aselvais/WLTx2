@@ -12,6 +12,7 @@ import Teams from "../components/lists/teams";
 import Teaminfos from "../components/lists/teaminfo";
 import Selectdate from "../components/lists/selectdate";
 import Arena from "../components/lists/arena";
+import Gameinfo from "../components/lists/gameinfo";
 
 HomeDrawerRouter.navigationOptions = ({navigation}) => ({header: null});
 
@@ -28,6 +29,7 @@ export default (
 			Teaminfo: {screen: Teaminfos},
 			Selectdate: {screen: Selectdate},
 			Arena: {screen: Arena},
+			Gameinfo: {screen: Gameinfo},
 		},
 		{}
 	)

@@ -15,7 +15,7 @@ class Arena extends Component
 	 * @param navigation
 	 */
 	static navigationOptions = ({navigation}) => ({
-		title: 'Game info'
+		title: 'Arena info'
 	});
 
 	/**

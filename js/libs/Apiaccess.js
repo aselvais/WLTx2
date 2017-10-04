@@ -35,12 +35,11 @@ class Apiaccess
 
 	/**
 	 * Maximum age of cached data in sec.
-	 * Set to 10 mins for now...
 	 *
 	 * @type {number}
 	 * @private
 	 */
-	_cachingDuration = 600;
+	_cachingDuration = 25*60;
 
 	/**
 	 * Token used to connect to the API (seems to be used for the favourite and other personal data)
@@ -48,6 +47,7 @@ class Apiaccess
 	 * @private
 	 */
 	_token = null;
+
 	/**
 	 * Date object instanciated when we created the singleton
 	 *

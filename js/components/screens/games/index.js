@@ -128,14 +128,14 @@ class Games extends Component
 						</Col>
 						<Col size={1} style={styles.colin}>
 							<Row style={{borderBottomColor: '#EEEEEE', borderBottomWidth: 1}}>
-								<TouchableOpacity onPress={() => this.clickGame(item, "Arena")}>
+								<TouchableOpacity onPress={() => this.clickGame(item, "Gameinfo")}>
 									<Text style={{fontWeight: 'bold'}}>
 										<Icon name="ios-time" style={{fontSize: 15}}/>{'  ' + item.time}
 									</Text>
 								</TouchableOpacity>
 							</Row>
 							<Row style={{paddingTop: 5}}>
-								<TouchableOpacity onPress={() => this.clickGame(item, "Arena")}>
+								<TouchableOpacity onPress={() => this.clickGame(item, "Gameinfo")}>
 									<Text>
 										<Icon name="ios-navigate" style={{fontSize: 15}}/>{'  ' + item.arena.name}
 									</Text>

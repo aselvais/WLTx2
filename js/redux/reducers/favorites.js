@@ -1,11 +1,11 @@
 import type {Action} from "../actions/types";
 import {
-	RESET_FAVORITES,
+	DELETE_USER_TEAMS,
 	GET_USER_DIVISION,
 	GET_USER_GAMES,
 	GET_USER_TEAMS,
 	POST_USER_TEAMS,
-	DELETE_USER_TEAMS
+	RESET_FAVORITES
 } from "../actions/favorites";
 
 /**
@@ -32,7 +32,7 @@ const initialState = {
  * @param action
  * @returns {*}
  */
-export default function(state: State = initialState, action: Action): State
+export default function (state: State = initialState, action: Action): State
 {
 	switch (action.type)
 	{

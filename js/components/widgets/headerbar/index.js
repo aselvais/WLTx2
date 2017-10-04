@@ -1,12 +1,5 @@
 import React, {Component} from "react";
-import {
-	Header,
-	Title,
-	Button,
-	Left,
-	Body,
-	Right
-} from "native-base";
+import {Body, Button, Header, Left, Right, Title} from "native-base";
 
 /**
  *

@@ -1,11 +1,7 @@
 import React, {Component} from "react";
 import PropTypes from 'prop-types';
 import {connect} from "react-redux";
-import {
-	Container,
-	Content,
-	Icon,
-} from "native-base";
+import {Container, Content, Icon,} from "native-base";
 import styles from "./styles";
 import Btnteamselect from '../../widgets/btnteamselect/index';
 import Headerbar from "../../widgets/headerbar/index";

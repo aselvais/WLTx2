@@ -1,25 +1,10 @@
 import React, {Component} from "react";
 import PropTypes from 'prop-types';
-import {
-	Image,
-	TouchableOpacity
-} from "react-native";
+import {Image, TouchableOpacity} from "react-native";
 import {connect} from "react-redux";
-import {
-	Container,
-	Content,
-	Text,
-	Icon,
-} from "native-base";
-import {
-	Grid,
-	Row,
-	Col
-} from "react-native-easy-grid";
-import {
-	getLeagues,
-	setLeagueIndex
-} from "../../../redux/actions/leagues";
+import {Container, Content, Icon, Text,} from "native-base";
+import {Col, Grid, Row} from "react-native-easy-grid";
+import {getLeagues, setLeagueIndex} from "../../../redux/actions/leagues";
 import Spinner from '../../widgets/loaders/Spinner';
 import {setLoading} from "../../../redux/actions/loading";
 import {resetSeasons} from "../../../redux/actions/seasons";

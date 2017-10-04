@@ -1,9 +1,5 @@
 import type {Action} from "../actions/types";
-import {
-	SET_TWITTERFEED_INDEX,
-	RESET_TWITTERFEEDS,
-	LOAD_TWITTERFEEDS
-} from "../actions/twitterfeed";
+import {LOAD_TWITTERFEEDS, RESET_TWITTERFEEDS, SET_TWITTERFEED_INDEX} from "../actions/twitterfeed";
 
 /**
  *
@@ -26,7 +22,7 @@ const initialState = {
  * @param action
  * @returns {*}
  */
-export default function(state: State = initialState, action: Action): State
+export default function (state: State = initialState, action: Action): State
 {
 	switch (action.type)
 	{

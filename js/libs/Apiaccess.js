@@ -14,7 +14,7 @@ class Apiaccess
 	 * @type {boolean}
 	 * @private
 	 */
-	_debugMode = false;
+	_debugMode = __DEV__;
 	/**
 	 *
 	 * @type {{prod: string, stage: string}}
@@ -48,6 +48,28 @@ class Apiaccess
 	 * @private
 	 */
 	_token = null;
+	/**
+	 * Date object instanciated when we created the singleton
+	 *
+	 * @type {Date}
+	 * @private
+	 */
+	_singletonStartDate;
+
+	/**
+	 * Instantiate / return the singleton instance of this class
+	 *
+	 * @returns {*}
+	 */
+	constructor()
+	{
+		if (!instance)
+		{
+			instance = this;
+		}
+		this._singletonStartDate = new Date();
+		return instance;
+	}
 
 	/**
 	 * Config coming from the XLS doc received
@@ -168,29 +190,6 @@ class Apiaccess
 	};
 
 	/**
-	 * Date object instanciated when we created the singleton
-	 *
-	 * @type {Date}
-	 * @private
-	 */
-	_singletonStartDate;
-
-	/**
-	 * Instantiate / return the singleton instance of this class
-	 *
-	 * @returns {*}
-	 */
-	constructor()
-	{
-		if (!instance)
-		{
-			instance = this;
-		}
-		this._singletonStartDate = new Date();
-		return instance;
-	}
-
-	/**
 	 * Returns the config element for the API coming from the XLS documentation received
 	 *
 	 * @return Object
@@ -198,6 +197,19 @@ class Apiaccess
 	get cfg()
 	{
 		return this._cfg;
+	}
+
+	/**
+	 * Setter for log message
+	 *
+	 * @param msg
+	 */
+	set log(msg)
+	{
+		if (this._debugMode)
+		{
+			console.log(msg);
+		}
 	}
 
 	/**
@@ -234,11 +246,11 @@ class Apiaccess
 			}
 			p = that._genericApiCall('PostRegister', {device: uID});
 			p.then(
-				function(d)
+				function (d)
 				{
 					that._token = d.token;
 				},
-				function(d)
+				function (d)
 				{
 					that._token = null;
 				}
@@ -247,7 +259,7 @@ class Apiaccess
 		}
 		else
 		{
-			return new Promise(function(resolve, reject)
+			return new Promise(function (resolve, reject)
 			{
 				resolve({token: that._token});
 			});
@@ -409,7 +421,6 @@ class Apiaccess
 		}));
 	}
 
-
 	/**
 	 * Get games in dates range for users favourite teams
 	 *
@@ -463,7 +474,6 @@ class Apiaccess
 	{
 		return this.postRegister().then(() => this._genericApiCall('DeleteUserTeams', {teamId: teamId}));
 	}
-
 
 	/**
 	 * Generic call to the API
@@ -539,19 +549,6 @@ class Apiaccess
 			this.log = 'Error querying the API';
 			this.log = error;
 			return error;
-		}
-	}
-
-	/**
-	 * Setter for log message
-	 *
-	 * @param msg
-	 */
-	set log(msg)
-	{
-		if (this._debugMode)
-		{
-			console.log(msg);
 		}
 	}
 

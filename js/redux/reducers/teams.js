@@ -1,9 +1,5 @@
 import type {Action} from "../actions/types";
-import {
-	LOAD_TEAMS, RESET_TEAMS,
-	SET_TEAMS_INDEX,
-	SET_TEAMS_INDEX_BY_ID
-} from "../actions/teams";
+import {LOAD_TEAMS, RESET_TEAMS, SET_TEAMS_INDEX, SET_TEAMS_INDEX_BY_ID} from "../actions/teams";
 
 /**
  *
@@ -27,7 +23,7 @@ const initialState = {
  * @param action
  * @returns {*}
  */
-export default function(state: State = initialState, action: Action): State
+export default function (state: State = initialState, action: Action): State
 {
 	switch (action.type)
 	{
@@ -49,7 +45,6 @@ export default function(state: State = initialState, action: Action): State
 			{
 				if (e.id === action.payload)
 				{
-					console.log(e.id, action.payload);
 					relem = e;
 					return;
 				}

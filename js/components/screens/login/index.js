@@ -1,22 +1,8 @@
 import React, {Component} from "react";
-import PropTypes from 'prop-types';
-import {
-	Image,
-	Dimensions
-} from "react-native";
-import {connect} from "react-redux";
-import {
-	Button,
-	Text
-} from "native-base";
-import {
-	Grid,
-	Row,
-	Col
-} from "react-native-easy-grid";
-import {
-	reduxForm
-} from "redux-form";
+import {Dimensions, Image} from "react-native";
+import {Button, Text} from "native-base";
+import {Col, Grid, Row} from "react-native-easy-grid";
+import {reduxForm} from "redux-form";
 import styles from "./styles";
 import Spinner from '../../widgets/loaders/Spinner';
 

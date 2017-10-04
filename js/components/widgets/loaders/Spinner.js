@@ -1,7 +1,5 @@
 import React, {Component} from "react";
-import {
-	Spinner
-} from "native-base";
+import {Spinner} from "native-base";
 import {connect} from "react-redux";
 
 /**

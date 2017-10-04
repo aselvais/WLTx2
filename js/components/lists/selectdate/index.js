@@ -1,18 +1,9 @@
 import React, {Component} from "react";
 import PropTypes from 'prop-types';
-import {
-	connect
-} from "react-redux";
-import {
-	Container,
-	Content
-} from "native-base";
-import {
-	setDate
-} from "../../../redux/actions/selecteddate";
-import {
-	Calendar
-} from 'react-native-calendars';
+import {connect} from "react-redux";
+import {Container, Content} from "native-base";
+import {setDate} from "../../../redux/actions/selecteddate";
+import {Calendar} from 'react-native-calendars';
 import moment from 'moment';
 import Spinner from '../../widgets/loaders/Spinner';
 

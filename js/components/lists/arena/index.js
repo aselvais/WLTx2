@@ -1,22 +1,7 @@
 import React, {Component} from "react";
-import PropTypes from 'prop-types';
-import {
-	Image,
-	TouchableOpacity
-} from "react-native";
 import {connect} from "react-redux";
-import {
-	Container,
-	Content,
-	Text,
-	H2,
-	Button
-} from "native-base";
-import {
-	Grid,
-	Row,
-	Col
-} from "react-native-easy-grid";
+import {Button, Container, Content, H2, Text} from "native-base";
+import {Col, Grid, Row} from "react-native-easy-grid";
 import openMap from 'react-native-open-maps';
 import Spinner from '../../widgets/loaders/Spinner';
 

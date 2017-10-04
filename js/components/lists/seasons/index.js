@@ -1,24 +1,10 @@
 import React, {Component} from "react";
 import PropTypes from 'prop-types';
-import {
-	TouchableOpacity
-} from "react-native";
+import {TouchableOpacity} from "react-native";
 import {connect} from "react-redux";
-import {
-	Container,
-	Content,
-	Text,
-	Icon,
-} from "native-base";
-import {
-	Grid,
-	Row,
-	Col
-} from "react-native-easy-grid";
-import {
-	getSeasons,
-	setSeasonIndex
-} from "../../../redux/actions/seasons";
+import {Container, Content, Icon, Text,} from "native-base";
+import {Col, Grid, Row} from "react-native-easy-grid";
+import {getSeasons, setSeasonIndex} from "../../../redux/actions/seasons";
 import {resetDivisions} from "../../../redux/actions/divisions";
 import Spinner from '../../widgets/loaders/Spinner';
 import {setLoading} from "../../../redux/actions/loading";
@@ -52,7 +38,7 @@ class Seasons extends Component
 	 */
 	componentDidMount()
 	{
-		console.log('Seasons::componentDidMount ' + parseInt(this.props.selectedLeague.id));
+		//console.log('Seasons::componentDidMount ' + parseInt(this.props.selectedLeague.id));
 		this.props.setLoading('seasons', true);
 		this.props.getSeasons(parseInt(this.props.selectedLeague.id)).then(
 			() => this.props.setLoading('seasons', false),

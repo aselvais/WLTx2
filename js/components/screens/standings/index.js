@@ -1,16 +1,9 @@
 import React, {Component} from "react";
 import PropTypes from 'prop-types';
 import {connect} from "react-redux";
-import {
-	Container,
-	Content,
-	Icon,
-} from "native-base";
+import {Container, Content, Icon,} from "native-base";
 import StandingsList from '../../lists/standings';
-import {
-	getTiers,
-	setTierIndex
-} from "../../../redux/actions/tiers";
+import {getTiers, setTierIndex} from "../../../redux/actions/tiers";
 import Spinner from '../../widgets/loaders/Spinner';
 import Headerbar from '../../widgets/headerbar/index';
 import styles from "./styles";

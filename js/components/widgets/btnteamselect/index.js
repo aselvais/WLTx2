@@ -1,15 +1,8 @@
 import React, {Component} from "react";
 import {connect} from "react-redux";
 import {Text} from "react-native";
-import {
-	Button,
-	Icon
-} from "native-base";
-import {
-	Grid,
-	Row,
-	Col
-} from "react-native-easy-grid";
+import {Button, Icon} from "native-base";
+import {Col, Grid, Row} from "react-native-easy-grid";
 import styles from "./styles";
 
 /**

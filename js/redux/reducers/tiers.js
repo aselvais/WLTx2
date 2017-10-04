@@ -1,9 +1,5 @@
 import type {Action} from "../actions/types";
-import {
-	SET_TIER_INDEX,
-	RESET_TIERS,
-	LOAD_TIERS
-} from "../actions/tiers";
+import {LOAD_TIERS, RESET_TIERS, SET_TIER_INDEX} from "../actions/tiers";
 
 /**
  *
@@ -26,7 +22,7 @@ const initialState = {
  * @param action
  * @returns {*}
  */
-export default function(state: State = initialState, action: Action): State
+export default function (state: State = initialState, action: Action): State
 {
 	switch (action.type)
 	{

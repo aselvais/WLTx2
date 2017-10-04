@@ -1,15 +1,7 @@
 import React from "react";
-import {
-	Dimensions,
-} from "react-native";
-import {
-	Text,
-	Container,
-	List,
-	ListItem,
-	Content,
-	View
-} from "native-base";
+import {Dimensions,} from "react-native";
+import {Container, Content, List, ListItem, Text, View} from "native-base";
+
 const deviceHeight = Dimensions.get('window').height;
 
 /**

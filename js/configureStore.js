@@ -15,17 +15,10 @@ export default function configureStore(onCompletion: () => void): any
 {
 	/**
 	 *
-	 * @type {boolean}
 	 */
-	const debugMode = true;
-
-	/**
-	 *
-	 * @type {<R>(a: R) => R | GenericStoreEnhancer | Func0<any> | Func1<any, any> | Func2<any, any, any> | Func3<any, any, any, any> | any}
-	 */
-	const enhancer = compose(
-		applyMiddleware(thunk, promise),
-		debugMode ? devTools({ name: 'WLTx2', realtime: true }) : null
+	const enhancer = ( __DEV__ ?
+			compose(applyMiddleware(thunk, promise), devTools({name: 'WLTx2', realtime: true})) :
+			compose(applyMiddleware(thunk, promise))
 	);
 
 	/**
@@ -33,6 +26,7 @@ export default function configureStore(onCompletion: () => void): any
 	 * @type {Store<any>}
 	 */
 	const store = createStore(reducer, enhancer);
+
 	/**
 	 *
 	 */

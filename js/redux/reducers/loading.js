@@ -1,7 +1,5 @@
 import type {Action} from '../actions/types';
-import {
-	SET_LOADING
-} from '../actions/loading';
+import {SET_LOADING} from '../actions/loading';
 
 export type State = {
 	services: object,
@@ -18,7 +16,7 @@ const initialState = {
 
 /* ------------------------------------------------------------------------------------------------------------------ */
 
-export default function(state: State = initialState, action: Action): State
+export default function (state: State = initialState, action: Action): State
 {
 	if (action.type === SET_LOADING)
 	{

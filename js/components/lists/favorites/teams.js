@@ -1,24 +1,11 @@
 import React, {Component} from "react";
 import PropTypes from 'prop-types';
-import {
-	Image,
-	TouchableOpacity
-} from "react-native";
+import {Image, TouchableOpacity} from "react-native";
 import {connect} from "react-redux";
-import {
-	Container,
-	Content,
-	Text,
-} from "native-base";
-import {
-	Grid,
-	Row,
-	Col
-} from "react-native-easy-grid";
+import {Container, Content, Text,} from "native-base";
+import {Col, Grid, Row} from "react-native-easy-grid";
 
-import {
-	getUserTeams
-} from "../../../redux/actions/favorites";
+import {getUserTeams} from "../../../redux/actions/favorites";
 import Spinner from '../../widgets/loaders/Spinner';
 
 /**

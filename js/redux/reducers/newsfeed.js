@@ -1,9 +1,5 @@
 import type {Action} from "../actions/types";
-import {
-	SET_NEWSFEED_INDEX,
-	RESET_NEWSFEEDS,
-	LOAD_NEWSFEEDS
-} from "../actions/newsfeed";
+import {LOAD_NEWSFEEDS, RESET_NEWSFEEDS, SET_NEWSFEED_INDEX} from "../actions/newsfeed";
 
 /**
  *
@@ -26,7 +22,7 @@ const initialState = {
  * @param action
  * @returns {*}
  */
-export default function(state: State = initialState, action: Action): State
+export default function (state: State = initialState, action: Action): State
 {
 	switch (action.type)
 	{

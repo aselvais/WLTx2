@@ -22,7 +22,7 @@ export default {
 	name: {
 		padding: 10
 	},
-	colRight:{
+	colRight: {
 		justifyContent: 'center',
 		alignItems: 'flex-end'
 	}

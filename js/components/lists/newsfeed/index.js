@@ -1,25 +1,10 @@
 import React, {Component} from "react";
 import PropTypes from 'prop-types';
-import {
-	Text,
-	TouchableOpacity
-} from "react-native";
+import {Text, TouchableOpacity} from "react-native";
 import {connect} from "react-redux";
-import {
-	Container,
-	Content,
-	H2
-} from "native-base";
-import {
-	Grid,
-	Row,
-	Col
-} from "react-native-easy-grid";
-import {
-	getNewsfeeds,
-	setNewsfeedIndex,
-	resetNewsfeeds
-} from "../../../redux/actions/newsfeed";
+import {Container, Content, H2} from "native-base";
+import {Col, Grid, Row} from "react-native-easy-grid";
+import {getNewsfeeds, resetNewsfeeds, setNewsfeedIndex} from "../../../redux/actions/newsfeed";
 import Spinner from '../../widgets/loaders/Spinner';
 
 /**

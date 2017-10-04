@@ -1,9 +1,5 @@
 import type {Action} from "../actions/types";
-import {
-	LOAD_SEASONS,
-	RESET_SEASONS,
-	SET_SEASONS_INDEX
-} from "../actions/seasons";
+import {LOAD_SEASONS, RESET_SEASONS, SET_SEASONS_INDEX} from "../actions/seasons";
 
 /**
  *
@@ -26,7 +22,7 @@ const initialState = {
  * @param action
  * @returns {*}
  */
-export default function(state: State = initialState, action: Action): State
+export default function (state: State = initialState, action: Action): State
 {
 	switch (action.type)
 	{

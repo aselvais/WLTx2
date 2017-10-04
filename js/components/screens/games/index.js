@@ -1,32 +1,12 @@
 import React, {Component} from "react";
 import PropTypes from 'prop-types';
 import {connect} from "react-redux";
-import {
-	Image,
-	TouchableOpacity,
-	Text,
-	View
-} from "react-native";
-import {
-	Container,
-	Content,
-	Icon,
-	Button,
-} from "native-base";
-import {
-	Grid,
-	Row,
-	Col
-} from "react-native-easy-grid";
+import {Image, Text, TouchableOpacity, View} from "react-native";
+import {Button, Container, Content, Icon,} from "native-base";
+import {Col, Grid, Row} from "react-native-easy-grid";
 import moment from 'moment';
-import {
-	setGameIndex,
-	getGamesAll
-} from "../../../redux/actions/games";
-import {
-	setTeamIndexById,
-	getTeams
-} from "../../../redux/actions/teams";
+import {getGamesAll, setGameIndex} from "../../../redux/actions/games";
+import {getTeams, setTeamIndexById} from "../../../redux/actions/teams";
 import {setLoading} from "../../../redux/actions/loading";
 import Headerbar from '../../widgets/headerbar/index';
 import styles from "./styles";

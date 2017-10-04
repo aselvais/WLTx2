@@ -1,9 +1,5 @@
 import type {Action} from "../actions/types";
-import {
-	LOAD_DIVISIONS,
-	RESET_DIVISIONS,
-	SET_DIVISIONS_INDEX
-} from "../actions/divisions";
+import {LOAD_DIVISIONS, RESET_DIVISIONS, SET_DIVISIONS_INDEX} from "../actions/divisions";
 
 /**
  *
@@ -26,7 +22,7 @@ const initialState = {
  * @param action
  * @returns {*}
  */
-export default function(state: State = initialState, action: Action): State
+export default function (state: State = initialState, action: Action): State
 {
 	switch (action.type)
 	{

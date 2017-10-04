@@ -1,27 +1,14 @@
 import React, {Component} from "react";
 import PropTypes from 'prop-types';
-import {
-	Image,
-	Dimensions
-} from "react-native";
+import {Dimensions, Image} from "react-native";
 import {connect} from "react-redux";
-import {
-	Container,
-	Content,
-	Text,
-} from "native-base";
-import {
-	Grid,
-	Row,
-	Col
-} from "react-native-easy-grid";
+import {Container, Content, Text,} from "native-base";
+import {Col, Grid, Row} from "react-native-easy-grid";
 
-import {
-	getTeaminfos
-} from "../../../redux/actions/teaminfo";
+import {getTeaminfos} from "../../../redux/actions/teaminfo";
+import Spinner from '../../widgets/loaders/Spinner';
 
 const deviceWidth = Dimensions.get('window').width;
-import Spinner from '../../widgets/loaders/Spinner';
 
 /**
  *

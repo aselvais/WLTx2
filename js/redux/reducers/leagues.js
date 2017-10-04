@@ -1,9 +1,5 @@
 import type {Action} from "../actions/types";
-import {
-	SET_LEAGUE_INDEX,
-	RESET_LEAGUES,
-	LOAD_LEAGUES
-} from "../actions/leagues";
+import {LOAD_LEAGUES, RESET_LEAGUES, SET_LEAGUE_INDEX} from "../actions/leagues";
 
 /**
  *
@@ -26,7 +22,7 @@ const initialState = {
  * @param action
  * @returns {*}
  */
-export default function(state: State = initialState, action: Action): State
+export default function (state: State = initialState, action: Action): State
 {
 	switch (action.type)
 	{

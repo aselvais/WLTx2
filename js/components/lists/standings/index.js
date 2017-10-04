@@ -1,24 +1,10 @@
 import React, {Component} from "react";
 import PropTypes from 'prop-types';
-import {
-	TouchableOpacity,
-	Text,
-	View
-} from "react-native";
+import {Text, TouchableOpacity, View} from "react-native";
 import {connect} from "react-redux";
-import {
-	Grid,
-	Row,
-	Col
-} from "react-native-easy-grid";
-import {
-	getStandings,
-	resetStandings,
-	setStandingIndex
-} from "../../../redux/actions/standings";
-import {
-	setTeamIndexById,
-} from "../../../redux/actions/teams";
+import {Col, Grid, Row} from "react-native-easy-grid";
+import {getStandings, resetStandings, setStandingIndex} from "../../../redux/actions/standings";
+import {setTeamIndexById,} from "../../../redux/actions/teams";
 import Spinner from '../../widgets/loaders/Spinner';
 import {setLoading} from "../../../redux/actions/loading";
 

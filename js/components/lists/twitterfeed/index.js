@@ -1,26 +1,11 @@
 import React, {Component} from "react";
 import PropTypes from 'prop-types';
-import {
-	TouchableOpacity,
-	Text
-} from "react-native";
+import {Text, TouchableOpacity} from "react-native";
 import {connect} from "react-redux";
-import {
-	Container,
-	Content,
-	H2,
-} from "native-base";
-import {
-	Grid,
-	Row,
-	Col
-} from "react-native-easy-grid";
+import {Container, Content, H2,} from "native-base";
+import {Col, Grid, Row} from "react-native-easy-grid";
 
-import {
-	getTwitterfeeds,
-	setTwitterfeedIndex,
-	resetTwitterfeeds
-} from "../../../redux/actions/twitterfeed";
+import {getTwitterfeeds, resetTwitterfeeds, setTwitterfeedIndex} from "../../../redux/actions/twitterfeed";
 import Spinner from '../../widgets/loaders/Spinner';
 
 /**

@@ -1,30 +1,13 @@
 import React, {Component} from "react";
 import PropTypes from 'prop-types';
-import {
-	Image,
-	TouchableOpacity
-} from "react-native";
+import {Image, TouchableOpacity} from "react-native";
 import {connect} from "react-redux";
-import {
-	Container,
-	Content,
-	Text,
-	Icon,
-} from "native-base";
-import {
-	Grid,
-	Row,
-	Col
-} from "react-native-easy-grid";
+import {Container, Content, Icon, Text,} from "native-base";
+import {Col, Grid, Row} from "react-native-easy-grid";
 
-import {
-	getTeams,
-	setTeamIndex
-} from "../../../redux/actions/teams";
+import {getTeams, setTeamIndex} from "../../../redux/actions/teams";
 
-import {
-	postUserTeams
-} from "../../../redux/actions/favorites";
+import {postUserTeams} from "../../../redux/actions/favorites";
 import Spinner from '../../widgets/loaders/Spinner';
 import {setLoading} from "../../../redux/actions/loading";
 
@@ -70,7 +53,7 @@ class Teams extends Component
 	 */
 	componentDidMount()
 	{
-		console.log('Teams::componentDidMount ' + parseInt(this.props.selectedDivision.id));
+		//console.log('Teams::componentDidMount ' + parseInt(this.props.selectedDivision.id));
 		this.props.setLoading('games', true);
 		this.props.getTeams(parseInt(this.props.selectedDivision.id)).then(
 			() => this.props.setLoading('games', false),

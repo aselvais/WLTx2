@@ -1,19 +1,11 @@
 import React, {Component} from "react";
-import {connect} from "react-redux";
 import {View} from "react-native";
-import {
-	Container,
-	Content,
-	Icon,
-	Tabs,
-	Tab
-} from "native-base";
+import {Container, Content, Icon, Tab, Tabs} from "native-base";
 import Headerbar from '../../widgets/headerbar/index';
 import styles from "./styles";
 
 import Newsfeed from '../../lists/newsfeed';
 import Twitterfeed from '../../lists/twitterfeed';
-import Spinner from '../../widgets/loaders/Spinner';
 
 /**
  *

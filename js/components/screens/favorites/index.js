@@ -1,17 +1,9 @@
 import React, {Component} from "react";
-import {connect} from "react-redux";
 import {Text, View} from "react-native";
-import {
-	Container,
-	Content,
-	Icon,
-	Tabs,
-	Tab
-} from "native-base";
+import {Container, Content, Icon, Tab, Tabs} from "native-base";
 import Headerbar from '../../widgets/headerbar/index';
 import styles from "./styles";
 import Teams from '../../lists/favorites/teams';
-import Spinner from '../../widgets/loaders/Spinner';
 
 /**
  *

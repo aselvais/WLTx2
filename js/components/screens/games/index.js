@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import PropTypes from 'prop-types';
 import {connect} from "react-redux";
-import {Image, Text, TouchableOpacity, View} from "react-native";
+import {Image, Text, View} from "react-native";
 import {Button, Container, Content, Icon,} from "native-base";
 import {Col, Grid, Row} from "react-native-easy-grid";
 import moment from 'moment';
@@ -86,24 +86,20 @@ class Games extends Component
 	getJsxGame(item)
 	{
 		return (
-			<Row key={item.id}>
-				<Col style={{margin: 5}}>
+			<Row key={item.id} onPress={() => this.clickGame(item, "Gameinfo")}>
+				<Col style={styles.col1widget} size={1}>
 					<Grid style={styles.griditem}>
 						<Col size={2}>
 							<Row>
 								<Grid>
 									<Row>
-										<Col style={{width: 40, height: 40}}>
-											<TouchableOpacity onPress={() => this.clickTeam(item.info.team1.teamId)}>
-												<Image style={{width: 25, height: 25}}
-													   source={{uri: item.info.team1.imageUrl}}/>
-											</TouchableOpacity>
+										<Col style={styles.col1widget}>
+											<Image style={styles.logoTeam}
+												   source={{uri: item.info.team1.imageUrl}}/>
 										</Col>
 										<Col>
-											<TouchableOpacity onPress={() => this.clickTeam(item.info.team1.teamId)}>
-												<Text
-													style={{color: '#000000'}}>{item.info.team1.teamName.toUpperCase()}</Text>
-											</TouchableOpacity>
+											<Text
+												style={{color: '#000000'}}>{item.info.team1.teamName.toUpperCase()}</Text>
 										</Col>
 									</Row>
 								</Grid>
@@ -111,16 +107,12 @@ class Games extends Component
 							<Row>
 								<Grid>
 									<Row>
-										<Col style={{width: 40, height: 40}}>
-											<TouchableOpacity onPress={() => this.clickTeam(item.info.team2.teamId)}>
-												<Image style={{width: 25, height: 25}}
-													   source={{uri: item.info.team2.imageUrl}}/>
-											</TouchableOpacity>
+										<Col style={styles.col1widget}>
+											<Image style={styles.logoTeam}
+												   source={{uri: item.info.team2.imageUrl}}/>
 										</Col>
 										<Col>
-											<TouchableOpacity onPress={() => this.clickTeam(item.info.team2.teamId)}>
-												<Text>{item.info.team2.teamName.toUpperCase()}</Text>
-											</TouchableOpacity>
+											<Text>{item.info.team2.teamName.toUpperCase()}</Text>
 										</Col>
 									</Row>
 								</Grid>
@@ -128,18 +120,14 @@ class Games extends Component
 						</Col>
 						<Col size={1} style={styles.colin}>
 							<Row style={{borderBottomColor: '#EEEEEE', borderBottomWidth: 1}}>
-								<TouchableOpacity onPress={() => this.clickGame(item, "Gameinfo")}>
-									<Text style={{fontWeight: 'bold'}}>
-										<Icon name="ios-time" style={{fontSize: 15}}/>{'  ' + item.time}
-									</Text>
-								</TouchableOpacity>
+								<Text style={styles.txtBold}>
+									<Icon name="ios-time" style={{fontSize: 15}}/>{'  ' + item.time}
+								</Text>
 							</Row>
 							<Row style={{paddingTop: 5}}>
-								<TouchableOpacity onPress={() => this.clickGame(item, "Gameinfo")}>
-									<Text>
-										<Icon name="ios-navigate" style={{fontSize: 15}}/>{'  ' + item.arena.name}
-									</Text>
-								</TouchableOpacity>
+								<Text>
+									<Icon name="ios-navigate" style={{fontSize: 15}}/>{'  ' + item.arena.name}
+								</Text>
 							</Row>
 						</Col>
 					</Grid>
@@ -155,21 +143,21 @@ class Games extends Component
 	render()
 	{
 		let {sdate, sdatefrom, sdateto, division, gamesday, loading} = this.props;
-
 		return (
-			<Container style={{backgroundColor: '#EEEEEE'}}>
+			<Container style={styles.container}>
 				<Grid>
-					<Row style={{height: 50}}>
+					<Row style={styles.rowTop}>
 						<Col size={1}>
 							<Button style={styles.topbutton}
 									onPress={() => this.props.navigation.navigate("Divisions")}>
 								<Grid>
 									<Col style={styles.topbntcol}>
-										<Text style={{fontWeight: 'bold'}}>DIVISION:</Text>
-										<Text
-											style={{fontWeight: 'bold'}}>{(division && division.name) ? division.name.toUpperCase() : null}</Text>
+										<Text style={styles.txtBold}>DIVISION:</Text>
+										<Text style={styles.txtBold}>
+											{(division && division.name) ? division.name.toUpperCase() : null}
+										</Text>
 									</Col>
-									<Col style={{width: 18}}>
+									<Col style={styles.col2}>
 										<Icon name="ios-arrow-forward" style={{color: '#000000'}}/>
 									</Col>
 								</Grid>
@@ -180,10 +168,10 @@ class Games extends Component
 									onPress={() => this.props.navigation.navigate("Selectdate")}>
 								<Grid>
 									<Col style={styles.topbntcol}>
-										<Text style={{fontWeight: 'bold'}}>DATE:</Text>
-										<Text style={{fontWeight: 'bold'}}>{moment(sdate).format('L')}</Text>
+										<Text style={styles.txtBold}>DATE:</Text>
+										<Text style={styles.txtBold}>{moment(sdate).format('L')}</Text>
 									</Col>
-									<Col style={{width: 18}}>
+									<Col style={styles.col2}>
 										<Icon name="ios-arrow-forward" style={{color: '#000000'}}/>
 									</Col>
 								</Grid>
@@ -193,22 +181,18 @@ class Games extends Component
 					<Row>
 						<Content padder>
 							<Spinner/>
-							{
-								(gamesday && gamesday.length && gamesday.length > 0) ?
-									<Grid>
-										{gamesday.map((item, i) => this.getJsxGame(item))}
-									</Grid>
-									: null
-							}
-							{
-								(!loading && !(gamesday && gamesday.length && gamesday.length > 0)) ?
-									<View>
-										<Text>No game from {moment(sdatefrom).format('L')}
-											to {moment(sdateto).format('L')}</Text>
-									</View>
-									:
-									null
-							}
+							{(gamesday && gamesday.length && gamesday.length > 0) ?
+								<Grid>{gamesday.map((item, i) => this.getJsxGame(item))}</Grid> : null}
+							{(!loading && !(gamesday && gamesday.length && gamesday.length > 0)) ?
+								<View style={styles.griditem}>
+									<Text style={{textAlign: 'center'}}>
+										No game or data from{"\n"}
+										{moment(sdatefrom).format('L')}{"\n"}
+										to{"\n"}
+										{moment(sdateto).format('L')}{"\n"}
+									</Text>
+								</View>
+								: null}
 						</Content>
 					</Row>
 				</Grid>

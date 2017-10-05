@@ -4,7 +4,7 @@ const {StyleSheet} = React;
 
 export default {
 	container: {
-		backgroundColor: '#FFFFFF',
+		backgroundColor: '#EEEEEE'
 	},
 	topbtn: {
 		backgroundColor: '#DDD',
@@ -17,7 +17,6 @@ export default {
 	},
 	topbutton: {
 		backgroundColor: '#DDD',
-//		width: '100%',
 		borderRadius: 0,
 		borderBottomColor: '#AAAAAA',
 		borderBottomWidth: 1
@@ -35,10 +34,32 @@ export default {
 		borderBottomWidth: 1,
 		borderRightColor: '#AAAAAA',
 		borderRightWidth: 1,
+		height: 100
 	},
 	colin: {
 		borderLeftColor: '#EEEEEE',
 		borderLeftWidth: 1,
 		paddingLeft: 3
-	}
+	},
+	txtBold: {
+		fontWeight: 'bold'
+	},
+	col2: {
+		width: 18
+	},
+	rowTop: {
+		height: 50
+	},
+	// ------------ match widget ------------- //
+	col1widget: {
+		margin: 5
+	},
+	logoTeam: {
+		width: 25,
+		height: 25
+	},
+	col1widget: {
+		width: 40,
+		height: 40
+	},
 };

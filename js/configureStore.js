@@ -2,7 +2,10 @@ import {AsyncStorage} from 'react-native';
 import devTools from 'remote-redux-devtools';
 import {applyMiddleware, compose, createStore} from 'redux';
 import thunk from 'redux-thunk';
-import {persistStore} from 'redux-persist';
+import {
+	persistStore,
+	autoRehydrate
+} from 'redux-persist';
 import reducer from './redux/reducers';
 import promise from './promise';
 
@@ -25,12 +28,21 @@ export default function configureStore(onCompletion: () => void): any
 	 *
 	 * @type {Store<any>}
 	 */
-	const store = createStore(reducer, enhancer);
-
+	const store = createStore(
+		reducer,
+		enhancer,
+		compose(
+			autoRehydrate()
+		)
+	);
 	/**
 	 *
 	 */
-	persistStore(store, {storage: AsyncStorage}, onCompletion);
+	persistStore(
+		store,
+		{storage: AsyncStorage},
+		onCompletion
+	);
 
 	return store;
 }

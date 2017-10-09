@@ -46,8 +46,9 @@ class Games extends Component
 	 */
 	componentDidMount()
 	{
-		let datefrom = this.props.sdatefrom.getTime();
-		let dateto = this.props.sdateto.getTime();
+		let dd = new Date();
+		let datefrom = (this.props.sdatefrom && this.props.sdatefrom.getTime) ? this.props.sdatefrom.getTime() : dd.getTime();
+		let dateto = (this.props.sdateto && this.props.sdateto.getTime) ? this.props.sdateto.getTime() : dd.getTime();
 
 		if (this.props && this.props.season && this.props.season.id && this.props.division && this.props.division.id)
 		{
@@ -94,12 +95,10 @@ class Games extends Component
 								<Grid>
 									<Row>
 										<Col style={styles.col1widget}>
-											<Image style={styles.logoTeam}
-												   source={{uri: item.info.team1.imageUrl}}/>
+											<Image style={styles.logoTeam} source={{uri: item.info.team1.imageUrl}}/>
 										</Col>
 										<Col>
-											<Text
-												style={{color: '#000000'}}>{item.info.team1.teamName.toUpperCase()}</Text>
+											<Text style={{color: '#000000'}}>{item.info.team1.teamName.toUpperCase()}</Text>
 										</Col>
 									</Row>
 								</Grid>

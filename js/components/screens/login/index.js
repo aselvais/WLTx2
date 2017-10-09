@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import {Dimensions, Image} from "react-native";
+import {connect} from "react-redux";
 import {Button, Text} from "native-base";
 import {Col, Grid, Row} from "react-native-easy-grid";
 import {reduxForm} from "redux-form";
@@ -16,6 +17,15 @@ const logo = require("../../../../images/MarlLogo.png");
  */
 class Login extends Component
 {
+
+	/**
+	 *
+	 * @param navigation
+	 */
+	static navigationOptions = ({navigation}) => ({
+		header: null
+	});
+
 	/**
 	 *
 	 * @type {{setUser}}
@@ -29,6 +39,15 @@ class Login extends Component
 	constructor(props)
 	{
 		super(props);
+	}
+
+	/**
+	 *
+	 */
+	onClickStart()
+	{
+		this.props.navigation.navigate("Games");
+		// this.props.navigation.navigate("Leagues");
 	}
 
 	/**
@@ -54,7 +73,7 @@ class Login extends Component
 					</Row>
 					<Row size={1}>
 						<Col>
-							<Button style={styles.btn} onPress={() => this.props.navigation.navigate("Leagues")}>
+							<Button style={styles.btn} onPress={() => this.onClickStart()}>
 								<Text>START</Text>
 							</Button>
 						</Col>
@@ -65,10 +84,15 @@ class Login extends Component
 	}
 }
 
-
-/**
- *
- */
+export default connect(
+	state => ({
+// 		league: state.leagues.selectedIndex,
+		season: state.seasons.selectedIndex,
+	}),
+	dispatch => ({
+	})
+)(Login);
+/*
 const LoginSwag = reduxForm(
 	{form: "test"},
 	function bindActions(dispatch)
@@ -76,5 +100,6 @@ const LoginSwag = reduxForm(
 		return {};
 	}
 )(Login);
-LoginSwag.navigationOptions = {header: null};
+
 export default LoginSwag;
+*/

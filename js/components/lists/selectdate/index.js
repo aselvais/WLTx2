@@ -49,15 +49,18 @@ class Selectdate extends Component
 		let mdates = {};
 		let i = sdatefrom;
 		mdates[moment(sdate).format('YYYY-MM-DD')] = [{selected: true}];
-		while (i < sdateto)
+		if (typeof i === 'object')
 		{
-			let txtd = moment(i).format('YYYY-MM-DD');
-			if (!mdates[txtd])
+			while (i < sdateto)
 			{
-				mdates[txtd] = [];
+				let txtd = moment(i).format('YYYY-MM-DD');
+				if (!mdates[txtd])
+				{
+					mdates[txtd] = [];
+				}
+				mdates[txtd].push({marked: true, color: 'green', textColor: 'white'});
+				i.setDate(i.getDate() + 1);
 			}
-			mdates[txtd].push({marked: true, color: 'green', textColor: 'white'});
-			i.setDate(i.getDate() + 1);
 		}
 
 		return (

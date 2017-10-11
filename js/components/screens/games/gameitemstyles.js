@@ -8,8 +8,27 @@ export default {
 		height: 25
 	},
 	col1widget: {
-		margin: 5,
-		height: 80
+		margin: 3,
+		height: 100,
+		alignItems: 'center',
+		alignSelf: 'center'
+	},
+	col12widget: {
+		width: 35,
+		alignItems: 'center',
+		alignSelf: 'center'
+	},
+	colTeamName: {
+		alignSelf: 'center'
+	},
+	colScores: {
+		width: 33,
+		alignItems: 'center',
+		alignSelf: 'center'
+	},
+	scoretxt: {
+		fontSize: 25,
+		// fontWeight: 'bold'
 	},
 	griditem: {
 		backgroundColor: '#FFFFFF',
@@ -22,6 +41,7 @@ export default {
 		height: 100
 	},
 	colin: {
+		width: 90,
 		borderLeftColor: '#EEEEEE',
 		borderLeftWidth: 1,
 		paddingLeft: 3

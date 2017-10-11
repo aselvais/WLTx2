@@ -34,7 +34,7 @@ class Selectdate extends Component
 	 */
 	onDayPress(d)
 	{
-		let dd = new Date(d.year, d.month - 1, d.day)
+		let dd = new Date(d.year, (d.month - 1), d.day)
 		this.props.setDate(dd);
 		this.props.navigation.navigate("Games");
 	}
@@ -49,6 +49,8 @@ class Selectdate extends Component
 		let mdates = {};
 		let i = sdatefrom;
 		mdates[moment(sdate).format('YYYY-MM-DD')] = [{selected: true}];
+		/*
+
 		if (typeof i === 'object')
 		{
 			while (i < sdateto)
@@ -63,6 +65,7 @@ class Selectdate extends Component
 			}
 		}
 
+		*/
 		return (
 			<Container>
 				<Spinner/>

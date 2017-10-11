@@ -18,22 +18,32 @@ const initialState = {
 
 export default function (state: State = initialState, action: Action): State
 {
-	if (action.type === SET_LOADING)
+	switch (action.type)
 	{
-		var globalstatus = false;
-		state.services[action.name] = action.status;
-		for (var k in state.services)
-		{
-			if (state.services[k] === true)
+		/**
+		 * set index of the leagues
+		 */
+		case SET_LOADING:
+			let globalstatus = false;
+			state.services[action.name] = action.status;
+
+			for (var k in state.services)
 			{
-				globalstatus = true;
-				break;
+				if (state.services[k] === true)
+				{
+					globalstatus = true;
+					break;
+				}
 			}
-		}
-		return {
-			...state,
-			globalstatus: globalstatus
-		};
+			return {
+				...state,
+				globalstatus: globalstatus
+			};
+			break;
+		/**
+		 * default do nothing
+		 */
+		default:
+			return state;
 	}
-	return state;
 }

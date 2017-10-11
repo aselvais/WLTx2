@@ -20,13 +20,24 @@ const initialState = {
 
 export default function (state: State = initialState, action: Action): State
 {
-	if (action.type === SET_DATE)
+	switch (action.type)
 	{
-		let dd = action.payload;
-		state.sdate = dd;
-		state.sdatefrom = dd;
-		state.sdateto = new Date(dd.getFullYear(), dd.getMonth() + rangeMonths, dd.getDate());
-		return state;
+		/**
+		 * set index of the leagues
+		 */
+		case SET_DATE:
+			let dd = action.payload;
+			return {
+				...state,
+				sdate: dd,
+				sdatefrom: dd,
+				sdateto: new Date(dd.getFullYear(), dd.getMonth() + rangeMonths, dd.getDate())
+			};
+			break;
+		/**
+		 * default do nothing
+		 */
+		default:
+			return state;
 	}
-	return state;
 }

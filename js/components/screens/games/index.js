@@ -46,16 +46,17 @@ class Games extends Component
 	 */
 	componentDidMount()
 	{
-		let dd = new Date();
-		let datefrom = (this.props.sdatefrom && this.props.sdatefrom.getTime) ? this.props.sdatefrom.getTime() : dd.getTime();
-		let dateto = (this.props.sdateto && this.props.sdateto.getTime) ? this.props.sdateto.getTime() : dd.getTime();
-
-		if (this.props && this.props.season && this.props.season.id && this.props.division && this.props.division.id)
+		let {season, division, setLoading, getGamesAll, sdatefrom, sdateto} = this.props;
+		if (season && season.id && division && division.id && sdatefrom && sdateto && sdatefrom.getTime && sdateto.getTime)
 		{
-			this.props.setLoading('games', true);
-			this.props.getGamesAll(datefrom, dateto, this.props.season.id, this.props.division.id).then(
-				() => this.props.setLoading('games', false),
-				() => this.props.setLoading('games', false)
+			setLoading('games', true);
+			getGamesAll(
+				sdatefrom.getTime(),
+				sdateto.getTime(),
+				season.id,
+				division.id).then(
+					() => setLoading('games', false),
+					() => setLoading('games', false)
 			);
 		}
 	}
@@ -71,12 +72,6 @@ class Games extends Component
 		{
 			this.props.navigation.navigate(routeName);
 		}
-	}
-
-	clickTeam(t)
-	{
-		this.props.setTeamIndexById(t);
-		this.props.navigation.navigate("Teaminfo");
 	}
 
 	/**

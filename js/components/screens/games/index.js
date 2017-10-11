@@ -11,6 +11,7 @@ import {setLoading} from "../../../redux/actions/loading";
 import Headerbar from '../../widgets/headerbar/index';
 import styles from "./styles";
 import Spinner from '../../widgets/loaders/Spinner';
+import Gameitem from './gameitem';
 
 /**
  *
@@ -50,13 +51,9 @@ class Games extends Component
 		if (season && season.id && division && division.id && sdatefrom && sdateto && sdatefrom.getTime && sdateto.getTime)
 		{
 			setLoading('games', true);
-			getGamesAll(
-				sdatefrom.getTime(),
-				sdateto.getTime(),
-				season.id,
-				division.id).then(
-					() => setLoading('games', false),
-					() => setLoading('games', false)
+			getGamesAll(sdatefrom.getTime(), sdateto.getTime(), season.id, division.id).then(
+				() => setLoading('games', false),
+				() => setLoading('games', false)
 			);
 		}
 	}
@@ -67,67 +64,12 @@ class Games extends Component
 	 */
 	clickGame(item, routeName = null)
 	{
-		this.props.setGameIndex(item);
+		let {setGameIndex, navigation} = this.props;
+		setGameIndex(item);
 		if (routeName)
 		{
-			this.props.navigation.navigate(routeName);
+			navigation.navigate(routeName);
 		}
-	}
-
-	/**
-	 *
-	 * @param item
-	 * @returns {XML}
-	 */
-	getJsxGame(item)
-	{
-		return (
-			<Row key={item.id} onPress={() => this.clickGame(item, "Gameinfo")}>
-				<Col style={styles.col1widget} size={1}>
-					<Grid style={styles.griditem}>
-						<Col size={2}>
-							<Row>
-								<Grid>
-									<Row>
-										<Col style={styles.col1widget}>
-											<Image style={styles.logoTeam} source={{uri: item.info.team1.imageUrl}}/>
-										</Col>
-										<Col>
-											<Text style={{color: '#000000'}}>{item.info.team1.teamName.toUpperCase()}</Text>
-										</Col>
-									</Row>
-								</Grid>
-							</Row>
-							<Row>
-								<Grid>
-									<Row>
-										<Col style={styles.col1widget}>
-											<Image style={styles.logoTeam}
-												   source={{uri: item.info.team2.imageUrl}}/>
-										</Col>
-										<Col>
-											<Text>{item.info.team2.teamName.toUpperCase()}</Text>
-										</Col>
-									</Row>
-								</Grid>
-							</Row>
-						</Col>
-						<Col size={1} style={styles.colin}>
-							<Row style={{borderBottomColor: '#EEEEEE', borderBottomWidth: 1}}>
-								<Text style={styles.txtBold}>
-									<Icon name="ios-time" style={{fontSize: 15}}/>{'  ' + item.time}
-								</Text>
-							</Row>
-							<Row style={{paddingTop: 5}}>
-								<Text>
-									<Icon name="ios-navigate" style={{fontSize: 15}}/>{'  ' + item.arena.name}
-								</Text>
-							</Row>
-						</Col>
-					</Grid>
-				</Col>
-			</Row>
-		);
 	}
 
 	/**
@@ -136,14 +78,14 @@ class Games extends Component
 	 */
 	render()
 	{
-		let {sdate, sdatefrom, sdateto, division, gamesday, loading} = this.props;
+		let {sdate, sdatefrom, sdateto, division, gamesday, loading, navigation} = this.props;
 		return (
 			<Container style={styles.container}>
 				<Grid>
 					<Row style={styles.rowTop}>
 						<Col size={1}>
 							<Button style={styles.topbutton}
-									onPress={() => this.props.navigation.navigate("Divisions")}>
+									onPress={() => navigation.navigate("Divisions")}>
 								<Grid>
 									<Col style={styles.topbntcol}>
 										<Text style={styles.txtBold}>DIVISION:</Text>
@@ -159,7 +101,7 @@ class Games extends Component
 						</Col>
 						<Col size={1}>
 							<Button style={styles.topbutton}
-									onPress={() => this.props.navigation.navigate("Selectdate")}>
+									onPress={() => navigation.navigate("Selectdate")}>
 								<Grid>
 									<Col style={styles.topbntcol}>
 										<Text style={styles.txtBold}>DATE:</Text>
@@ -176,7 +118,11 @@ class Games extends Component
 						<Content padder>
 							<Spinner/>
 							{(gamesday && gamesday.length && gamesday.length > 0) ?
-								<Grid>{gamesday.map((item, i) => this.getJsxGame(item))}</Grid> : null}
+								<Grid>{gamesday.map((item, i) => (
+									<Row key={item.id} onPress={() => this.clickGame(item, "Gameinfo")}>
+										<Gameitem key={item.id} item={item}/>
+									</Row>))}
+								</Grid> : null}
 							{(!loading && !(gamesday && gamesday.length && gamesday.length > 0)) ?
 								<View style={styles.griditem}>
 									<Text style={{textAlign: 'center'}}>

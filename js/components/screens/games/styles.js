@@ -50,16 +50,4 @@ export default {
 	rowTop: {
 		height: 50
 	},
-	// ------------ match widget ------------- //
-	col1widget: {
-		margin: 5
-	},
-	logoTeam: {
-		width: 25,
-		height: 25
-	},
-	col1widget: {
-		width: 40,
-		height: 40
-	},
 };

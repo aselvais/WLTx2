@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import PropTypes from 'prop-types';
 import {connect} from "react-redux";
-import {Image, Text, View} from "react-native";
+import {Text, View} from "react-native";
 import {Button, Container, Content, Icon,} from "native-base";
 import {Col, Grid, Row} from "react-native-easy-grid";
 import moment from 'moment';
@@ -74,6 +74,34 @@ class Games extends Component
 
 	/**
 	 *
+	 * @param gamesday
+	 * @returns {*}
+	 */
+	getMatchListJsx(gamesday)
+	{
+		if (gamesday && gamesday.length && gamesday.length > 0)
+		{
+			let ddmOld = null;
+			let ddm = null;
+			let jsx = [];
+			gamesday.map((item, i) =>
+			{
+				ddm = moment(new Date(item.dateTime)).format('dddd, MMMM Do YYYY');
+				if (ddm != ddmOld)
+				{
+					jsx.push(<Text key={ddm} style={styles.dateTxt}>{ddm}</Text>);
+				}
+				jsx.push(<Row key={item.id} onPress={() => this.clickGame(item, "Gameinfo")}>
+					<Gameitem key={item.id} item={item}/></Row>);
+				ddmOld = ddm;
+			});
+			return (<Grid>{jsx}</Grid>);
+		}
+		return null;
+	}
+
+	/**
+	 *
 	 * @returns {XML}
 	 */
 	render()
@@ -117,12 +145,7 @@ class Games extends Component
 					<Row>
 						<Content padder>
 							<Spinner/>
-							{(gamesday && gamesday.length && gamesday.length > 0) ?
-								<Grid>{gamesday.map((item, i) => (
-									<Row key={item.id} onPress={() => this.clickGame(item, "Gameinfo")}>
-										<Gameitem key={item.id} item={item}/>
-									</Row>))}
-								</Grid> : null}
+							{this.getMatchListJsx(gamesday)}
 							{(!loading && !(gamesday && gamesday.length && gamesday.length > 0)) ?
 								<View style={styles.griditem}>
 									<Text style={{textAlign: 'center'}}>

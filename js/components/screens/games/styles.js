@@ -6,6 +6,13 @@ export default {
 	container: {
 		backgroundColor: '#EEEEEE'
 	},
+	dateTxt: {
+		textAlign: 'center',
+		fontSize: 23,
+//		fontWeight: 'bold',
+		paddingTop: 10,
+		paddingBottom: 8,
+	},
 	topbtn: {
 		backgroundColor: '#DDD',
 		width: '100%',

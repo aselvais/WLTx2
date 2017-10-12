@@ -4,6 +4,7 @@ const {StyleSheet} = React;
 
 export default {
 	logoTeam: {
+		paddingLeft: 10,
 		width: 25,
 		height: 25
 	},
@@ -14,7 +15,7 @@ export default {
 		alignSelf: 'center'
 	},
 	col12widget: {
-		width: 35,
+		width: 45,
 		alignItems: 'center',
 		alignSelf: 'center'
 	},
@@ -22,7 +23,7 @@ export default {
 		alignSelf: 'center'
 	},
 	colScores: {
-		width: 33,
+		width: 40,
 		alignItems: 'center',
 		alignSelf: 'center'
 	},
@@ -33,7 +34,7 @@ export default {
 	griditem: {
 		backgroundColor: '#FFFFFF',
 		margin: 3,
-		borderRadius: 3,
+		borderRadius: 7,
 		borderBottomColor: '#AAAAAA',
 		borderBottomWidth: 1,
 		borderRightColor: '#AAAAAA',

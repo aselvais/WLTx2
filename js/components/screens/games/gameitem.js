@@ -12,18 +12,29 @@ class Gameitem extends Component
 
 	/**
 	 *
+	 * @param s
+	 * @returns {*}
+	 */
+	getScoreTxt(s)
+	{
+		if (!s && parseInt(s) !== 0) return '-';
+		return s;
+	}
+
+	/**
+	 *
 	 * @param txt
 	 * @returns {Array}
 	 */
 	getTeamNameJsx(txt='')
 	{
 		let jsx = [];
-		let txt0 = txt.split(' ');
+		let txt0 = txt.trim().split(' ');
 		let txt2 = txt0.pop();
 		let txt1 = txt0.join(' ');
 
 		if (txt1 != '') jsx.push(<Text key={1} style={{color: '#000000', fontSize: 11, textAlign: 'left'}}>{txt1}</Text>);
-		if (txt2 != '')jsx.push(<Text key={2} style={{color: '#000000', fontSize: 14}}>{txt2}</Text>);
+		if (txt2 != '') jsx.push(<Text key={2} style={{color: '#000000', fontSize: 14}}>{txt2}</Text>);
 
 		return jsx;
 	}
@@ -50,7 +61,7 @@ class Gameitem extends Component
 											{this.getTeamNameJsx(item.info.team1.teamName.toUpperCase())}
 										</Col>
 										<Col style={styles.colScores}>
-											<Text style={styles.scoretxt}>{ item.info.team1.score }</Text>
+											<Text style={styles.scoretxt}>{ this.getScoreTxt(item.info.team1.score) }</Text>
 										</Col>
 									</Row>
 								</Grid>
@@ -65,7 +76,7 @@ class Gameitem extends Component
 											{this.getTeamNameJsx(item.info.team2.teamName.toUpperCase())}
 										</Col>
 										<Col style={styles.colScores}>
-											<Text style={styles.scoretxt}>{ item.info.team2.score }</Text>
+											<Text style={styles.scoretxt}>{ this.getScoreTxt(item.info.team2.score) }</Text>
 										</Col>
 									</Row>
 								</Grid>

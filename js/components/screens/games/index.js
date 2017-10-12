@@ -86,7 +86,11 @@ class Games extends Component
 			let jsx = [];
 			gamesday.map((item, i) =>
 			{
-				ddm = moment(new Date(item.dateTime)).format('dddd, MMMM Do YYYY');
+				try {
+					ddm = moment(new Date(item.dateTime)).format('dddd, MMMM Do YYYY');
+				} catch (er) {
+					// date manipulation failed...
+				}
 				if (ddm != ddmOld)
 				{
 					jsx.push(<Text key={ddm} style={styles.dateTxt}>{ddm}</Text>);

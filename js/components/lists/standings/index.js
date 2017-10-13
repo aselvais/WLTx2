@@ -7,7 +7,7 @@ import {getStandings, resetStandings, setStandingIndex} from "../../../redux/act
 import {setTeamIndexById,} from "../../../redux/actions/teams";
 import Spinner from '../../widgets/loaders/Spinner';
 import {setLoading} from "../../../redux/actions/loading";
-
+import styles from "./styles";
 
 /**
  *
@@ -106,14 +106,13 @@ class Standings extends Component
 		});
 
 		return (
-			<Grid>
-				<Spinner/>
+			<Grid style={styles.griditemBottom}>
 				<Row>
 					<Col size={1}></Col>
-					<Col size={5}><Text style={{fontWeight: 'bold'}}>Team</Text></Col>
-					<Col size={1}><Text style={{fontWeight: 'bold'}}>GP</Text></Col>
-					<Col size={2}><Text style={{fontWeight: 'bold'}}>W-L-T</Text></Col>
-					<Col size={1}><Text style={{fontWeight: 'bold'}}>PTS</Text></Col>
+					<Col size={5}><Text style={styles.titleline}>Team</Text></Col>
+					<Col size={1}><Text style={styles.titleline}>GP</Text></Col>
+					<Col size={2}><Text style={styles.titleline}>W-L-T</Text></Col>
+					<Col size={1}><Text style={styles.titleline}>PTS</Text></Col>
 				</Row>
 				{jsx}
 			</Grid>
@@ -132,9 +131,9 @@ class Standings extends Component
 				{(this.props.standings && this.props.standings.length && this.props.standings.length > 0) ?
 					<Grid>
 						{this.props.standings.map((item, i) => (
-							<Row key={item.id}>
-								<Col style={{padding: 10}}>
-									<Text style={{fontWeight: 'bold', textAlign: 'center'}}>{item.name}</Text>
+							<Row key={item.id} style={{ paddingTop: 10 }}>
+								<Col>
+									{ (item.name) ? <Text style={styles.griditemTop}>{item.name}</Text> : null }
 									{(item.name != '') ? this.getStandingsJsx(item.teamStandingLocalAPIModels) : null}
 								</Col>
 							</Row>

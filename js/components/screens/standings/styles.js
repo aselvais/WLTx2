@@ -4,6 +4,6 @@ const {StyleSheet} = React;
 
 export default {
 	container: {
-		backgroundColor: '#FFFFFF',
+		backgroundColor: '#EEEEEE'
 	},
 };

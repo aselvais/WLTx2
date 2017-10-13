@@ -24,17 +24,25 @@ class Gameitem extends Component
 	/**
 	 *
 	 * @param txt
+	 * @param isWinner
 	 * @returns {Array}
 	 */
-	getTeamNameJsx(txt='')
+	getTeamNameJsx(txt='', isWinner=false)
 	{
 		let jsx = [];
 		let txt0 = txt.trim().split(' ');
 		let txt2 = txt0.pop();
 		let txt1 = txt0.join(' ');
+		let tcolor = '#000000';
+		let tweight = 'normal';
+		if (isWinner)
+		{
+			tweight = 'bold';
+			tcolor = '#3F51B5';
+		}
 
-		if (txt1 != '') jsx.push(<Text key={1} style={{color: '#000000', fontSize: 11, textAlign: 'left'}}>{txt1}</Text>);
-		if (txt2 != '') jsx.push(<Text key={2} style={{color: '#000000', fontSize: 14}}>{txt2}</Text>);
+		if (txt1 != '') jsx.push(<Text key={1} style={{color: tcolor, fontWeight: tweight, fontSize: 11, textAlign: 'left'}}>{txt1}</Text>);
+		if (txt2 != '') jsx.push(<Text key={2} style={{color: tcolor, fontWeight: tweight,  fontSize: 14}}>{txt2}</Text>);
 
 		return jsx;
 	}
@@ -58,7 +66,10 @@ class Gameitem extends Component
 											<Image style={styles.logoTeam} source={{uri: item.info.team1.imageUrl}}/>
 										</Col>
 										<Col style={styles.colTeamName}>
-											{this.getTeamNameJsx(item.info.team1.teamName.toUpperCase())}
+											{this.getTeamNameJsx(
+												item.info.team1.teamName.toUpperCase(),
+												(parseInt(item.info.team1.score) > parseInt(item.info.team2.score))
+											)}
 										</Col>
 										<Col style={styles.colScores}>
 											<Text style={styles.scoretxt}>{ this.getScoreTxt(item.info.team1.score) }</Text>
@@ -73,7 +84,10 @@ class Gameitem extends Component
 											<Image style={styles.logoTeam} source={{uri: item.info.team2.imageUrl}}/>
 										</Col>
 										<Col style={styles.colTeamName}>
-											{this.getTeamNameJsx(item.info.team2.teamName.toUpperCase())}
+											{this.getTeamNameJsx(
+												item.info.team2.teamName.toUpperCase(),
+												(parseInt(item.info.team1.score) < parseInt(item.info.team2.score))
+											)}
 										</Col>
 										<Col style={styles.colScores}>
 											<Text style={styles.scoretxt}>{ this.getScoreTxt(item.info.team2.score) }</Text>

@@ -8,6 +8,7 @@ import {setTeamIndexById,} from "../../../redux/actions/teams";
 import Spinner from '../../widgets/loaders/Spinner';
 import {setLoading} from "../../../redux/actions/loading";
 import styles from "./styles";
+import Orientation from 'react-native-orientation';
 
 /**
  *
@@ -39,6 +40,7 @@ class Standings extends Component
 	 */
 	componentDidMount()
 	{
+		Orientation.lockToPortrait();
 		if (this.props.selectedDivisions && this.props.selectedDivisions.id)
 		{
 			this.props.setLoading('standings', true);
@@ -91,25 +93,23 @@ class Standings extends Component
 		{
 			u++;
 			jsx.push(
-				<Row key={u}>
-					<Col size={1}><Text>{u}</Text></Col>
-					<Col size={5}>
-						<TouchableOpacity onPress={() => this.clickTeam(d.teamId)}>
-							<Text>{d.teamName}</Text>
-						</TouchableOpacity>
-					</Col>
-					<Col size={1}><Text>{d.gp}</Text></Col>
-					<Col size={2}><Text>{d.win + '-' + d.lose + '-' + d.draw}</Text></Col>
-					<Col size={1}><Text>{d.points}</Text></Col>
-				</Row>
+				<TouchableOpacity key={u} onPress={() => this.clickTeam(d.teamId)}>
+					<Row key={u}>
+						<Col size={6}>
+							<Text>{u + ' ' + d.teamName}</Text>
+						</Col>
+						<Col size={1}><Text>{d.gp}</Text></Col>
+						<Col size={2}><Text>{d.win + '-' + d.lose + '-' + d.draw}</Text></Col>
+						<Col size={1}><Text>{d.points}</Text></Col>
+					</Row>
+				</TouchableOpacity>
 			);
 		});
 
 		return (
 			<Grid style={styles.griditemBottom}>
 				<Row>
-					<Col size={1}></Col>
-					<Col size={5}><Text style={styles.titleline}>Team</Text></Col>
+					<Col size={6}><Text style={styles.titleline}>Team</Text></Col>
 					<Col size={1}><Text style={styles.titleline}>GP</Text></Col>
 					<Col size={2}><Text style={styles.titleline}>W-L-T</Text></Col>
 					<Col size={1}><Text style={styles.titleline}>PTS</Text></Col>
@@ -126,22 +126,20 @@ class Standings extends Component
 	render()
 	{
 		let u = 0;
+
 		return (
 			<View>
-				{(this.props.standings && this.props.standings.length && this.props.standings.length > 0) ?
-					<Grid>
-						{this.props.standings.map((item, i) => (
-							<Row key={item.id} style={{ paddingTop: 10 }}>
-								<Col>
-									{ (item.name) ? <Text style={styles.griditemTop}>{item.name}</Text> : null }
-									{(item.name != '') ? this.getStandingsJsx(item.teamStandingLocalAPIModels) : null}
-								</Col>
-							</Row>
-						))}
+				<Spinner/>
+				{this.props.standings.map((item, i) => (
+					<Grid key={item.id} style={styles.griditem}>
+						<Row style={styles.griditemTop}>
+							<Col>
+								{(item.name) ? <Text style={styles.topText}>{item.name}</Text> : null}
+								{(item.name != '') ? this.getStandingsJsx(item.teamStandingLocalAPIModels) : null}
+							</Col>
+						</Row>
 					</Grid>
-					:
-					null
-				}
+				))}
 			</View>
 		);
 	}

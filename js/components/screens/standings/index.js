@@ -64,7 +64,6 @@ class Standings extends Component
 		const {props: {name, index, list}} = this;
 		return (
 			<Container style={styles.container}>
-				<Spinner/>
 				<Content padder>
 					<StandingsList navigation={this.props.navigation}/>
 				</Content>

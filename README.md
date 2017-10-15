@@ -100,4 +100,10 @@ code-push deployment ls WinLoseOrTie-ios
  - Add fixed data for the league/division/ ...
  - Change the CodePush ID
  
+# Trics
 
+## clear cache
+
+```bash
+watchman watch-del-all && rm -rf $TMPDIR/react-* && rm -rf node_modules/ && npm cache clean && npm install && npm start -- --reset-cache
+```

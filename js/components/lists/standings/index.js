@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import PropTypes from 'prop-types';
-import {Text, TouchableOpacity, View} from "react-native";
+import {Text, TouchableOpacity, View, Image} from "react-native";
 import {connect} from "react-redux";
 import {Col, Grid, Row} from "react-native-easy-grid";
 import {getStandings, resetStandings, setStandingIndex} from "../../../redux/actions/standings";
@@ -9,6 +9,7 @@ import Spinner from '../../widgets/loaders/Spinner';
 import {setLoading} from "../../../redux/actions/loading";
 import styles from "./styles";
 import Orientation from 'react-native-orientation';
+import colors from '../../../libs/Wltcolors';
 
 /**
  *
@@ -94,13 +95,21 @@ class Standings extends Component
 			u++;
 			jsx.push(
 				<TouchableOpacity key={u} onPress={() => this.clickTeam(d.teamId)}>
-					<Row key={u}>
-						<Col size={6}>
-							<Text>{u + ' ' + d.teamName}</Text>
+					<Row key={u} style={{
+						backgroundColor: (u%2) ? colors.white : colors.lightgrey
+					}}>
+						<Col size={1}>
+							<Text style={styles.txtItem}>{u}</Text>
 						</Col>
-						<Col size={1}><Text>{d.gp}</Text></Col>
-						<Col size={2}><Text>{d.win + '-' + d.lose + '-' + d.draw}</Text></Col>
-						<Col size={1}><Text>{d.points}</Text></Col>
+						<Col size={1}>
+							<Image style={styles.logoTeam} source={{uri: d.imageUrl}}/>
+						</Col>
+						<Col size={4}>
+							<Text style={styles.txtItem}>{d.teamName}</Text>
+						</Col>
+						<Col size={1}><Text style={styles.txtItem}>{d.gp}</Text></Col>
+						<Col size={2}><Text style={styles.txtItem}>{d.win + '-' + d.lose + '-' + d.draw}</Text></Col>
+						<Col size={1}><Text style={styles.txtItem}>{d.points}</Text></Col>
 					</Row>
 				</TouchableOpacity>
 			);
@@ -108,8 +117,8 @@ class Standings extends Component
 
 		return (
 			<Grid style={styles.griditemBottom}>
-				<Row>
-					<Col size={6}><Text style={styles.titleline}>Team</Text></Col>
+				<Row style={styles.titleRow}>
+					<Col size={6}><Text style={styles.titleline}>TEAM</Text></Col>
 					<Col size={1}><Text style={styles.titleline}>GP</Text></Col>
 					<Col size={2}><Text style={styles.titleline}>W-L-T</Text></Col>
 					<Col size={1}><Text style={styles.titleline}>PTS</Text></Col>
@@ -134,7 +143,7 @@ class Standings extends Component
 					<Grid key={item.id} style={styles.griditem}>
 						<Row style={styles.griditemTop}>
 							<Col>
-								{(item.name) ? <Text style={styles.topText}>{item.name}</Text> : null}
+								{(item.name) ? <Text style={styles.topText}>{item.name.toUpperCase()}</Text> : null}
 								{(item.name != '') ? this.getStandingsJsx(item.teamStandingLocalAPIModels) : null}
 							</Col>
 						</Row>

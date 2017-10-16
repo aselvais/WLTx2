@@ -21,10 +21,10 @@ export default {
 		borderTopLeftRadius: 7,
 		borderTopRightRadius: 7,
 		fontWeight: 'bold',
-		textAlign: 'center',
+		textAlign: 'left',
 		backgroundColor: colors.blue,
 		color: colors.white,
-		padding: 3,
+		padding: 5,
 	},
 	griditemBottom:
 	{
@@ -32,8 +32,24 @@ export default {
 		padding: 5,
 		borderRadius: 7,
 	},
+	titleRow: {
+		borderBottomColor: colors.grey,
+		borderBottomWidth: 1,
+	},
 	titleline:
 	{
-		fontWeight: 'bold',
-	}
+		borderBottomColor: colors.grey,
+		paddingTop: 3,
+		paddingBottom: 5,
+	},
+	txtItem: {
+		paddingTop: 5,
+		paddingBottom: 5,
+		fontSize: 12,
+	},
+	logoTeam: {
+		paddingTop: 5,
+		width: 20,
+		height: 20
+	},
 };

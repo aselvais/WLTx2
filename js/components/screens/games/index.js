@@ -111,6 +111,7 @@ class Games extends Component
 	render()
 	{
 		let {sdate, sdatefrom, sdateto, division, gamesday, loading, navigation} = this.props;
+
 		return (
 			<Container style={styles.container}>
 				<Grid>

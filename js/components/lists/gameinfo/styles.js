@@ -14,7 +14,7 @@ export default {
 	},
 	image: {
 		resizeMode: 'contain',
-		width: (deviceWidth / 2),
-		height: (deviceWidth / 2)
+		width: (deviceWidth / 4),
+		height: (deviceWidth / 4)
 	},
 };

@@ -12,7 +12,7 @@ const MainScreenNavigator = TabNavigator({
 		Home: {screen: Home},
 		Games: {screen: Games},
 		Stand: {screen: Standings},
-		News: {screen: News},
+//		News: {screen: News},
 		Fav: {screen: Favorites},
 	},
 	{

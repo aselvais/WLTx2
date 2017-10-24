@@ -138,7 +138,6 @@ class Standings extends Component
 
 		return (
 			<View>
-				<Spinner/>
 				{this.props.standings.map((item, i) => (
 					<Grid key={item.id} style={styles.griditem}>
 						<Row style={styles.griditemTop}>

@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {Dimensions, Image} from "react-native";
+import {Dimensions, Image, AsyncStorage} from "react-native";
 import {connect} from "react-redux";
 import {Button, Text} from "native-base";
 import {Col, Grid, Row} from "react-native-easy-grid";
@@ -43,6 +43,16 @@ class Login extends Component
 
 	/**
 	 *
+	 * @todo Clear the local storage in case of problem
+	 * @returns {*|Promise}
+	 */
+	clearStorage()
+	{
+		return AsyncStorage.clear();
+	}
+
+	/**
+	 *
 	 */
 	onClickStart()
 	{
@@ -76,6 +86,11 @@ class Login extends Component
 							<Button style={styles.btn} onPress={() => this.onClickStart()}>
 								<Text>START</Text>
 							</Button>
+
+							<Button style={styles.btn}  onPress={ () => this.clearStorage() }transparent info>
+								<Text style={{ color: '#0000FF' }}>Clear cached data</Text>
+							</Button>
+
 						</Col>
 					</Row>
 				</Image>

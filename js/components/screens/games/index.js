@@ -86,9 +86,11 @@ class Games extends Component
 			let jsx = [];
 			gamesday.map((item, i) =>
 			{
-				try {
+				try
+				{
 					ddm = moment(new Date(item.dateTime)).format('dddd, MMMM Do YYYY');
-				} catch (er) {
+				} catch (er)
+				{
 					// date manipulation failed...
 				}
 				if (ddm != ddmOld)
@@ -108,45 +110,58 @@ class Games extends Component
 	 *
 	 * @returns {XML}
 	 */
+	getDropDownJsx()
+	{
+		let {sdate, division, navigation} = this.props;
+
+		return (
+			<Row style={styles.rowTop}>
+				<Col size={1}>
+					<Button style={styles.topbutton}
+							onPress={() => navigation.navigate("Divisions")}>
+						<Grid>
+							<Col style={styles.topbntcol}>
+								<Text style={styles.txtBold}>DIVISION:</Text>
+								<Text style={styles.txtBold}>
+									{(division && division.name) ? division.name.toUpperCase() : null}
+								</Text>
+							</Col>
+							<Col style={styles.col2}>
+								<Icon name="ios-arrow-forward" style={{color: '#000000'}}/>
+							</Col>
+						</Grid>
+					</Button>
+				</Col>
+				<Col size={1}>
+					<Button style={styles.topbutton}
+							onPress={() => navigation.navigate("Selectdate")}>
+						<Grid>
+							<Col style={styles.topbntcol}>
+								<Text style={styles.txtBold}>DATE:</Text>
+								<Text style={styles.txtBold}>{moment(sdate).format('L')}</Text>
+							</Col>
+							<Col style={styles.col2}>
+								<Icon name="ios-arrow-forward" style={{color: '#000000'}}/>
+							</Col>
+						</Grid>
+					</Button>
+				</Col>
+			</Row>
+		);
+	}
+
+	/**
+	 *
+	 * @returns {XML}
+	 */
 	render()
 	{
-		let {sdate, sdatefrom, sdateto, division, gamesday, loading, navigation} = this.props;
+		let {sdatefrom, sdateto, gamesday, loading} = this.props;
 
 		return (
 			<Container style={styles.container}>
 				<Grid>
-					<Row style={styles.rowTop}>
-						<Col size={1}>
-							<Button style={styles.topbutton}
-									onPress={() => navigation.navigate("Divisions")}>
-								<Grid>
-									<Col style={styles.topbntcol}>
-										<Text style={styles.txtBold}>DIVISION:</Text>
-										<Text style={styles.txtBold}>
-											{(division && division.name) ? division.name.toUpperCase() : null}
-										</Text>
-									</Col>
-									<Col style={styles.col2}>
-										<Icon name="ios-arrow-forward" style={{color: '#000000'}}/>
-									</Col>
-								</Grid>
-							</Button>
-						</Col>
-						<Col size={1}>
-							<Button style={styles.topbutton}
-									onPress={() => navigation.navigate("Selectdate")}>
-								<Grid>
-									<Col style={styles.topbntcol}>
-										<Text style={styles.txtBold}>DATE:</Text>
-										<Text style={styles.txtBold}>{moment(sdate).format('L')}</Text>
-									</Col>
-									<Col style={styles.col2}>
-										<Icon name="ios-arrow-forward" style={{color: '#000000'}}/>
-									</Col>
-								</Grid>
-							</Button>
-						</Col>
-					</Row>
+					{this.getDropDownJsx()}
 					<Row>
 						<Content padder>
 							<Spinner/>

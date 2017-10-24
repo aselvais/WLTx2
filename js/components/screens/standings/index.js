@@ -1,12 +1,14 @@
 import React, {Component} from "react";
 import PropTypes from 'prop-types';
 import {connect} from "react-redux";
-import {Container, Content, Icon,} from "native-base";
+import {Button, Container, Content, Icon, Text} from "native-base";
 import StandingsList from '../../lists/standings';
 import {getTiers, setTierIndex} from "../../../redux/actions/tiers";
-import Spinner from '../../widgets/loaders/Spinner';
+import {Col, Grid, Row} from "react-native-easy-grid";
 import Headerbar from '../../widgets/headerbar/index';
 import styles from "./styles";
+import Spinner from '../../widgets/loaders/Spinner';
+import Tiers from '../../lists/tiers'
 
 /**
  *
@@ -55,6 +57,31 @@ class Standings extends Component
 		}
 	}
 
+	getDropDownJsx()
+	{
+		const {tiers, navigation, selectedTier} = this.props;
+
+		return (
+			<Row style={styles.rowTop}>
+				<Col size={1}>
+					<Button style={styles.topbutton} onPress={() => navigation.navigate("Tiers")}>
+						<Grid>
+							<Col style={styles.topbntcol}>
+								<Text style={styles.txtBold}>Tiers:</Text>
+								<Text style={styles.txtBold}>
+									{(selectedTier && selectedTier.name) ? selectedTier.name.toUpperCase() : null}
+								</Text>
+							</Col>
+							<Col style={styles.col2}>
+								<Icon name="ios-arrow-forward" style={{color: '#000000'}}/>
+							</Col>
+						</Grid>
+					</Button>
+				</Col>
+			</Row>
+		);
+	}
+
 	/**
 	 *
 	 * @returns {XML}
@@ -62,11 +89,16 @@ class Standings extends Component
 	render()
 	{
 		const {props: {name, index, list}} = this;
+
 		return (
 			<Container style={styles.container}>
-				<Content padder>
-					<StandingsList navigation={this.props.navigation}/>
-				</Content>
+				<Grid>
+					{this.getDropDownJsx()}
+					<Content padder>
+						<Spinner/>
+						<StandingsList navigation={this.props.navigation}/>
+					</Content>
+				</Grid>
 			</Container>
 		);
 	}

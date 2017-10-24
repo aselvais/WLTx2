@@ -3,7 +3,6 @@ package com.WinLoseOrTie;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
-import com.calendarevents.CalendarEventsPackage;
 import com.github.yamill.orientation.OrientationPackage;
 import com.idehub.GoogleAnalyticsBridge.GoogleAnalyticsBridgePackage;
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
@@ -36,7 +35,6 @@ public class MainApplication extends Application implements ReactApplication {
             new CodePush("TkzhMiuvHCt63fGBfBIL167I0MiDd6a1b3b3-a940-4ce5-ace9-1b792d004c3a", MainApplication.this, BuildConfig.DEBUG),
             new RNDeviceInfo(),
             new MainReactPackage(),
-            new CalendarEventsPackage(),
             new OrientationPackage(),
             new GoogleAnalyticsBridgePackage()
       );

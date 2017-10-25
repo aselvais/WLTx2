@@ -40,12 +40,12 @@ export default {
   checkboxTickColor: '#fff',
 
   // Segment
-  segmentBackgroundColor: '#3F51B5',
+  segmentBackgroundColor: '#1b6bb0',
   segmentActiveBackgroundColor: '#fff',
   segmentTextColor: '#fff',
-  segmentActiveTextColor: '#3F51B5',
+  segmentActiveTextColor: '#1b6bb0',
   segmentBorderColor: '#fff',
-  segmentBorderColorMain: '#3F51B5',
+  segmentBorderColorMain: '#1b6bb0',
   
     // New Variable
   get defaultTextColor() {
@@ -143,23 +143,23 @@ export default {
     // FooterTab
   tabBarTextColor: '#8bb3f4',
   tabBarTextSize: (platform === 'ios') ? 14 : 11,
-  activeTab: (platform === 'ios') ? '#007aff' : '#fff',
-  sTabBarActiveTextColor: '#007aff',
+  activeTab: (platform === 'ios') ? '#1b6bb0' : '#fff',
+  sTabBarActiveTextColor: '#1b6bb0',
   tabBarActiveTextColor: '#fff',
-  tabActiveBgColor: (platform === 'ios') ? '#1569f4' : undefined,
+  tabActiveBgColor: (platform === 'ios') ? '#1b6bb0' : undefined,
 
     // Tab
-  tabDefaultBg: '#2874F0',
+  tabDefaultBg: '#1b6bb0',
   topTabBarTextColor: '#b3c7f9',
   topTabBarActiveTextColor: '#fff',
-  topTabActiveBgColor: (platform === 'ios') ? '#1569f4' : undefined,
+  topTabActiveBgColor: (platform === 'ios') ? '#1b6bb0' : undefined,
   topTabBarBorderColor: '#fff',
   topTabBarActiveBorderColor: '#fff',
 
 
     // Header
   toolbarBtnColor: '#fff',
-  toolbarDefaultBg: '#2874F0',
+  toolbarDefaultBg: '#1b6bb0',
   toolbarHeight: (platform === 'ios') ? 64 : 56,
   toolbarIconSize: (platform === 'ios') ? 20 : 22,
   toolbarSearchIconSize: (platform === 'ios') ? 20 : 23,
@@ -168,7 +168,7 @@ export default {
   toolbarInverseBg: '#222',
   toolbarTextColor: '#fff',
   iosStatusbar: 'light-content',
-  toolbarDefaultBorder: '#2874F0',
+  toolbarDefaultBorder: '#1b6bb0',
   get statusBarColor() {
     return color(this.toolbarDefaultBg).darken(0.2).hexString();
   },
@@ -235,7 +235,7 @@ export default {
 
     // Radio Button
   radioBtnSize: (platform === 'ios') ? 25 : 23,
-  radioSelectedColorAndroid: '#5067FF',
+  radioSelectedColorAndroid: '#1b6bb0',
 
     // New Variable
   radioBtnLineHeight: (platform === 'ios') ? 29 : 24,

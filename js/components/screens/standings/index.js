@@ -57,29 +57,39 @@ class Standings extends Component
 		}
 	}
 
+	/**
+	 *
+	 * @returns {XML}
+	 */
 	getDropDownJsx()
 	{
 		const {tiers, navigation, selectedTier} = this.props;
+		// if (tiers && tiers.length && tiers.length > 0) {
+			return (
+				<Row style={styles.rowTop}>
+					<Col size={1}>
+						<Button style={styles.topbutton} onPress={() => navigation.navigate("Tiers")}>
+							<Grid>
+								<Col style={styles.topbntcol}>
+									<Text style={styles.txtBold}>Tiers:</Text>
+									<Text style={styles.txtBold}>
+										{(selectedTier && selectedTier.name) ? selectedTier.name.toUpperCase() : null}
+									</Text>
+								</Col>
+								<Col style={styles.col2}>
+									<Icon name="ios-arrow-forward" style={{color: '#000000'}}/>
+								</Col>
+							</Grid>
+						</Button>
+					</Col>
+				</Row>
+			);
+		/* }
+		else
+		{
+			return (<Text/>);
+		} */
 
-		return (
-			<Row style={styles.rowTop}>
-				<Col size={1}>
-					<Button style={styles.topbutton} onPress={() => navigation.navigate("Tiers")}>
-						<Grid>
-							<Col style={styles.topbntcol}>
-								<Text style={styles.txtBold}>Tiers:</Text>
-								<Text style={styles.txtBold}>
-									{(selectedTier && selectedTier.name) ? selectedTier.name.toUpperCase() : null}
-								</Text>
-							</Col>
-							<Col style={styles.col2}>
-								<Icon name="ios-arrow-forward" style={{color: '#000000'}}/>
-							</Col>
-						</Grid>
-					</Button>
-				</Col>
-			</Row>
-		);
 	}
 
 	/**

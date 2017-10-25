@@ -40,12 +40,12 @@ export default {
   checkboxTickColor: '#fff',
 
   // Segment
-  segmentBackgroundColor: (platform === 'ios') ? '#F8F8F8' : '#3F51B5',
-  segmentActiveBackgroundColor: (platform === 'ios') ? '#007aff' : '#fff',
-  segmentTextColor: (platform === 'ios') ? '#007aff' : '#fff',
-  segmentActiveTextColor: (platform === 'ios') ? '#fff' : '#3F51B5',
-  segmentBorderColor: (platform === 'ios') ? '#007aff' : '#fff',
-  segmentBorderColorMain: (platform === 'ios') ? '#a7a6ab' : '#3F51B5',
+  segmentBackgroundColor: (platform === 'ios') ? '#F8F8F8' : '#1b6bb0',
+  segmentActiveBackgroundColor: (platform === 'ios') ? '#1b6bb0' : '#fff',
+  segmentTextColor: (platform === 'ios') ? '#1b6bb0' : '#fff',
+  segmentActiveTextColor: (platform === 'ios') ? '#fff' : '#1b6bb0',
+  segmentBorderColor: (platform === 'ios') ? '#1b6bb0' : '#fff',
+  segmentBorderColorMain: (platform === 'ios') ? '#a7a6ab' : '#1b6bb0',
 
     // New Variable
   get defaultTextColor() {
@@ -137,24 +137,24 @@ export default {
 
     // Footer
   footerHeight: 55,
-  footerDefaultBg: (platform === 'ios') ? '#F8F8F8' : '#4179F7',
+  footerDefaultBg: (platform === 'ios') ? '#F8F8F8' : '#1b6bb0',
 
 
     // FooterTab
   tabBarTextColor: (platform === 'ios') ? '#6b6b6b' : '#b3c7f9',
   tabBarTextSize: (platform === 'ios') ? 14 : 11,
-  activeTab: (platform === 'ios') ? '#007aff' : '#fff',
-  sTabBarActiveTextColor: '#007aff',
-  tabBarActiveTextColor: (platform === 'ios') ? '#007aff' : '#fff',
-  tabActiveBgColor: (platform === 'ios') ? '#cde1f9' : '#3F51B5',
+  activeTab: (platform === 'ios') ? '#1b6bb0' : '#fff',
+  sTabBarActiveTextColor: '#1b6bb0',
+  tabBarActiveTextColor: (platform === 'ios') ? '#1b6bb0' : '#fff',
+  tabActiveBgColor: (platform === 'ios') ? '#cde1f9' : '#1b6bb0',
 
     // Tab
-  tabDefaultBg: (platform === 'ios') ? '#F8F8F8' : '#3F51B5',
+  tabDefaultBg: (platform === 'ios') ? '#F8F8F8' : '#1b6bb0',
   topTabBarTextColor: (platform === 'ios') ? '#6b6b6b' : '#b3c7f9',
-  topTabBarActiveTextColor: (platform === 'ios') ? '#007aff' : '#fff',
+  topTabBarActiveTextColor: (platform === 'ios') ? '#1b6bb0' : '#fff',
   topTabActiveBgColor: (platform === 'ios') ? '#cde1f9' : undefined,
   topTabBarBorderColor: (platform === 'ios') ? '#a7a6ab' : '#fff',
-  topTabBarActiveBorderColor: (platform === 'ios') ? '#007aff' : '#fff',
+  topTabBarActiveBorderColor: (platform === 'ios') ? '#1b6bb0' : '#fff',
 
 
     // Header
@@ -167,7 +167,7 @@ export default {
   searchBarHeight: (platform === 'ios') ? 30 : 40,
   toolbarInverseBg: '#FFF',
   toolbarTextColor: (platform === 'ios') ? '#FFF' : '#FFF',
-  toolbarDefaultBorder: (platform === 'ios') ? '#a7a6ab' : '#3F51B5',
+  toolbarDefaultBorder: (platform === 'ios') ? '#a7a6ab' : '#1b6bb0',
   iosStatusbar: (platform === 'ios') ? 'dark-content' : 'light-content',
   get statusBarColor() {
     return color(this.toolbarDefaultBg).darken(0.2).hexString();
@@ -235,7 +235,7 @@ export default {
 
     // Radio Button
   radioBtnSize: (platform === 'ios') ? 25 : 23,
-  radioSelectedColorAndroid: '#3F51B5',
+  radioSelectedColorAndroid: '#1b6bb0',
 
     // New Variable
   radioBtnLineHeight: (platform === 'ios') ? 29 : 24,

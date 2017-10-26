@@ -4,7 +4,7 @@ const {StyleSheet} = React;
 
 export default {
 	container: {
-		backgroundColor: '#EEEEEE'
+	//	backgroundColor: '#EEEEEE'
 	},
 	dateTxt: {
 		textAlign: 'center',

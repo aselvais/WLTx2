@@ -6,6 +6,7 @@ import {Button, Container, Content, H2, H3, Text} from "native-base";
 import {Col, Grid, Row} from "react-native-easy-grid";
 import moment from 'moment';
 import {setTeamIndexById} from "../../../redux/actions/teams";
+import {setTeaminfoIndex} from "../../../redux/actions/teaminfo";
 import openMap from 'react-native-open-maps';
 import Spinner from '../../widgets/loaders/Spinner';
 import styles from "./styles";
@@ -29,6 +30,7 @@ class Gameinfo extends Component
 	 */
 	static propTypes = {
 		setTeamIndexById: PropTypes.func,
+		setTeaminfoIndex: PropTypes.func,
 	};
 
 	/**
@@ -48,7 +50,8 @@ class Gameinfo extends Component
 	{
 		if (t > 0)
 		{
-			this.props.setTeamIndexById(t);
+			//this.props.setTeamIndexById(t);
+			this.props.setTeaminfoIndex(t);
 			this.props.navigation.navigate("Teaminfo");
 		}
 	}
@@ -180,5 +183,6 @@ export default connect(
 	state => ({game: state.games.selectedIndex}),
 	dispatch => ({
 		setTeamIndexById: id => dispatch(setTeamIndexById(id)),
+		setTeaminfoIndex: id => dispatch(setTeaminfoIndex(id)),
 	})
 )(Gameinfo);

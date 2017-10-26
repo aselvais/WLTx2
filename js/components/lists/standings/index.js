@@ -5,6 +5,7 @@ import {connect} from "react-redux";
 import {Col, Grid, Row} from "react-native-easy-grid";
 import {getStandings, resetStandings, setStandingIndex} from "../../../redux/actions/standings";
 import {setTeamIndexById,} from "../../../redux/actions/teams";
+import {setTeaminfoIndex,} from "../../../redux/actions/teaminfo";
 import Spinner from '../../widgets/loaders/Spinner';
 import {setLoading} from "../../../redux/actions/loading";
 import styles from "./styles";
@@ -33,6 +34,7 @@ class Standings extends Component
 		resetStandings: PropTypes.func,
 		setStandingIndex: PropTypes.func,
 		setTeamIndexById: PropTypes.func,
+		setTeaminfoIndex: PropTypes.func,
 		setLoading: PropTypes.func,
 	};
 
@@ -75,7 +77,8 @@ class Standings extends Component
 	{
 		if (t > 0)
 		{
-			this.props.setTeamIndexById(t);
+			// this.props.setTeamIndexById(t);
+			this.props.setTeaminfoIndex(t);
 			this.props.navigation.navigate("Teaminfo");
 		}
 	}
@@ -165,6 +168,7 @@ export default connect(
 		resetStandings: () => dispatch(resetStandings()),
 		setStandingIndex: index => dispatch(setStandingIndex(index)),
 		setTeamIndexById: id => dispatch(setTeamIndexById(id)),
+		setTeaminfoIndex: id => dispatch(setTeaminfoIndex(id)),
 		setLoading: (name, status) => dispatch(setLoading(name, status)),
 	})
 )(Standings);

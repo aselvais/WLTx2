@@ -14,7 +14,8 @@ export type State = {
  */
 const initialState = {
 	list: [],
-	selectedIndex: null
+	selectedIndex: null,
+	selectedItem: null
 };
 
 /**

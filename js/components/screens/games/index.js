@@ -7,6 +7,7 @@ import {Col, Grid, Row} from "react-native-easy-grid";
 import moment from 'moment';
 import {getGamesAll, setGameIndex} from "../../../redux/actions/games";
 import {getTeams, setTeamIndexById} from "../../../redux/actions/teams";
+import {setTeaminfoIndex} from "../../../redux/actions/teaminfo";
 import {setLoading} from "../../../redux/actions/loading";
 import Headerbar from '../../widgets/headerbar/index';
 import styles from "./styles";
@@ -36,6 +37,7 @@ class Games extends Component
 		getGames: PropTypes.func,
 		setGameIndex: PropTypes.func,
 		setTeamIndexById: PropTypes.func,
+		setTeaminfoIndex: PropTypes.func,
 		getGamesDay: PropTypes.func,
 		getGamesAll: PropTypes.func,
 		getTeams: PropTypes.func,
@@ -163,7 +165,7 @@ class Games extends Component
 				<Grid>
 					{this.getDropDownJsx()}
 					<Row>
-						<Content padder>
+						<Content>
 							<Spinner/>
 							{this.getMatchListJsx(gamesday)}
 							{(!loading && !(gamesday && gamesday.length && gamesday.length > 0)) ?
@@ -203,6 +205,7 @@ export default connect(
 		getTeams: index => dispatch(getTeams(index)),
 		setGameIndex: index => dispatch(setGameIndex(index)),
 		setTeamIndexById: id => dispatch(setTeamIndexById(id)),
+		setTeaminfoIndex: id => dispatch(setTeaminfoIndex(id)),
 		setLoading: (name, status) => dispatch(setLoading(name, status)),
 	})
 )(Games);

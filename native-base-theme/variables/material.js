@@ -137,19 +137,19 @@ export default {
 
     // Footer
   footerHeight: 55,
-  footerDefaultBg: '#3F51B5',
+  footerDefaultBg: '#1b6bb0',
 
 
     // FooterTab
   tabBarTextColor: '#b3c7f9',
   tabBarTextSize: (platform === 'ios') ? 14 : 11,
   activeTab: '#fff',
-  sTabBarActiveTextColor: '#007aff',
+  sTabBarActiveTextColor: '#1b6bb0',
   tabBarActiveTextColor: '#fff',
   tabActiveBgColor: undefined,
 
     // Tab
-  tabDefaultBg: '#3F51B5',
+  tabDefaultBg: '#1b6bb0',
   topTabBarTextColor: '#b3c7f9',
   topTabBarActiveTextColor: '#fff',
   topTabActiveBgColor: undefined,
@@ -159,7 +159,7 @@ export default {
 
     // Header
   toolbarBtnColor: '#fff',
-  toolbarDefaultBg: '#3F51B5',
+  toolbarDefaultBg: '#1b6bb0',
   toolbarHeight: (platform === 'ios') ? 76 : 56,
   toolbarIconSize: (platform === 'ios') ? 20 : 22,
   toolbarSearchIconSize: (platform === 'ios') ? 20 : 23,
@@ -167,7 +167,7 @@ export default {
   searchBarHeight: (platform === 'ios') ? 30 : 40,
   toolbarInverseBg: '#222',
   toolbarTextColor: '#fff',
-  toolbarDefaultBorder: '#3F51B5',
+  toolbarDefaultBorder: '#1b6bb0',
   iosStatusbar: 'light-content',
   get statusBarColor() {
     return color(this.toolbarDefaultBg).darken(0.2).hexString();
@@ -235,7 +235,7 @@ export default {
 
     // Radio Button
   radioBtnSize: (platform === 'ios') ? 25 : 23,
-  radioSelectedColorAndroid: '#5067FF',
+  radioSelectedColorAndroid: '#1b6bb0',
 
     // New Variable
   radioBtnLineHeight: (platform === 'ios') ? 29 : 24,

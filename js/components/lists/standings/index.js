@@ -128,6 +128,7 @@ class Standings extends Component
 				</Row>
 				{jsx}
 			</Grid>
+
 		);
 	}
 

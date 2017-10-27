@@ -1,15 +1,15 @@
 import React, {Component} from "react";
 import PropTypes from 'prop-types';
-import {Dimensions} from "react-native";
+import {View, Image} from "react-native";
 import {connect} from "react-redux";
-import {Container, Content, Text,} from "native-base";
+import {Container, Content, Text, Tab, Tabs} from "native-base";
 import {Col, Grid, Row} from "react-native-easy-grid";
 import styles from "./styles";
 import {getTeaminfos} from "../../../redux/actions/teaminfo";
 import Spinner from '../../widgets/loaders/Spinner';
-import LinearGradient from 'react-native-linear-gradient';
 
-const deviceWidth = Dimensions.get('window').width;
+
+const coverimg = require('../../../../images/teambackgroundblack.jpg');
 
 /**
  *
@@ -52,57 +52,85 @@ class Teaminfos extends Component
 	render()
 	{
 		let {teaminfos} = this.props;
-		/**
-		 *                            <Row key={teaminfos.id}>
-		 <Col style={{
-									padding: 10,
-									alignSelf: 'center',
-									justifyContent: 'center'
-								}}>
-
-		 <Image style={{
-										resizeMode: 'contain',
-										width: (deviceWidth / 2),
-										height: (deviceWidth / 2)
-									}} source={{uri: teaminfos.imageUrl}}/>
-
-		 <Text style={{fontWeight: 'bold'}}>NAME</Text>
-		 <Text>{teaminfos.name}</Text>
-		 <Text style={{fontWeight: 'bold'}}>DIVITION</Text>
-		 <Text>{teaminfos.divisionName}</Text>
-		 <Text style={{fontWeight: 'bold'}}>TIER</Text>
-		 <Text>{teaminfos.tierName}</Text>
-		 <Text style={{fontWeight: 'bold'}}>GROUP</Text>
-		 <Text>{teaminfos.groupName}</Text>
-		 </Col>
-		 </Row>
-		 */
-
 		return (
 			<Container>
-				<LinearGradient colors={styles.linegradientTopGradient} style={styles.linegradientTop}>
-				<Grid style={{height: 150}}>
-					<Row>
+				<Grid>
+					<Row size={25} style={styles.row01}>
 						<Col>
-							<Text>Top</Text>
+							<Grid>
+								<Row>
+									<Image source={coverimg} style={styles.backgroundImage}>
+									<Col style={{ alignItems: 'center' }}>
+										<Image style={styles.imageLogo} source={{uri: teaminfos.imageUrl}}/>
+										<Text style={styles.row01textName}>{ (teaminfos.name) ? teaminfos.name.toUpperCase() : null }</Text>
+										<Text style={styles.row01textDivName}>{ teaminfos.divisionName }</Text>
+									</Col>
+									</Image>
+								</Row>
+							</Grid>
+						</Col>
+					</Row>
+					<Row size={75}>
+						<Col>
+							<Tabs initialPage={0}>
+
+								<Tab heading="OVERVIEW">
+									<Content padder>
+										<Spinner/>
+										<Grid>
+											{ [
+												"name",
+												"divisionId",
+												"divisionName",
+												"tierId",
+												"tierName",
+												"groupId",
+												"groupName",
+												"hasNews",
+												"hasTweets",
+												"playOff",
+											].map((k, kk) => {
+												return (
+												<Row key={'itm'+kk}>
+													<Col size={1}><Text>{k}</Text></Col>
+													<Col size={2}><Text>{ teaminfos[k] }</Text></Col>
+												</Row>
+											)}) }
+										</Grid>
+									</Content>
+								</Tab>
+
+								<Tab heading="NEWS">
+									<Content padder>
+										<View>
+											<Spinner/>
+											<Text>Games HERE ..... !!!!</Text>
+										</View>
+									</Content>
+								</Tab>
+
+								<Tab heading="STATS">
+									<Content padder>
+										<View>
+											<Spinner/>
+											<Text>Games HERE ..... !!!!</Text>
+										</View>
+									</Content>
+								</Tab>
+
+								<Tab heading="GAMES">
+									<Content padder>
+										<View>
+											<Spinner/>
+											<Text>Games HERE ..... !!!!</Text>
+										</View>
+									</Content>
+								</Tab>
+
+							</Tabs>
 						</Col>
 					</Row>
 				</Grid>
-				</LinearGradient>
-				<Content>
-					<Spinner/>
-					{(teaminfos && teaminfos.id) ?
-						<Grid>
-							<Row>
-								<Col>
-									<Text>Bottom</Text>
-								</Col>
-							</Row>
-						</Grid>
-						:
-						null
-					}
-				</Content>
 			</Container>
 		);
 	}

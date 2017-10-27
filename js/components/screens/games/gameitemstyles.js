@@ -50,4 +50,18 @@ export default {
 	txtBold: {
 		fontWeight: 'bold'
 	},
+	rowTime: {
+		borderBottomColor: '#EEEEEE',
+		borderBottomWidth: 1,
+		alignItems: 'center',
+		alignSelf: 'center',
+	},
+	rowArenaName: {
+		paddingTop: 5,
+		alignItems: 'center',
+		alignSelf: 'center',
+	},
+	textArenaName: {
+		fontSize: 12,
+	}
 };

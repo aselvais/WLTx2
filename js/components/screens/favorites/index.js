@@ -27,7 +27,7 @@ class Favorites extends Component
 
 	render()
 	{
-		const {props: {name, index, list}} = this;
+		// const {name, index, list} = this.props;
 		return (
 			<Container style={styles.container}>
 				<Tabs initialPage={0}>

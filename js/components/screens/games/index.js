@@ -90,7 +90,8 @@ class Games extends Component
 			{
 				try
 				{
-					ddm = moment(new Date(item.dateTime)).format('dddd, MMMM Do YYYY');
+					ddm = moment(item.dateTime).format('dddd, MMMM Do YYYY');
+					// ddm = item.dateTime;
 				} catch (er)
 				{
 					// date manipulation failed...

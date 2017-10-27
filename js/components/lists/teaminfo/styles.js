@@ -1,10 +1,41 @@
 import colors from '../../../libs/Wltcolors';
+import {Dimensions} from "react-native";
 const React = require('react-native');
+import {Image} from "react-native";
 const {StyleSheet} = React;
 
-export default {
-	linegradientTop: {
+const deviceWidth = Dimensions.get('window').width;
 
+export default {
+	linegradientTopGradient: [
+		'#000000',
+		'#444444',
+	],
+	row01: {
+		// backgroundColor: '#000000',
 	},
-	linegradientTopGradient: ['#000000', '#444444']
+	imageLogo: {
+		resizeMode: 'contain',
+		width: (deviceWidth / 4),
+		height: (deviceWidth / 4),
+	},
+	row01textName: {
+		backfaceVisibility: 'hidden',
+		color: '#FFFFFF',
+		textAlign: 'center',
+		fontWeight: 'bold',
+		fontSize: 16,
+		backgroundColor: 'rgba(0,0,0,0)',
+	},
+	row01textDivName: {
+		color: '#DDDDDD',
+		textAlign: 'center',
+		fontSize: 13,
+		backgroundColor: 'rgba(0,0,0,0)',
+	},
+	backgroundImage: {
+		flex: 1,
+		width: null,
+		height: null
+	},
 };

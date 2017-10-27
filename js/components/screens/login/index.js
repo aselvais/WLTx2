@@ -57,7 +57,7 @@ class Login extends Component
 	onClickStart()
 	{
 		this.props.navigation.navigate("Games");
-		// this.props.navigation.navigate("Leagues");
+		///this.props.navigation.navigate("Teaminfo");
 	}
 
 	/**

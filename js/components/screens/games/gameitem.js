@@ -97,11 +97,11 @@ class Gameitem extends Component
 							</Row>
 						</Col>
 						<Col style={styles.colin}>
-							<Row style={{borderBottomColor: '#EEEEEE', borderBottomWidth: 1, alignItems: 'center', alignSelf: 'center'}}>
+							<Row style={styles.rowTime}>
 								<Text style={styles.txtBold}>{item.time}</Text>
 							</Row>
-							<Row style={{paddingTop: 5, alignItems: 'center', alignSelf: 'center'}}>
-								<Text>{item.arena.name}</Text>
+							<Row style={styles.rowArenaName}>
+								<Text style={styles.textArenaName}>{item.arena.name}</Text>
 							</Row>
 						</Col>
 					</Grid>

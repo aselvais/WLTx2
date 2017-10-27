@@ -20,6 +20,7 @@ HomeDrawerRouter.navigationOptions = ({navigation}) => ({header: null});
 export default (
 	StackNav = StackNavigator(
 		{
+			///Teaminfo: {screen: Teaminfos},
 			Login: {screen: Login},
 			HomeWtabs: {screen: HomeWtabs},
 			Home: {screen: Home},

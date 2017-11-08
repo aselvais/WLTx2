@@ -154,6 +154,8 @@ class Gameinfo extends Component
 									<Col>
 										<Grid>
 											{this.getJsxRow('Date / time', moment(game.dateTime).format('MMMM Do YYYY') + ' ' + game.time)}
+											{this.getJsxRow('Game type', game.type)}
+											{this.getJsxRow('Game Status', game.status)}
 											{this.getJsxRow('Arena', game.arena.name + "\n" + game.arena.address)}
 											{this.getJsxRow('League', game.leagueName)}
 											{this.getJsxRow('Season', game.seasonName)}

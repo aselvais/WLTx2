@@ -50,4 +50,19 @@ export default {
 		fontSize: 15,
 		textAlign: 'center',
 	},
+	rowTxt01: {},
+	txtTxt01: {
+		padding: 8,
+		textAlign: 'center',
+		fontWeight: 'bold',
+		fontSize: 13,
+		backgroundColor: colors.blue,
+		color: colors.white,
+	},
+	rowTxt02: {},
+	txtTxt02: {
+		padding: 8,
+		textAlign: 'center',
+		fontSize: 20,
+	},
 };

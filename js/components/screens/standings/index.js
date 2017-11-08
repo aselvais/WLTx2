@@ -65,8 +65,8 @@ class Standings extends Component
 	{
 		const {tiers, navigation, selectedTier} = this.props;
 		let jsx = null;
-		//if (tiers && tiers.length && tiers.length > 0)
-		//{
+		if (tiers && tiers.length && tiers.length > 0)
+		{
 			jsx =  (
 				<Row style={styles.rowTop}>
 					<Col size={1}>
@@ -86,7 +86,14 @@ class Standings extends Component
 					</Col>
 				</Row>
 			);
-		//}
+		} else {
+			jsx =  (
+				<Row style={{height: 2}}>
+					<Col size={1}>
+					</Col>
+				</Row>
+			);
+		}
 		return jsx;
 
 	}

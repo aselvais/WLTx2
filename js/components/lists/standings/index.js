@@ -139,6 +139,7 @@ class Standings extends Component
 	render()
 	{
 		let u = 0;
+		let {selectedDivisions} = this.props;
 
 		return (
 			<View>
@@ -146,8 +147,8 @@ class Standings extends Component
 					<Grid key={item.id} style={styles.griditem}>
 						<Row style={styles.griditemTop}>
 							<Col>
-								{(item.name) ? <Text style={styles.topText}>{item.name.toUpperCase()}</Text> : null}
-								{(item.name != '') ? this.getStandingsJsx(item.teamStandingLocalAPIModels) : null}
+								{(item.name) ? <Text style={styles.topText}>{item.name.toUpperCase()}</Text> : <Text style={styles.topText}>{selectedDivisions.name.toUpperCase()}</Text>}
+								{(item.teamStandingLocalAPIModels && item.teamStandingLocalAPIModels.length && item.teamStandingLocalAPIModels.length > 0) ? this.getStandingsJsx(item.teamStandingLocalAPIModels) : null}
 							</Col>
 						</Row>
 					</Grid>

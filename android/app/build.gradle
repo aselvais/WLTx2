@@ -85,7 +85,7 @@ def enableProguardInReleaseBuilds = false
 
 android {
     compileSdkVersion 23
-    buildToolsVersion '25.0.0'
+    buildToolsVersion '23.0.1'
 
     defaultConfig {
         applicationId "com.WinLoseOrTie"
@@ -146,7 +146,6 @@ android {
 
 dependencies {
     compile project(':react-native-linear-gradient')
-    compile project(':react-native-calendar-events')
     compile project(':react-native-orientation')
     compile project(':react-native-google-analytics-bridge')
     compile project(':react-native-device-info')

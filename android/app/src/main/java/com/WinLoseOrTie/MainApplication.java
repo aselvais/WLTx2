@@ -4,7 +4,6 @@ import android.app.Application;
 
 import com.facebook.react.ReactApplication;
 import com.BV.LinearGradient.LinearGradientPackage;
-import com.calendarevents.CalendarEventsPackage;
 import com.github.yamill.orientation.OrientationPackage;
 import com.idehub.GoogleAnalyticsBridge.GoogleAnalyticsBridgePackage;
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
@@ -38,7 +37,6 @@ public class MainApplication extends Application implements ReactApplication {
             new RNDeviceInfo(),
             new MainReactPackage(),
             new LinearGradientPackage(),
-            new CalendarEventsPackage(),
             new OrientationPackage(),
             new GoogleAnalyticsBridgePackage()
       );

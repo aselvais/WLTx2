@@ -1,13 +1,12 @@
 import React, {Component} from "react";
 import PropTypes from 'prop-types';
-import {View, Image, Text, TouchableHighlight} from "react-native";
+import {Image, Text, TouchableHighlight, View} from "react-native";
 import {connect} from "react-redux";
 import {Container, Content, Tab, Tabs} from "native-base";
 import {Col, Grid, Row} from "react-native-easy-grid";
 import styles from "./styles";
 import {getTeaminfos} from "../../../redux/actions/teaminfo";
 import Spinner from '../../widgets/loaders/Spinner';
-
 
 const coverimg = require('../../../../images/teambackgroundblack.jpg');
 
@@ -57,84 +56,128 @@ class Teaminfos extends Component
 	 *
 	 * @returns {XML}
 	 */
+	getJSXoverview()
+	{
+		let {teaminfos} = this.props;
+		let jsx = (
+			<Content padder>
+				<Spinner/>
+				<Grid>
+					{[
+						"name",
+						"divisionId",
+						"divisionName",
+						"tierId",
+						"tierName",
+						"groupId",
+						"groupName",
+						"hasNews",
+						"hasTweets",
+						"playOff",
+					].map((k, kk) =>
+					{
+						return (
+							<Row key={'itm' + kk}>
+								<Col size={1}><Text>{k}</Text></Col>
+								<Col size={2}><Text>{teaminfos[k]}</Text></Col>
+							</Row>
+						)
+					})}
+				</Grid>
+			</Content>
+		);
+		return jsx;
+	}
+
+	/**
+	 *
+	 * @returns {XML}
+	 */
+	getJSXnews()
+	{
+		let {teaminfos} = this.props;
+		let jsx = (
+			<Content padder>
+				<View>
+					<Spinner/>
+					<Text>Games HERE ..... !!!!</Text>
+				</View>
+			</Content>
+		);
+		return jsx;
+	}
+
+	/**
+	 *
+	 * @returns {XML}
+	 */
+	getJSXstats()
+	{
+		let {teaminfos} = this.props;
+		let jsx = (
+			<Content padder>
+				<View>
+					<Spinner/>
+					<Text>Games HERE ..... !!!!</Text>
+				</View>
+			</Content>
+		);
+		return jsx;
+	}
+
+	/**
+	 *
+	 * @returns {XML}
+	 */
+	getJSXgames()
+	{
+		let {teaminfos} = this.props;
+		let jsx = (
+			<Content padder>
+				<View>
+					<Spinner/>
+					<Text>Games HERE ..... !!!!</Text>
+				</View>
+			</Content>
+		);
+		return jsx;
+	}
+
+	/**
+	 *
+	 * @returns {XML}
+	 */
 	render()
 	{
 		let {teaminfos} = this.props;
 		return (
 			<Container>
 				<Grid>
+
 					<Row size={25} style={styles.row01}>
 						<Col>
 							<Grid>
 								<Row>
 									<Image source={coverimg} style={styles.backgroundImage}>
-									<Col style={{ alignItems: 'center' }}>
-										<Image style={styles.imageLogo} source={{uri: teaminfos.imageUrl}}/>
-										<Text style={styles.row01textName}>{ (teaminfos.name) ? teaminfos.name.toUpperCase() : null }</Text>
-										<Text style={styles.row01textDivName}>{ teaminfos.divisionName }</Text>
-									</Col>
+										<Col style={{alignItems: 'center'}}>
+											<Image style={styles.imageLogo} source={{uri: teaminfos.imageUrl}}/>
+											<Text
+												style={styles.row01textName}>{(teaminfos.name) ? teaminfos.name.toUpperCase() : null}</Text>
+											<Text style={styles.row01textDivName}>{teaminfos.divisionName}</Text>
+										</Col>
 									</Image>
 								</Row>
 							</Grid>
 						</Col>
 					</Row>
+
 					<Row size={75}>
 						<Col>
 							<Tabs initialPage={0}>
-
-								<Tab heading="OVERVIEW">
-									<Content padder>
-										<Spinner/>
-										<Grid>
-											{ [
-												"name",
-												"divisionId",
-												"divisionName",
-												"tierId",
-												"tierName",
-												"groupId",
-												"groupName",
-												"hasNews",
-												"hasTweets",
-												"playOff",
-											].map((k, kk) => {
-												return (
-												<Row key={'itm'+kk}>
-													<Col size={1}><Text>{k}</Text></Col>
-													<Col size={2}><Text>{ teaminfos[k] }</Text></Col>
-												</Row>
-											)}) }
-										</Grid>
-									</Content>
-								</Tab>
-
-								<Tab heading="NEWS">
-									<Content padder>
-										<View>
-											<Spinner/>
-											<Text>Games HERE ..... !!!!</Text>
-										</View>
-									</Content>
-								</Tab>
-
-								<Tab heading="STATS">
-									<Content padder>
-										<View>
-											<Spinner/>
-											<Text>Games HERE ..... !!!!</Text>
-										</View>
-									</Content>
-								</Tab>
-
-								<Tab heading="GAMES">
-									<Content padder>
-										<View>
-											<Spinner/>
-											<Text>Games HERE ..... !!!!</Text>
-										</View>
-									</Content>
-								</Tab>
-
+								<Tab heading="OVERVIEW">{ this.getJSXoverview() }</Tab>
+								<Tab heading="NEWS">{ this.getJSXnews() }</Tab>
+								<Tab heading="STATS">{ this.getJSXstats() }</Tab>
+								<Tab heading="GAMES">{ this.getJSXgames() }</Tab>
 							</Tabs>
 						</Col>
 					</Row>
@@ -146,7 +189,6 @@ class Teaminfos extends Component
 							</TouchableHighlight>
 						</Col>
 					</Row>
-
 
 				</Grid>
 			</Container>

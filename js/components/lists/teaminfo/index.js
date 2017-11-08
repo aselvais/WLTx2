@@ -1,8 +1,8 @@
 import React, {Component} from "react";
 import PropTypes from 'prop-types';
-import {View, Image} from "react-native";
+import {View, Image, Text, TouchableHighlight} from "react-native";
 import {connect} from "react-redux";
-import {Container, Content, Text, Tab, Tabs} from "native-base";
+import {Container, Content, Tab, Tabs} from "native-base";
 import {Col, Grid, Row} from "react-native-easy-grid";
 import styles from "./styles";
 import {getTeaminfos} from "../../../redux/actions/teaminfo";
@@ -43,6 +43,14 @@ class Teaminfos extends Component
 		{
 			this.props.getTeaminfos(parseInt(this.props.selectedTeaminfo));
 		}
+	}
+
+	/**
+	 *
+	 */
+	addToFavorite()
+	{
+
 	}
 
 	/**
@@ -130,6 +138,16 @@ class Teaminfos extends Component
 							</Tabs>
 						</Col>
 					</Row>
+
+					<Row size={8}>
+						<Col size={100} style={styles.topButtonsCol}>
+							<TouchableHighlight onPress={() => this.addToFavorite()}>
+								<Text style={styles.topButtonsTxt}>Add team to favorites</Text>
+							</TouchableHighlight>
+						</Col>
+					</Row>
+
+
 				</Grid>
 			</Container>
 		);

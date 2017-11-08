@@ -38,4 +38,16 @@ export default {
 		width: null,
 		height: null
 	},
+	topButtonsCol: {
+		borderTopColor: '#AAAAAA',
+		borderTopWidth: 1,
+		borderRightColor: '#AAAAAA',
+		borderRightWidth: 1,
+		backgroundColor: '#EEEEEE',
+		justifyContent: 'center',
+	},
+	topButtonsTxt: {
+		fontSize: 15,
+		textAlign: 'center',
+	},
 };

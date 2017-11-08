@@ -88,12 +88,7 @@ class Gameinfo extends Component
 	render()
 	{
 		const {game} = this.props;
-		/*
-		 {this.getJsxRow('PlayOff', game.seasonPlayOff)}
-		 {this.getJsxRow('ShareUrl', game.shareUrl)}
-		 {this.getJsxRow('Status', game.status)}
-		 {this.getJsxRow('Type', game.type)}
-		 */
+
 		return (
 			<Container>
 				<Grid>
@@ -135,38 +130,31 @@ class Gameinfo extends Component
 								</Row>
 								<Row size={25}>
 									<Col size={45} style={{alignItems: 'center'}}>
+										<TouchableHighlight onPress={() => this.openTeam(game.info.team1.teamId)}>
 										<Text style={styles.row01textScore}>{game.info.team1.score}</Text>
+										</TouchableHighlight>
 									</Col>
 									<Col size={10} style={{alignItems: 'center'}}>
 									</Col>
 									<Col size={45} style={{alignItems: 'center'}}>
+										<TouchableHighlight onPress={() => this.openTeam(game.info.team2.teamId)}>
 										<Text style={styles.row01textScore}>{game.info.team2.score}</Text>
+										</TouchableHighlight>
 									</Col>
 								</Row>
 							</Image>
 						</Col>
 					</Row>
-					<Row size={5}>
-						<Col size={50} style={styles.topButtonsCol}>
-							<TouchableHighlight onPress={() => this.addToCalendar()}>
-								<Text style={styles.topButtonsTxt}>Add to calendar</Text>
-							</TouchableHighlight>
-						</Col>
-						<Col size={50} style={styles.topButtonsCol}>
-							<TouchableHighlight onPress={() => this.openMaps()}>
-								<Text style={styles.topButtonsTxt}>Open maps</Text>
-							</TouchableHighlight>
-						</Col>
-					</Row>
+
 					<Row size={70}>
 						<Spinner/>
-						<Content padder>
+						<Content>
 							<Grid>
 								<Row>
 									<Col>
 										<Grid>
 											{this.getJsxRow('Date / time', moment(game.dateTime).format('MMMM Do YYYY') + ' ' + game.time)}
-											{this.getJsxRow('Arena', game.arena.name + ' ' + game.arena.address)}
+											{this.getJsxRow('Arena', game.arena.name + "\n" + game.arena.address)}
 											{this.getJsxRow('League', game.leagueName)}
 											{this.getJsxRow('Season', game.seasonName)}
 											{this.getJsxRow('Division', game.divisionName)}
@@ -176,6 +164,20 @@ class Gameinfo extends Component
 							</Grid>
 						</Content>
 					</Row>
+
+					<Row size={8}>
+						<Col size={50} style={styles.topButtonsCol}>
+							<TouchableHighlight onPress={() => this.addToCalendar()}>
+								<Text style={styles.topButtonsTxt}>Add to calendar</Text>
+							</TouchableHighlight>
+						</Col>
+						<Col size={50} style={styles.topButtonsCol}>
+							<TouchableHighlight onPress={() => this.openMaps()}>
+								<Text style={styles.topButtonsTxt}>Open map</Text>
+							</TouchableHighlight>
+						</Col>
+					</Row>
+
 				</Grid>
 			</Container>
 		);

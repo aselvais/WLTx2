@@ -12,8 +12,12 @@ export default {
 		borderBottomColor: '#000'
 	},
 	rowLabel: {
-		backgroundColor: '#ddd',
-		padding: 5
+		padding: 5,
+		backgroundColor: '#DDD',
+		borderRadius: 0,
+		borderBottomColor: '#AAAAAA',
+		borderBottomWidth: 1
+
 	},
 	label: {
 		padding: 10,

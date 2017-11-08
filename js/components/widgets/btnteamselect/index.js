@@ -26,7 +26,7 @@ class Btnteamselect extends Component
 				item: division,
 				func: 'getTier | getTeamStandingLocalTierGroup'
 			},
-			team: {label: "team", route: "Teams", item: team, func: 'getFeedNews | getFeedTwitter | getTeamInfo'},
+			//team: {label: "team", route: "Teams", item: team, func: 'getFeedNews | getFeedTwitter | getTeamInfo'},
 		};
 	}
 
@@ -48,7 +48,7 @@ class Btnteamselect extends Component
 					<Row key={data[i].label + ++k}>
 						<Col size={5}>
 							<Button style={styles.btn} onPress={() => navigation.navigate(data[i].route)}>
-								<Icon name="ios-create"/><Text>Choose a {data[i].label}</Text>
+								<Icon color="#000000" name="ios-create"/><Text>Choose a {data[i].label}</Text>
 							</Button>
 						</Col>
 					</Row>
@@ -60,8 +60,12 @@ class Btnteamselect extends Component
 				toret.push(
 					<Row key={data[i].label + ++k} style={styles.rowLabel}
 						 onPress={() => navigation.navigate(data[i].route)}>
-						<Col size={4}><Text style={styles.label}>{data[i].label.toUpperCase()}
-							: {data[i].item.name}</Text></Col>
+						<Col size={90}>
+							<Text style={styles.label}>{data[i].label.toUpperCase()}</Text>
+						</Col>
+						<Col size={8} style={{justifyContent: 'center',alignItems: 'center'}}>
+							<Icon name="ios-arrow-forward" fontSize={10}/>
+						</Col>
 					</Row>
 				);
 				toret.push(

@@ -1,5 +1,6 @@
 import {Dimensions} from "react-native";
 const deviceWidth = Dimensions.get('window').width;
+import colors from '../../../libs/Wltcolors';
 
 export default {
 	container: {
@@ -13,14 +14,16 @@ export default {
 
 	rowTxt01: {},
 	txtTxt01: {
-		padding: 10,
+		padding: 8,
 		textAlign: 'center',
 		fontWeight: 'bold',
-		fontSize: 16,
+		fontSize: 13,
+		backgroundColor: colors.blue,
+		color: colors.white,
 	},
 	rowTxt02: {},
 	txtTxt02: {
-		padding: 3,
+		padding: 8,
 		textAlign: 'center',
 		fontSize: 20,
 	},
@@ -72,8 +75,8 @@ export default {
 		height: null
 	},
 	topButtonsCol: {
-		borderBottomColor: '#AAAAAA',
-		borderBottomWidth: 1,
+		borderTopColor: '#AAAAAA',
+		borderTopWidth: 1,
 		borderRightColor: '#AAAAAA',
 		borderRightWidth: 1,
 		backgroundColor: '#EEEEEE',

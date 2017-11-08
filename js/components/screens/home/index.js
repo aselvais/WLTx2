@@ -1,11 +1,17 @@
 import React, {Component} from "react";
 import PropTypes from 'prop-types';
 import {connect} from "react-redux";
-import {Container, Content, Icon,} from "native-base";
+import {Dimensions, Image} from "react-native";
+import {Container, Content, Icon} from "native-base";
+import {Col, Grid, Row} from "react-native-easy-grid";
 import styles from "./styles";
 import Btnteamselect from '../../widgets/btnteamselect/index';
 import Headerbar from "../../widgets/headerbar/index";
 import Spinner from "../../widgets/loaders/Spinner";
+
+const deviceHeight = Dimensions.get('window').height;
+const coverimg = require('../../../../images/wltLogo2.png');
+const logo = require("../../../../images/MarlLogo.png");
 
 /**
  *
@@ -46,11 +52,30 @@ class Home extends Component
 	{
 		let {team} = this.props;
 		return (
-			<Container style={styles.container}>
-				<Content padder>
-					<Spinner/>
-					<Btnteamselect navigation={this.props.navigation}/>
-				</Content>
+			<Container>
+				<Grid>
+					<Row size={25}>
+						<Col>
+							<Grid>
+								<Row>
+									<Image source={coverimg} style={styles.backgroundImage}>
+										<Col style={{alignItems: 'center'}}>
+											<Image style={styles.imageLogo} source={logo}/>
+										</Col>
+									</Image>
+								</Row>
+							</Grid>
+						</Col>
+					</Row>
+					<Row size={75}>
+						<Col>
+							<Content>
+								<Spinner/>
+								<Btnteamselect navigation={this.props.navigation}/>
+							</Content>
+						</Col>
+					</Row>
+				</Grid>
 			</Container>
 		);
 	}

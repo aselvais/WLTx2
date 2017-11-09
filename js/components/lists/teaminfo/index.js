@@ -7,6 +7,7 @@ import {Col, Grid, Row} from "react-native-easy-grid";
 import styles from "./styles";
 import {getTeaminfos, setTeaminfoIndex} from "../../../redux/actions/teaminfo";
 import {getGames} from "../../../redux/actions/games";
+import {setLoading} from "../../../redux/actions/loading";
 import moment from 'moment';
 
 import Spinner from '../../widgets/loaders/Spinner';
@@ -35,6 +36,7 @@ class Teaminfos extends Component
 	static propTypes = {
 		getTeaminfos: PropTypes.func,
 		getGames: PropTypes.func,
+		setLoading: PropTypes.func,
 	};
 
 	/**
@@ -42,10 +44,15 @@ class Teaminfos extends Component
 	 */
 	componentDidMount()
 	{
+		this.props.setLoading('teaminfo', true);
 		if (this.props.selectedTeaminfo && this.props.selectedTeaminfo > 0)
 		{
 			this.props.getTeaminfos(parseInt(this.props.selectedTeaminfo));
-			this.props.getGames(moment(new Date()).format('YYYY-MM-DD'), parseInt(this.props.selectedTeaminfo));
+			this.props.getGames(moment(new Date()).format('YYYY-MM-DD'), parseInt(this.props.selectedTeaminfo)).then(
+				() => this.props.setLoading('teaminfo', false),
+				() => this.props.setLoading('teaminfo', false)
+		);
+
 		}
 	}
 
@@ -90,7 +97,6 @@ class Teaminfos extends Component
 		};
 		let jsx = (
 			<Content padder>
-				<Spinner/>
 				<Grid>{Object.keys(datastruct).map((k) => this.getJsxRow(datastruct[k], teaminfos[k]))}</Grid>
 			</Content>
 		);
@@ -166,7 +172,6 @@ class Teaminfos extends Component
 		let jsx = (
 			<Content padder>
 				<View>
-					<Spinner/>
 					{games.map(g => (
 						<Grid key={g.id}>
 							<Row>
@@ -199,56 +204,61 @@ class Teaminfos extends Component
 	 */
 	render()
 	{
-		let {teaminfos, games} = this.props;
+		let {loading, teaminfos, games} = this.props;
 		return (
 			<Container>
-				<Grid>
+				{
+					(loading) ?
+						<Spinner/>
+						:
+						<Grid>
 
-					<Row size={25} style={styles.row01}>
-						<Col>
-							<Grid>
-								<Row>
-									<Image source={coverimg} style={styles.backgroundImage}>
-										<Col style={{alignItems: 'center'}}>
-											<Image style={styles.imageLogo} source={{uri: teaminfos.imageUrl}}/>
-											<Text style={styles.row01textName}>
-												{(teaminfos.name) ? teaminfos.name.toUpperCase() : null}
-											</Text>
-											<Text style={styles.row01textDivName}>{teaminfos.divisionName}</Text>
-										</Col>
-									</Image>
-								</Row>
-							</Grid>
-						</Col>
-					</Row>
+							<Row size={25} style={styles.row01}>
+								<Col>
+									<Grid>
+										<Row>
+											<Image source={coverimg} style={styles.backgroundImage}>
+												<Col style={{alignItems: 'center'}}>
+													<Image style={styles.imageLogo} source={{uri: teaminfos.imageUrl}}/>
+													<Text style={styles.row01textName}>
+														{(teaminfos.name) ? teaminfos.name.toUpperCase() : null}
+													</Text>
+													<Text style={styles.row01textDivName}>{teaminfos.divisionName}</Text>
+												</Col>
+											</Image>
+										</Row>
+									</Grid>
+								</Col>
+							</Row>
 
-					<Row size={75}>
-						<Col>
-							<Tabs initialPage={0}>
-								<Tab heading="OVERVIEW">{this.getJSXoverview()}</Tab>
-								{(teaminfos && teaminfos.hasNews) ?
-									<Tab heading="NEWS">{this.getJSXnews()}</Tab> : null}
-								{(teaminfos && teaminfos.hasTweets) ?
-									<Tab heading="TWEETS">{this.getJSXtweet()}</Tab> : null}
-								{(games && games.past && games.past.length && games.past.length > 0) ?
-									<Tab heading="PAST GAMES">{this.getJSXgames(games.past)}</Tab> : null}
-								{(games && games.today && games.today.length && games.today.length > 0) ?
-									<Tab heading="GAMES TODAY">{this.getJSXgames(games.today)}</Tab> : null}
-								{(games && games.upcoming && games.upcoming.length && games.upcoming.length > 0) ?
-									<Tab heading="UPCOMING GAMES">{this.getJSXgames(games.upcoming)}</Tab> : null}
-							</Tabs>
-						</Col>
-					</Row>
+							<Row size={75}>
+								<Col>
+									<Tabs initialPage={0}>
+										<Tab heading="OVERVIEW">{this.getJSXoverview()}</Tab>
+										{(teaminfos && teaminfos.hasNews) ?
+											<Tab heading="NEWS">{this.getJSXnews()}</Tab> : null}
+										{(teaminfos && teaminfos.hasTweets) ?
+											<Tab heading="TWEETS">{this.getJSXtweet()}</Tab> : null}
+										{(games && games.past && games.past.length && games.past.length > 0) ?
+											<Tab heading="PAST GAMES">{this.getJSXgames(games.past)}</Tab> : null}
+										{(games && games.today && games.today.length && games.today.length > 0) ?
+											<Tab heading="GAMES TODAY">{this.getJSXgames(games.today)}</Tab> : null}
+										{(games && games.upcoming && games.upcoming.length && games.upcoming.length > 0) ?
+											<Tab heading="UPCOMING GAMES">{this.getJSXgames(games.upcoming)}</Tab> : null}
+									</Tabs>
+								</Col>
+							</Row>
 
-					<Row size={8}>
-						<Col size={100} style={styles.topButtonsCol}>
-							<TouchableHighlight onPress={() => this.addToFavorite()}>
-								<Text style={styles.topButtonsTxt}>Add team to favorites</Text>
-							</TouchableHighlight>
-						</Col>
-					</Row>
+							<Row size={8}>
+								<Col size={100} style={styles.topButtonsCol}>
+									<TouchableHighlight onPress={() => this.addToFavorite()}>
+										<Text style={styles.topButtonsTxt}>Add team to favorites</Text>
+									</TouchableHighlight>
+								</Col>
+							</Row>
 
-				</Grid>
+						</Grid>
+				}
 			</Container>
 		);
 	}
@@ -259,11 +269,13 @@ export default connect(
 		teaminfos: state.teaminfo.list,
 		games: state.games.list,
 		selectedTeaminfo: state.teaminfo.selectedIndex,
-		selectedTeam: state.teams.selectedIndex
+		selectedTeam: state.teams.selectedIndex,
+		loading: state.loading.globalstatus,
 	}),
 	dispatch => ({
 		getTeaminfos: teamid => dispatch(getTeaminfos(teamid)),
 		getGames: (date, teamid) => dispatch(getGames(date, teamid)),
 		setTeaminfoIndex: id => dispatch(setTeaminfoIndex(id)),
+		setLoading: (name, status) => dispatch(setLoading(name, status)),
 	})
 )(Teaminfos);

@@ -168,14 +168,19 @@ class Gameinfo extends Component
 					</Row>
 
 					<Row size={8}>
-						<Col size={50} style={styles.topButtonsCol}>
+						<Col size={33} style={styles.topButtonsCol}>
 							<TouchableHighlight onPress={() => this.addToCalendar()}>
 								<Text style={styles.topButtonsTxt}>Add to calendar</Text>
 							</TouchableHighlight>
 						</Col>
-						<Col size={50} style={styles.topButtonsCol}>
+						<Col size={33} style={styles.topButtonsCol}>
 							<TouchableHighlight onPress={() => this.openMaps()}>
-								<Text style={styles.topButtonsTxt}>Open map</Text>
+								<Text style={styles.topButtonsTxt}>Share</Text>
+							</TouchableHighlight>
+						</Col>
+						<Col size={33} style={styles.topButtonsCol}>
+							<TouchableHighlight onPress={() => this.openMaps()}>
+								<Text style={styles.topButtonsTxt}>Map</Text>
 							</TouchableHighlight>
 						</Col>
 					</Row>

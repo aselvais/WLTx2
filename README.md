@@ -81,7 +81,7 @@ Successfully added the "WinLoseOrTie-ios" app, along with the following default 
 │ Staging    │ so5ufonprUcPMHZT23KYGBqcyv1Wd6a1b3b3-a940-4ce5-ace9-1b792d004c3a │
 └────────────┴──────────────────────────────────────────────────────────────────┘
 
-code-push release-react WinLoseOrTie-android android -d Production
+code-push release-react WinLoseOrTie-android android -d Production &&
 code-push release-react WinLoseOrTie-ios ios -d Production
 
 

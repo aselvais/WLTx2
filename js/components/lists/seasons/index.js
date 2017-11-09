@@ -67,44 +67,47 @@ class Seasons extends Component
 	 */
 	render()
 	{
-		// const params = this.props.navigation.state.params;
+		const {loading} = this.props;
 		return (
 			<Container>
-				<Spinner/>
-				<Content padder>
-					{(this.props.seasons && this.props.seasons.length && this.props.seasons.length > 0) ?
-						<Grid>
-							{this.props.seasons.map((item, i) => (
-								<Row key={item.id}>
-									<Col style={{padding: 10}}>
-										<TouchableOpacity onPress={() => this.clickSeason(item)}>
-											<Text>{item.name}
-												{item.bracketsVisibleInSeason ? (
-													<Icon name="code" fontSize="5" color="#FF0000"/>) : null}
-												{item.playOff ? (<Icon name="ios-american-football" fontSize="5"
-																	   color="#FF0000"/>) : null}
-											</Text>
-										</TouchableOpacity>
-									</Col>
-									<Col style={{width: 40, alignItems: 'center'}}>
-										{(item.id && this.props.selectedSeason && this.props.selectedSeason.id && this.props.selectedSeason.id == item.id)
-											? (<Icon name="checkmark" fontSize="10" color="#FF0000"
-													 iconRight="true"/>) : null}
-									</Col>
+				{ loading ? <Spinner/> :
+					(<Content padder>
+						{(this.props.seasons && this.props.seasons.length && this.props.seasons.length > 0) ?
+							<Grid>
+								{this.props.seasons.map((item, i) => (
+									<Row key={item.id}>
+										<Col style={{padding: 10}}>
+											<TouchableOpacity onPress={() => this.clickSeason(item)}>
+												<Text>{item.name}
+													{item.bracketsVisibleInSeason ? (
+														<Icon name="code" fontSize="5" color="#FF0000"/>) : null}
+													{item.playOff ? (<Icon name="ios-american-football" fontSize="5"
+																		   color="#FF0000"/>) : null}
+												</Text>
+											</TouchableOpacity>
+										</Col>
+										<Col style={{width: 40, alignItems: 'center'}}>
+											{(item.id && this.props.selectedSeason && this.props.selectedSeason.id && this.props.selectedSeason.id == item.id)
+												? (<Icon name="checkmark" fontSize="10" color="#FF0000"
+														 iconRight="true"/>) : null}
+										</Col>
 
-								</Row>
-							))}
-						</Grid>
-						:
-						null
-					}
-					{
-						(this.props.seasons && this.props.seasons.message) ?
-							<Text>{this.props.seasons.message}</Text>
+									</Row>
+								))}
+							</Grid>
 							:
 							null
-					}
-				</Content>
+						}
+						{
+							(this.props.seasons && this.props.seasons.message) ?
+								<Text>{this.props.seasons.message}</Text>
+								:
+								null
+						}
+					</Content>)
+				}
+
+
 			</Container>
 		);
 	}
@@ -114,7 +117,8 @@ export default connect(
 	state => ({
 		seasons: state.seasons.list,
 		selectedSeason: state.seasons.selectedIndex,
-		selectedLeague: state.leagues.selectedIndex
+		selectedLeague: state.leagues.selectedIndex,
+		loading: state.loading.globalstatus
 	}),
 	dispatch => ({
 		getSeasons: leagueid => dispatch(getSeasons(leagueid)),

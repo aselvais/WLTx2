@@ -104,7 +104,7 @@ class Games extends Component
 					<Gameitem key={item.id} item={item}/></Row>);
 				ddmOld = ddm;
 			});
-			return (<Grid>{jsx}</Grid>);
+			return (<Grid key="m01">{jsx}</Grid>);
 		}
 		return null;
 	}
@@ -155,6 +155,32 @@ class Games extends Component
 
 	/**
 	 *
+	 * @returns {Array}
+	 */
+	getJsxContent()
+	{
+		let {sdatefrom, sdateto, gamesday, loading} = this.props;
+		let jsx = [];
+
+		jsx.push(this.getMatchListJsx(gamesday));
+
+		if (!loading && !(gamesday && gamesday.length && gamesday.length > 0))
+		{
+			jsx.push(<View key="m02" style={styles.griditem}>
+					<Text style={{textAlign: 'center'}}>
+						No game or data from{"\n"}
+						{moment(sdatefrom).format('L')}{"\n"}
+						to{"\n"}
+						{moment(sdateto).format('L')}{"\n"}
+					</Text>
+				</View>
+			);
+		}
+		return jsx;
+	}
+
+	/**
+	 *
 	 * @returns {XML}
 	 */
 	render()
@@ -167,18 +193,7 @@ class Games extends Component
 					{this.getDropDownJsx()}
 					<Row>
 						<Content>
-							<Spinner/>
-							{this.getMatchListJsx(gamesday)}
-							{(!loading && !(gamesday && gamesday.length && gamesday.length > 0)) ?
-								<View style={styles.griditem}>
-									<Text style={{textAlign: 'center'}}>
-										No game or data from{"\n"}
-										{moment(sdatefrom).format('L')}{"\n"}
-										to{"\n"}
-										{moment(sdateto).format('L')}{"\n"}
-									</Text>
-								</View>
-								: null}
+							{ (loading) ? <Spinner/> : this.getJsxContent()}
 						</Content>
 					</Row>
 				</Grid>

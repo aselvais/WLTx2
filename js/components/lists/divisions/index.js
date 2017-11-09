@@ -68,31 +68,35 @@ class Divisions extends Component
 	 */
 	render()
 	{
+		const {loading} = this.props;
 		return (
 			<Container>
-				<Spinner/>
-				<Content padder>
-					{(this.props.divisions && this.props.divisions.length && this.props.divisions.length > 0) ?
-						<Grid>
-							{this.props.divisions.map((item, i) => (
-								<Row key={item.id}>
-									<Col style={{padding: 10}}>
-										<TouchableOpacity onPress={() => this.clickDivision(item)}>
-											<Text>{item.name}</Text>
-										</TouchableOpacity>
-									</Col>
-									<Col style={{width: 40, alignItems: 'center'}}>
-										{(item.id && this.props.selectedDivision && this.props.selectedDivision.id && this.props.selectedDivision.id == item.id)
-											? (<Icon name="checkmark" fontSize="10" color="#FF0000"
-													 iconRight="true"/>) : null}
-									</Col>
-								</Row>
-							))}
-						</Grid>
-						:
-						null
-					}
-				</Content>
+				{loading ? <Spinner/> : (
+					<Content padder>
+						{(this.props.divisions && this.props.divisions.length && this.props.divisions.length > 0) ?
+							<Grid>
+								{this.props.divisions.map((item, i) => (
+									<Row key={item.id}>
+										<Col style={{padding: 10}}>
+											<TouchableOpacity onPress={() => this.clickDivision(item)}>
+												<Text>{item.name}</Text>
+											</TouchableOpacity>
+										</Col>
+										<Col style={{width: 40, alignItems: 'center'}}>
+											{(item.id && this.props.selectedDivision && this.props.selectedDivision.id && this.props.selectedDivision.id == item.id)
+												? (<Icon name="checkmark" fontSize="10" color="#FF0000"
+														 iconRight="true"/>) : null}
+										</Col>
+									</Row>
+								))}
+							</Grid>
+							:
+							null
+						}
+					</Content>
+				)}
+
+
 			</Container>
 		);
 	}
@@ -102,7 +106,9 @@ export default connect(
 	state => ({
 		divisions: state.divisions.list,
 		selectedDivision: state.divisions.selectedIndex,
-		selectedSeason: state.seasons.selectedIndex
+		selectedSeason: state.seasons.selectedIndex,
+		loading: state.loading.globalstatus
+
 	}),
 	dispatch => ({
 		getDivisions: seasonid => dispatch(getDivisions(seasonid)),

@@ -67,31 +67,34 @@ class Leagues extends Component
 	 */
 	render()
 	{
+		let {loading} = this.props;
+
 		return (
 			<Container>
 				<Content>
-					<Spinner/>
-					<Grid style={styles.mt}>
-						{this.props.leagues.map((item, i) => (
-							<Row key={item.id}>
-								<Col style={{width: 60, height: 55}}>
-									<TouchableOpacity style={styles.row} onPress={() => this.clickLeague(item)}>
-										<Image style={{width: 50, height: 50}} source={{uri: item.imageUrl}}/>
-									</TouchableOpacity>
-								</Col>
-								<Col>
-									<TouchableOpacity style={styles.row} onPress={() => this.clickLeague(item)}>
-										<Text style={styles.text}>{item.name}</Text>
-									</TouchableOpacity>
-								</Col>
-								<Col style={{width: 40, alignItems: 'center'}}>
-									{(item.id && this.props.selectedLeague && this.props.selectedLeague.id && this.props.selectedLeague.id == item.id)
-										? (<Icon name="checkmark" fontSize="10" color="#FF0000"
-												 iconRight="true"/>) : null}
-								</Col>
-							</Row>
-						))}
-					</Grid>
+					{ loading ? <Spinner/> :
+						(<Grid style={styles.mt}>
+							{this.props.leagues.map((item, i) => (
+								<Row key={item.id}>
+									<Col style={{width: 60, height: 55}}>
+										<TouchableOpacity style={styles.row} onPress={() => this.clickLeague(item)}>
+											<Image style={{width: 50, height: 50}} source={{uri: item.imageUrl}}/>
+										</TouchableOpacity>
+									</Col>
+									<Col>
+										<TouchableOpacity style={styles.row} onPress={() => this.clickLeague(item)}>
+											<Text style={styles.text}>{item.name}</Text>
+										</TouchableOpacity>
+									</Col>
+									<Col style={{width: 40, alignItems: 'center'}}>
+										{(item.id && this.props.selectedLeague && this.props.selectedLeague.id && this.props.selectedLeague.id == item.id)
+											? (<Icon name="checkmark" fontSize="10" color="#FF0000"
+													 iconRight="true"/>) : null}
+									</Col>
+								</Row>
+							))}
+						</Grid>)
+					}
 				</Content>
 			</Container>
 		);
@@ -102,7 +105,8 @@ export default connect(
 	state => ({
 		name: state.user.name,
 		leagues: state.leagues.list,
-		selectedLeague: state.leagues.selectedIndex
+		selectedLeague: state.leagues.selectedIndex,
+		loading: state.loading.globalstatus
 	}),
 	dispatch => ({
 		getLeagues: () => dispatch(getLeagues()),

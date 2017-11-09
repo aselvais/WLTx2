@@ -3,7 +3,6 @@ import {TabBarBottom, TabNavigator} from "react-navigation";
 // screens
 import Home from "../components/screens/home";
 import Games from "../components/screens/games";
-import News from "../components/screens/news";
 import Standings from "../components/screens/standings";
 import Favorites from "../components/screens/favorites";
 

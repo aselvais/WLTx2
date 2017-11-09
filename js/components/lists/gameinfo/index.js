@@ -16,7 +16,7 @@ const coverimg = require('../../../../images/gamebackgroundblack.jpg');
 /**
  *
  */
-class Gameinfo extends Component
+class Gameinfo extends React.PureComponent
 {
 	/**
 	 *
@@ -131,14 +131,14 @@ class Gameinfo extends Component
 								<Row size={25}>
 									<Col size={45} style={{alignItems: 'center'}}>
 										<TouchableHighlight onPress={() => this.openTeam(game.info.team1.teamId)}>
-										<Text style={styles.row01textScore}>{game.info.team1.score}</Text>
+											<Text style={styles.row01textScore}>{game.info.team1.score}</Text>
 										</TouchableHighlight>
 									</Col>
 									<Col size={10} style={{alignItems: 'center'}}>
 									</Col>
 									<Col size={45} style={{alignItems: 'center'}}>
 										<TouchableHighlight onPress={() => this.openTeam(game.info.team2.teamId)}>
-										<Text style={styles.row01textScore}>{game.info.team2.score}</Text>
+											<Text style={styles.row01textScore}>{game.info.team2.score}</Text>
 										</TouchableHighlight>
 									</Col>
 								</Row>

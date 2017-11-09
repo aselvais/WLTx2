@@ -23,7 +23,7 @@ const initialState = {
  * @param action
  * @returns {*}
  */
-export default function (state: State = initialState, action: Action): State
+export default function(state: State = initialState, action: Action): State
 {
 	switch (action.type)
 	{

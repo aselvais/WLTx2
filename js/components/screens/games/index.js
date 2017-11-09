@@ -17,7 +17,7 @@ import Gameitem from './gameitem';
 /**
  *
  */
-class Games extends Component
+class Games extends React.PureComponent
 {
 	/**
 	 * Option for the TabNavigation system
@@ -193,7 +193,7 @@ class Games extends Component
 					{this.getDropDownJsx()}
 					<Row>
 						<Content>
-							{ (loading) ? <Spinner/> : this.getJsxContent()}
+							{(loading) ? <Spinner/> : this.getJsxContent()}
 						</Content>
 					</Row>
 				</Grid>

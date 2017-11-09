@@ -4,7 +4,7 @@ import {Body, Button, Header, Left, Right, Title} from "native-base";
 /**
  *
  */
-class Headerbar extends Component
+class Headerbar extends React.PureComponent
 {
 	/**
 	 *

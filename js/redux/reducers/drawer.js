@@ -11,7 +11,7 @@ const initialState = {
 	drawerDisabled: true,
 };
 
-export default function (state: State = initialState, action: Action): State
+export default function(state: State = initialState, action: Action): State
 {
 	if (action.type === OPEN_DRAWER)
 	{

@@ -11,7 +11,7 @@ import Spinner from '../../widgets/loaders/Spinner';
 /**
  *
  */
-class Twitterfeeds extends Component
+class Twitterfeeds extends React.PureComponent
 {
 	/**
 	 *

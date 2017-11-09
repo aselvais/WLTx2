@@ -1,6 +1,7 @@
 import {Dimensions} from "react-native";
-const deviceWidth = Dimensions.get('window').width;
 import colors from '../../../libs/Wltcolors';
+
+const deviceWidth = Dimensions.get('window').width;
 
 export default {
 	container: {

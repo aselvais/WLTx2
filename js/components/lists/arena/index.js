@@ -8,7 +8,7 @@ import Spinner from '../../widgets/loaders/Spinner';
 /**
  *
  */
-class Arena extends Component
+class Arena extends React.PureComponent
 {
 	/**
 	 *

@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {ProgressBarAndroid} from 'react-native';
 
 
-class SpinnerNB extends Component
+class SpinnerNB extends React.PureComponent
 {
 
 	render()

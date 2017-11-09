@@ -13,7 +13,7 @@ import styles from "./styles";
 /**
  *
  */
-class Leagues extends Component
+class Leagues extends React.PureComponent
 {
 	/**
 	 *
@@ -72,7 +72,7 @@ class Leagues extends Component
 		return (
 			<Container>
 				<Content>
-					{ loading ? <Spinner/> :
+					{loading ? <Spinner/> :
 						(<Grid style={styles.mt}>
 							{this.props.leagues.map((item, i) => (
 								<Row key={item.id}>

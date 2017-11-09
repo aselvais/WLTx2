@@ -10,7 +10,7 @@ import Spinner from '../../widgets/loaders/Spinner';
 /**
  *
  */
-class Selectdate extends Component
+class Selectdate extends React.PureComponent
 {
 	/**
 	 *

@@ -13,7 +13,7 @@ import Tiers from '../../lists/tiers'
 /**
  *
  */
-class Standings extends Component
+class Standings extends React.PureComponent
 {
 	/**
 	 * Option for the TabNavigation system
@@ -67,7 +67,7 @@ class Standings extends Component
 		let jsx = null;
 		if (tiers && tiers.length && tiers.length > 0)
 		{
-			jsx =  (
+			jsx = (
 				<Row style={styles.rowTop}>
 					<Col size={1}>
 						<Button style={styles.topbutton} onPress={() => navigation.navigate("Tiers")}>
@@ -86,8 +86,10 @@ class Standings extends Component
 					</Col>
 				</Row>
 			);
-		} else {
-			jsx =  (
+		}
+		else
+		{
+			jsx = (
 				<Row style={{height: 2}}>
 					<Col size={1}>
 					</Col>

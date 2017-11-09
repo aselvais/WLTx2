@@ -9,7 +9,7 @@ const initialState = {
 	name: '',
 };
 
-export default function (state: State = initialState, action: Action): State
+export default function(state: State = initialState, action: Action): State
 {
 	if (action.type === SET_USER)
 	{

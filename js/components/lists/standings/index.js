@@ -1,12 +1,11 @@
 import React, {Component} from "react";
 import PropTypes from 'prop-types';
-import {Text, TouchableOpacity, View, Image} from "react-native";
+import {Image, Text, TouchableOpacity, View} from "react-native";
 import {connect} from "react-redux";
 import {Col, Grid, Row} from "react-native-easy-grid";
 import {getStandings, resetStandings, setStandingIndex} from "../../../redux/actions/standings";
 import {setTeamIndexById,} from "../../../redux/actions/teams";
 import {setTeaminfoIndex,} from "../../../redux/actions/teaminfo";
-import Spinner from '../../widgets/loaders/Spinner';
 import {setLoading} from "../../../redux/actions/loading";
 import styles from "./styles";
 import Orientation from 'react-native-orientation';
@@ -15,7 +14,7 @@ import colors from '../../../libs/Wltcolors';
 /**
  *
  */
-class Standings extends Component
+class Standings extends React.PureComponent
 {
 	/**
 	 *
@@ -99,7 +98,7 @@ class Standings extends Component
 			jsx.push(
 				<TouchableOpacity key={u} onPress={() => this.clickTeam(d.teamId)}>
 					<Row key={u} style={{
-						backgroundColor: (u%2) ? colors.white : colors.lightgrey
+						backgroundColor: (u % 2) ? colors.white : colors.lightgrey
 					}}>
 						<Col size={1}>
 							<Text style={styles.txtItem}>{u}</Text>
@@ -147,7 +146,8 @@ class Standings extends Component
 					<Grid key={item.id} style={styles.griditem}>
 						<Row style={styles.griditemTop}>
 							<Col>
-								{(item.name) ? <Text style={styles.topText}>{item.name.toUpperCase()}</Text> : <Text style={styles.topText}>{selectedDivisions.name.toUpperCase()}</Text>}
+								{(item.name) ? <Text style={styles.topText}>{item.name.toUpperCase()}</Text> :
+									<Text style={styles.topText}>{selectedDivisions.name.toUpperCase()}</Text>}
 								{(item.teamStandingLocalAPIModels && item.teamStandingLocalAPIModels.length && item.teamStandingLocalAPIModels.length > 0) ? this.getStandingsJsx(item.teamStandingLocalAPIModels) : null}
 							</Col>
 						</Row>

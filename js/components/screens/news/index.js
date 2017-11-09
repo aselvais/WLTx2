@@ -10,7 +10,7 @@ import Twitterfeed from '../../lists/twitterfeed';
 /**
  *
  */
-class News extends Component
+class News extends React.PureComponent
 {
 	/**
 	 * Option for the TabNavigation system

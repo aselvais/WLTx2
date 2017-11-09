@@ -16,7 +16,7 @@ const logo = require("../../../../images/MarlLogo.png");
 /**
  *
  */
-class Home extends Component
+class Home extends React.PureComponent
 {
 
 	/**
@@ -50,7 +50,7 @@ class Home extends Component
 	 */
 	render()
 	{
-		let {team} = this.props;
+		let {team,loading} = this.props;
 		return (
 			<Container>
 				<Grid>
@@ -70,8 +70,7 @@ class Home extends Component
 					<Row size={75}>
 						<Col>
 							<Content>
-								<Spinner/>
-								<Btnteamselect navigation={this.props.navigation}/>
+								{ loading ? <Spinner/> : <Btnteamselect navigation={this.props.navigation}/> }
 							</Content>
 						</Col>
 					</Row>
@@ -88,6 +87,7 @@ export default connect(
 		season: state.seasons.selectedIndex,
 		division: state.divisions.selectedIndex,
 		team: state.teams.selectedIndex,
+		loading: state.loading.globalstatus
 	}),
 	dispatch => ({})
 )(Home);

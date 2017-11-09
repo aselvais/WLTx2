@@ -39,7 +39,7 @@ class Apiaccess
 	 * @type {number}
 	 * @private
 	 */
-	_cachingDuration = 25*60;
+	_cachingDuration = 25 * 60;
 
 	/**
 	 * Token used to connect to the API (seems to be used for the favourite and other personal data)
@@ -246,11 +246,11 @@ class Apiaccess
 			}
 			p = that._genericApiCall('PostRegister', {device: uID});
 			p.then(
-				function (d)
+				function(d)
 				{
 					that._token = d.token;
 				},
-				function (d)
+				function(d)
 				{
 					that._token = null;
 				}
@@ -259,7 +259,7 @@ class Apiaccess
 		}
 		else
 		{
-			return new Promise(function (resolve, reject)
+			return new Promise(function(resolve, reject)
 			{
 				resolve({token: that._token});
 			});

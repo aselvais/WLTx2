@@ -5,7 +5,7 @@ import {connect} from "react-redux";
 /**
  *
  */
-class SpinnerCustom extends Component
+class SpinnerCustom extends React.PureComponent
 {
 	/**
 	 *

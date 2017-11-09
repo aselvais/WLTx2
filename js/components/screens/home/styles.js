@@ -1,5 +1,5 @@
-import colors from '../../../libs/Wltcolors';
 import {Dimensions} from "react-native";
+
 const React = require('react-native');
 const {StyleSheet} = React;
 

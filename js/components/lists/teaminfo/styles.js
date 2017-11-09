@@ -1,7 +1,8 @@
 import colors from '../../../libs/Wltcolors';
 import {Dimensions} from "react-native";
+
 const React = require('react-native');
-import {Image} from "react-native";
+
 const {StyleSheet} = React;
 
 const deviceWidth = Dimensions.get('window').width;

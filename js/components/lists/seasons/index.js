@@ -12,7 +12,7 @@ import {setLoading} from "../../../redux/actions/loading";
 /**
  *
  */
-class Seasons extends Component
+class Seasons extends React.PureComponent
 {
 	/**
 	 *
@@ -70,7 +70,7 @@ class Seasons extends Component
 		const {loading} = this.props;
 		return (
 			<Container>
-				{ loading ? <Spinner/> :
+				{loading ? <Spinner/> :
 					(<Content padder>
 						{(this.props.seasons && this.props.seasons.length && this.props.seasons.length > 0) ?
 							<Grid>

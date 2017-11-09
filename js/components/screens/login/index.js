@@ -1,9 +1,8 @@
 import React, {Component} from "react";
-import {Dimensions, Image, AsyncStorage} from "react-native";
+import {AsyncStorage, Dimensions, Image} from "react-native";
 import {connect} from "react-redux";
 import {Button, Text} from "native-base";
 import {Col, Grid, Row} from "react-native-easy-grid";
-import {reduxForm} from "redux-form";
 import styles from "./styles";
 import Spinner from '../../widgets/loaders/Spinner';
 
@@ -15,7 +14,7 @@ const logo = require("../../../../images/MarlLogo.png");
 /**
  *
  */
-class Login extends Component
+class Login extends React.PureComponent
 {
 
 	/**
@@ -87,8 +86,8 @@ class Login extends Component
 								<Text>START</Text>
 							</Button>
 
-							<Button style={styles.btn}  onPress={ () => this.clearStorage() }transparent info>
-								<Text style={{ color: '#0000FF' }}>Clear cached data</Text>
+							<Button style={styles.btn} onPress={() => this.clearStorage()} transparent info>
+								<Text style={{color: '#0000FF'}}>Clear cached data</Text>
 							</Button>
 
 						</Col>
@@ -104,8 +103,7 @@ export default connect(
 // 		league: state.leagues.selectedIndex,
 		season: state.seasons.selectedIndex,
 	}),
-	dispatch => ({
-	})
+	dispatch => ({})
 )(Login);
 /*
 const LoginSwag = reduxForm(

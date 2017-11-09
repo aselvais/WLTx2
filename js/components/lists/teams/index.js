@@ -15,7 +15,7 @@ import {setLoading} from "../../../redux/actions/loading";
 /**
  *
  */
-class Teams extends Component
+class Teams extends React.PureComponent
 {
 	/**
 	 *

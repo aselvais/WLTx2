@@ -15,7 +15,7 @@ function setup(): React.Component
 	/**
 	 *
 	 */
-	class Root extends Component
+	class Root extends React.PureComponent
 	{
 
 		/**

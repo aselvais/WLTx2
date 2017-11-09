@@ -1,13 +1,12 @@
 import React, {Component} from "react";
 import {Image, Text} from "react-native";
-import {Icon} from "native-base";
 import {Col, Grid, Row} from "react-native-easy-grid";
 import styles from "./gameitemstyles";
 
 /**
  *
  */
-class Gameitem extends Component
+class Gameitem extends React.PureComponent
 {
 
 	/**
@@ -17,7 +16,10 @@ class Gameitem extends Component
 	 */
 	getScoreTxt(s)
 	{
-		if (!s && parseInt(s) !== 0) return '-';
+		if (!s && parseInt(s) !== 0)
+		{
+			return '-';
+		}
 		return s;
 	}
 
@@ -27,7 +29,7 @@ class Gameitem extends Component
 	 * @param isWinner
 	 * @returns {Array}
 	 */
-	getTeamNameJsx(txt='', isWinner=false)
+	getTeamNameJsx(txt = '', isWinner = false)
 	{
 		let jsx = [];
 		let txt0 = txt.trim().split(' ');
@@ -41,8 +43,20 @@ class Gameitem extends Component
 			tcolor = '#3F51B5';
 		}
 
-		if (txt1 != '') jsx.push(<Text key={1} style={{color: tcolor, fontWeight: tweight, fontSize: 11, textAlign: 'left'}}>{txt1}</Text>);
-		if (txt2 != '') jsx.push(<Text key={2} style={{color: tcolor, fontWeight: tweight,  fontSize: 14}}>{txt2}</Text>);
+		if (txt1 != '')
+		{
+			jsx.push(<Text key={1} style={{
+				color: tcolor,
+				fontWeight: tweight,
+				fontSize: 11,
+				textAlign: 'left'
+			}}>{txt1}</Text>);
+		}
+		if (txt2 != '')
+		{
+			jsx.push(<Text key={2}
+						   style={{color: tcolor, fontWeight: tweight, fontSize: 14}}>{txt2}</Text>);
+		}
 
 		return jsx;
 	}
@@ -72,7 +86,8 @@ class Gameitem extends Component
 											)}
 										</Col>
 										<Col style={styles.colScores}>
-											<Text style={styles.scoretxt}>{ this.getScoreTxt(item.info.team1.score) }</Text>
+											<Text
+												style={styles.scoretxt}>{this.getScoreTxt(item.info.team1.score)}</Text>
 										</Col>
 									</Row>
 								</Grid>
@@ -90,7 +105,8 @@ class Gameitem extends Component
 											)}
 										</Col>
 										<Col style={styles.colScores}>
-											<Text style={styles.scoretxt}>{ this.getScoreTxt(item.info.team2.score) }</Text>
+											<Text
+												style={styles.scoretxt}>{this.getScoreTxt(item.info.team2.score)}</Text>
 										</Col>
 									</Row>
 								</Grid>

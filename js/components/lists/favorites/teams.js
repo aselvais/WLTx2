@@ -11,7 +11,7 @@ import Spinner from '../../widgets/loaders/Spinner';
 /**
  *
  */
-class Teams extends Component
+class Teams extends React.PureComponent
 {
 	/**
 	 *

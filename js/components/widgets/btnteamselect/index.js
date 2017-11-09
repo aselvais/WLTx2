@@ -8,7 +8,7 @@ import styles from "./styles";
 /**
  *
  */
-class Btnteamselect extends Component
+class Btnteamselect extends React.PureComponent
 {
 	/**
 	 *
@@ -63,7 +63,7 @@ class Btnteamselect extends Component
 						<Col size={90}>
 							<Text style={styles.label}>{data[i].label.toUpperCase()}</Text>
 						</Col>
-						<Col size={8} style={{justifyContent: 'center',alignItems: 'center'}}>
+						<Col size={8} style={{justifyContent: 'center', alignItems: 'center'}}>
 							<Icon name="ios-arrow-forward" fontSize={10}/>
 						</Col>
 					</Row>

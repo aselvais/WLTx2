@@ -18,7 +18,7 @@ const initialState = {
 	sdateto: dateTo
 };
 
-export default function (state: State = initialState, action: Action): State
+export default function(state: State = initialState, action: Action): State
 {
 	switch (action.type)
 	{

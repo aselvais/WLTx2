@@ -10,7 +10,7 @@ import Spinner from '../../widgets/loaders/Spinner';
 /**
  *
  */
-class Tiers extends Component
+class Tiers extends React.PureComponent
 {
 	/**
 	 *

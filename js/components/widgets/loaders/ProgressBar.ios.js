@@ -3,7 +3,7 @@
 import React, {Component} from 'react';
 import {ProgressViewIOS} from 'react-native';
 
-class ProgressBarNB extends Component
+class ProgressBarNB extends React.PureComponent
 {
 
 

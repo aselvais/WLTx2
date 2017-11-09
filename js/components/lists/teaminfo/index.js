@@ -19,7 +19,7 @@ const coverimg = require('../../../../images/teambackgroundblack.jpg');
 /**
  *
  */
-class Teaminfos extends Component
+class Teaminfos extends React.PureComponent
 {
 	/**
 	 *
@@ -51,7 +51,7 @@ class Teaminfos extends Component
 			this.props.getGames(moment(new Date()).format('YYYY-MM-DD'), parseInt(this.props.selectedTeaminfo)).then(
 				() => this.props.setLoading('teaminfo', false),
 				() => this.props.setLoading('teaminfo', false)
-		);
+			);
 
 		}
 	}
@@ -223,7 +223,8 @@ class Teaminfos extends Component
 													<Text style={styles.row01textName}>
 														{(teaminfos.name) ? teaminfos.name.toUpperCase() : null}
 													</Text>
-													<Text style={styles.row01textDivName}>{teaminfos.divisionName}</Text>
+													<Text
+														style={styles.row01textDivName}>{teaminfos.divisionName}</Text>
 												</Col>
 											</Image>
 										</Row>
@@ -244,7 +245,8 @@ class Teaminfos extends Component
 										{(games && games.today && games.today.length && games.today.length > 0) ?
 											<Tab heading="GAMES TODAY">{this.getJSXgames(games.today)}</Tab> : null}
 										{(games && games.upcoming && games.upcoming.length && games.upcoming.length > 0) ?
-											<Tab heading="UPCOMING GAMES">{this.getJSXgames(games.upcoming)}</Tab> : null}
+											<Tab
+												heading="UPCOMING GAMES">{this.getJSXgames(games.upcoming)}</Tab> : null}
 									</Tabs>
 								</Col>
 							</Row>

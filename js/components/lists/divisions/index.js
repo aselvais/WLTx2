@@ -12,7 +12,7 @@ import {resetTeams} from "../../../redux/actions/teams";
 /**
  *
  */
-class Divisions extends Component
+class Divisions extends React.PureComponent
 {
 	/**
 	 *
@@ -58,7 +58,6 @@ class Divisions extends Component
 			this.props.resetTeams();
 		}
 		this.props.setDivisionIndex(item);
-		// this.props.navigation.navigate("Teams", {division: item});
 		this.props.navigation.navigate("HomeWtabs");
 	}
 

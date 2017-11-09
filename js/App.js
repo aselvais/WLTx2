@@ -28,7 +28,7 @@ const styles = {
 /**
  *
  */
-class App extends Component
+class App extends React.PureComponent
 {
 	/**
 	 *

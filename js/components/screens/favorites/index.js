@@ -8,7 +8,7 @@ import Teams from '../../lists/favorites/teams';
 /**
  *
  */
-class Favorites extends Component
+class Favorites extends React.PureComponent
 {
 	/**
 	 * Option for the TabNavigation system

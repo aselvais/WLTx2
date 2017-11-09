@@ -10,7 +10,7 @@ import Spinner from '../../widgets/loaders/Spinner';
 /**
  *
  */
-class Newsfeeds extends Component
+class Newsfeeds extends React.PureComponent
 {
 	/**
 	 *

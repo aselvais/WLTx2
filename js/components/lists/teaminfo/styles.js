@@ -66,4 +66,15 @@ export default {
 		textAlign: 'center',
 		fontSize: 20,
 	},
+	griditem: {
+		backgroundColor: '#FFFFFF',
+		margin: 3,
+		borderRadius: 7,
+		borderBottomColor: '#AAAAAA',
+		borderBottomWidth: 1,
+		borderRightColor: '#AAAAAA',
+		borderRightWidth: 1,
+		// height: 100,
+		padding: 5,
+	},
 };

@@ -170,10 +170,10 @@ class Teaminfos extends React.PureComponent
 			}
 		*/
 		let jsx = (
-			<Content padder>
+			<Content padder style={{ backgroundColor: '#EEEEEE' }}>
 				<View>
 					{games.map(g => (
-						<Grid key={g.id}>
+						<Grid key={g.id} style={styles.griditem}>
 							<Row>
 								<Col><Text>{g.date + "\n" + g.time}</Text></Col>
 								<TouchableHighlight onPress={() => this.clickTeam(g.teamId)}>

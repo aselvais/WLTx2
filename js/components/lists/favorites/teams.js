@@ -32,7 +32,7 @@ class Teams extends React.PureComponent
 	/**
 	 *
 	 */
-	componentDidMount()
+	componentWillMount()
 	{
 		this.props.getUserTeams();
 	}

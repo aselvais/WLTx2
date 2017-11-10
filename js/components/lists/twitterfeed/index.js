@@ -43,7 +43,7 @@ class Twitterfeeds extends React.PureComponent
 	/**
 	 *
 	 */
-	componentDidMount()
+	componentWillMount()
 	{
 		if (this.props.selectedTeam && this.props.selectedTeam.id)
 		{

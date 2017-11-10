@@ -47,7 +47,7 @@ class Games extends React.PureComponent
 	/**
 	 *
 	 */
-	componentDidMount()
+	componentWillMount()
 	{
 		let {season, division, setLoading, getGamesAll, sdatefrom, sdateto} = this.props;
 		if (season && season.id && division && division.id && sdatefrom && sdateto && sdatefrom.getTime && sdateto.getTime)

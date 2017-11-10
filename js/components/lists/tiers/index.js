@@ -32,7 +32,7 @@ class Tiers extends React.PureComponent
 	/**
 	 *
 	 */
-	componentDidMount()
+	componentWillMount()
 	{
 		if (this.props.selectedDivision && this.props.selectedDivision.id)
 		{

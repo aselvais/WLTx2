@@ -40,7 +40,7 @@ class Standings extends React.PureComponent
 	/**
 	 *
 	 */
-	componentDidMount()
+	componentWillMount()
 	{
 		Orientation.lockToPortrait();
 		if (this.props.selectedDivisions && this.props.selectedDivisions.id)
@@ -98,7 +98,8 @@ class Standings extends React.PureComponent
 			jsx.push(
 				<TouchableOpacity key={u} onPress={() => this.clickTeam(d.teamId)}>
 					<Row key={u} style={{
-						backgroundColor: (u % 2) ? colors.white : colors.lightgrey
+						backgroundColor: (u % 2) ? colors.white : colors.lightgrey,
+						height: 30,
 					}}>
 						<Col size={1}>
 							<Text style={styles.txtItem}>{u}</Text>
@@ -107,7 +108,7 @@ class Standings extends React.PureComponent
 							<Image style={styles.logoTeam} source={{uri: d.imageUrl}}/>
 						</Col>
 						<Col size={4}>
-							<Text style={styles.txtItem}>{d.teamName}</Text>
+							<Text style={styles.txtItem}>{d.teamName.toUpperCase()}</Text>
 						</Col>
 						<Col size={1}><Text style={styles.txtItem}>{d.gp}</Text></Col>
 						<Col size={2}><Text style={styles.txtItem}>{d.win + '-' + d.lose + '-' + d.draw}</Text></Col>

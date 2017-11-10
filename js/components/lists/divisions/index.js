@@ -36,7 +36,7 @@ class Divisions extends React.PureComponent
 	/**
 	 *
 	 */
-	componentDidMount()
+	componentWillMount()
 	{
 		// console.log('Divisions::componentDidMount ' + parseInt(this.props.selectedSeason.id));
 		this.props.setLoading('divisions', true);

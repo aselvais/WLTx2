@@ -40,7 +40,7 @@ class Home extends React.PureComponent
 	/**
 	 *
 	 */
-	componentDidMount()
+	componentWillMount()
 	{
 	}
 

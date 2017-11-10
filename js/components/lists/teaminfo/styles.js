@@ -74,7 +74,21 @@ export default {
 		borderBottomWidth: 1,
 		borderRightColor: '#AAAAAA',
 		borderRightWidth: 1,
-		// height: 100,
+		padding: 8,
+	},
+	topRow: {
 		padding: 5,
+	},
+	bottomRow: {
+		borderTopColor: '#EEEEEE',
+		borderTopWidth: 1,
+		padding: 5,
+	},
+	txtBottom01: {
+		fontSize: 12,
+	},
+	txtBottom02: {
+		fontSize: 12,
+		textAlign: 'right',
 	},
 };

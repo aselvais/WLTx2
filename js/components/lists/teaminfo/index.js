@@ -42,17 +42,35 @@ class Teaminfos extends React.PureComponent
 	/**
 	 *
 	 */
-	componentDidMount()
+	componentWillMount()
 	{
+		this.loadTeamFromApi();
+	}
+
+	/**
+	 *
+	 */
+	loadTeamFromApi(tids=null)
+	{
+		let tid = null;
 		this.props.setLoading('teaminfo', true);
-		if (this.props.selectedTeaminfo && this.props.selectedTeaminfo > 0)
+		if (tids)
 		{
-			this.props.getTeaminfos(parseInt(this.props.selectedTeaminfo));
-			this.props.getGames(moment(new Date()).format('YYYY-MM-DD'), parseInt(this.props.selectedTeaminfo)).then(
+			tid = tids;
+		}
+		else
+		{
+			tid = this.props.selectedTeaminfo;
+		}
+
+
+		if (tid && tid > 0)
+		{
+			this.props.getTeaminfos(parseInt(tid));
+			this.props.getGames(moment(new Date()).format('YYYY-MM-DD'), parseInt(tid)).then(
 				() => this.props.setLoading('teaminfo', false),
 				() => this.props.setLoading('teaminfo', false)
 			);
-
 		}
 	}
 
@@ -74,10 +92,16 @@ class Teaminfos extends React.PureComponent
 		let retJsx = [];
 		if (k && v)
 		{
-			retJsx.push(<Row key={k + '01'}><Col size={2} style={styles.rowTxt01}><Text
-				style={styles.txtTxt01}>{k.toUpperCase()}</Text></Col></Row>);
-			retJsx.push(<Row key={k + '02'}><Col size={2} style={styles.rowTxt02}><Text
-				style={styles.txtTxt02}>{v}</Text></Col></Row>);
+			retJsx.push(
+				<Row key={k + '01'}><Col size={2} style={styles.rowTxt01}>
+					<Text style={styles.txtTxt01}>{k.toUpperCase()}</Text>
+				</Col></Row>
+			);
+			retJsx.push(
+				<Row key={k + '02'}><Col size={2} style={styles.rowTxt02}>
+					<Text style={styles.txtTxt02}>{v}</Text>
+				</Col></Row>
+			);
 		}
 		return retJsx;
 	}
@@ -96,7 +120,7 @@ class Teaminfos extends React.PureComponent
 			groupName: "Group",
 		};
 		let jsx = (
-			<Content padder>
+			<Content>
 				<Grid>{Object.keys(datastruct).map((k) => this.getJsxRow(datastruct[k], teaminfos[k]))}</Grid>
 			</Content>
 		);
@@ -135,8 +159,10 @@ class Teaminfos extends React.PureComponent
 	{
 		if (t > 0)
 		{
+
 			this.props.setTeaminfoIndex(t);
-			this.props.navigation.navigate("Teaminfo");
+			this.loadTeamFromApi(t);
+			// this.props.navigation.navigate("Teaminfo");
 		}
 	}
 
@@ -147,50 +173,31 @@ class Teaminfos extends React.PureComponent
 	 */
 	getJSXgames(games)
 	{
-		/*
-			{
-				id: 710923,
-				date: "Feb 25",
-				time: "4:00 PM",
-				home: true,
-				team: "Kanata Sharks PH1",
-				imageUrl: "http://admin.winloseortie.com/files/image?directory=team_images&filename=lFi_Kanata.png",
-				standing: "L 1 - 2",
-				teamId: 28671,
-				leagueTimezone: "+0500",
-				divisionId: 3009,
-				divisionName: "Peewee",
-				dateTime: "2017-02-25 16:00:00",
-				news: false,
-				tweets: false,
-				seasonPlayOff: false,
-				shareUrl: "http://www.winloseortie.com",
-				status: "B Final (3rd vs 4th)",
-				linkStreamVideo: null,
-			}
-		*/
 		let jsx = (
 			<Content padder style={{ backgroundColor: '#EEEEEE' }}>
 				<View>
 					{games.map(g => (
+						<TouchableHighlight key={g.id} onPress={() => this.clickTeam(g.teamId)}>
 						<Grid key={g.id} style={styles.griditem}>
-							<Row>
-								<Col><Text>{g.date + "\n" + g.time}</Text></Col>
-								<TouchableHighlight onPress={() => this.clickTeam(g.teamId)}>
-									<Col>
-										<Image style={{paddingTop: 5, width: 20, height: 20}}
-											   source={{uri: g.imageUrl}}/>
-										<Text>{g.team}</Text>
-									</Col>
-								</TouchableHighlight>
-								<Col><Text>{g.standing}</Text></Col>
-							</Row>
-							<Row>
-								<Col>
-									<Text>{g.status}</Text>
+							<Row style={styles.topRow}>
+								<Col size={80}>
+									<Grid>
+										<Row>
+											<Col style={{width: 25}}><Image style={{paddingTop: 5, width: 20, height: 20}} source={{uri: g.imageUrl}}/></Col>
+											<Col><Text>{g.team.toUpperCase()}</Text></Col>
+										</Row>
+									</Grid>
+								</Col>
+								<Col size={20}>
+									<Text>{g.standing}</Text>
 								</Col>
 							</Row>
+							<Row style={styles.bottomRow}>
+								<Col size={50}><Text style={styles.txtBottom01}>{g.date + " " + g.time}</Text></Col>
+								<Col size={50}><Text style={styles.txtBottom02}>{g.status}</Text></Col>
+							</Row>
 						</Grid>
+						</TouchableHighlight>
 					))}
 				</View>
 			</Content>
@@ -235,18 +242,17 @@ class Teaminfos extends React.PureComponent
 							<Row size={75}>
 								<Col>
 									<Tabs initialPage={0}>
-										<Tab heading="OVERVIEW">{this.getJSXoverview()}</Tab>
-										{(teaminfos && teaminfos.hasNews) ?
-											<Tab heading="NEWS">{this.getJSXnews()}</Tab> : null}
-										{(teaminfos && teaminfos.hasTweets) ?
-											<Tab heading="TWEETS">{this.getJSXtweet()}</Tab> : null}
-										{(games && games.past && games.past.length && games.past.length > 0) ?
-											<Tab heading="PAST GAMES">{this.getJSXgames(games.past)}</Tab> : null}
-										{(games && games.today && games.today.length && games.today.length > 0) ?
-											<Tab heading="GAMES TODAY">{this.getJSXgames(games.today)}</Tab> : null}
-										{(games && games.upcoming && games.upcoming.length && games.upcoming.length > 0) ?
-											<Tab
-												heading="UPCOMING GAMES">{this.getJSXgames(games.upcoming)}</Tab> : null}
+										{ (teaminfos && teaminfos.hasNews) ?
+											<Tab heading="NEWS">{this.getJSXnews()}</Tab> : null }
+										{ (teaminfos && teaminfos.hasTweets) ?
+											<Tab heading="TWEETS">{this.getJSXtweet()}</Tab> : null }
+										{ (games && games.past && games.past.length && games.past.length > 0) ?
+											<Tab heading="PAST GAMES">{this.getJSXgames(games.past)}</Tab> : null }
+										{ (games && games.today && games.today.length && games.today.length > 0) ?
+											<Tab heading="GAMES TODAY">{this.getJSXgames(games.today)}</Tab> : null }
+										{ (games && games.upcoming && games.upcoming.length && games.upcoming.length > 0) ?
+											<Tab heading="UPCOMING GAMES">{this.getJSXgames(games.upcoming)}</Tab> : null }
+										<Tab heading="INFO">{this.getJSXoverview()}</Tab>
 									</Tabs>
 								</Col>
 							</Row>

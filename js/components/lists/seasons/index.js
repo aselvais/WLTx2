@@ -36,7 +36,7 @@ class Seasons extends React.PureComponent
 	/**
 	 *
 	 */
-	componentDidMount()
+	componentWillMount()
 	{
 		//console.log('Seasons::componentDidMount ' + parseInt(this.props.selectedLeague.id));
 		this.props.setLoading('seasons', true);

@@ -47,7 +47,7 @@ class App extends React.PureComponent
 	/**
 	 *
 	 */
-	componentDidMount()
+	componentWillMount()
 	{
 		CodePush.sync(
 			{updateDialog: true, installMode: CodePush.InstallMode.IMMEDIATE},

@@ -38,7 +38,7 @@ class Leagues extends React.PureComponent
 	/**
 	 *
 	 */
-	componentDidMount()
+	componentWillMount()
 	{
 		this.props.setLoading('leagues', true);
 		this.props.getLeagues().then(

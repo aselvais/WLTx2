@@ -51,7 +51,7 @@ class Teams extends React.PureComponent
 	/**
 	 *
 	 */
-	componentDidMount()
+	componentWillMount()
 	{
 		//console.log('Teams::componentDidMount ' + parseInt(this.props.selectedDivision.id));
 		this.props.setLoading('games', true);

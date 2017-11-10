@@ -29,6 +29,12 @@ Build the icons for Android and iOS:
 $ app-icon generate
 ```
 
+Cleanup after major libs upgrade
+
+```sh
+watchman watch-del-all && rm -rf $TMPDIR/react-* && rm -rf node_modules/ && npm cache clean && npm install && npm start -- --reset-cache
+```
+
 ## 2. Run / develop
 
 Just run the usual react native commands:
